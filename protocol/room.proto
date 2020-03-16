@@ -4,30 +4,37 @@ package protocol;
 import "header.proto";
 
 message RoomUser {
-    string uid   = 1;
-    string token = 2;
+    string uid       = 1;
+    string token     = 2;
+    bool   VideoPush = 5;
+    bool   AudioPush = 6;
 }
 
 message CreateRoomReq {
-    repeated RoomUser users = 1; //要加入房间的用户
+    repeated RoomUser users    = 1; //要加入房间的用户
+    string            protocol = 2; // 协议
 }
 
 message CreateRoomAck {
-    int32 roomId = 1;
+    int32  roomId = 1;
+    string addr   = 2;
 }
 
 message JoinRoomReq {
-    CallAckHeader header = 1;
-    RoomUser      user   = 2;
-    int32         roomId = 3;
+    CallAckHeader header   = 1;
+    RoomUser      user     = 2;
+    int32         roomId   = 3;
+    string        protocol = 4; // 协议
 }
 
 message JoinRoomAck {
     CallAckHeader header = 1;
+    string        addr   = 2;
 }
 
 message LeaveRoomReq {
-    string uid = 1;
+    string uid    = 1;
+    int32  roomId = 2;
 }
 
 //最后倒数第二个人离开房间时解散
@@ -65,5 +72,12 @@ service RoomService {
 service ChatService {
     //解散房间
     rpc DiscardRoom(DiscardRoomReq) returns (DiscardRoomAck) {
+    }
+    //加入通话
+    rpc JoinRoom(JoinRoomReq) returns (JoinRoomAck) {
+    }
+
+    //挂断 当挂断至房间只有一个人时 解散房间
+    rpc LeaveRoom(LeaveRoomReq) returns (LeaveRoomAck) {
     }
 }

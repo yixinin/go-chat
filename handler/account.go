@@ -13,12 +13,23 @@ type AccountHandler struct {
 	logic *logic.AccountLogic
 }
 
+func NewAccountHandler() *AccountHandler {
+	return &AccountHandler{
+		logic: &logic.AccountLogic{},
+	}
+}
+
 func (h *AccountHandler) String() string {
 	return "handler.AccountHandler"
 }
 
 func (h *AccountHandler) HandleAll(g *gin.Engine) error {
 	g.POST("/signUp", h.SignUp)
+	g.POST("/signIn", h.SignIn)
+	g.POST("/signOut", h.SignOut)
+	g.POST("/delete", h.Delete)
+	g.POST("/changePassword", h.ChangePassword)
+	g.POST("/resetPassword", h.ResetPassword)
 	return nil
 }
 

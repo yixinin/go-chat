@@ -6,11 +6,31 @@ import (
 	"go-lib/log"
 	"net/http"
 
+	"go-lib/registry"
+
 	"github.com/gin-gonic/gin"
 )
 
 type MessageHandler struct {
 	logic *logic.ChatLogic
+}
+
+func NewMessageHandler(watcher registry.Watcher, notifyFuncs ...logic.NotifyFunc) *MessageHandler {
+
+	return &MessageHandler{
+		logic: logic.NewChatLogic(watcher, notifyFuncs...),
+	}
+}
+
+func (h *MessageHandler) String() string {
+	return "handler.MessageHandler"
+}
+
+func (h *MessageHandler) HandleAll(g *gin.Engine) error {
+	g.POST("/sendMessage", h.SendMessage)
+	g.POST("/realTime", h.RealTime)
+	g.POST("/pollnotify", h.Pollnotify)
+	return nil
 }
 
 func (h *MessageHandler) SendMessage(c *gin.Context) {

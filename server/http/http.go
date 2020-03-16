@@ -12,13 +12,18 @@ import (
 )
 
 var (
-	DebugMode = flag.Bool("debug", false, "-debug")
+	DebugMode = flag.Bool("debug", true, "-debug")
 )
+
+type Config struct {
+	Addr string
+}
 
 type httpServer struct {
 	handlers []server.HttpHandler
 	engine   *gin.Engine
 	hs       *http.Server
+	config   *Config
 }
 
 func NewHttpServer(c *Config) server.Server {
@@ -31,6 +36,7 @@ func NewHttpServer(c *Config) server.Server {
 		hs: &http.Server{
 			Addr: addr,
 		},
+		config: c,
 	}
 	return s
 }
