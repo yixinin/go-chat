@@ -1,13 +1,18 @@
 package models
 
-import "time"
+import (
+	"go.mongodb.org/mongo-driver/bson/primitive"
+)
 
 type UserGroup struct {
-	Id         int64
-	UserId     int64
-	GroupId    int64
-	IsAdmin    bool
-	JoinDesc   string //如何加入
-	CreateTime time.Time
-	UpdateTime time.Time
+	Id          primitive.ObjectID `bson:"_id"`
+	UserId      string
+	GroupId     string
+	Sort        int
+	IsFavorites bool
+	Remarks     string //备注
+	NotifyLevel int8
+
+	CreateTime int64
+	UpdateTime int64
 }

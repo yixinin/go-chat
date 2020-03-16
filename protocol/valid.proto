@@ -1,0 +1,23 @@
+syntax = "proto3";
+package protocol;
+import "header.proto";
+
+message GetValidReq {
+    ReqHeader header    = 1;
+    int32     ValidType = 2;
+}
+
+message GetValidAck {
+    AckHeader header  = 1;
+    string    ValidId = 2;
+}
+
+//检查用户名、deviceCode、phone是否可用
+message CheckUserIdReq {
+    ReqHeader header    = 1;
+    string    value     = 2;
+    int32     checkType = 3;
+}
+message CheckUserIdAck {
+    AckHeader header = 1;
+}

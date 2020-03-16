@@ -1,7 +1,10 @@
 package server
 
+import "go-lib/hook"
+
 type Server interface {
-	Init() error
+	hook.ShutdownHooker
+	Init(handlers ...Handler) error
 	Start() error
 	Stop() error
 }

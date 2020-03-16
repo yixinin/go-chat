@@ -1,0 +1,69 @@
+syntax = "proto3";
+package protocol;
+
+import "header.proto";
+
+message RoomUser {
+    string uid   = 1;
+    string token = 2;
+}
+
+message CreateRoomReq {
+    repeated RoomUser users = 1; //要加入房间的用户
+}
+
+message CreateRoomAck {
+    int32 roomId = 1;
+}
+
+message JoinRoomReq {
+    CallAckHeader header = 1;
+    RoomUser      user   = 2;
+    int32         roomId = 3;
+}
+
+message JoinRoomAck {
+    CallAckHeader header = 1;
+}
+
+message LeaveRoomReq {
+    string uid = 1;
+}
+
+//最后倒数第二个人离开房间时解散
+message LeaveRoomAck {
+    CallAckHeader header = 1;
+}
+
+//互相请求 中断通话/标记房间解散
+message DiscardRoomReq {
+    int32 roomId = 1;
+}
+
+message DiscardRoomAck {
+    CallAckHeader header = 1;
+}
+
+service RoomService {
+    //创建房间
+    rpc CreateRoom(CreateRoomReq) returns (CreateRoomAck) {
+    }
+
+    //加入通话
+    rpc JoinRoom(JoinRoomReq) returns (JoinRoomAck) {
+    }
+
+    //挂断 当挂断至房间只有一个人时 解散房间
+    rpc LeaveRoom(LeaveRoomReq) returns (LeaveRoomAck) {
+    }
+
+    //强制中断通话
+    rpc DiscardRoom(DiscardRoomReq) returns (DiscardRoomAck) {
+    }
+}
+
+service ChatService {
+    //解散房间
+    rpc DiscardRoom(DiscardRoomReq) returns (DiscardRoomAck) {
+    }
+}

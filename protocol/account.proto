@@ -1,0 +1,72 @@
+syntax = "proto3";
+package protocol;
+import "header.proto";
+
+message SignUpReq {
+    ReqHeader header     = 1;
+    string    username   = 2;
+    string    password   = 3;
+    string    validCode  = 4;
+    string    validId    = 5;
+    string    deviceCode = 6;
+    int32     deviceType = 7;
+}
+
+message SignUpAck {
+    AckHeader header = 1;
+    string    token  = 2;
+}
+
+message SignInReq {
+    ReqHeader header     = 1;
+    string    username   = 2;
+    string    password   = 3;
+    int32     deviceType = 7;
+}
+
+message SignInAck {
+    AckHeader header = 1;
+    string    token  = 2;
+}
+
+message SignOutReq {
+    ReqHeader header = 1;
+}
+
+message SignOutAck {
+    AckHeader header = 1;
+}
+
+message DeleteReq {
+    ReqHeader header   = 1;
+    string    password = 2;
+}
+
+message DeleteAck {
+    AckHeader header = 1;
+}
+
+message ChangePasswordReq {
+    ReqHeader header    = 1;
+    string    oldPwd    = 2;
+    string    newPwd    = 3;
+    string    validCode = 4;
+    string    validId   = 5;
+}
+
+message ChangePasswordAck {
+    AckHeader header = 1;
+}
+
+message ResetPasswordReq {
+    AckHeader header     = 1;
+    string    username   = 2;
+    string    password   = 3;
+    string    validCode  = 4;
+    string    validId    = 5;
+    int32     deviceType = 7;
+}
+
+message ResetPasswordAck {
+    AckHeader header = 1;
+}

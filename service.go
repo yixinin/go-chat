@@ -2,6 +2,7 @@ package main
 
 import (
 	"go-chat/server"
+	"go-chat/server/http"
 	"go-lib/registry"
 	"time"
 
@@ -22,6 +23,14 @@ type Service struct {
 	config      *config.Config
 }
 
+func NewService(c *config.Config) *Service {
+	var s = &Service{
+		HttpServer: http.NewHttpServer(c.HttpConfig),
+	}
+
+	return s
+}
+
 func (s *Service) Init() {
 	s.Registry.Init(registry.Addrs(s.config.EtcdAddr...))
 	s.TcpServer.Init()
@@ -37,10 +46,10 @@ func (s *Service) Init() {
 
 func (s *Service) Start() {
 
-	s.TcpServer.Start()
-	s.HttpServer.Start()
-	s.WsServer.Start()
-	s.GrpcServer.Start()
+	go s.TcpServer.Start()
+	go s.HttpServer.Start()
+	go s.WsServer.Start()
+	go s.GrpcServer.Start()
 
 	//注册服务
 	s.Registry.Register(&registry.Service{

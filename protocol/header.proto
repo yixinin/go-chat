@@ -1,0 +1,28 @@
+syntax = "proto3";
+package protocol;
+
+message ReqHeader {
+    string uid   = 1;
+    string token = 2;
+}
+
+message AckHeader {
+    int32  code = 1;
+    string msg  = 2;
+}
+
+message NotiHeader {
+    // int64 uid = 1;
+}
+
+message CallAckHeader {
+    int32  code = 1;
+    string msg  = 2;
+}
+
+//轮询请求
+message PollReq {
+    ReqHeader header   = 1;
+    int32     notifyId = 2;
+    string    body     = 3; //消息体
+}

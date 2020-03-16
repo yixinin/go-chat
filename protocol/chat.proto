@@ -1,0 +1,71 @@
+syntax = "proto3";
+package protocol;
+
+import "header.proto";
+
+enum MessageType {
+    None     = 0;
+    Text     = 1;
+    Pictrue  = 2;
+    Audio    = 3;
+    Video    = 4;
+    Link     = 5;
+    RealTime = 6;
+}
+
+message SendMessageReq {
+    ReqHeader   header       = 1;
+    MessageType messageType  = 2;
+    string      textMessage  = 3;
+    repeated string memtions = 4;
+}
+
+message SendMessageAck {
+    AckHeader header = 1;
+}
+
+message RealTimeReq {
+    ReqHeader header   = 1;
+    string    uid      = 2; //请求和用户通话
+    string    groupId  = 3; //请求视频会议
+    string    protocol = 4; //协议
+}
+
+message RealTimeAck {
+    AckHeader header = 1;
+    string    addr   = 2; //服务器连接地址
+    string    token  = 3; //本次连接token
+    int32     roomId = 4; //房间id
+    // string    uid     = 5; //来自用户
+    // string    groupId = 6; //来自群聊
+}
+
+message RealTimeInfo {
+    string addr    = 2; //服务器连接地址
+    string token   = 3; //本次连接token
+    int32  roomId  = 4; //房间id
+    string uid     = 5; //来自用户
+    string groupId = 6; //来自群聊
+}
+message MessageNotify {
+    NotiHeader  header           = 1;
+    int32       messageType      = 2;
+    MessageType textMessage      = 3;
+    repeated string memtions     = 4;
+    RealTimeInfo    realTimeInfo = 5;
+}
+
+message CacheMessage {
+    string name      = 1; //前端通过消息名解析 json
+    string body      = 2; //json
+    int64  timeStamp = 3; //时间戳 前端判断消息是否还有效
+}
+
+message PollNotifyReq {
+    ReqHeader header = 1;
+}
+
+message PollNotifyAck {
+    AckHeader header          = 1;
+    repeated CacheMessage msg = 2;
+}
