@@ -1,8 +1,8 @@
 package grpc
 
 import (
-	"go-chat/protocol"
-	"go-chat/server"
+	"chat/protocol"
+	"chat/server"
 )
 
 type Config struct {

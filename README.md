@@ -1,2 +1,2 @@
-# go-chat
+# chat
 chat server

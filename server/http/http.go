@@ -1,9 +1,10 @@
 package http
 
 import (
+	"chat/handler/middleware"
+	"chat/server"
 	"context"
 	"flag"
-	"go-chat/server"
 	"go-lib/log"
 	"net/http"
 	"time"
@@ -70,6 +71,8 @@ func (s *httpServer) Init(handlers ...server.Handler) error {
 	} else {
 		gin.SetMode(gin.ReleaseMode)
 	}
+
+	s.engine.Use(middleware.Auth)
 
 	for _, h := range handlers {
 		if handler, ok := h.(server.HttpHandler); ok {

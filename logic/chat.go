@@ -1,10 +1,10 @@
 package logic
 
 import (
+	"chat/cache"
+	"chat/protocol"
 	"context"
 	"encoding/json"
-	"go-chat/cache"
-	"go-chat/protocol"
 	"go-lib/log"
 	"go-lib/registry"
 	"go-lib/utils"
@@ -20,27 +20,33 @@ type NotifyFunc func(uid string, msg interface{}) (bool, error)
 type ChatLogic struct {
 	sync.RWMutex
 	watcher     registry.Watcher
+	Registry    registry.Registry
 	roomClients map[string]protocol.RoomServiceClient
 	Notify      NotifyFunc
 	stop        chan bool
 }
 
-func NewChatLogic(watcher registry.Watcher, notifyFuncs ...NotifyFunc) *ChatLogic {
+func NewChatLogic(regist registry.Registry, notifyFuncs ...NotifyFunc) *ChatLogic {
 	var notifyFunc NotifyFunc = nil
 	if len(notifyFuncs) > 0 {
 		notifyFunc = notifyFuncs[0]
+	}
+	var watcher, err = regist.Watch()
+	if err != nil {
+		log.Error(err)
 	}
 	var c = &ChatLogic{
 		roomClients: make(map[string]protocol.RoomServiceClient, 2),
 		Notify:      notifyFunc,
 		watcher:     watcher,
+		Registry:    regist,
 	}
 
 	go c.Watch()
 	return c
 }
 
-func (s *ChatLogic) AddRoomConn(addr string) {
+func (s *ChatLogic) AddNode(addr string) {
 	s.Lock()
 	defer s.Unlock()
 	var conn, err = grpc.Dial(addr, grpc.WithInsecure())
@@ -53,7 +59,7 @@ func (s *ChatLogic) AddRoomConn(addr string) {
 	var client = protocol.NewRoomServiceClient(conn)
 	s.roomClients[addr] = client
 }
-func (s *ChatLogic) DelRoomConn(addr string) {
+func (s *ChatLogic) DelNode(addr string) {
 	s.Lock()
 	defer s.Unlock()
 	if _, ok := s.roomClients[addr]; ok {
@@ -61,7 +67,7 @@ func (s *ChatLogic) DelRoomConn(addr string) {
 	}
 }
 
-func (s *ChatLogic) UpdateRoomConn(addr string) {
+func (s *ChatLogic) UpdateNode(addr string) {
 	s.Lock()
 	defer s.Unlock()
 	if _, ok := s.roomClients[addr]; ok {
@@ -121,7 +127,9 @@ func (s *ChatLogic) RealTime(req *protocol.RealTimeReq, ack *protocol.RealTimeAc
 		Users: users,
 	})
 
-	ack.Addr = resp.Addr
+	ack.TcpAddr = resp.TcpAddr
+	ack.WsAddr = resp.WsAddr
+	ack.HttpAddr = resp.HttpAddr
 	ack.RoomId = resp.RoomId
 	ack.Token = req.Header.Token
 
@@ -130,11 +138,13 @@ func (s *ChatLogic) RealTime(req *protocol.RealTimeReq, ack *protocol.RealTimeAc
 		s.NotifyMessage(u.Uid, "RealTimeNotify", &protocol.RealTimeNotify{
 			Header: &protocol.NotiHeader{},
 			RealTimeInfo: &protocol.RealTimeInfo{
-				Uid:     req.Uid,
-				GroupId: req.GroupId,
-				Token:   u.Token,
-				RoomId:  resp.RoomId,
-				Addr:    resp.Addr,
+				Uid:      req.Uid,
+				GroupId:  req.GroupId,
+				Token:    u.Token,
+				RoomId:   resp.RoomId,
+				TcpAddr:  resp.TcpAddr,
+				WsAddr:   resp.WsAddr,
+				HttpAddr: resp.HttpAddr,
 			},
 			IsConnect: true,
 		})
@@ -230,6 +240,19 @@ func (s *ChatLogic) Watch() {
 			log.Errorf("watcher paniced, recover:", err)
 		}
 	}()
+
+	services, err := s.Registry.GetService("live-chat.voip")
+	if err == nil {
+		for _, srv := range services {
+			for _, node := range srv.Nodes {
+				s.AddNode(node.Address)
+				log.Infof("add node %s :%s", srv.Name, node.Address)
+			}
+		}
+	} else {
+		log.Error(err)
+	}
+
 	for {
 		select {
 		case <-s.stop:
@@ -247,16 +270,24 @@ func (s *ChatLogic) Watch() {
 				switch res.Action {
 				case "create":
 					for _, node := range res.Service.Nodes {
-						s.AddRoomConn(node.Address)
+						s.AddNode(node.Address)
+						log.Infof("new node %s :%s", name, node.Address)
 					}
+
 				case "delete":
 					for _, node := range res.Service.Nodes {
-						s.DelRoomConn(node.Address)
+						s.DelNode(node.Address)
+						log.Infof("del node %s :%s", name, node.Address)
 					}
 				case "update":
 					for _, node := range res.Service.Nodes {
-						s.UpdateRoomConn(node.Address)
+						s.UpdateNode(node.Address)
+						log.Infof("update node %s :%s", name, node.Address)
 					}
+				}
+			} else {
+				for _, node := range res.Service.Nodes {
+					log.Infof("%s node %s :%s", res.Action, name, node.Address)
 				}
 			}
 		}

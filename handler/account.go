@@ -1,8 +1,8 @@
 package handler
 
 import (
-	"go-chat/logic"
-	"go-chat/protocol"
+	"chat/logic"
+	"chat/protocol"
 	"go-lib/log"
 	"net/http"
 
@@ -24,12 +24,14 @@ func (h *AccountHandler) String() string {
 }
 
 func (h *AccountHandler) HandleAll(g *gin.Engine) error {
-	g.POST("/signUp", h.SignUp)
-	g.POST("/signIn", h.SignIn)
-	g.POST("/signOut", h.SignOut)
-	g.POST("/delete", h.Delete)
-	g.POST("/changePassword", h.ChangePassword)
-	g.POST("/resetPassword", h.ResetPassword)
+	var group = g.Group("/account")
+
+	group.POST("/signUp", h.SignUp)
+	group.POST("/signIn", h.SignIn)
+	group.POST("/signOut", h.SignOut)
+	group.POST("/delete", h.Delete)
+	group.POST("/changePassword", h.ChangePassword)
+	group.POST("/resetPassword", h.ResetPassword)
 	return nil
 }
 
@@ -41,6 +43,10 @@ func (h *AccountHandler) SignUp(c *gin.Context) {
 		ack.Header.Msg = "parse json error"
 		c.JSON(http.StatusBadRequest, ack)
 		log.Errorf("parse json error: req:%v, error:%v", req, err)
+		return
+	}
+	if !SetHeader(c, req.Header) {
+		NotLogin(c)
 		return
 	}
 	if err := h.logic.SignUp(&req, &ack); err != nil {
@@ -65,6 +71,10 @@ func (h *AccountHandler) SignIn(c *gin.Context) {
 		log.Errorf("parse json error: req:%v, error:%v", req, err)
 		return
 	}
+	if !SetHeader(c, req.Header) {
+		NotLogin(c)
+		return
+	}
 	if err := h.logic.SignIn(&req, &ack); err != nil {
 		log.Errorf("req:%v, error:%v", req, err)
 		if ack.Header.Code == 0 {
@@ -85,6 +95,10 @@ func (h *AccountHandler) SignOut(c *gin.Context) {
 		ack.Header.Msg = "parse json error"
 		c.JSON(http.StatusBadRequest, ack)
 		log.Errorf("parse json error: req:%v, error:%v", req, err)
+		return
+	}
+	if !SetHeader(c, req.Header) {
+		NotLogin(c)
 		return
 	}
 	if err := h.logic.SignOut(&req, &ack); err != nil {
@@ -109,6 +123,10 @@ func (h *AccountHandler) Delete(c *gin.Context) {
 		log.Errorf("parse json error: req:%v, error:%v", req, err)
 		return
 	}
+	if !SetHeader(c, req.Header) {
+		NotLogin(c)
+		return
+	}
 	if err := h.logic.Delete(&req, &ack); err != nil {
 		log.Errorf("req:%v, error:%v", req, err)
 		if ack.Header.Code == 0 {
@@ -129,6 +147,10 @@ func (h *AccountHandler) ChangePassword(c *gin.Context) {
 		ack.Header.Msg = "parse json error"
 		c.JSON(http.StatusBadRequest, ack)
 		log.Errorf("parse json error: req:%v, error:%v", req, err)
+		return
+	}
+	if !SetHeader(c, req.Header) {
+		NotLogin(c)
 		return
 	}
 	if err := h.logic.ChangePassword(&req, &ack); err != nil {
@@ -153,6 +175,7 @@ func (h *AccountHandler) ResetPassword(c *gin.Context) {
 		log.Errorf("parse json error: req:%v, error:%v", req, err)
 		return
 	}
+	SetHeader(c, req.Header)
 	if err := h.logic.ResetPassword(&req, &ack); err != nil {
 		log.Errorf("req:%v, error:%v", req, err)
 		if ack.Header.Code == 0 {

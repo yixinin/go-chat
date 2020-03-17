@@ -1,8 +1,8 @@
 package handler
 
 import (
-	"go-chat/logic"
-	"go-chat/protocol"
+	"chat/logic"
+	"chat/protocol"
 	"go-lib/log"
 	"net/http"
 
@@ -15,10 +15,10 @@ type MessageHandler struct {
 	logic *logic.ChatLogic
 }
 
-func NewMessageHandler(watcher registry.Watcher, notifyFuncs ...logic.NotifyFunc) *MessageHandler {
+func NewMessageHandler(regist registry.Registry, notifyFuncs ...logic.NotifyFunc) *MessageHandler {
 
 	return &MessageHandler{
-		logic: logic.NewChatLogic(watcher, notifyFuncs...),
+		logic: logic.NewChatLogic(regist, notifyFuncs...),
 	}
 }
 
@@ -27,9 +27,11 @@ func (h *MessageHandler) String() string {
 }
 
 func (h *MessageHandler) HandleAll(g *gin.Engine) error {
-	g.POST("/sendMessage", h.SendMessage)
-	g.POST("/realTime", h.RealTime)
-	g.POST("/pollnotify", h.Pollnotify)
+	var group = g.Group("/msg")
+	group.POST("/send", h.SendMessage)
+	group.POST("/realTime", h.RealTime)
+	group.POST("/cancelRealTime", h.CancelRealTime)
+	group.POST("/pollnotify", h.Pollnotify)
 	return nil
 }
 
@@ -41,6 +43,10 @@ func (h *MessageHandler) SendMessage(c *gin.Context) {
 		ack.Header.Msg = "parse json error"
 		c.JSON(http.StatusBadRequest, ack)
 		log.Errorf("parse json error: req:%v, error:%v", req, err)
+		return
+	}
+	if !SetHeader(c, req.Header) {
+		NotLogin(c)
 		return
 	}
 	if err := h.logic.SendMessage(&req, &ack); err != nil {
@@ -66,6 +72,10 @@ func (h *MessageHandler) RealTime(c *gin.Context) {
 		log.Errorf("parse json error: req:%v, error:%v", req, err)
 		return
 	}
+	if !SetHeader(c, req.Header) {
+		NotLogin(c)
+		return
+	}
 	if err := h.logic.RealTime(&req, &ack); err != nil {
 		log.Errorf("req:%v, error:%v", req, err)
 		if ack.Header.Code == 0 {
@@ -88,6 +98,10 @@ func (h *MessageHandler) CancelRealTime(c *gin.Context) {
 		log.Errorf("parse json error: req:%v, error:%v", req, err)
 		return
 	}
+	if !SetHeader(c, req.Header) {
+		NotLogin(c)
+		return
+	}
 	if err := h.logic.CancelRealTime(&req, &ack); err != nil {
 		log.Errorf("req:%v, error:%v", req, err)
 		if ack.Header.Code == 0 {
@@ -108,6 +122,10 @@ func (h *MessageHandler) Pollnotify(c *gin.Context) {
 		ack.Header.Msg = "parse json error"
 		c.JSON(http.StatusBadRequest, ack)
 		log.Errorf("parse json error: req:%v, error:%v", req, err)
+		return
+	}
+	if !SetHeader(c, req.Header) {
+		NotLogin(c)
 		return
 	}
 	if err := h.logic.PollNotify(&req, &ack); err != nil {

@@ -1,25 +1,25 @@
 package main
 
 import (
+	"chat/handler"
+	"chat/logic"
+	"chat/protocol"
+	"chat/server"
+	"chat/server/grpc"
+	"chat/server/http"
 	"fmt"
-	"go-chat/handler"
-	"go-chat/logic"
-	"go-chat/protocol"
-	"go-chat/server"
-	"go-chat/server/grpc"
-	"go-chat/server/http"
+	"go-lib/db"
 	"go-lib/ip"
 	"go-lib/log"
 	"go-lib/registry"
 	"go-lib/registry/etcd"
+	"go-lib/utils"
 	"net"
 	"time"
 
-	"go-lib/utils"
-
 	ggrpc "google.golang.org/grpc"
 
-	"go-chat/config"
+	"chat/config"
 )
 
 type Service struct {
@@ -31,25 +31,22 @@ type Service struct {
 
 	watcher registry.Watcher
 
-	Registry registry.Registry
-	config   *config.Config
+	Registry        registry.Registry
+	RegistrtService *registry.Service
+	config          *config.Config
+
+	stop chan bool
 }
 
 func NewService(c *config.Config) *Service {
-
-	var regist = etcd.NewRegistry()
-	watcher, err := regist.Watch()
-	if err != nil {
-		log.Errorf("watch err:%v", err)
-	}
 
 	var s = &Service{
 		HttpServer: http.NewHttpServer(c.HttpConfig),
 		GrpcServer: grpc.NewGrpcServer(c.GrpcConfig),
 		config:     c,
-		Registry:   regist,
-		watcher:    watcher,
+		Registry:   etcd.NewRegistry(),
 		gs:         ggrpc.NewServer(),
+		stop:       make(chan bool),
 	}
 	protocol.RegisterChatServiceServer(s.gs, &logic.ChatServer{})
 	return s
@@ -57,9 +54,16 @@ func NewService(c *config.Config) *Service {
 
 func (s *Service) Init() {
 
+	db.InitMongo(s.config.Mongo)
+	db.InitRedis(s.config.Redis)
+
+	s.Registry.Init(
+		registry.Addrs(s.config.EtcdAddr...),
+	)
+
 	if s.HttpServer != nil {
 		var account = handler.NewAccountHandler()
-		var message = handler.NewMessageHandler(s.watcher)
+		var message = handler.NewMessageHandler(s.Registry)
 		s.HttpServer.Init(account, message)
 	}
 	if s.TcpServer != nil {
@@ -71,10 +75,6 @@ func (s *Service) Init() {
 	if s.GrpcServer != nil {
 		s.GrpcServer.Init()
 	}
-
-	s.Registry.Init(
-		registry.Addrs(s.config.EtcdAddr...),
-	)
 
 }
 
@@ -99,14 +99,42 @@ func (s *Service) Start() error {
 	if err != nil {
 		return err
 	}
-	s.gs.Serve(listen)
+	go func() {
+		err = s.gs.Serve(listen)
+		if err != nil {
+			log.Error(err)
+		}
+	}()
+
 	//注册服务
-	s.Registry.Register(&registry.Service{
+	var srv = &registry.Service{
 		Name:    "live-chat.chat",
 		Version: "v1.0",
 		Nodes: []*registry.Node{
-			{Id: utils.UUID(), Address: ip.LocalIP},
+			{Id: utils.UUID(), Address: ip.GrpcAddr(s.config.GrpcConfig.Port)},
 		},
-	}, registry.RegisterTTL(time.Minute))
+	}
+	s.RegistrtService = srv
+	err = s.Registry.Register(srv, registry.RegisterTTL(5*time.Second))
+	if err != nil {
+		log.Error(err)
+	}
+
+	go s.KeepAlive()
 	return nil
+}
+
+func (s *Service) KeepAlive() {
+	for {
+		select {
+		case <-s.stop:
+			err := s.Registry.Deregister(s.RegistrtService)
+			if err != nil {
+				log.Error(err)
+			}
+			return
+		default:
+		}
+	}
+
 }

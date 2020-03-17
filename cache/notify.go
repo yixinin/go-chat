@@ -1,8 +1,8 @@
 package cache
 
 import (
+	"chat/protocol"
 	"encoding/json"
-	"go-chat/protocol"
 	"go-lib/db"
 )
 

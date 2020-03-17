@@ -28,33 +28,34 @@ namespace Protocol {
             "c2VyEgsKA3VpZBgBIAEoCRINCgV0b2tlbhgCIAEoCRIRCglWaWRlb1B1c2gY",
             "BSABKAgSEQoJQXVkaW9QdXNoGAYgASgIIkQKDUNyZWF0ZVJvb21SZXESIQoF",
             "dXNlcnMYASADKAsyEi5wcm90b2NvbC5Sb29tVXNlchIQCghwcm90b2NvbBgC",
-            "IAEoCSItCg1DcmVhdGVSb29tQWNrEg4KBnJvb21JZBgBIAEoBRIMCgRhZGRy",
-            "GAIgASgJIogBCgtKb2luUm9vbVJlcRInCgZoZWFkZXIYASABKAsyFy5wcm90",
-            "b2NvbC5DYWxsQWNrSGVhZGVyEiAKBHVzZXIYAiABKAsyEi5wcm90b2NvbC5S",
-            "b29tVXNlchIOCgZyb29tSWQYAyABKAUSEAoIcHJvdG9jb2wYBCABKAkSDAoE",
-            "YWRkchgFIAEoCSJECgtKb2luUm9vbUFjaxInCgZoZWFkZXIYASABKAsyFy5w",
-            "cm90b2NvbC5DYWxsQWNrSGVhZGVyEgwKBGFkZHIYAiABKAkiKwoMTGVhdmVS",
-            "b29tUmVxEgsKA3VpZBgBIAEoCRIOCgZyb29tSWQYAiABKAUiNwoMTGVhdmVS",
-            "b29tQWNrEicKBmhlYWRlchgBIAEoCzIXLnByb3RvY29sLkNhbGxBY2tIZWFk",
-            "ZXIiIAoORGlzY2FyZFJvb21SZXESDgoGcm9vbUlkGAEgASgFIjkKDkRpc2Nh",
-            "cmRSb29tQWNrEicKBmhlYWRlchgBIAEoCzIXLnByb3RvY29sLkNhbGxBY2tI",
-            "ZWFkZXIyjwIKC1Jvb21TZXJ2aWNlEkAKCkNyZWF0ZVJvb20SFy5wcm90b2Nv",
-            "bC5DcmVhdGVSb29tUmVxGhcucHJvdG9jb2wuQ3JlYXRlUm9vbUFjayIAEjoK",
-            "CEpvaW5Sb29tEhUucHJvdG9jb2wuSm9pblJvb21SZXEaFS5wcm90b2NvbC5K",
-            "b2luUm9vbUFjayIAEj0KCUxlYXZlUm9vbRIWLnByb3RvY29sLkxlYXZlUm9v",
-            "bVJlcRoWLnByb3RvY29sLkxlYXZlUm9vbUFjayIAEkMKC0Rpc2NhcmRSb29t",
-            "EhgucHJvdG9jb2wuRGlzY2FyZFJvb21SZXEaGC5wcm90b2NvbC5EaXNjYXJk",
-            "Um9vbUFjayIAMs0BCgtDaGF0U2VydmljZRJDCgtEaXNjYXJkUm9vbRIYLnBy",
-            "b3RvY29sLkRpc2NhcmRSb29tUmVxGhgucHJvdG9jb2wuRGlzY2FyZFJvb21B",
-            "Y2siABI6CghKb2luUm9vbRIVLnByb3RvY29sLkpvaW5Sb29tUmVxGhUucHJv",
-            "dG9jb2wuSm9pblJvb21BY2siABI9CglMZWF2ZVJvb20SFi5wcm90b2NvbC5M",
-            "ZWF2ZVJvb21SZXEaFi5wcm90b2NvbC5MZWF2ZVJvb21BY2siAGIGcHJvdG8z"));
+            "IAEoCSJSCg1DcmVhdGVSb29tQWNrEg4KBnJvb21JZBgBIAEoBRIPCgd0Y3BB",
+            "ZGRyGAIgASgJEg4KBndzQWRkchgDIAEoCRIQCghodHRwQWRkchgEIAEoCSKI",
+            "AQoLSm9pblJvb21SZXESJwoGaGVhZGVyGAEgASgLMhcucHJvdG9jb2wuQ2Fs",
+            "bEFja0hlYWRlchIgCgR1c2VyGAIgASgLMhIucHJvdG9jb2wuUm9vbVVzZXIS",
+            "DgoGcm9vbUlkGAMgASgFEhAKCHByb3RvY29sGAQgASgJEgwKBGFkZHIYBSAB",
+            "KAkiRAoLSm9pblJvb21BY2sSJwoGaGVhZGVyGAEgASgLMhcucHJvdG9jb2wu",
+            "Q2FsbEFja0hlYWRlchIMCgRhZGRyGAIgASgJIisKDExlYXZlUm9vbVJlcRIL",
+            "CgN1aWQYASABKAkSDgoGcm9vbUlkGAIgASgFIjcKDExlYXZlUm9vbUFjaxIn",
+            "CgZoZWFkZXIYASABKAsyFy5wcm90b2NvbC5DYWxsQWNrSGVhZGVyIiAKDkRp",
+            "c2NhcmRSb29tUmVxEg4KBnJvb21JZBgBIAEoBSI5Cg5EaXNjYXJkUm9vbUFj",
+            "axInCgZoZWFkZXIYASABKAsyFy5wcm90b2NvbC5DYWxsQWNrSGVhZGVyMo8C",
+            "CgtSb29tU2VydmljZRJACgpDcmVhdGVSb29tEhcucHJvdG9jb2wuQ3JlYXRl",
+            "Um9vbVJlcRoXLnByb3RvY29sLkNyZWF0ZVJvb21BY2siABI6CghKb2luUm9v",
+            "bRIVLnByb3RvY29sLkpvaW5Sb29tUmVxGhUucHJvdG9jb2wuSm9pblJvb21B",
+            "Y2siABI9CglMZWF2ZVJvb20SFi5wcm90b2NvbC5MZWF2ZVJvb21SZXEaFi5w",
+            "cm90b2NvbC5MZWF2ZVJvb21BY2siABJDCgtEaXNjYXJkUm9vbRIYLnByb3Rv",
+            "Y29sLkRpc2NhcmRSb29tUmVxGhgucHJvdG9jb2wuRGlzY2FyZFJvb21BY2si",
+            "ADLNAQoLQ2hhdFNlcnZpY2USQwoLRGlzY2FyZFJvb20SGC5wcm90b2NvbC5E",
+            "aXNjYXJkUm9vbVJlcRoYLnByb3RvY29sLkRpc2NhcmRSb29tQWNrIgASOgoI",
+            "Sm9pblJvb20SFS5wcm90b2NvbC5Kb2luUm9vbVJlcRoVLnByb3RvY29sLkpv",
+            "aW5Sb29tQWNrIgASPQoJTGVhdmVSb29tEhYucHJvdG9jb2wuTGVhdmVSb29t",
+            "UmVxGhYucHJvdG9jb2wuTGVhdmVSb29tQWNrIgBiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.HeaderReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.RoomUser), global::Protocol.RoomUser.Parser, new[]{ "Uid", "Token", "VideoPush", "AudioPush" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.CreateRoomReq), global::Protocol.CreateRoomReq.Parser, new[]{ "Users", "Protocol" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.CreateRoomAck), global::Protocol.CreateRoomAck.Parser, new[]{ "RoomId", "Addr" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.CreateRoomAck), global::Protocol.CreateRoomAck.Parser, new[]{ "RoomId", "TcpAddr", "WsAddr", "HttpAddr" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.JoinRoomReq), global::Protocol.JoinRoomReq.Parser, new[]{ "Header", "User", "RoomId", "Protocol", "Addr" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.JoinRoomAck), global::Protocol.JoinRoomAck.Parser, new[]{ "Header", "Addr" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.LeaveRoomReq), global::Protocol.LeaveRoomReq.Parser, new[]{ "Uid", "RoomId" }, null, null, null, null),
@@ -461,7 +462,9 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public CreateRoomAck(CreateRoomAck other) : this() {
       roomId_ = other.roomId_;
-      addr_ = other.addr_;
+      tcpAddr_ = other.tcpAddr_;
+      wsAddr_ = other.wsAddr_;
+      httpAddr_ = other.httpAddr_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -481,14 +484,36 @@ namespace Protocol {
       }
     }
 
-    /// <summary>Field number for the "addr" field.</summary>
-    public const int AddrFieldNumber = 2;
-    private string addr_ = "";
+    /// <summary>Field number for the "tcpAddr" field.</summary>
+    public const int TcpAddrFieldNumber = 2;
+    private string tcpAddr_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Addr {
-      get { return addr_; }
+    public string TcpAddr {
+      get { return tcpAddr_; }
       set {
-        addr_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        tcpAddr_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "wsAddr" field.</summary>
+    public const int WsAddrFieldNumber = 3;
+    private string wsAddr_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string WsAddr {
+      get { return wsAddr_; }
+      set {
+        wsAddr_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "httpAddr" field.</summary>
+    public const int HttpAddrFieldNumber = 4;
+    private string httpAddr_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string HttpAddr {
+      get { return httpAddr_; }
+      set {
+        httpAddr_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -506,7 +531,9 @@ namespace Protocol {
         return true;
       }
       if (RoomId != other.RoomId) return false;
-      if (Addr != other.Addr) return false;
+      if (TcpAddr != other.TcpAddr) return false;
+      if (WsAddr != other.WsAddr) return false;
+      if (HttpAddr != other.HttpAddr) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -514,7 +541,9 @@ namespace Protocol {
     public override int GetHashCode() {
       int hash = 1;
       if (RoomId != 0) hash ^= RoomId.GetHashCode();
-      if (Addr.Length != 0) hash ^= Addr.GetHashCode();
+      if (TcpAddr.Length != 0) hash ^= TcpAddr.GetHashCode();
+      if (WsAddr.Length != 0) hash ^= WsAddr.GetHashCode();
+      if (HttpAddr.Length != 0) hash ^= HttpAddr.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -532,9 +561,17 @@ namespace Protocol {
         output.WriteRawTag(8);
         output.WriteInt32(RoomId);
       }
-      if (Addr.Length != 0) {
+      if (TcpAddr.Length != 0) {
         output.WriteRawTag(18);
-        output.WriteString(Addr);
+        output.WriteString(TcpAddr);
+      }
+      if (WsAddr.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(WsAddr);
+      }
+      if (HttpAddr.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(HttpAddr);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -547,8 +584,14 @@ namespace Protocol {
       if (RoomId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(RoomId);
       }
-      if (Addr.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Addr);
+      if (TcpAddr.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(TcpAddr);
+      }
+      if (WsAddr.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(WsAddr);
+      }
+      if (HttpAddr.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(HttpAddr);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -564,8 +607,14 @@ namespace Protocol {
       if (other.RoomId != 0) {
         RoomId = other.RoomId;
       }
-      if (other.Addr.Length != 0) {
-        Addr = other.Addr;
+      if (other.TcpAddr.Length != 0) {
+        TcpAddr = other.TcpAddr;
+      }
+      if (other.WsAddr.Length != 0) {
+        WsAddr = other.WsAddr;
+      }
+      if (other.HttpAddr.Length != 0) {
+        HttpAddr = other.HttpAddr;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -583,7 +632,15 @@ namespace Protocol {
             break;
           }
           case 18: {
-            Addr = input.ReadString();
+            TcpAddr = input.ReadString();
+            break;
+          }
+          case 26: {
+            WsAddr = input.ReadString();
+            break;
+          }
+          case 34: {
+            HttpAddr = input.ReadString();
             break;
           }
         }

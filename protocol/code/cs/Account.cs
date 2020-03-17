@@ -43,7 +43,7 @@ namespace Protocol {
             "b2xkUHdkGAIgASgJEg4KBm5ld1B3ZBgDIAEoCRIRCgl2YWxpZENvZGUYBCAB",
             "KAkSDwoHdmFsaWRJZBgFIAEoCSI4ChFDaGFuZ2VQYXNzd29yZEFjaxIjCgZo",
             "ZWFkZXIYASABKAsyEy5wcm90b2NvbC5BY2tIZWFkZXIikwEKEFJlc2V0UGFz",
-            "c3dvcmRSZXESIwoGaGVhZGVyGAEgASgLMhMucHJvdG9jb2wuQWNrSGVhZGVy",
+            "c3dvcmRSZXESIwoGaGVhZGVyGAEgASgLMhMucHJvdG9jb2wuUmVxSGVhZGVy",
             "EhAKCHVzZXJuYW1lGAIgASgJEhAKCHBhc3N3b3JkGAMgASgJEhEKCXZhbGlk",
             "Q29kZRgEIAEoCRIPCgd2YWxpZElkGAUgASgJEhIKCmRldmljZVR5cGUYByAB",
             "KAUiNwoQUmVzZXRQYXNzd29yZEFjaxIjCgZoZWFkZXIYASABKAsyEy5wcm90",
@@ -1908,9 +1908,9 @@ namespace Protocol {
 
     /// <summary>Field number for the "header" field.</summary>
     public const int HeaderFieldNumber = 1;
-    private global::Protocol.AckHeader header_;
+    private global::Protocol.ReqHeader header_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Protocol.AckHeader Header {
+    public global::Protocol.ReqHeader Header {
       get { return header_; }
       set {
         header_ = value;
@@ -2079,7 +2079,7 @@ namespace Protocol {
       }
       if (other.header_ != null) {
         if (header_ == null) {
-          Header = new global::Protocol.AckHeader();
+          Header = new global::Protocol.ReqHeader();
         }
         Header.MergeFrom(other.Header);
       }
@@ -2111,7 +2111,7 @@ namespace Protocol {
             break;
           case 10: {
             if (header_ == null) {
-              Header = new global::Protocol.AckHeader();
+              Header = new global::Protocol.ReqHeader();
             }
             input.ReadMessage(Header);
             break;

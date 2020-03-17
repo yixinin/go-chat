@@ -1,4 +1,4 @@
-module go-chat
+module chat
 
 go 1.13
 
@@ -10,6 +10,7 @@ require (
 	github.com/emirpasic/gods v1.12.0
 	github.com/gin-gonic/gin v1.5.0
 	github.com/golang/protobuf v1.3.2
+	github.com/micro/go-micro/v2 v2.2.0
 	go-lib v0.0.0-00010101000000-000000000000
 	go.mongodb.org/mongo-driver v1.3.1
 	google.golang.org/grpc v1.26.0

@@ -59,7 +59,7 @@ message ChangePasswordAck {
 }
 
 message ResetPasswordReq {
-    AckHeader header     = 1;
+    ReqHeader header     = 1;
     string    username   = 2;
     string    password   = 3;
     string    validCode  = 4;
