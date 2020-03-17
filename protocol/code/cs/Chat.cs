@@ -33,20 +33,26 @@ namespace Protocol {
             "b2wuUmVxSGVhZGVyEgsKA3VpZBgCIAEoCRIPCgdncm91cElkGAMgASgJEhAK",
             "CHByb3RvY29sGAQgASgJIl8KC1JlYWxUaW1lQWNrEiMKBmhlYWRlchgBIAEo",
             "CzITLnByb3RvY29sLkFja0hlYWRlchIMCgRhZGRyGAIgASgJEg0KBXRva2Vu",
-            "GAMgASgJEg4KBnJvb21JZBgEIAEoBSJZCgxSZWFsVGltZUluZm8SDAoEYWRk",
-            "chgCIAEoCRINCgV0b2tlbhgDIAEoCRIOCgZyb29tSWQYBCABKAUSCwoDdWlk",
-            "GAUgASgJEg8KB2dyb3VwSWQYBiABKAkitgEKDU1lc3NhZ2VOb3RpZnkSJAoG",
-            "aGVhZGVyGAEgASgLMhQucHJvdG9jb2wuTm90aUhlYWRlchITCgttZXNzYWdl",
-            "VHlwZRgCIAEoBRIqCgt0ZXh0TWVzc2FnZRgDIAEoDjIVLnByb3RvY29sLk1l",
-            "c3NhZ2VUeXBlEhAKCG1lbXRpb25zGAQgAygJEiwKDHJlYWxUaW1lSW5mbxgF",
-            "IAEoCzIWLnByb3RvY29sLlJlYWxUaW1lSW5mbyI9CgxDYWNoZU1lc3NhZ2US",
-            "DAoEbmFtZRgBIAEoCRIMCgRib2R5GAIgASgJEhEKCXRpbWVTdGFtcBgDIAEo",
-            "AyI0Cg1Qb2xsTm90aWZ5UmVxEiMKBmhlYWRlchgBIAEoCzITLnByb3RvY29s",
-            "LlJlcUhlYWRlciJZCg1Qb2xsTm90aWZ5QWNrEiMKBmhlYWRlchgBIAEoCzIT",
-            "LnByb3RvY29sLkFja0hlYWRlchIjCgNtc2cYAiADKAsyFi5wcm90b2NvbC5D",
-            "YWNoZU1lc3NhZ2UqXAoLTWVzc2FnZVR5cGUSCAoETm9uZRAAEggKBFRleHQQ",
-            "ARILCgdQaWN0cnVlEAISCQoFQXVkaW8QAxIJCgVWaWRlbxAEEggKBExpbmsQ",
-            "BRIMCghSZWFsVGltZRAGYgZwcm90bzM="));
+            "GAMgASgJEg4KBnJvb21JZBgEIAEoBSIvCgpTaW1wbGVVc2VyEhAKCG5pY2tu",
+            "YW1lGAEgASgJEg8KB2F2YXRhcnQYAiABKAkifgoMUmVhbFRpbWVJbmZvEgwK",
+            "BGFkZHIYAiABKAkSDQoFdG9rZW4YAyABKAkSDgoGcm9vbUlkGAQgASgFEgsK",
+            "A3VpZBgFIAEoCRIPCgdncm91cElkGAYgASgJEiMKBXVzZXJzGAcgAygLMhQu",
+            "cHJvdG9jb2wuU2ltcGxlVXNlciI4ChFDYW5jZWxSZWFsVGltZVJlcRIjCgZo",
+            "ZWFkZXIYASABKAsyEy5wcm90b2NvbC5SZXFIZWFkZXIiOAoRQ2FuY2VsUmVh",
+            "bFRpbWVBY2sSIwoGaGVhZGVyGAEgASgLMhMucHJvdG9jb2wuQWNrSGVhZGVy",
+            "IncKDlJlYWxUaW1lTm90aWZ5EiQKBmhlYWRlchgBIAEoCzIULnByb3RvY29s",
+            "Lk5vdGlIZWFkZXISEQoJSXNDb25uZWN0GAIgASgIEiwKDHJlYWxUaW1lSW5m",
+            "bxgDIAEoCzIWLnByb3RvY29sLlJlYWxUaW1lSW5mbyKIAQoNTWVzc2FnZU5v",
+            "dGlmeRIkCgZoZWFkZXIYASABKAsyFC5wcm90b2NvbC5Ob3RpSGVhZGVyEhMK",
+            "C21lc3NhZ2VUeXBlGAIgASgFEioKC3RleHRNZXNzYWdlGAMgASgOMhUucHJv",
+            "dG9jb2wuTWVzc2FnZVR5cGUSEAoIbWVtdGlvbnMYBCADKAkiPQoMQ2FjaGVN",
+            "ZXNzYWdlEgwKBG5hbWUYASABKAkSDAoEYm9keRgCIAEoCRIRCgl0aW1lU3Rh",
+            "bXAYAyABKAMiNAoNUG9sbE5vdGlmeVJlcRIjCgZoZWFkZXIYASABKAsyEy5w",
+            "cm90b2NvbC5SZXFIZWFkZXIiWQoNUG9sbE5vdGlmeUFjaxIjCgZoZWFkZXIY",
+            "ASABKAsyEy5wcm90b2NvbC5BY2tIZWFkZXISIwoDbXNnGAIgAygLMhYucHJv",
+            "dG9jb2wuQ2FjaGVNZXNzYWdlKlwKC01lc3NhZ2VUeXBlEggKBE5vbmUQABII",
+            "CgRUZXh0EAESCwoHUGljdHJ1ZRACEgkKBUF1ZGlvEAMSCQoFVmlkZW8QBBII",
+            "CgRMaW5rEAUSDAoIUmVhbFRpbWUQBmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.HeaderReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Protocol.MessageType), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -54,8 +60,12 @@ namespace Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SendMessageAck), global::Protocol.SendMessageAck.Parser, new[]{ "Header" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.RealTimeReq), global::Protocol.RealTimeReq.Parser, new[]{ "Header", "Uid", "GroupId", "Protocol" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.RealTimeAck), global::Protocol.RealTimeAck.Parser, new[]{ "Header", "Addr", "Token", "RoomId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.RealTimeInfo), global::Protocol.RealTimeInfo.Parser, new[]{ "Addr", "Token", "RoomId", "Uid", "GroupId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.MessageNotify), global::Protocol.MessageNotify.Parser, new[]{ "Header", "MessageType", "TextMessage", "Memtions", "RealTimeInfo" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SimpleUser), global::Protocol.SimpleUser.Parser, new[]{ "Nickname", "Avatart" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.RealTimeInfo), global::Protocol.RealTimeInfo.Parser, new[]{ "Addr", "Token", "RoomId", "Uid", "GroupId", "Users" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.CancelRealTimeReq), global::Protocol.CancelRealTimeReq.Parser, new[]{ "Header" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.CancelRealTimeAck), global::Protocol.CancelRealTimeAck.Parser, new[]{ "Header" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.RealTimeNotify), global::Protocol.RealTimeNotify.Parser, new[]{ "Header", "IsConnect", "RealTimeInfo" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.MessageNotify), global::Protocol.MessageNotify.Parser, new[]{ "Header", "MessageType", "TextMessage", "Memtions" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.CacheMessage), global::Protocol.CacheMessage.Parser, new[]{ "Name", "Body", "TimeStamp" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.PollNotifyReq), global::Protocol.PollNotifyReq.Parser, new[]{ "Header" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.PollNotifyAck), global::Protocol.PollNotifyAck.Parser, new[]{ "Header", "Msg" }, null, null, null, null)
@@ -880,6 +890,163 @@ namespace Protocol {
 
   }
 
+  public sealed partial class SimpleUser : pb::IMessage<SimpleUser> {
+    private static readonly pb::MessageParser<SimpleUser> _parser = new pb::MessageParser<SimpleUser>(() => new SimpleUser());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<SimpleUser> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Protocol.ChatReflection.Descriptor.MessageTypes[4]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SimpleUser() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SimpleUser(SimpleUser other) : this() {
+      nickname_ = other.nickname_;
+      avatart_ = other.avatart_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SimpleUser Clone() {
+      return new SimpleUser(this);
+    }
+
+    /// <summary>Field number for the "nickname" field.</summary>
+    public const int NicknameFieldNumber = 1;
+    private string nickname_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Nickname {
+      get { return nickname_; }
+      set {
+        nickname_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "avatart" field.</summary>
+    public const int AvatartFieldNumber = 2;
+    private string avatart_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Avatart {
+      get { return avatart_; }
+      set {
+        avatart_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as SimpleUser);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(SimpleUser other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Nickname != other.Nickname) return false;
+      if (Avatart != other.Avatart) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Nickname.Length != 0) hash ^= Nickname.GetHashCode();
+      if (Avatart.Length != 0) hash ^= Avatart.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Nickname.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Nickname);
+      }
+      if (Avatart.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Avatart);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Nickname.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Nickname);
+      }
+      if (Avatart.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Avatart);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(SimpleUser other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Nickname.Length != 0) {
+        Nickname = other.Nickname;
+      }
+      if (other.Avatart.Length != 0) {
+        Avatart = other.Avatart;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Nickname = input.ReadString();
+            break;
+          }
+          case 18: {
+            Avatart = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   public sealed partial class RealTimeInfo : pb::IMessage<RealTimeInfo> {
     private static readonly pb::MessageParser<RealTimeInfo> _parser = new pb::MessageParser<RealTimeInfo>(() => new RealTimeInfo());
     private pb::UnknownFieldSet _unknownFields;
@@ -888,7 +1055,7 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.ChatReflection.Descriptor.MessageTypes[4]; }
+      get { return global::Protocol.ChatReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -910,6 +1077,7 @@ namespace Protocol {
       roomId_ = other.roomId_;
       uid_ = other.uid_;
       groupId_ = other.groupId_;
+      users_ = other.users_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -988,6 +1156,19 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "users" field.</summary>
+    public const int UsersFieldNumber = 7;
+    private static readonly pb::FieldCodec<global::Protocol.SimpleUser> _repeated_users_codec
+        = pb::FieldCodec.ForMessage(58, global::Protocol.SimpleUser.Parser);
+    private readonly pbc::RepeatedField<global::Protocol.SimpleUser> users_ = new pbc::RepeatedField<global::Protocol.SimpleUser>();
+    /// <summary>
+    ///用户/群名称
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::Protocol.SimpleUser> Users {
+      get { return users_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as RealTimeInfo);
@@ -1006,6 +1187,7 @@ namespace Protocol {
       if (RoomId != other.RoomId) return false;
       if (Uid != other.Uid) return false;
       if (GroupId != other.GroupId) return false;
+      if(!users_.Equals(other.users_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1017,6 +1199,7 @@ namespace Protocol {
       if (RoomId != 0) hash ^= RoomId.GetHashCode();
       if (Uid.Length != 0) hash ^= Uid.GetHashCode();
       if (GroupId.Length != 0) hash ^= GroupId.GetHashCode();
+      hash ^= users_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1050,6 +1233,7 @@ namespace Protocol {
         output.WriteRawTag(50);
         output.WriteString(GroupId);
       }
+      users_.WriteTo(output, _repeated_users_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1073,6 +1257,7 @@ namespace Protocol {
       if (GroupId.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(GroupId);
       }
+      size += users_.CalculateSize(_repeated_users_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -1099,6 +1284,7 @@ namespace Protocol {
       if (other.GroupId.Length != 0) {
         GroupId = other.GroupId;
       }
+      users_.Add(other.users_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -1130,6 +1316,477 @@ namespace Protocol {
             GroupId = input.ReadString();
             break;
           }
+          case 58: {
+            users_.AddEntriesFrom(input, _repeated_users_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class CancelRealTimeReq : pb::IMessage<CancelRealTimeReq> {
+    private static readonly pb::MessageParser<CancelRealTimeReq> _parser = new pb::MessageParser<CancelRealTimeReq>(() => new CancelRealTimeReq());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<CancelRealTimeReq> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Protocol.ChatReflection.Descriptor.MessageTypes[6]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CancelRealTimeReq() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CancelRealTimeReq(CancelRealTimeReq other) : this() {
+      header_ = other.header_ != null ? other.header_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CancelRealTimeReq Clone() {
+      return new CancelRealTimeReq(this);
+    }
+
+    /// <summary>Field number for the "header" field.</summary>
+    public const int HeaderFieldNumber = 1;
+    private global::Protocol.ReqHeader header_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Protocol.ReqHeader Header {
+      get { return header_; }
+      set {
+        header_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as CancelRealTimeReq);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(CancelRealTimeReq other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(Header, other.Header)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (header_ != null) hash ^= Header.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (header_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Header);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (header_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Header);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(CancelRealTimeReq other) {
+      if (other == null) {
+        return;
+      }
+      if (other.header_ != null) {
+        if (header_ == null) {
+          Header = new global::Protocol.ReqHeader();
+        }
+        Header.MergeFrom(other.Header);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            if (header_ == null) {
+              Header = new global::Protocol.ReqHeader();
+            }
+            input.ReadMessage(Header);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class CancelRealTimeAck : pb::IMessage<CancelRealTimeAck> {
+    private static readonly pb::MessageParser<CancelRealTimeAck> _parser = new pb::MessageParser<CancelRealTimeAck>(() => new CancelRealTimeAck());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<CancelRealTimeAck> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Protocol.ChatReflection.Descriptor.MessageTypes[7]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CancelRealTimeAck() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CancelRealTimeAck(CancelRealTimeAck other) : this() {
+      header_ = other.header_ != null ? other.header_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CancelRealTimeAck Clone() {
+      return new CancelRealTimeAck(this);
+    }
+
+    /// <summary>Field number for the "header" field.</summary>
+    public const int HeaderFieldNumber = 1;
+    private global::Protocol.AckHeader header_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Protocol.AckHeader Header {
+      get { return header_; }
+      set {
+        header_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as CancelRealTimeAck);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(CancelRealTimeAck other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(Header, other.Header)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (header_ != null) hash ^= Header.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (header_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Header);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (header_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Header);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(CancelRealTimeAck other) {
+      if (other == null) {
+        return;
+      }
+      if (other.header_ != null) {
+        if (header_ == null) {
+          Header = new global::Protocol.AckHeader();
+        }
+        Header.MergeFrom(other.Header);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            if (header_ == null) {
+              Header = new global::Protocol.AckHeader();
+            }
+            input.ReadMessage(Header);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class RealTimeNotify : pb::IMessage<RealTimeNotify> {
+    private static readonly pb::MessageParser<RealTimeNotify> _parser = new pb::MessageParser<RealTimeNotify>(() => new RealTimeNotify());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<RealTimeNotify> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Protocol.ChatReflection.Descriptor.MessageTypes[8]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RealTimeNotify() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RealTimeNotify(RealTimeNotify other) : this() {
+      header_ = other.header_ != null ? other.header_.Clone() : null;
+      isConnect_ = other.isConnect_;
+      realTimeInfo_ = other.realTimeInfo_ != null ? other.realTimeInfo_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RealTimeNotify Clone() {
+      return new RealTimeNotify(this);
+    }
+
+    /// <summary>Field number for the "header" field.</summary>
+    public const int HeaderFieldNumber = 1;
+    private global::Protocol.NotiHeader header_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Protocol.NotiHeader Header {
+      get { return header_; }
+      set {
+        header_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "IsConnect" field.</summary>
+    public const int IsConnectFieldNumber = 2;
+    private bool isConnect_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool IsConnect {
+      get { return isConnect_; }
+      set {
+        isConnect_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "realTimeInfo" field.</summary>
+    public const int RealTimeInfoFieldNumber = 3;
+    private global::Protocol.RealTimeInfo realTimeInfo_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Protocol.RealTimeInfo RealTimeInfo {
+      get { return realTimeInfo_; }
+      set {
+        realTimeInfo_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as RealTimeNotify);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(RealTimeNotify other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(Header, other.Header)) return false;
+      if (IsConnect != other.IsConnect) return false;
+      if (!object.Equals(RealTimeInfo, other.RealTimeInfo)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (header_ != null) hash ^= Header.GetHashCode();
+      if (IsConnect != false) hash ^= IsConnect.GetHashCode();
+      if (realTimeInfo_ != null) hash ^= RealTimeInfo.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (header_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Header);
+      }
+      if (IsConnect != false) {
+        output.WriteRawTag(16);
+        output.WriteBool(IsConnect);
+      }
+      if (realTimeInfo_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(RealTimeInfo);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (header_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Header);
+      }
+      if (IsConnect != false) {
+        size += 1 + 1;
+      }
+      if (realTimeInfo_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(RealTimeInfo);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(RealTimeNotify other) {
+      if (other == null) {
+        return;
+      }
+      if (other.header_ != null) {
+        if (header_ == null) {
+          Header = new global::Protocol.NotiHeader();
+        }
+        Header.MergeFrom(other.Header);
+      }
+      if (other.IsConnect != false) {
+        IsConnect = other.IsConnect;
+      }
+      if (other.realTimeInfo_ != null) {
+        if (realTimeInfo_ == null) {
+          RealTimeInfo = new global::Protocol.RealTimeInfo();
+        }
+        RealTimeInfo.MergeFrom(other.RealTimeInfo);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            if (header_ == null) {
+              Header = new global::Protocol.NotiHeader();
+            }
+            input.ReadMessage(Header);
+            break;
+          }
+          case 16: {
+            IsConnect = input.ReadBool();
+            break;
+          }
+          case 26: {
+            if (realTimeInfo_ == null) {
+              RealTimeInfo = new global::Protocol.RealTimeInfo();
+            }
+            input.ReadMessage(RealTimeInfo);
+            break;
+          }
         }
       }
     }
@@ -1144,7 +1801,7 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.ChatReflection.Descriptor.MessageTypes[5]; }
+      get { return global::Protocol.ChatReflection.Descriptor.MessageTypes[9]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1165,7 +1822,6 @@ namespace Protocol {
       messageType_ = other.messageType_;
       textMessage_ = other.textMessage_;
       memtions_ = other.memtions_.Clone();
-      realTimeInfo_ = other.realTimeInfo_ != null ? other.realTimeInfo_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1217,17 +1873,6 @@ namespace Protocol {
       get { return memtions_; }
     }
 
-    /// <summary>Field number for the "realTimeInfo" field.</summary>
-    public const int RealTimeInfoFieldNumber = 5;
-    private global::Protocol.RealTimeInfo realTimeInfo_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Protocol.RealTimeInfo RealTimeInfo {
-      get { return realTimeInfo_; }
-      set {
-        realTimeInfo_ = value;
-      }
-    }
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as MessageNotify);
@@ -1245,7 +1890,6 @@ namespace Protocol {
       if (MessageType != other.MessageType) return false;
       if (TextMessage != other.TextMessage) return false;
       if(!memtions_.Equals(other.memtions_)) return false;
-      if (!object.Equals(RealTimeInfo, other.RealTimeInfo)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1256,7 +1900,6 @@ namespace Protocol {
       if (MessageType != 0) hash ^= MessageType.GetHashCode();
       if (TextMessage != global::Protocol.MessageType.None) hash ^= TextMessage.GetHashCode();
       hash ^= memtions_.GetHashCode();
-      if (realTimeInfo_ != null) hash ^= RealTimeInfo.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1283,10 +1926,6 @@ namespace Protocol {
         output.WriteEnum((int) TextMessage);
       }
       memtions_.WriteTo(output, _repeated_memtions_codec);
-      if (realTimeInfo_ != null) {
-        output.WriteRawTag(42);
-        output.WriteMessage(RealTimeInfo);
-      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1305,9 +1944,6 @@ namespace Protocol {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) TextMessage);
       }
       size += memtions_.CalculateSize(_repeated_memtions_codec);
-      if (realTimeInfo_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(RealTimeInfo);
-      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -1332,12 +1968,6 @@ namespace Protocol {
         TextMessage = other.TextMessage;
       }
       memtions_.Add(other.memtions_);
-      if (other.realTimeInfo_ != null) {
-        if (realTimeInfo_ == null) {
-          RealTimeInfo = new global::Protocol.RealTimeInfo();
-        }
-        RealTimeInfo.MergeFrom(other.RealTimeInfo);
-      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -1368,13 +1998,6 @@ namespace Protocol {
             memtions_.AddEntriesFrom(input, _repeated_memtions_codec);
             break;
           }
-          case 42: {
-            if (realTimeInfo_ == null) {
-              RealTimeInfo = new global::Protocol.RealTimeInfo();
-            }
-            input.ReadMessage(RealTimeInfo);
-            break;
-          }
         }
       }
     }
@@ -1389,7 +2012,7 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.ChatReflection.Descriptor.MessageTypes[6]; }
+      get { return global::Protocol.ChatReflection.Descriptor.MessageTypes[10]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1583,7 +2206,7 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.ChatReflection.Descriptor.MessageTypes[7]; }
+      get { return global::Protocol.ChatReflection.Descriptor.MessageTypes[11]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1718,7 +2341,7 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.ChatReflection.Descriptor.MessageTypes[8]; }
+      get { return global::Protocol.ChatReflection.Descriptor.MessageTypes[12]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

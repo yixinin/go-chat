@@ -25,6 +25,7 @@ message JoinRoomReq {
     RoomUser      user     = 2;
     int32         roomId   = 3;
     string        protocol = 4; // 协议
+    string        addr     = 5; //grpc地址
 }
 
 message JoinRoomAck {

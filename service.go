@@ -103,7 +103,7 @@ func (s *Service) Start() error {
 	//注册服务
 	s.Registry.Register(&registry.Service{
 		Name:    "live-chat.chat",
-		Version: "v2",
+		Version: "v1.0",
 		Nodes: []*registry.Node{
 			{Id: utils.UUID(), Address: ip.LocalIP},
 		},

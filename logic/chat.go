@@ -127,9 +127,8 @@ func (s *ChatLogic) RealTime(req *protocol.RealTimeReq, ack *protocol.RealTimeAc
 
 	//推送给其它成员
 	for _, u := range users {
-		s.NotifyMessage(u.Uid, "MessageNotify", &protocol.MessageNotify{
-			Header:      &protocol.NotiHeader{},
-			MessageType: int32(protocol.MessageType_RealTime),
+		s.NotifyMessage(u.Uid, "RealTimeNotify", &protocol.RealTimeNotify{
+			Header: &protocol.NotiHeader{},
 			RealTimeInfo: &protocol.RealTimeInfo{
 				Uid:     req.Uid,
 				GroupId: req.GroupId,
@@ -137,13 +136,52 @@ func (s *ChatLogic) RealTime(req *protocol.RealTimeReq, ack *protocol.RealTimeAc
 				RoomId:  resp.RoomId,
 				Addr:    resp.Addr,
 			},
+			IsConnect: true,
 		})
-		// reals[u.Uid] =
 	}
 
 	ack.Header.Code = 200
 	ack.Header.Msg = "success"
 	return
+}
+
+func (s *ChatLogic) CancelRealTime(req *protocol.CancelRealTimeReq, ack *protocol.CancelRealTimeAck) (err error) {
+	//查找当前房间
+	rid, addr, err := cache.GetUserRoomInfo(req.Header.Uid)
+	if err != nil {
+		return err
+	}
+	var ctx, cancel = context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	client, ok := s.roomClients[addr]
+	if ok {
+		client.LeaveRoom(ctx, &protocol.LeaveRoomReq{
+			Uid:    req.Header.Uid,
+			RoomId: rid,
+		})
+	}
+
+	//删除信息
+	cache.LeaveRoom(req.Header.Uid)
+	uids, err := cache.GetRoomMembers(rid)
+	if err != nil {
+		log.Error(err)
+	}
+	if len(uids) <= 1 {
+		//删除房间
+		cache.DiscardRoom(rid)
+	}
+	//通知其他人
+	for _, uid := range uids {
+		s.NotifyMessage(uid, "RealTimeNotify", &protocol.RealTimeNotify{
+			Header: &protocol.NotiHeader{},
+			RealTimeInfo: &protocol.RealTimeInfo{
+				RoomId: rid,
+			},
+			IsConnect: false,
+		})
+	}
+	return nil
 }
 
 func (s *ChatLogic) NotifyMessage(uid, msgName string, msg interface{}) {

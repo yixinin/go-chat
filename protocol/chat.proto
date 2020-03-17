@@ -40,19 +40,39 @@ message RealTimeAck {
     // string    groupId = 6; //来自群聊
 }
 
-message RealTimeInfo {
-    string addr    = 2; //服务器连接地址
-    string token   = 3; //本次连接token
-    int32  roomId  = 4; //房间id
-    string uid     = 5; //来自用户
-    string groupId = 6; //来自群聊
+message SimpleUser {
+    string nickname = 1;
+    string avatart  = 2;
 }
+
+message RealTimeInfo {
+    string   addr             = 2; //服务器连接地址
+    string   token            = 3; //本次连接token
+    int32    roomId           = 4; //房间id
+    string   uid              = 5; //来自用户
+    string   groupId          = 6; //来自群聊
+    repeated SimpleUser users = 7; //用户/群名称
+}
+
+message CancelRealTimeReq {
+    ReqHeader header = 1;
+}
+
+message CancelRealTimeAck {
+    AckHeader header = 1;
+}
+
+message RealTimeNotify {
+    NotiHeader   header       = 1;
+    bool         IsConnect    = 2;
+    RealTimeInfo realTimeInfo = 3;
+}
+
 message MessageNotify {
-    NotiHeader  header           = 1;
-    int32       messageType      = 2;
-    MessageType textMessage      = 3;
-    repeated string memtions     = 4;
-    RealTimeInfo    realTimeInfo = 5;
+    NotiHeader  header       = 1;
+    int32       messageType  = 2;
+    MessageType textMessage  = 3;
+    repeated string memtions = 4;
 }
 
 message CacheMessage {
