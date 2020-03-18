@@ -52,9 +52,9 @@ namespace Protocol {
             "bGxOb3RpZnlSZXESIwoGaGVhZGVyGAEgASgLMhMucHJvdG9jb2wuUmVxSGVh",
             "ZGVyIlkKDVBvbGxOb3RpZnlBY2sSIwoGaGVhZGVyGAEgASgLMhMucHJvdG9j",
             "b2wuQWNrSGVhZGVyEiMKA21zZxgCIAMoCzIWLnByb3RvY29sLkNhY2hlTWVz",
-            "c2FnZSpcCgtNZXNzYWdlVHlwZRIICgROb25lEAASCAoEVGV4dBABEgsKB1Bp",
-            "Y3RydWUQAhIJCgVBdWRpbxADEgkKBVZpZGVvEAQSCAoETGluaxAFEgwKCFJl",
-            "YWxUaW1lEAZiBnByb3RvMw=="));
+            "c2FnZSpOCgtNZXNzYWdlVHlwZRIICgROb25lEAASCAoEVGV4dBABEgsKB1Bp",
+            "Y3RydWUQAhIJCgVBdWRpbxADEgkKBVZpZGVvEAQSCAoETGluaxAFYgZwcm90",
+            "bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.HeaderReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Protocol.MessageType), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -84,7 +84,6 @@ namespace Protocol {
     [pbr::OriginalName("Audio")] Audio = 3,
     [pbr::OriginalName("Video")] Video = 4,
     [pbr::OriginalName("Link")] Link = 5,
-    [pbr::OriginalName("RealTime")] RealTime = 6,
   }
 
   #endregion

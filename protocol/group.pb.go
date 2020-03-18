@@ -20,12 +20,751 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
+type JoinGroupReq struct {
+	Header               *ReqHeader `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`
+	GroupToken           string     `protobuf:"bytes,2,opt,name=groupToken,proto3" json:"groupToken,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
+}
+
+func (m *JoinGroupReq) Reset()         { *m = JoinGroupReq{} }
+func (m *JoinGroupReq) String() string { return proto.CompactTextString(m) }
+func (*JoinGroupReq) ProtoMessage()    {}
+func (*JoinGroupReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_e10f4c9b19ad8eee, []int{0}
+}
+
+func (m *JoinGroupReq) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_JoinGroupReq.Unmarshal(m, b)
+}
+func (m *JoinGroupReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_JoinGroupReq.Marshal(b, m, deterministic)
+}
+func (m *JoinGroupReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JoinGroupReq.Merge(m, src)
+}
+func (m *JoinGroupReq) XXX_Size() int {
+	return xxx_messageInfo_JoinGroupReq.Size(m)
+}
+func (m *JoinGroupReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_JoinGroupReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_JoinGroupReq proto.InternalMessageInfo
+
+func (m *JoinGroupReq) GetHeader() *ReqHeader {
+	if m != nil {
+		return m.Header
+	}
+	return nil
+}
+
+func (m *JoinGroupReq) GetGroupToken() string {
+	if m != nil {
+		return m.GroupToken
+	}
+	return ""
+}
+
+type JoinGroupAck struct {
+	Header               *AckHeader `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
+}
+
+func (m *JoinGroupAck) Reset()         { *m = JoinGroupAck{} }
+func (m *JoinGroupAck) String() string { return proto.CompactTextString(m) }
+func (*JoinGroupAck) ProtoMessage()    {}
+func (*JoinGroupAck) Descriptor() ([]byte, []int) {
+	return fileDescriptor_e10f4c9b19ad8eee, []int{1}
+}
+
+func (m *JoinGroupAck) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_JoinGroupAck.Unmarshal(m, b)
+}
+func (m *JoinGroupAck) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_JoinGroupAck.Marshal(b, m, deterministic)
+}
+func (m *JoinGroupAck) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JoinGroupAck.Merge(m, src)
+}
+func (m *JoinGroupAck) XXX_Size() int {
+	return xxx_messageInfo_JoinGroupAck.Size(m)
+}
+func (m *JoinGroupAck) XXX_DiscardUnknown() {
+	xxx_messageInfo_JoinGroupAck.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_JoinGroupAck proto.InternalMessageInfo
+
+func (m *JoinGroupAck) GetHeader() *AckHeader {
+	if m != nil {
+		return m.Header
+	}
+	return nil
+}
+
+type LeaveGroupReq struct {
+	Header               *ReqHeader `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`
+	GroupToken           string     `protobuf:"bytes,2,opt,name=groupToken,proto3" json:"groupToken,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
+}
+
+func (m *LeaveGroupReq) Reset()         { *m = LeaveGroupReq{} }
+func (m *LeaveGroupReq) String() string { return proto.CompactTextString(m) }
+func (*LeaveGroupReq) ProtoMessage()    {}
+func (*LeaveGroupReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_e10f4c9b19ad8eee, []int{2}
+}
+
+func (m *LeaveGroupReq) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_LeaveGroupReq.Unmarshal(m, b)
+}
+func (m *LeaveGroupReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_LeaveGroupReq.Marshal(b, m, deterministic)
+}
+func (m *LeaveGroupReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LeaveGroupReq.Merge(m, src)
+}
+func (m *LeaveGroupReq) XXX_Size() int {
+	return xxx_messageInfo_LeaveGroupReq.Size(m)
+}
+func (m *LeaveGroupReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_LeaveGroupReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_LeaveGroupReq proto.InternalMessageInfo
+
+func (m *LeaveGroupReq) GetHeader() *ReqHeader {
+	if m != nil {
+		return m.Header
+	}
+	return nil
+}
+
+func (m *LeaveGroupReq) GetGroupToken() string {
+	if m != nil {
+		return m.GroupToken
+	}
+	return ""
+}
+
+type LeaveGroupAck struct {
+	Header               *AckHeader `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
+}
+
+func (m *LeaveGroupAck) Reset()         { *m = LeaveGroupAck{} }
+func (m *LeaveGroupAck) String() string { return proto.CompactTextString(m) }
+func (*LeaveGroupAck) ProtoMessage()    {}
+func (*LeaveGroupAck) Descriptor() ([]byte, []int) {
+	return fileDescriptor_e10f4c9b19ad8eee, []int{3}
+}
+
+func (m *LeaveGroupAck) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_LeaveGroupAck.Unmarshal(m, b)
+}
+func (m *LeaveGroupAck) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_LeaveGroupAck.Marshal(b, m, deterministic)
+}
+func (m *LeaveGroupAck) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LeaveGroupAck.Merge(m, src)
+}
+func (m *LeaveGroupAck) XXX_Size() int {
+	return xxx_messageInfo_LeaveGroupAck.Size(m)
+}
+func (m *LeaveGroupAck) XXX_DiscardUnknown() {
+	xxx_messageInfo_LeaveGroupAck.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_LeaveGroupAck proto.InternalMessageInfo
+
+func (m *LeaveGroupAck) GetHeader() *AckHeader {
+	if m != nil {
+		return m.Header
+	}
+	return nil
+}
+
+type KickGroupReq struct {
+	Header               *ReqHeader `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`
+	GroupToken           string     `protobuf:"bytes,2,opt,name=groupToken,proto3" json:"groupToken,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
+}
+
+func (m *KickGroupReq) Reset()         { *m = KickGroupReq{} }
+func (m *KickGroupReq) String() string { return proto.CompactTextString(m) }
+func (*KickGroupReq) ProtoMessage()    {}
+func (*KickGroupReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_e10f4c9b19ad8eee, []int{4}
+}
+
+func (m *KickGroupReq) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_KickGroupReq.Unmarshal(m, b)
+}
+func (m *KickGroupReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_KickGroupReq.Marshal(b, m, deterministic)
+}
+func (m *KickGroupReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_KickGroupReq.Merge(m, src)
+}
+func (m *KickGroupReq) XXX_Size() int {
+	return xxx_messageInfo_KickGroupReq.Size(m)
+}
+func (m *KickGroupReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_KickGroupReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_KickGroupReq proto.InternalMessageInfo
+
+func (m *KickGroupReq) GetHeader() *ReqHeader {
+	if m != nil {
+		return m.Header
+	}
+	return nil
+}
+
+func (m *KickGroupReq) GetGroupToken() string {
+	if m != nil {
+		return m.GroupToken
+	}
+	return ""
+}
+
+type KickGroupAck struct {
+	Header               *AckHeader `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
+}
+
+func (m *KickGroupAck) Reset()         { *m = KickGroupAck{} }
+func (m *KickGroupAck) String() string { return proto.CompactTextString(m) }
+func (*KickGroupAck) ProtoMessage()    {}
+func (*KickGroupAck) Descriptor() ([]byte, []int) {
+	return fileDescriptor_e10f4c9b19ad8eee, []int{5}
+}
+
+func (m *KickGroupAck) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_KickGroupAck.Unmarshal(m, b)
+}
+func (m *KickGroupAck) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_KickGroupAck.Marshal(b, m, deterministic)
+}
+func (m *KickGroupAck) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_KickGroupAck.Merge(m, src)
+}
+func (m *KickGroupAck) XXX_Size() int {
+	return xxx_messageInfo_KickGroupAck.Size(m)
+}
+func (m *KickGroupAck) XXX_DiscardUnknown() {
+	xxx_messageInfo_KickGroupAck.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_KickGroupAck proto.InternalMessageInfo
+
+func (m *KickGroupAck) GetHeader() *AckHeader {
+	if m != nil {
+		return m.Header
+	}
+	return nil
+}
+
+type InviteReq struct {
+	Header               *ReqHeader `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`
+	Username             string     `protobuf:"bytes,3,opt,name=username,proto3" json:"username,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
+}
+
+func (m *InviteReq) Reset()         { *m = InviteReq{} }
+func (m *InviteReq) String() string { return proto.CompactTextString(m) }
+func (*InviteReq) ProtoMessage()    {}
+func (*InviteReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_e10f4c9b19ad8eee, []int{6}
+}
+
+func (m *InviteReq) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_InviteReq.Unmarshal(m, b)
+}
+func (m *InviteReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_InviteReq.Marshal(b, m, deterministic)
+}
+func (m *InviteReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InviteReq.Merge(m, src)
+}
+func (m *InviteReq) XXX_Size() int {
+	return xxx_messageInfo_InviteReq.Size(m)
+}
+func (m *InviteReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_InviteReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_InviteReq proto.InternalMessageInfo
+
+func (m *InviteReq) GetHeader() *ReqHeader {
+	if m != nil {
+		return m.Header
+	}
+	return nil
+}
+
+func (m *InviteReq) GetUsername() string {
+	if m != nil {
+		return m.Username
+	}
+	return ""
+}
+
+type InviteAck struct {
+	Header               *AckHeader `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`
+	GroupToken           string     `protobuf:"bytes,2,opt,name=groupToken,proto3" json:"groupToken,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
+}
+
+func (m *InviteAck) Reset()         { *m = InviteAck{} }
+func (m *InviteAck) String() string { return proto.CompactTextString(m) }
+func (*InviteAck) ProtoMessage()    {}
+func (*InviteAck) Descriptor() ([]byte, []int) {
+	return fileDescriptor_e10f4c9b19ad8eee, []int{7}
+}
+
+func (m *InviteAck) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_InviteAck.Unmarshal(m, b)
+}
+func (m *InviteAck) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_InviteAck.Marshal(b, m, deterministic)
+}
+func (m *InviteAck) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InviteAck.Merge(m, src)
+}
+func (m *InviteAck) XXX_Size() int {
+	return xxx_messageInfo_InviteAck.Size(m)
+}
+func (m *InviteAck) XXX_DiscardUnknown() {
+	xxx_messageInfo_InviteAck.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_InviteAck proto.InternalMessageInfo
+
+func (m *InviteAck) GetHeader() *AckHeader {
+	if m != nil {
+		return m.Header
+	}
+	return nil
+}
+
+func (m *InviteAck) GetGroupToken() string {
+	if m != nil {
+		return m.GroupToken
+	}
+	return ""
+}
+
+type CreateGroupReq struct {
+	Header               *ReqHeader `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`
+	Usernames            []string   `protobuf:"bytes,2,rep,name=usernames,proto3" json:"usernames,omitempty"`
+	Nickname             string     `protobuf:"bytes,4,opt,name=nickname,proto3" json:"nickname,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
+}
+
+func (m *CreateGroupReq) Reset()         { *m = CreateGroupReq{} }
+func (m *CreateGroupReq) String() string { return proto.CompactTextString(m) }
+func (*CreateGroupReq) ProtoMessage()    {}
+func (*CreateGroupReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_e10f4c9b19ad8eee, []int{8}
+}
+
+func (m *CreateGroupReq) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CreateGroupReq.Unmarshal(m, b)
+}
+func (m *CreateGroupReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CreateGroupReq.Marshal(b, m, deterministic)
+}
+func (m *CreateGroupReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CreateGroupReq.Merge(m, src)
+}
+func (m *CreateGroupReq) XXX_Size() int {
+	return xxx_messageInfo_CreateGroupReq.Size(m)
+}
+func (m *CreateGroupReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_CreateGroupReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CreateGroupReq proto.InternalMessageInfo
+
+func (m *CreateGroupReq) GetHeader() *ReqHeader {
+	if m != nil {
+		return m.Header
+	}
+	return nil
+}
+
+func (m *CreateGroupReq) GetUsernames() []string {
+	if m != nil {
+		return m.Usernames
+	}
+	return nil
+}
+
+func (m *CreateGroupReq) GetNickname() string {
+	if m != nil {
+		return m.Nickname
+	}
+	return ""
+}
+
+type CreateGroupAck struct {
+	Header               *AckHeader `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
+}
+
+func (m *CreateGroupAck) Reset()         { *m = CreateGroupAck{} }
+func (m *CreateGroupAck) String() string { return proto.CompactTextString(m) }
+func (*CreateGroupAck) ProtoMessage()    {}
+func (*CreateGroupAck) Descriptor() ([]byte, []int) {
+	return fileDescriptor_e10f4c9b19ad8eee, []int{9}
+}
+
+func (m *CreateGroupAck) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CreateGroupAck.Unmarshal(m, b)
+}
+func (m *CreateGroupAck) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CreateGroupAck.Marshal(b, m, deterministic)
+}
+func (m *CreateGroupAck) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CreateGroupAck.Merge(m, src)
+}
+func (m *CreateGroupAck) XXX_Size() int {
+	return xxx_messageInfo_CreateGroupAck.Size(m)
+}
+func (m *CreateGroupAck) XXX_DiscardUnknown() {
+	xxx_messageInfo_CreateGroupAck.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CreateGroupAck proto.InternalMessageInfo
+
+func (m *CreateGroupAck) GetHeader() *AckHeader {
+	if m != nil {
+		return m.Header
+	}
+	return nil
+}
+
+type DiscardGroupReq struct {
+	Header               *ReqHeader `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
+}
+
+func (m *DiscardGroupReq) Reset()         { *m = DiscardGroupReq{} }
+func (m *DiscardGroupReq) String() string { return proto.CompactTextString(m) }
+func (*DiscardGroupReq) ProtoMessage()    {}
+func (*DiscardGroupReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_e10f4c9b19ad8eee, []int{10}
+}
+
+func (m *DiscardGroupReq) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DiscardGroupReq.Unmarshal(m, b)
+}
+func (m *DiscardGroupReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DiscardGroupReq.Marshal(b, m, deterministic)
+}
+func (m *DiscardGroupReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DiscardGroupReq.Merge(m, src)
+}
+func (m *DiscardGroupReq) XXX_Size() int {
+	return xxx_messageInfo_DiscardGroupReq.Size(m)
+}
+func (m *DiscardGroupReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_DiscardGroupReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DiscardGroupReq proto.InternalMessageInfo
+
+func (m *DiscardGroupReq) GetHeader() *ReqHeader {
+	if m != nil {
+		return m.Header
+	}
+	return nil
+}
+
+type DiscardGroupAck struct {
+	Header               *AckHeader `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
+}
+
+func (m *DiscardGroupAck) Reset()         { *m = DiscardGroupAck{} }
+func (m *DiscardGroupAck) String() string { return proto.CompactTextString(m) }
+func (*DiscardGroupAck) ProtoMessage()    {}
+func (*DiscardGroupAck) Descriptor() ([]byte, []int) {
+	return fileDescriptor_e10f4c9b19ad8eee, []int{11}
+}
+
+func (m *DiscardGroupAck) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DiscardGroupAck.Unmarshal(m, b)
+}
+func (m *DiscardGroupAck) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DiscardGroupAck.Marshal(b, m, deterministic)
+}
+func (m *DiscardGroupAck) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DiscardGroupAck.Merge(m, src)
+}
+func (m *DiscardGroupAck) XXX_Size() int {
+	return xxx_messageInfo_DiscardGroupAck.Size(m)
+}
+func (m *DiscardGroupAck) XXX_DiscardUnknown() {
+	xxx_messageInfo_DiscardGroupAck.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DiscardGroupAck proto.InternalMessageInfo
+
+func (m *DiscardGroupAck) GetHeader() *AckHeader {
+	if m != nil {
+		return m.Header
+	}
+	return nil
+}
+
+type UpdateGroupReq struct {
+	Header               *ReqHeader `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`
+	Nickname             string     `protobuf:"bytes,2,opt,name=nickname,proto3" json:"nickname,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
+}
+
+func (m *UpdateGroupReq) Reset()         { *m = UpdateGroupReq{} }
+func (m *UpdateGroupReq) String() string { return proto.CompactTextString(m) }
+func (*UpdateGroupReq) ProtoMessage()    {}
+func (*UpdateGroupReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_e10f4c9b19ad8eee, []int{12}
+}
+
+func (m *UpdateGroupReq) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_UpdateGroupReq.Unmarshal(m, b)
+}
+func (m *UpdateGroupReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_UpdateGroupReq.Marshal(b, m, deterministic)
+}
+func (m *UpdateGroupReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UpdateGroupReq.Merge(m, src)
+}
+func (m *UpdateGroupReq) XXX_Size() int {
+	return xxx_messageInfo_UpdateGroupReq.Size(m)
+}
+func (m *UpdateGroupReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_UpdateGroupReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UpdateGroupReq proto.InternalMessageInfo
+
+func (m *UpdateGroupReq) GetHeader() *ReqHeader {
+	if m != nil {
+		return m.Header
+	}
+	return nil
+}
+
+func (m *UpdateGroupReq) GetNickname() string {
+	if m != nil {
+		return m.Nickname
+	}
+	return ""
+}
+
+type UpdateGroupAck struct {
+	Header               *AckHeader `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
+}
+
+func (m *UpdateGroupAck) Reset()         { *m = UpdateGroupAck{} }
+func (m *UpdateGroupAck) String() string { return proto.CompactTextString(m) }
+func (*UpdateGroupAck) ProtoMessage()    {}
+func (*UpdateGroupAck) Descriptor() ([]byte, []int) {
+	return fileDescriptor_e10f4c9b19ad8eee, []int{13}
+}
+
+func (m *UpdateGroupAck) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_UpdateGroupAck.Unmarshal(m, b)
+}
+func (m *UpdateGroupAck) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_UpdateGroupAck.Marshal(b, m, deterministic)
+}
+func (m *UpdateGroupAck) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UpdateGroupAck.Merge(m, src)
+}
+func (m *UpdateGroupAck) XXX_Size() int {
+	return xxx_messageInfo_UpdateGroupAck.Size(m)
+}
+func (m *UpdateGroupAck) XXX_DiscardUnknown() {
+	xxx_messageInfo_UpdateGroupAck.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UpdateGroupAck proto.InternalMessageInfo
+
+func (m *UpdateGroupAck) GetHeader() *AckHeader {
+	if m != nil {
+		return m.Header
+	}
+	return nil
+}
+
+type UpdateUserGroupReq struct {
+	Header               *ReqHeader `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`
+	Nickname             string     `protobuf:"bytes,2,opt,name=nickname,proto3" json:"nickname,omitempty"`
+	GroupToken           string     `protobuf:"bytes,3,opt,name=groupToken,proto3" json:"groupToken,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
+}
+
+func (m *UpdateUserGroupReq) Reset()         { *m = UpdateUserGroupReq{} }
+func (m *UpdateUserGroupReq) String() string { return proto.CompactTextString(m) }
+func (*UpdateUserGroupReq) ProtoMessage()    {}
+func (*UpdateUserGroupReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_e10f4c9b19ad8eee, []int{14}
+}
+
+func (m *UpdateUserGroupReq) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_UpdateUserGroupReq.Unmarshal(m, b)
+}
+func (m *UpdateUserGroupReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_UpdateUserGroupReq.Marshal(b, m, deterministic)
+}
+func (m *UpdateUserGroupReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UpdateUserGroupReq.Merge(m, src)
+}
+func (m *UpdateUserGroupReq) XXX_Size() int {
+	return xxx_messageInfo_UpdateUserGroupReq.Size(m)
+}
+func (m *UpdateUserGroupReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_UpdateUserGroupReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UpdateUserGroupReq proto.InternalMessageInfo
+
+func (m *UpdateUserGroupReq) GetHeader() *ReqHeader {
+	if m != nil {
+		return m.Header
+	}
+	return nil
+}
+
+func (m *UpdateUserGroupReq) GetNickname() string {
+	if m != nil {
+		return m.Nickname
+	}
+	return ""
+}
+
+func (m *UpdateUserGroupReq) GetGroupToken() string {
+	if m != nil {
+		return m.GroupToken
+	}
+	return ""
+}
+
+type UpdateUserGroupAck struct {
+	Header               *AckHeader `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
+}
+
+func (m *UpdateUserGroupAck) Reset()         { *m = UpdateUserGroupAck{} }
+func (m *UpdateUserGroupAck) String() string { return proto.CompactTextString(m) }
+func (*UpdateUserGroupAck) ProtoMessage()    {}
+func (*UpdateUserGroupAck) Descriptor() ([]byte, []int) {
+	return fileDescriptor_e10f4c9b19ad8eee, []int{15}
+}
+
+func (m *UpdateUserGroupAck) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_UpdateUserGroupAck.Unmarshal(m, b)
+}
+func (m *UpdateUserGroupAck) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_UpdateUserGroupAck.Marshal(b, m, deterministic)
+}
+func (m *UpdateUserGroupAck) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UpdateUserGroupAck.Merge(m, src)
+}
+func (m *UpdateUserGroupAck) XXX_Size() int {
+	return xxx_messageInfo_UpdateUserGroupAck.Size(m)
+}
+func (m *UpdateUserGroupAck) XXX_DiscardUnknown() {
+	xxx_messageInfo_UpdateUserGroupAck.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UpdateUserGroupAck proto.InternalMessageInfo
+
+func (m *UpdateUserGroupAck) GetHeader() *AckHeader {
+	if m != nil {
+		return m.Header
+	}
+	return nil
+}
+
+func init() {
+	proto.RegisterType((*JoinGroupReq)(nil), "protocol.JoinGroupReq")
+	proto.RegisterType((*JoinGroupAck)(nil), "protocol.JoinGroupAck")
+	proto.RegisterType((*LeaveGroupReq)(nil), "protocol.LeaveGroupReq")
+	proto.RegisterType((*LeaveGroupAck)(nil), "protocol.LeaveGroupAck")
+	proto.RegisterType((*KickGroupReq)(nil), "protocol.KickGroupReq")
+	proto.RegisterType((*KickGroupAck)(nil), "protocol.KickGroupAck")
+	proto.RegisterType((*InviteReq)(nil), "protocol.InviteReq")
+	proto.RegisterType((*InviteAck)(nil), "protocol.InviteAck")
+	proto.RegisterType((*CreateGroupReq)(nil), "protocol.CreateGroupReq")
+	proto.RegisterType((*CreateGroupAck)(nil), "protocol.CreateGroupAck")
+	proto.RegisterType((*DiscardGroupReq)(nil), "protocol.DiscardGroupReq")
+	proto.RegisterType((*DiscardGroupAck)(nil), "protocol.DiscardGroupAck")
+	proto.RegisterType((*UpdateGroupReq)(nil), "protocol.UpdateGroupReq")
+	proto.RegisterType((*UpdateGroupAck)(nil), "protocol.UpdateGroupAck")
+	proto.RegisterType((*UpdateUserGroupReq)(nil), "protocol.UpdateUserGroupReq")
+	proto.RegisterType((*UpdateUserGroupAck)(nil), "protocol.UpdateUserGroupAck")
+}
+
 func init() { proto.RegisterFile("group.proto", fileDescriptor_e10f4c9b19ad8eee) }
 
 var fileDescriptor_e10f4c9b19ad8eee = []byte{
-	// 58 bytes of a gzipped FileDescriptorProto
+	// 311 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x4e, 0x2f, 0xca, 0x2f,
 	0x2d, 0xd0, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x00, 0x53, 0xc9, 0xf9, 0x39, 0x52, 0x3c,
-	0x19, 0xa9, 0x89, 0x29, 0xa9, 0x45, 0x10, 0xf1, 0x24, 0x36, 0x30, 0x65, 0x0c, 0x08, 0x00, 0x00,
-	0xff, 0xff, 0x29, 0x3a, 0x24, 0x0b, 0x2d, 0x00, 0x00, 0x00,
+	0x19, 0xa9, 0x89, 0x29, 0xa9, 0x45, 0x10, 0x71, 0xa5, 0x68, 0x2e, 0x1e, 0xaf, 0xfc, 0xcc, 0x3c,
+	0x77, 0x90, 0xd2, 0xa0, 0xd4, 0x42, 0x21, 0x6d, 0x2e, 0x36, 0x88, 0xbc, 0x04, 0xa3, 0x02, 0xa3,
+	0x06, 0xb7, 0x91, 0xb0, 0x1e, 0x4c, 0xa3, 0x5e, 0x50, 0x6a, 0xa1, 0x07, 0x58, 0x2a, 0x08, 0xaa,
+	0x44, 0x48, 0x8e, 0x8b, 0x0b, 0x6c, 0x47, 0x48, 0x7e, 0x76, 0x6a, 0x9e, 0x04, 0x93, 0x02, 0xa3,
+	0x06, 0x67, 0x10, 0x92, 0x88, 0x92, 0x35, 0x92, 0xe1, 0x8e, 0xc9, 0xd9, 0xf8, 0x0c, 0x77, 0x4c,
+	0xce, 0x46, 0x35, 0x5c, 0x29, 0x86, 0x8b, 0xd7, 0x27, 0x35, 0xb1, 0x2c, 0x95, 0x36, 0x4e, 0xb3,
+	0x41, 0x36, 0x9d, 0x64, 0xb7, 0x45, 0x73, 0xf1, 0x78, 0x67, 0x26, 0x67, 0xd3, 0x2c, 0xd4, 0xe0,
+	0x86, 0x93, 0xec, 0xb2, 0x10, 0x2e, 0x4e, 0xcf, 0xbc, 0xb2, 0xcc, 0x92, 0x54, 0x92, 0x9d, 0x25,
+	0xc5, 0xc5, 0x51, 0x5a, 0x9c, 0x5a, 0x94, 0x97, 0x98, 0x9b, 0x2a, 0xc1, 0x0c, 0x76, 0x14, 0x9c,
+	0xaf, 0x14, 0x01, 0x33, 0x95, 0x54, 0xf7, 0x10, 0xf4, 0x6c, 0x39, 0x17, 0x9f, 0x73, 0x51, 0x6a,
+	0x62, 0x09, 0x99, 0xd1, 0x2c, 0xc3, 0xc5, 0x09, 0x73, 0x64, 0xb1, 0x04, 0x93, 0x02, 0xb3, 0x06,
+	0x67, 0x10, 0x42, 0x00, 0xe4, 0xa5, 0xbc, 0xcc, 0xe4, 0x6c, 0xb0, 0x97, 0x58, 0x20, 0x5e, 0x82,
+	0xf1, 0x95, 0x6c, 0x51, 0x2c, 0x26, 0x39, 0x9c, 0xed, 0xb8, 0xf8, 0x5d, 0x32, 0x8b, 0x93, 0x13,
+	0x8b, 0x52, 0xc8, 0x72, 0x38, 0xba, 0x7e, 0x92, 0xed, 0x8f, 0xe4, 0xe2, 0x0b, 0x2d, 0x48, 0x21,
+	0x3b, 0xdc, 0x90, 0x43, 0x86, 0x09, 0x33, 0x64, 0x90, 0x8c, 0x26, 0xd9, 0x65, 0xb5, 0x5c, 0x42,
+	0x10, 0xed, 0xa1, 0xc5, 0xa9, 0x45, 0x54, 0x77, 0x1d, 0x5a, 0x82, 0x62, 0xc6, 0x48, 0x50, 0x8e,
+	0x18, 0xd6, 0x93, 0xea, 0x83, 0x24, 0x36, 0xb0, 0x9c, 0x31, 0x20, 0x00, 0x00, 0xff, 0xff, 0x27,
+	0x93, 0xe9, 0x56, 0x41, 0x05, 0x00, 0x00,
 }

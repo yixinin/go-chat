@@ -2,3 +2,75 @@ syntax = "proto3";
 package protocol;
 
 import "header.proto";
+
+message JoinGroupReq {
+    ReqHeader header     = 1;
+    string    groupToken = 2;
+}
+
+message JoinGroupAck {
+    AckHeader header = 1;
+}
+
+message LeaveGroupReq {
+    ReqHeader header     = 1;
+    string    groupToken = 2; //通过自己的邀请码退出群
+}
+message LeaveGroupAck {
+    AckHeader header = 1;
+}
+
+message KickGroupReq {
+    ReqHeader header     = 1;
+    string    groupToken = 2; //
+}
+
+message KickGroupAck {
+    AckHeader header = 1;
+}
+
+message InviteReq {
+    ReqHeader header   = 1;
+    string    username = 3;
+}
+
+message InviteAck {
+    AckHeader header     = 1;
+    string    groupToken = 2; //获取邀请码 每次更新
+}
+
+message CreateGroupReq {
+    ReqHeader header          = 1;
+    repeated string usernames = 2;
+    string          nickname  = 4; //群名称
+}
+
+message CreateGroupAck {
+    AckHeader header = 1;
+}
+
+message DiscardGroupReq {
+    ReqHeader header = 1;
+}
+
+message DiscardGroupAck {
+    AckHeader header = 1;
+}
+
+message UpdateGroupReq {
+    ReqHeader header   = 1;
+    string    nickname = 2;
+}
+message UpdateGroupAck {
+    AckHeader header = 1;
+}
+
+message UpdateUserGroupReq {
+    ReqHeader header     = 1;
+    string    nickname   = 2;
+    string    groupToken = 3;
+}
+
+message UpdateUserGroupAck {
+    AckHeader header = 1;
+}
