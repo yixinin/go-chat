@@ -26,7 +26,9 @@ type AccountLogic struct {
 //账号操作等。。。
 
 //SignUp 注册
-func (s *AccountLogic) SignUp(req *protocol.SignUpReq, ack *protocol.SignUpAck) (err error) {
+func (s *AccountLogic) SignUp(r Reqer, a Acker) (err error) {
+	req, _ := r.(*protocol.SignUpReq)
+	ack, _ := a.(*protocol.SignUpAck)
 	var ctx, cancel = context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 	var now = time.Now().Unix()
@@ -83,7 +85,9 @@ func (s *AccountLogic) SignUp(req *protocol.SignUpReq, ack *protocol.SignUpAck) 
 }
 
 //登录
-func (s *AccountLogic) SignIn(req *protocol.SignInReq, ack *protocol.SignInAck) (err error) {
+func (s *AccountLogic) SignIn(r Reqer, a Acker) (err error) {
+	req, _ := r.(*protocol.SignInReq)
+	ack, _ := a.(*protocol.SignInAck)
 	var ctx, cancel = context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 	var user models.User
@@ -116,7 +120,9 @@ func (s *AccountLogic) SignIn(req *protocol.SignInReq, ack *protocol.SignInAck) 
 	return
 }
 
-func (s *AccountLogic) SignOut(req *protocol.SignOutReq, ack *protocol.SignOutAck) (err error) {
+func (s *AccountLogic) SignOut(r Reqer, a Acker) (err error) {
+	req, _ := r.(*protocol.SignOutReq)
+	ack, _ := a.(*protocol.SignOutAck)
 	var uid = req.Header.Uid
 	deviceType, err := cache.GetDeviceToken(uid, req.Header.Token)
 	cache.DelDevice(uid, deviceType)
@@ -126,7 +132,9 @@ func (s *AccountLogic) SignOut(req *protocol.SignOutReq, ack *protocol.SignOutAc
 	return
 }
 
-func (s *AccountLogic) Delete(req *protocol.DeleteReq, ack *protocol.DeleteAck) (err error) {
+func (s *AccountLogic) Delete(r Reqer, a Acker) (err error) {
+	req, _ := r.(*protocol.DeleteReq)
+	ack, _ := a.(*protocol.DeleteAck)
 	uid, err := cache.GetToken(req.Header.Token)
 	//标记删除
 	var ctx, cancel = context.WithTimeout(context.Background(), 5*time.Second)
@@ -148,13 +156,17 @@ func (s *AccountLogic) Delete(req *protocol.DeleteReq, ack *protocol.DeleteAck) 
 	return
 }
 
-func (s *AccountLogic) ChangePassword(req *protocol.ChangePasswordReq, ack *protocol.ChangePasswordAck) (err error) {
+func (s *AccountLogic) ChangePassword(r Reqer, a Acker) (err error) {
+	// req, _ := r.(*protocol.ChangePasswordReq)
+	ack, _ := a.(*protocol.ChangePasswordAck)
 	ack.Header.Code = 200
 	ack.Header.Msg = "success"
 	return
 }
 
-func (s *AccountLogic) ResetPassword(req *protocol.ResetPasswordReq, ack *protocol.ResetPasswordAck) (err error) {
+func (s *AccountLogic) ResetPassword(r Reqer, a Acker) (err error) {
+	// req,_ :=r.(*protocol.ResetPasswordReq)
+	ack, _ := a.(*protocol.ResetPasswordAck)
 	ack.Header.Code = 200
 	ack.Header.Msg = "success"
 	return

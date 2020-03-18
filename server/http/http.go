@@ -72,7 +72,7 @@ func (s *httpServer) Init(handlers ...server.Handler) error {
 		gin.SetMode(gin.ReleaseMode)
 	}
 
-	s.engine.Use(middleware.Auth)
+	s.engine.Use(middleware.SetUid)
 
 	for _, h := range handlers {
 		if handler, ok := h.(server.HttpHandler); ok {

@@ -81,18 +81,21 @@ func (s *ChatLogic) UpdateNode(addr string) {
 	s.roomClients[addr] = client
 }
 
-func (s *ChatLogic) SendMessage(req *protocol.SendMessageReq, ack *protocol.SendMessageAck) (err error) {
-
+func (s *ChatLogic) SendMessage(r Reqer, a Acker) (err error) {
+	// req, _ := r.(*protocol.SendMessageReq)
+	ack, _ := a.(*protocol.SendMessageAck)
 	ack.Header.Code = 200
 	ack.Header.Msg = "success"
 	return
 }
 
-func (s *ChatLogic) RealTime(req *protocol.RealTimeReq, ack *protocol.RealTimeAck) (err error) {
-	switch req.Protocol {
-	case "tcp":
-	case "ws":
-	}
+func (s *ChatLogic) RealTime(r Reqer, a Acker) (err error) {
+	// switch req.Protocol {
+	// case "tcp":
+	// case "ws":
+	// }
+	req, _ := r.(*protocol.RealTimeReq)
+	ack, _ := a.(*protocol.RealTimeAck)
 
 	var users []*protocol.RoomUser
 
@@ -155,7 +158,9 @@ func (s *ChatLogic) RealTime(req *protocol.RealTimeReq, ack *protocol.RealTimeAc
 	return
 }
 
-func (s *ChatLogic) CancelRealTime(req *protocol.CancelRealTimeReq, ack *protocol.CancelRealTimeAck) (err error) {
+func (s *ChatLogic) CancelRealTime(r Reqer, a Acker) (err error) {
+	req, _ := r.(*protocol.CancelRealTimeReq)
+	ack, _ := a.(*protocol.CancelRealTimeAck)
 	//查找当前房间
 	rid, addr, err := cache.GetUserRoomInfo(req.Header.Uid)
 	if err != nil {
@@ -191,6 +196,7 @@ func (s *ChatLogic) CancelRealTime(req *protocol.CancelRealTimeReq, ack *protoco
 			IsConnect: false,
 		})
 	}
+	ack.Header.Code = 200
 	return nil
 }
 
@@ -223,7 +229,9 @@ func (s *ChatLogic) NotifyMessage(uid, msgName string, msg interface{}) {
 	}
 }
 
-func (s *ChatLogic) PollNotify(req *protocol.PollNotifyReq, ack *protocol.PollNotifyAck) error {
+func (s *ChatLogic) PollNotify(r Reqer, a Acker) error {
+	req, _ := r.(*protocol.PollNotifyReq)
+	ack, _ := a.(*protocol.PollNotifyAck)
 	msgs, err := cache.GetAllNotifyMessage(req.Header.Uid)
 	if err != nil {
 		return err
