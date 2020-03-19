@@ -24,7 +24,8 @@ message AddContactReq {
     string    username    = 2;
     int32     contactType = 3; //添加类型 1=搜索 2=通讯录 3=推荐
     string    setRemarks  = 4;
-    string    msg         = 5;
+    string    msg         = 5; //验证消息
+    string    authId      = 6; //验证id
 }
 
 message AddContactAck {

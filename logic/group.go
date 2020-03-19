@@ -21,3 +21,17 @@ func (s GroupLogic) JoinGroup(r Reqer, a Acker) error {
 	db.Mongo.Collection(groupAuth.TableName()).InsertOne(ctx, groupAuth)
 	return Success(ack)
 }
+
+func (s *GroupLogic) Auth(r Reqer, a Acker) error {
+	// req, _ := r.(*protocol.AuthGroupReq)
+	ack, _ := a.(*protocol.AuthGroupAck)
+
+	return Success(ack)
+}
+
+func (s *GroupLogic) LeaveGroup(r Reqer, a Acker) error {
+	// req, _ := r.(*protocol.LeaveGroupReq)
+	ack, _ := a.(*protocol.LeaveGroupAck)
+
+	return Success(ack)
+}

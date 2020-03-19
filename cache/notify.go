@@ -7,30 +7,31 @@ import (
 	"go-lib/db"
 )
 
-func GetNotifyMsgKey(uid int64) string {
-	return fmt.Sprintf("list:user:msg:%d", uid)
+func GetRealTimeNotifyKey(uid int64) string {
+	return fmt.Sprintf("list:user:realtime:%d", uid)
 }
 
-func CacheNotifyMessage(uid int64, msg []byte) error {
-	var key = GetNotifyMsgKey(uid)
-	// var v, err = json.Marshal(msg)
-	// if err != nil {
-	// 	return err
-	// }
-	return db.Redis.RPush(key, msg).Err()
+func CacheRealTimeNotify(uid int64, msg *protocol.RealTimeNotify) error {
+	var key = GetRealTimeNotifyKey(uid)
+	var body, err = json.Marshal(msg)
+	if err != nil {
+		return err
+	}
+	return db.Redis.RPush(key, body).Err()
 }
-
-func GetNotifyMessage(uid int64) (*protocol.CacheMessage, error) {
-	var key = GetNotifyMsgKey(uid)
-	var buf, err = db.Redis.LPop(key).Bytes()
-	var msg *protocol.CacheMessage
+func GetRealTime(uid int64, msg *protocol.RealTimeNotify) (err error) {
+	var key = GetRealTimeNotifyKey(uid)
+	buf, err := db.Redis.LPop(key).Bytes()
+	if err != nil {
+		return
+	}
 	err = json.Unmarshal(buf, msg)
-	return msg, err
+	return err
 }
 
-func GetAllNotifyMessage(uid int64) ([]*protocol.CacheMessage, error) {
-	var key = GetNotifyMsgKey(uid)
-	var msgs = make([]*protocol.CacheMessage, 0, 1)
+func GetAllNotifyMessage(uid int64) ([]*protocol.PollAck_Message, error) {
+	var key = GetRealTimeNotifyKey(uid)
+	var msgs = make([]*protocol.PollAck_Message, 0, 1)
 	var err error
 	for true {
 		var buf []byte
@@ -41,7 +42,7 @@ func GetAllNotifyMessage(uid int64) ([]*protocol.CacheMessage, error) {
 		if len(buf) == 0 {
 			break
 		}
-		var msg *protocol.CacheMessage
+		var msg *protocol.PollAck_Message
 		err = json.Unmarshal(buf, msg)
 		if err != nil {
 			break
@@ -51,3 +52,10 @@ func GetAllNotifyMessage(uid int64) ([]*protocol.CacheMessage, error) {
 
 	return msgs, err
 }
+
+//好友未读
+func IncUserMessage(uid int64, count int) error {
+
+}
+
+func IncGroup()

@@ -5,7 +5,6 @@ import (
 	"chat/models"
 	"chat/protocol"
 	"context"
-	"encoding/json"
 	"go-lib/db"
 	"go-lib/log"
 	"go-lib/registry"
@@ -14,6 +13,8 @@ import (
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 	"gopkg.in/mgo.v2/bson"
 )
 
@@ -52,9 +53,8 @@ func NewChatLogic(regist registry.Registry, notifyFuncs ...NotifyFunc) *ChatLogi
 func (s *ChatLogic) SendMessage(r Reqer, a Acker) (err error) {
 	req, _ := r.(*protocol.SendMessageReq)
 	ack, _ := a.(*protocol.SendMessageAck)
+	var now = time.Now().Unix()
 
-	var uids = make([]int64, 1, 2)
-	uids[0] = req.Header.Uid
 	// var users = make(*models.User, 0, 1)
 	//查找用户/群
 	if req.ContactId != "" {
@@ -67,35 +67,62 @@ func (s *ChatLogic) SendMessage(r Reqer, a Acker) (err error) {
 		err = db.Mongo.Collection(contact.TableName(req.Header.Uid)).
 			FindOne(ctx, bson.M{"_id": _id}).
 			Decode(&contact)
+
+		//插入mongo
+		var userMessage = &models.UserMessage{
+			Text:        req.TextMessage,
+			FromUid:     req.Header.Uid,
+			ToUid:       contact.UserId,
+			Read:        false,
+			MessageType: int32(req.MessageType),
+			CreateTime:  now,
+		}
+		ctx, cancel = NewContext()
+		defer cancel()
+		_, err := db.Mongo.Collection(userMessage.TableName(contact.UserId)).InsertOne(ctx, userMessage)
 		if err != nil {
 			return Error(ack, err)
 		}
-		uids = append(uids, contact.UserId)
+		ctx, cancel = NewContext()
+		defer cancel()
+		_, err = db.Mongo.Collection(userMessage.TableName(req.Header.Uid)).InsertOne(ctx, userMessage)
+		if err != nil {
+			return Error(ack, err)
+		}
+
 	}
 
 	if req.GroupId != "" {
 		_id, _ := primitive.ObjectIDFromHex(req.GroupId)
-		var userGroup = &models.UserGroup{
-			Id: _id,
-		}
+		var userGroup = &models.UserGroup{}
 		var ctx, cancel = NewContext()
 		defer cancel()
 		err := db.Mongo.Collection(userGroup.TableName(req.Header.Uid)).FindOne(ctx, bson.M{"_id": _id}).Decode(&userGroup)
 		if err != nil {
 			return Error(ack, err)
 		}
-		//查找群成员
-		var group = &models.Group{}
-		err = db.Mongo.Collection(group.TableName()).FindOne(ctx, bson.M{"_id": _id}).Decode(&group)
+		if userGroup.GroupId == "" {
+			return Fail(ack, "no such group")
+		}
+		//插入消息
+		var groupMessage = &models.GroupMessage{
+			GroupId:     userGroup.GroupId,
+			Text:        req.TextMessage,
+			FromUid:     req.Header.Uid,
+			MessageType: int32(req.MessageType),
+			Memtions:    req.Memtions,
+			CreateTime:  now,
+		}
+		ctx, cancel = NewContext()
+		defer cancel()
+		_, err = db.Mongo.Collection(groupMessage.TableName(userGroup.GroupId)).InsertOne(ctx, groupMessage)
 		if err != nil {
 			return Error(ack, err)
 		}
-		for _, v := range group.Members {
-			uids = append(uids, v.UserId)
-		}
+
 	}
 
-	s.NotifyMessage(uids, "msg", req.TextMessage)
+	// s.NotifyMessage(uids, "msg", req.TextMessage)
 	return Success(ack)
 }
 
@@ -151,7 +178,7 @@ func (s *ChatLogic) RealTime(r Reqer, a Acker) (err error) {
 		if u.Uid == req.Header.Uid {
 			continue
 		}
-		s.NotifyMessage([]int64{u.Uid}, "RealTimeNotify", &protocol.RealTimeNotify{
+		s.NotifyRealTime([]int64{u.Uid}, &protocol.RealTimeNotify{
 			Header: &protocol.NotiHeader{},
 			RealTimeInfo: &protocol.RealTimeInfo{
 				Uid:      req.Uid,
@@ -198,7 +225,7 @@ func (s *ChatLogic) CancelRealTime(r Reqer, a Acker) (err error) {
 		cache.DiscardRoom(rid)
 	}
 	//通知其他人
-	s.NotifyMessage(uids, "RealTimeNotify", &protocol.RealTimeNotify{
+	s.NotifyRealTime(uids, &protocol.RealTimeNotify{
 		Header: &protocol.NotiHeader{},
 		RealTimeInfo: &protocol.RealTimeInfo{
 			RoomId: rid,
@@ -209,84 +236,60 @@ func (s *ChatLogic) CancelRealTime(r Reqer, a Acker) (err error) {
 	return Success(ack)
 }
 
-func (s *ChatLogic) NotifyMessage(uids []int64, msgName string, msg interface{}) {
-	var ok = false
-	var err error
-
-	var cacheMessage []byte
-
-	if s.Notify != nil {
-		for _, uid := range uids {
-			ok, err = s.Notify(uid, msg)
-			if err != nil {
-				log.Errorf("notify msg error:%v", err)
-			}
-			if !ok || err != nil {
-				if cacheMessage == nil {
-					if body, err := json.Marshal(msg); err != nil {
-						log.Error(err)
-					} else {
-						cacheMessage, err = json.Marshal(protocol.CacheMessage{
-							Name:      msgName,
-							Body:      string(body),
-							TimeStamp: time.Now().Unix(),
-						})
-						if err != nil {
-							log.Error(err)
-						}
-					}
-				}
-
-				if len(cacheMessage) > 10 {
-					err = cache.CacheNotifyMessage(uid, cacheMessage)
-					if err != nil {
-						log.Errorf("cache notify msg error:%v", err)
-					}
-				}
-			}
-		}
-
-	}
-
-	//没有长连接或发送失败 消息存到redis 前端轮询接收
-	if !ok || err != nil {
-		for _, uid := range uids {
-			if cacheMessage == nil {
-				if body, err := json.Marshal(msg); err != nil {
-					log.Error(err)
-				} else {
-					cacheMessage, err = json.Marshal(protocol.CacheMessage{
-						Name:      msgName,
-						Body:      string(body),
-						TimeStamp: time.Now().Unix(),
-					})
-					if err != nil {
-						log.Error(err)
-					}
-				}
-			}
-			if len(cacheMessage) > 10 {
-				err = cache.CacheNotifyMessage(uid, cacheMessage)
-				if err != nil {
-					log.Errorf("cache notify msg error:%v", err)
-				}
-			}
+func (s *ChatLogic) NotifyRealTime(uids []int64, msg *protocol.RealTimeNotify) {
+	for _, uid := range uids {
+		err := cache.CacheRealTimeNotify(uid, msg)
+		if err != nil {
+			log.Errorf("cache notify msg error:%v", err)
 		}
 	}
 }
 
-func (s *ChatLogic) CacheNotifyMessage(msg []byte, uid ...int64) {
-
-}
-
-func (s *ChatLogic) PollNotify(r Reqer, a Acker) error {
-	req, _ := r.(*protocol.PollNotifyReq)
-	ack, _ := a.(*protocol.PollNotifyAck)
+func (s *ChatLogic) Poll(r Reqer, a Acker) error {
+	req, _ := r.(*protocol.PollReq)
+	ack, _ := a.(*protocol.PollAck)
 	msgs, err := cache.GetAllNotifyMessage(req.Header.Uid)
 	if err != nil {
 		return Error(ack, err)
 	}
-	ack.Msg = msgs
+	ack.Msgs = msgs
 
+	return Success(ack)
+}
+
+func (s *ChatLogic) PollMessage(r Reqer, a Acker) error {
+	req, _ := r.(*protocol.PollMessageReq)
+	ack, _ := a.(*protocol.PollMessageAck)
+	var userMessages = make([]models.UserMessage, 0, 10)
+	var ctx, cancel = NewContext()
+	defer cancel()
+	c, err := db.Mongo.Collection((&models.UserMessage{}).TableName(req.Header.Uid)).Find(ctx, bson.M{"read": false}, options.Find().SetSort(bson.M{"_id": -1}))
+	if err != nil {
+		if err != mongo.ErrNoDocuments {
+			return Error(ack, err)
+		}
+	}
+	defer c.Close(context.TODO())
+	for c.TryNext(context.TODO()) {
+		var msg models.UserMessage
+		err := c.Decode(&msg)
+		if err != nil {
+			log.Error(err)
+			continue
+		}
+		userMessages = append(userMessages, msg)
+	}
+
+	ack.Data = make([]*protocol.PollMessageAck_DataItem, 0, len(userMessages))
+	for _, v := range userMessages {
+		ack.Data = append(ack.Data, &protocol.PollMessageAck_DataItem{
+			Text:        v.Text,
+			FromUid:     v.FromUid,
+			ToUid:       v.ToUid,
+			MediaUrl:    v.MediaUrl,
+			MessageType: v.MessageType,
+			CreateTime:  v.CreateTime,
+		})
+	}
 	return Success(ack)
 }

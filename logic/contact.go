@@ -44,33 +44,68 @@ func (s *ContactLogic) SearchUser(r Reqer, a Acker) error {
 func (s *ContactLogic) AddContact(r Reqer, a Acker) error {
 	req, _ := r.(*protocol.AddContactReq)
 	ack, _ := a.(*protocol.AddContactAck)
-
-	//查找用户
-	var user = models.User{
-		Username: req.Username,
-	}
-	ok, err := db.Mysql.Get(&user)
-	if err != nil {
-		return Fail(ack, "Unexpected error")
-	}
-	if !ok {
-		return Fail(ack, "no such user")
-	}
-
-	//添加用户认证
 	var now = time.Now().Unix()
-	var contact = &models.Contact{
-		UserAId:    req.Header.Uid,
-		UserBId:    user.Id,
-		RemarksA:   req.SetRemarks,
-		CreateTime: now,
-		UpdateTime: now,
-	}
-	var ctx, cancel = context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancel()
-	_, err = db.Mongo.Collection(contact.TableName()).InsertOne(ctx, contact)
-	if err != nil {
-		return Error(ack, err)
+
+	if req.AuthId != "" { //通过验证
+		ctx, cancel := NewContext()
+		defer cancel()
+		var contact = &models.Contact{}
+		_id, _ := primitive.ObjectIDFromHex(req.AuthId)
+		err := db.Mongo.Collection(contact.TableName()).FindOne(ctx, bson.M{"_id": _id}).Decode(contact)
+		if err != nil {
+			return Error(ack, err)
+		}
+		if contact.UserBId != req.Header.Uid {
+			return Fail(ack, "accsess deined")
+		}
+		//添加
+		ctx, cancel = NewContext()
+		defer cancel()
+		userContact := &models.UserContact{
+			UserId:     req.Header.Uid,
+			Remarks:    req.SetRemarks,
+			CreateTime: now,
+			UpdateTime: now,
+		}
+		_, err = db.Mongo.Collection(userContact.TableName(contact.UserAId)).InsertOne(ctx, userContact)
+		if err != nil {
+			return Error(ack, err)
+		}
+		userContact.UserId = contact.UserAId
+		ctx, cancel = NewContext()
+		defer cancel()
+		_, err = db.Mongo.Collection(userContact.TableName(contact.UserBId)).InsertOne(ctx, userContact)
+		if err != nil {
+			return Error(ack, err)
+		}
+	} else { //添加验证
+		//查找用户
+		var user = models.User{
+			Username: req.Username,
+		}
+		ok, err := db.Mysql.Get(&user)
+		if err != nil {
+			return Fail(ack, "Unexpected error")
+		}
+		if !ok {
+			return Fail(ack, "no such user")
+		}
+
+		//添加用户认证
+		var contact = &models.Contact{
+			UserAId:    req.Header.Uid,
+			UserBId:    user.Id,
+			RemarksA:   req.SetRemarks,
+			CreateTime: now,
+			UpdateTime: now,
+			Message:    req.Msg,
+		}
+		var ctx, cancel = context.WithTimeout(context.Background(), 5*time.Second)
+		defer cancel()
+		_, err = db.Mongo.Collection(contact.TableName()).InsertOne(ctx, contact)
+		if err != nil {
+			return Error(ack, err)
+		}
 	}
 
 	return Success(ack)

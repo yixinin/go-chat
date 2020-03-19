@@ -63,7 +63,7 @@ func (s *Service) Init() {
 
 	if s.HttpServer != nil {
 		var account = handler.NewAccountHandler()
-		var message = handler.NewMessageHandler(s.Registry)
+		var message = handler.NewChatHandler(s.Registry)
 		s.HttpServer.Init(account, message)
 	}
 	if s.TcpServer != nil {

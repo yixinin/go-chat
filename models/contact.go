@@ -19,6 +19,7 @@ type Contact struct {
 	UserBId    int64
 	RemarksA   string //预设备注备注
 	Status     int32  //状态 1=待通过 2=已拒绝 3=已通过 4=已过期
+	Message    string //验证消息
 	CreateTime int64
 	UpdateTime int64
 }

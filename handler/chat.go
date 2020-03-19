@@ -32,7 +32,8 @@ func (h *ChatHandler) HandleAll(g *gin.Engine) error {
 	group.POST("/send", h.SendMessage)
 	group.POST("/realTime", h.RealTime)
 	group.POST("/cancelRealTime", h.CancelRealTime)
-	group.POST("/pollnotify", h.Pollnotify)
+	group.POST("/pollRealTimeNotify", h.PollRealTimeNotify)
+	group.POST("/pollMessage", h.PollMessage)
 	return nil
 }
 
@@ -55,8 +56,14 @@ func (h *ChatHandler) CancelRealTime(c *gin.Context) {
 	h.Handle(c, &req, &ack, h.logic.CancelRealTime)
 }
 
-func (h *ChatHandler) Pollnotify(c *gin.Context) {
-	var req protocol.PollNotifyReq
-	var ack protocol.PollNotifyAck
-	h.Handle(c, &req, &ack, h.logic.PollNotify)
+func (h *ChatHandler) PollRealTimeNotify(c *gin.Context) {
+	var req protocol.PollReq
+	var ack protocol.PollAck
+	h.Handle(c, &req, &ack, h.logic.Poll)
+}
+
+func (h *ChatHandler) PollMessage(c *gin.Context) {
+	var req protocol.PollMessageReq
+	var ack protocol.PollMessageAck
+	h.Handle(c, &req, &ack, h.logic.PollMessage)
 }

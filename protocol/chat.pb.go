@@ -600,206 +600,388 @@ func (m *RealTimeNotify) GetRealTimeInfo() *RealTimeInfo {
 	return nil
 }
 
-type MessageNotify struct {
-	Header               *NotiHeader `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`
-	MessageType          int32       `protobuf:"varint,2,opt,name=messageType,proto3" json:"messageType,omitempty"`
-	TextMessage          MessageType `protobuf:"varint,3,opt,name=textMessage,proto3,enum=protocol.MessageType" json:"textMessage,omitempty"`
-	Memtions             []string    `protobuf:"bytes,4,rep,name=memtions,proto3" json:"memtions,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
-	XXX_unrecognized     []byte      `json:"-"`
-	XXX_sizecache        int32       `json:"-"`
-}
-
-func (m *MessageNotify) Reset()         { *m = MessageNotify{} }
-func (m *MessageNotify) String() string { return proto.CompactTextString(m) }
-func (*MessageNotify) ProtoMessage()    {}
-func (*MessageNotify) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8c585a45e2093e54, []int{9}
-}
-
-func (m *MessageNotify) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_MessageNotify.Unmarshal(m, b)
-}
-func (m *MessageNotify) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_MessageNotify.Marshal(b, m, deterministic)
-}
-func (m *MessageNotify) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MessageNotify.Merge(m, src)
-}
-func (m *MessageNotify) XXX_Size() int {
-	return xxx_messageInfo_MessageNotify.Size(m)
-}
-func (m *MessageNotify) XXX_DiscardUnknown() {
-	xxx_messageInfo_MessageNotify.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_MessageNotify proto.InternalMessageInfo
-
-func (m *MessageNotify) GetHeader() *NotiHeader {
-	if m != nil {
-		return m.Header
-	}
-	return nil
-}
-
-func (m *MessageNotify) GetMessageType() int32 {
-	if m != nil {
-		return m.MessageType
-	}
-	return 0
-}
-
-func (m *MessageNotify) GetTextMessage() MessageType {
-	if m != nil {
-		return m.TextMessage
-	}
-	return MessageType_None
-}
-
-func (m *MessageNotify) GetMemtions() []string {
-	if m != nil {
-		return m.Memtions
-	}
-	return nil
-}
-
-type CacheMessage struct {
-	Name                 string   `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Body                 string   `protobuf:"bytes,2,opt,name=body,proto3" json:"body,omitempty"`
-	TimeStamp            int64    `protobuf:"varint,3,opt,name=timeStamp,proto3" json:"timeStamp,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *CacheMessage) Reset()         { *m = CacheMessage{} }
-func (m *CacheMessage) String() string { return proto.CompactTextString(m) }
-func (*CacheMessage) ProtoMessage()    {}
-func (*CacheMessage) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8c585a45e2093e54, []int{10}
-}
-
-func (m *CacheMessage) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_CacheMessage.Unmarshal(m, b)
-}
-func (m *CacheMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_CacheMessage.Marshal(b, m, deterministic)
-}
-func (m *CacheMessage) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CacheMessage.Merge(m, src)
-}
-func (m *CacheMessage) XXX_Size() int {
-	return xxx_messageInfo_CacheMessage.Size(m)
-}
-func (m *CacheMessage) XXX_DiscardUnknown() {
-	xxx_messageInfo_CacheMessage.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_CacheMessage proto.InternalMessageInfo
-
-func (m *CacheMessage) GetName() string {
-	if m != nil {
-		return m.Name
-	}
-	return ""
-}
-
-func (m *CacheMessage) GetBody() string {
-	if m != nil {
-		return m.Body
-	}
-	return ""
-}
-
-func (m *CacheMessage) GetTimeStamp() int64 {
-	if m != nil {
-		return m.TimeStamp
-	}
-	return 0
-}
-
-type PollNotifyReq struct {
+type PollMessageReq struct {
 	Header               *ReqHeader `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
 	XXX_unrecognized     []byte     `json:"-"`
 	XXX_sizecache        int32      `json:"-"`
 }
 
-func (m *PollNotifyReq) Reset()         { *m = PollNotifyReq{} }
-func (m *PollNotifyReq) String() string { return proto.CompactTextString(m) }
-func (*PollNotifyReq) ProtoMessage()    {}
-func (*PollNotifyReq) Descriptor() ([]byte, []int) {
+func (m *PollMessageReq) Reset()         { *m = PollMessageReq{} }
+func (m *PollMessageReq) String() string { return proto.CompactTextString(m) }
+func (*PollMessageReq) ProtoMessage()    {}
+func (*PollMessageReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8c585a45e2093e54, []int{9}
+}
+
+func (m *PollMessageReq) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_PollMessageReq.Unmarshal(m, b)
+}
+func (m *PollMessageReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_PollMessageReq.Marshal(b, m, deterministic)
+}
+func (m *PollMessageReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PollMessageReq.Merge(m, src)
+}
+func (m *PollMessageReq) XXX_Size() int {
+	return xxx_messageInfo_PollMessageReq.Size(m)
+}
+func (m *PollMessageReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_PollMessageReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_PollMessageReq proto.InternalMessageInfo
+
+func (m *PollMessageReq) GetHeader() *ReqHeader {
+	if m != nil {
+		return m.Header
+	}
+	return nil
+}
+
+type PollMessageAck struct {
+	Header               *AckHeader                 `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`
+	Total                int32                      `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	Data                 []*PollMessageAck_DataItem `protobuf:"bytes,3,rep,name=data,proto3" json:"data,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                   `json:"-"`
+	XXX_unrecognized     []byte                     `json:"-"`
+	XXX_sizecache        int32                      `json:"-"`
+}
+
+func (m *PollMessageAck) Reset()         { *m = PollMessageAck{} }
+func (m *PollMessageAck) String() string { return proto.CompactTextString(m) }
+func (*PollMessageAck) ProtoMessage()    {}
+func (*PollMessageAck) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8c585a45e2093e54, []int{10}
+}
+
+func (m *PollMessageAck) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_PollMessageAck.Unmarshal(m, b)
+}
+func (m *PollMessageAck) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_PollMessageAck.Marshal(b, m, deterministic)
+}
+func (m *PollMessageAck) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PollMessageAck.Merge(m, src)
+}
+func (m *PollMessageAck) XXX_Size() int {
+	return xxx_messageInfo_PollMessageAck.Size(m)
+}
+func (m *PollMessageAck) XXX_DiscardUnknown() {
+	xxx_messageInfo_PollMessageAck.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_PollMessageAck proto.InternalMessageInfo
+
+func (m *PollMessageAck) GetHeader() *AckHeader {
+	if m != nil {
+		return m.Header
+	}
+	return nil
+}
+
+func (m *PollMessageAck) GetTotal() int32 {
+	if m != nil {
+		return m.Total
+	}
+	return 0
+}
+
+func (m *PollMessageAck) GetData() []*PollMessageAck_DataItem {
+	if m != nil {
+		return m.Data
+	}
+	return nil
+}
+
+type PollMessageAck_DataItem struct {
+	Text                 string   `protobuf:"bytes,1,opt,name=text,proto3" json:"text,omitempty"`
+	FromUid              int64    `protobuf:"varint,2,opt,name=fromUid,proto3" json:"fromUid,omitempty"`
+	ToUid                int64    `protobuf:"varint,3,opt,name=toUid,proto3" json:"toUid,omitempty"`
+	GroupId              int64    `protobuf:"varint,4,opt,name=groupId,proto3" json:"groupId,omitempty"`
+	MessageType          int32    `protobuf:"varint,5,opt,name=messageType,proto3" json:"messageType,omitempty"`
+	MediaUrl             string   `protobuf:"bytes,6,opt,name=mediaUrl,proto3" json:"mediaUrl,omitempty"`
+	CreateTime           int64    `protobuf:"varint,7,opt,name=createTime,proto3" json:"createTime,omitempty"`
+	Memtions             []string `protobuf:"bytes,16,rep,name=memtions,proto3" json:"memtions,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *PollMessageAck_DataItem) Reset()         { *m = PollMessageAck_DataItem{} }
+func (m *PollMessageAck_DataItem) String() string { return proto.CompactTextString(m) }
+func (*PollMessageAck_DataItem) ProtoMessage()    {}
+func (*PollMessageAck_DataItem) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8c585a45e2093e54, []int{10, 0}
+}
+
+func (m *PollMessageAck_DataItem) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_PollMessageAck_DataItem.Unmarshal(m, b)
+}
+func (m *PollMessageAck_DataItem) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_PollMessageAck_DataItem.Marshal(b, m, deterministic)
+}
+func (m *PollMessageAck_DataItem) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PollMessageAck_DataItem.Merge(m, src)
+}
+func (m *PollMessageAck_DataItem) XXX_Size() int {
+	return xxx_messageInfo_PollMessageAck_DataItem.Size(m)
+}
+func (m *PollMessageAck_DataItem) XXX_DiscardUnknown() {
+	xxx_messageInfo_PollMessageAck_DataItem.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_PollMessageAck_DataItem proto.InternalMessageInfo
+
+func (m *PollMessageAck_DataItem) GetText() string {
+	if m != nil {
+		return m.Text
+	}
+	return ""
+}
+
+func (m *PollMessageAck_DataItem) GetFromUid() int64 {
+	if m != nil {
+		return m.FromUid
+	}
+	return 0
+}
+
+func (m *PollMessageAck_DataItem) GetToUid() int64 {
+	if m != nil {
+		return m.ToUid
+	}
+	return 0
+}
+
+func (m *PollMessageAck_DataItem) GetGroupId() int64 {
+	if m != nil {
+		return m.GroupId
+	}
+	return 0
+}
+
+func (m *PollMessageAck_DataItem) GetMessageType() int32 {
+	if m != nil {
+		return m.MessageType
+	}
+	return 0
+}
+
+func (m *PollMessageAck_DataItem) GetMediaUrl() string {
+	if m != nil {
+		return m.MediaUrl
+	}
+	return ""
+}
+
+func (m *PollMessageAck_DataItem) GetCreateTime() int64 {
+	if m != nil {
+		return m.CreateTime
+	}
+	return 0
+}
+
+func (m *PollMessageAck_DataItem) GetMemtions() []string {
+	if m != nil {
+		return m.Memtions
+	}
+	return nil
+}
+
+type PollReq struct {
+	Header               *ReqHeader `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
+}
+
+func (m *PollReq) Reset()         { *m = PollReq{} }
+func (m *PollReq) String() string { return proto.CompactTextString(m) }
+func (*PollReq) ProtoMessage()    {}
+func (*PollReq) Descriptor() ([]byte, []int) {
 	return fileDescriptor_8c585a45e2093e54, []int{11}
 }
 
-func (m *PollNotifyReq) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_PollNotifyReq.Unmarshal(m, b)
+func (m *PollReq) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_PollReq.Unmarshal(m, b)
 }
-func (m *PollNotifyReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_PollNotifyReq.Marshal(b, m, deterministic)
+func (m *PollReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_PollReq.Marshal(b, m, deterministic)
 }
-func (m *PollNotifyReq) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_PollNotifyReq.Merge(m, src)
+func (m *PollReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PollReq.Merge(m, src)
 }
-func (m *PollNotifyReq) XXX_Size() int {
-	return xxx_messageInfo_PollNotifyReq.Size(m)
+func (m *PollReq) XXX_Size() int {
+	return xxx_messageInfo_PollReq.Size(m)
 }
-func (m *PollNotifyReq) XXX_DiscardUnknown() {
-	xxx_messageInfo_PollNotifyReq.DiscardUnknown(m)
+func (m *PollReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_PollReq.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_PollNotifyReq proto.InternalMessageInfo
+var xxx_messageInfo_PollReq proto.InternalMessageInfo
 
-func (m *PollNotifyReq) GetHeader() *ReqHeader {
+func (m *PollReq) GetHeader() *ReqHeader {
 	if m != nil {
 		return m.Header
 	}
 	return nil
 }
 
-type PollNotifyAck struct {
-	Header               *AckHeader      `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`
-	Msg                  []*CacheMessage `protobuf:"bytes,2,rep,name=msg,proto3" json:"msg,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
-	XXX_unrecognized     []byte          `json:"-"`
-	XXX_sizecache        int32           `json:"-"`
+//根据轮询结果请求相应消息数据
+type PollAck struct {
+	Header               *AckHeader         `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`
+	Msgs                 []*PollAck_Message `protobuf:"bytes,2,rep,name=msgs,proto3" json:"msgs,omitempty"`
+	RealTime             *PollAck_RealTime  `protobuf:"bytes,3,opt,name=realTime,proto3" json:"realTime,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}           `json:"-"`
+	XXX_unrecognized     []byte             `json:"-"`
+	XXX_sizecache        int32              `json:"-"`
 }
 
-func (m *PollNotifyAck) Reset()         { *m = PollNotifyAck{} }
-func (m *PollNotifyAck) String() string { return proto.CompactTextString(m) }
-func (*PollNotifyAck) ProtoMessage()    {}
-func (*PollNotifyAck) Descriptor() ([]byte, []int) {
+func (m *PollAck) Reset()         { *m = PollAck{} }
+func (m *PollAck) String() string { return proto.CompactTextString(m) }
+func (*PollAck) ProtoMessage()    {}
+func (*PollAck) Descriptor() ([]byte, []int) {
 	return fileDescriptor_8c585a45e2093e54, []int{12}
 }
 
-func (m *PollNotifyAck) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_PollNotifyAck.Unmarshal(m, b)
+func (m *PollAck) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_PollAck.Unmarshal(m, b)
 }
-func (m *PollNotifyAck) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_PollNotifyAck.Marshal(b, m, deterministic)
+func (m *PollAck) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_PollAck.Marshal(b, m, deterministic)
 }
-func (m *PollNotifyAck) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_PollNotifyAck.Merge(m, src)
+func (m *PollAck) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PollAck.Merge(m, src)
 }
-func (m *PollNotifyAck) XXX_Size() int {
-	return xxx_messageInfo_PollNotifyAck.Size(m)
+func (m *PollAck) XXX_Size() int {
+	return xxx_messageInfo_PollAck.Size(m)
 }
-func (m *PollNotifyAck) XXX_DiscardUnknown() {
-	xxx_messageInfo_PollNotifyAck.DiscardUnknown(m)
+func (m *PollAck) XXX_DiscardUnknown() {
+	xxx_messageInfo_PollAck.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_PollNotifyAck proto.InternalMessageInfo
+var xxx_messageInfo_PollAck proto.InternalMessageInfo
 
-func (m *PollNotifyAck) GetHeader() *AckHeader {
+func (m *PollAck) GetHeader() *AckHeader {
 	if m != nil {
 		return m.Header
 	}
 	return nil
 }
 
-func (m *PollNotifyAck) GetMsg() []*CacheMessage {
+func (m *PollAck) GetMsgs() []*PollAck_Message {
 	if m != nil {
-		return m.Msg
+		return m.Msgs
+	}
+	return nil
+}
+
+func (m *PollAck) GetRealTime() *PollAck_RealTime {
+	if m != nil {
+		return m.RealTime
+	}
+	return nil
+}
+
+type PollAck_Message struct {
+	Count                int32    `protobuf:"varint,1,opt,name=Count,proto3" json:"Count,omitempty"`
+	MessageKind          int32    `protobuf:"varint,2,opt,name=messageKind,proto3" json:"messageKind,omitempty"`
+	GroupId              string   `protobuf:"bytes,3,opt,name=groupId,proto3" json:"groupId,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *PollAck_Message) Reset()         { *m = PollAck_Message{} }
+func (m *PollAck_Message) String() string { return proto.CompactTextString(m) }
+func (*PollAck_Message) ProtoMessage()    {}
+func (*PollAck_Message) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8c585a45e2093e54, []int{12, 0}
+}
+
+func (m *PollAck_Message) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_PollAck_Message.Unmarshal(m, b)
+}
+func (m *PollAck_Message) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_PollAck_Message.Marshal(b, m, deterministic)
+}
+func (m *PollAck_Message) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PollAck_Message.Merge(m, src)
+}
+func (m *PollAck_Message) XXX_Size() int {
+	return xxx_messageInfo_PollAck_Message.Size(m)
+}
+func (m *PollAck_Message) XXX_DiscardUnknown() {
+	xxx_messageInfo_PollAck_Message.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_PollAck_Message proto.InternalMessageInfo
+
+func (m *PollAck_Message) GetCount() int32 {
+	if m != nil {
+		return m.Count
+	}
+	return 0
+}
+
+func (m *PollAck_Message) GetMessageKind() int32 {
+	if m != nil {
+		return m.MessageKind
+	}
+	return 0
+}
+
+func (m *PollAck_Message) GetGroupId() string {
+	if m != nil {
+		return m.GroupId
+	}
+	return ""
+}
+
+type PollAck_RealTime struct {
+	IsConnect            bool          `protobuf:"varint,2,opt,name=IsConnect,proto3" json:"IsConnect,omitempty"`
+	RealTimeInfo         *RealTimeInfo `protobuf:"bytes,3,opt,name=realTimeInfo,proto3" json:"realTimeInfo,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}      `json:"-"`
+	XXX_unrecognized     []byte        `json:"-"`
+	XXX_sizecache        int32         `json:"-"`
+}
+
+func (m *PollAck_RealTime) Reset()         { *m = PollAck_RealTime{} }
+func (m *PollAck_RealTime) String() string { return proto.CompactTextString(m) }
+func (*PollAck_RealTime) ProtoMessage()    {}
+func (*PollAck_RealTime) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8c585a45e2093e54, []int{12, 1}
+}
+
+func (m *PollAck_RealTime) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_PollAck_RealTime.Unmarshal(m, b)
+}
+func (m *PollAck_RealTime) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_PollAck_RealTime.Marshal(b, m, deterministic)
+}
+func (m *PollAck_RealTime) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PollAck_RealTime.Merge(m, src)
+}
+func (m *PollAck_RealTime) XXX_Size() int {
+	return xxx_messageInfo_PollAck_RealTime.Size(m)
+}
+func (m *PollAck_RealTime) XXX_DiscardUnknown() {
+	xxx_messageInfo_PollAck_RealTime.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_PollAck_RealTime proto.InternalMessageInfo
+
+func (m *PollAck_RealTime) GetIsConnect() bool {
+	if m != nil {
+		return m.IsConnect
+	}
+	return false
+}
+
+func (m *PollAck_RealTime) GetRealTimeInfo() *RealTimeInfo {
+	if m != nil {
+		return m.RealTimeInfo
 	}
 	return nil
 }
@@ -815,55 +997,65 @@ func init() {
 	proto.RegisterType((*CancelRealTimeReq)(nil), "protocol.CancelRealTimeReq")
 	proto.RegisterType((*CancelRealTimeAck)(nil), "protocol.CancelRealTimeAck")
 	proto.RegisterType((*RealTimeNotify)(nil), "protocol.RealTimeNotify")
-	proto.RegisterType((*MessageNotify)(nil), "protocol.MessageNotify")
-	proto.RegisterType((*CacheMessage)(nil), "protocol.CacheMessage")
-	proto.RegisterType((*PollNotifyReq)(nil), "protocol.PollNotifyReq")
-	proto.RegisterType((*PollNotifyAck)(nil), "protocol.PollNotifyAck")
+	proto.RegisterType((*PollMessageReq)(nil), "protocol.PollMessageReq")
+	proto.RegisterType((*PollMessageAck)(nil), "protocol.PollMessageAck")
+	proto.RegisterType((*PollMessageAck_DataItem)(nil), "protocol.PollMessageAck.DataItem")
+	proto.RegisterType((*PollReq)(nil), "protocol.PollReq")
+	proto.RegisterType((*PollAck)(nil), "protocol.PollAck")
+	proto.RegisterType((*PollAck_Message)(nil), "protocol.PollAck.Message")
+	proto.RegisterType((*PollAck_RealTime)(nil), "protocol.PollAck.RealTime")
 }
 
 func init() { proto.RegisterFile("chat.proto", fileDescriptor_8c585a45e2093e54) }
 
 var fileDescriptor_8c585a45e2093e54 = []byte{
-	// 644 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x54, 0xcd, 0x6e, 0xd3, 0x40,
-	0x10, 0xc6, 0x71, 0x9c, 0x9f, 0x71, 0x5a, 0x99, 0xa5, 0x54, 0x56, 0xd5, 0x83, 0xe5, 0x53, 0x54,
-	0x50, 0x0f, 0xe1, 0x50, 0x09, 0x81, 0x44, 0xe8, 0x85, 0x48, 0xb4, 0xaa, 0xb6, 0x81, 0xbb, 0xbb,
-	0x9e, 0x36, 0x56, 0xe2, 0xdd, 0xd4, 0xde, 0x40, 0x7b, 0xe5, 0xc4, 0x23, 0xf0, 0x20, 0x88, 0x07,
-	0xe2, 0x49, 0xd0, 0xae, 0xed, 0x7a, 0xdd, 0x00, 0x22, 0x15, 0xa7, 0xec, 0x37, 0xfb, 0x8d, 0xf7,
-	0x9b, 0xf9, 0x26, 0x03, 0xc0, 0x66, 0x91, 0x3c, 0x5c, 0x66, 0x42, 0x0a, 0xd2, 0xd3, 0x3f, 0x4c,
-	0x2c, 0xf6, 0x06, 0x33, 0x8c, 0x62, 0xcc, 0x8a, 0x78, 0xf8, 0xb5, 0x05, 0xdb, 0xe7, 0xc8, 0xe3,
-	0x13, 0xcc, 0xf3, 0xe8, 0x0a, 0x29, 0x5e, 0x93, 0x67, 0xd0, 0x29, 0x28, 0xbe, 0x15, 0x58, 0x43,
-	0x77, 0xf4, 0xe4, 0xb0, 0xca, 0x3d, 0xa4, 0x78, 0xfd, 0x4e, 0x5f, 0xd1, 0x92, 0x42, 0x8e, 0xc0,
-	0x4d, 0x8b, 0xd4, 0xe9, 0xed, 0x12, 0xfd, 0x56, 0x60, 0x0d, 0xb7, 0x47, 0x4f, 0xeb, 0x8c, 0x93,
-	0xfa, 0x92, 0x9a, 0x4c, 0x12, 0x80, 0x2b, 0xf1, 0x46, 0x96, 0xf7, 0xbe, 0x1d, 0x58, 0xc3, 0x3e,
-	0x35, 0x43, 0x64, 0x0f, 0x7a, 0x29, 0xa6, 0x32, 0x11, 0x3c, 0xf7, 0xdb, 0x81, 0x3d, 0xec, 0xd3,
-	0x3b, 0x4c, 0xf6, 0xa1, 0xcf, 0x04, 0x97, 0x11, 0x93, 0x93, 0xd8, 0x77, 0x74, 0x6e, 0x1d, 0x50,
-	0x99, 0xab, 0x1c, 0x33, 0x1e, 0xa5, 0xe8, 0x77, 0xf4, 0xe5, 0x1d, 0x26, 0x3e, 0x74, 0xaf, 0x32,
-	0xb1, 0x5a, 0x4e, 0x62, 0xbf, 0xab, 0xaf, 0x2a, 0x18, 0xbe, 0x6e, 0x74, 0x62, 0xcc, 0xe6, 0x7f,
-	0xeb, 0xc4, 0x98, 0xcd, 0x9b, 0x9d, 0x08, 0xbf, 0x58, 0xe0, 0x52, 0x8c, 0x16, 0xd3, 0x24, 0xdd,
-	0xbc, 0x8d, 0x1e, 0xd8, 0xab, 0x24, 0xd6, 0xed, 0xb3, 0xa9, 0x3a, 0x9a, 0x3a, 0xed, 0x86, 0x4e,
-	0x55, 0x5d, 0xf5, 0x25, 0xbf, 0x5d, 0x54, 0x57, 0xe1, 0xf0, 0x87, 0x21, 0x62, 0xd3, 0x0a, 0xd4,
-	0x93, 0x92, 0x2d, 0xc7, 0x71, 0x9c, 0x69, 0x21, 0x7d, 0x5a, 0x41, 0xb2, 0x03, 0x8e, 0x14, 0x73,
-	0xe4, 0xa5, 0x94, 0x02, 0x90, 0x5d, 0xe8, 0x64, 0x42, 0xa4, 0x93, 0x58, 0xcb, 0x70, 0x68, 0x89,
-	0x54, 0xfc, 0x73, 0xae, 0x3f, 0x53, 0x38, 0x53, 0x22, 0x25, 0x7c, 0x26, 0x65, 0xf1, 0x40, 0x69,
-	0x4b, 0x85, 0xc3, 0xb7, 0x00, 0xe7, 0x49, 0xba, 0x5c, 0xe0, 0x87, 0x1c, 0x35, 0x93, 0x27, 0x6c,
-	0xae, 0x0d, 0xb4, 0x0a, 0x66, 0x85, 0x95, 0xca, 0xe8, 0x53, 0x24, 0xa3, 0x4c, 0x56, 0x2a, 0x4b,
-	0x18, 0xfe, 0xb4, 0x60, 0x50, 0x15, 0x3f, 0xe1, 0x97, 0xc2, 0x10, 0x62, 0x35, 0x84, 0xfc, 0xaf,
-	0x42, 0x4b, 0xd7, 0x9c, 0xdf, 0xba, 0xd6, 0x69, 0xba, 0x76, 0x00, 0x8e, 0x9a, 0xc1, 0xdc, 0xef,
-	0x06, 0xf6, 0xd0, 0x1d, 0xed, 0xd4, 0x46, 0xd4, 0x75, 0xd3, 0x82, 0xd2, 0x68, 0x54, 0xef, 0x5e,
-	0xa3, 0xde, 0xc0, 0xe3, 0xe3, 0x88, 0x33, 0x5c, 0x3c, 0x74, 0xd6, 0xd6, 0xbf, 0xb0, 0xf1, 0xa8,
-	0x7f, 0xb3, 0x60, 0xbb, 0x4a, 0x3e, 0x15, 0x32, 0xb9, 0xbc, 0x25, 0xcf, 0xef, 0xe5, 0x1b, 0xf5,
-	0x29, 0xc6, 0xbd, 0x49, 0xdb, 0x87, 0xfe, 0x24, 0x3f, 0x16, 0x9c, 0x23, 0x2b, 0x5c, 0xec, 0xd1,
-	0x3a, 0x40, 0x5e, 0xc2, 0x20, 0x33, 0x6c, 0xd4, 0x5e, 0xb8, 0xa3, 0x5d, 0xb3, 0xa6, 0xfa, 0x96,
-	0x36, 0xb8, 0xe1, 0x77, 0x0b, 0xb6, 0xca, 0x7f, 0xf0, 0x83, 0x94, 0x05, 0xeb, 0xfb, 0xcc, 0x69,
-	0x2e, 0xae, 0xa3, 0xf5, 0xc5, 0xf5, 0xe7, 0x8d, 0xf7, 0x8f, 0xfb, 0x2c, 0x9c, 0xc2, 0xe0, 0x38,
-	0x62, 0x33, 0xac, 0xb8, 0x04, 0xda, 0xc6, 0xf0, 0xeb, 0xb3, 0x8a, 0x5d, 0x88, 0xf8, 0xb6, 0x1c,
-	0x59, 0x7d, 0x56, 0x8d, 0x94, 0x49, 0x8a, 0xe7, 0x32, 0x4a, 0x97, 0x5a, 0x8a, 0x4d, 0xeb, 0x40,
-	0xf8, 0x0a, 0xb6, 0xce, 0xc4, 0x62, 0x51, 0x34, 0x62, 0xe3, 0x39, 0xb9, 0x34, 0xb3, 0x37, 0x5e,
-	0x26, 0x43, 0xb0, 0xd3, 0xfc, 0xca, 0x6f, 0xe9, 0x69, 0x37, 0xbc, 0x33, 0xcb, 0xa4, 0x8a, 0x72,
-	0x70, 0x0a, 0xae, 0xd1, 0x33, 0xd2, 0x83, 0xf6, 0xa9, 0xe0, 0xe8, 0x3d, 0x52, 0xa7, 0x29, 0xde,
-	0x48, 0xcf, 0x22, 0x2e, 0x74, 0xcf, 0x12, 0x26, 0xb3, 0x15, 0x7a, 0x2d, 0xd2, 0x07, 0x67, 0xbc,
-	0x8a, 0x13, 0xe1, 0xd9, 0xea, 0xf8, 0x31, 0x89, 0x51, 0x78, 0x6d, 0x45, 0x7e, 0x9f, 0xf0, 0xb9,
-	0xe7, 0x5c, 0x74, 0xf4, 0x5b, 0x2f, 0x7e, 0x05, 0x00, 0x00, 0xff, 0xff, 0x79, 0x91, 0x44, 0xcd,
-	0xff, 0x06, 0x00, 0x00,
+	// 767 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x55, 0xc1, 0x6e, 0xd3, 0x4c,
+	0x10, 0xfe, 0x1d, 0xdb, 0x89, 0x33, 0xae, 0x2a, 0xff, 0xfb, 0xf7, 0xaf, 0x4c, 0x54, 0x21, 0xe3,
+	0x53, 0x54, 0x20, 0x87, 0x20, 0x8a, 0x84, 0x84, 0x44, 0x28, 0x07, 0x22, 0x68, 0x55, 0x6d, 0x5b,
+	0x2e, 0x9c, 0x16, 0x7b, 0xdb, 0x5a, 0xb1, 0xbd, 0xa9, 0xbd, 0x81, 0xf6, 0xca, 0x89, 0x47, 0xe0,
+	0x49, 0x78, 0x1e, 0xd4, 0x17, 0xe0, 0x15, 0xd0, 0xee, 0x7a, 0x63, 0xbb, 0x05, 0xa4, 0x54, 0x70,
+	0xf2, 0x7e, 0xb3, 0x33, 0xbb, 0x33, 0xf3, 0x7d, 0x3b, 0x06, 0x88, 0xce, 0x08, 0x1f, 0xcd, 0x0b,
+	0xc6, 0x19, 0x72, 0xe4, 0x27, 0x62, 0xe9, 0x60, 0xed, 0x8c, 0x92, 0x98, 0x16, 0xca, 0x1e, 0x7e,
+	0xee, 0xc0, 0xfa, 0x21, 0xcd, 0xe3, 0x3d, 0x5a, 0x96, 0xe4, 0x94, 0x62, 0x7a, 0x8e, 0xee, 0x43,
+	0x57, 0xb9, 0xf8, 0x46, 0x60, 0x0c, 0xdd, 0xf1, 0x7f, 0x23, 0x1d, 0x3b, 0xc2, 0xf4, 0xfc, 0x95,
+	0xdc, 0xc2, 0x95, 0x0b, 0x7a, 0x02, 0x6e, 0xa6, 0x42, 0x8f, 0x2e, 0xe7, 0xd4, 0xef, 0x04, 0xc6,
+	0x70, 0x7d, 0xfc, 0x7f, 0x1d, 0xb1, 0x57, 0x6f, 0xe2, 0xa6, 0x27, 0x0a, 0xc0, 0xe5, 0xf4, 0x82,
+	0x57, 0xfb, 0xbe, 0x19, 0x18, 0xc3, 0x3e, 0x6e, 0x9a, 0xd0, 0x00, 0x9c, 0x8c, 0x66, 0x3c, 0x61,
+	0x79, 0xe9, 0x5b, 0x81, 0x39, 0xec, 0xe3, 0x25, 0x46, 0x5b, 0xd0, 0x8f, 0x58, 0xce, 0x49, 0xc4,
+	0xa7, 0xb1, 0x6f, 0xcb, 0xd8, 0xda, 0x20, 0x22, 0x17, 0x25, 0x2d, 0x72, 0x92, 0x51, 0xbf, 0x2b,
+	0x37, 0x97, 0x18, 0xf9, 0xd0, 0x3b, 0x2d, 0xd8, 0x62, 0x3e, 0x8d, 0xfd, 0x9e, 0xdc, 0xd2, 0x30,
+	0x7c, 0xd6, 0xea, 0xc4, 0x24, 0x9a, 0xfd, 0xae, 0x13, 0x93, 0x68, 0xd6, 0xee, 0x44, 0xf8, 0xc9,
+	0x00, 0x17, 0x53, 0x92, 0x1e, 0x25, 0xd9, 0xea, 0x6d, 0xf4, 0xc0, 0x5c, 0x24, 0xb1, 0x6c, 0x9f,
+	0x89, 0xc5, 0xb2, 0x99, 0xa7, 0xd9, 0xca, 0x53, 0x54, 0xa7, 0x4f, 0xf2, 0x2d, 0x55, 0x9d, 0xc6,
+	0xe1, 0xd7, 0x46, 0x12, 0xab, 0x56, 0x20, 0xae, 0xe4, 0xd1, 0x7c, 0x12, 0xc7, 0x85, 0x4c, 0xa4,
+	0x8f, 0x35, 0x44, 0x1b, 0x60, 0x73, 0x36, 0xa3, 0x79, 0x95, 0x8a, 0x02, 0x68, 0x13, 0xba, 0x05,
+	0x63, 0xd9, 0x34, 0x96, 0x69, 0xd8, 0xb8, 0x42, 0xc2, 0xfe, 0xb1, 0x94, 0xc7, 0x28, 0x66, 0x2a,
+	0x24, 0x12, 0x3f, 0xe3, 0x5c, 0x5d, 0x50, 0xd1, 0xa2, 0x71, 0xf8, 0x02, 0xe0, 0x30, 0xc9, 0xe6,
+	0x29, 0x3d, 0x2e, 0xa9, 0xf4, 0xcc, 0x93, 0x68, 0x26, 0x09, 0x34, 0x94, 0xa7, 0xc6, 0x22, 0x4b,
+	0xf2, 0x81, 0x70, 0x52, 0x70, 0x9d, 0x65, 0x05, 0xc3, 0x2b, 0x03, 0xd6, 0x74, 0xf1, 0xd3, 0xfc,
+	0x84, 0x35, 0x12, 0x31, 0x5a, 0x89, 0xfc, 0xa9, 0x42, 0x2b, 0xd6, 0xec, 0x9f, 0xb2, 0xd6, 0x6d,
+	0xb3, 0xb6, 0x0d, 0xb6, 0xd0, 0x60, 0xe9, 0xf7, 0x02, 0x73, 0xe8, 0x8e, 0x37, 0x6a, 0x22, 0xea,
+	0xba, 0xb1, 0x72, 0x69, 0x35, 0xca, 0xb9, 0xd6, 0xa8, 0xe7, 0xf0, 0xef, 0x2e, 0xc9, 0x23, 0x9a,
+	0xde, 0x56, 0x6b, 0x37, 0x4f, 0x58, 0x59, 0xea, 0x5f, 0x0c, 0x58, 0xd7, 0xc1, 0xfb, 0x8c, 0x27,
+	0x27, 0x97, 0xe8, 0xc1, 0xb5, 0xf8, 0x46, 0x7d, 0xc2, 0xe3, 0x9a, 0xd2, 0xb6, 0xa0, 0x3f, 0x2d,
+	0x77, 0x59, 0x9e, 0xd3, 0x48, 0xb1, 0xe8, 0xe0, 0xda, 0x80, 0x9e, 0xc2, 0x5a, 0xd1, 0xa0, 0x51,
+	0x72, 0xe1, 0x8e, 0x37, 0x9b, 0x35, 0xd5, 0xbb, 0xb8, 0xe5, 0x2b, 0x1e, 0xf1, 0x01, 0x4b, 0xd3,
+	0x5b, 0x8e, 0xb3, 0xf0, 0x7b, 0xa7, 0x15, 0xbf, 0xf2, 0x13, 0x92, 0xfa, 0xe1, 0x24, 0x95, 0x45,
+	0xd9, 0x58, 0x01, 0xf4, 0x18, 0xac, 0x98, 0x70, 0xe2, 0x9b, 0x92, 0xfa, 0x7b, 0xf5, 0x01, 0xed,
+	0xab, 0x46, 0x2f, 0x09, 0x27, 0x53, 0x4e, 0x33, 0x2c, 0xdd, 0x07, 0x57, 0x06, 0x38, 0xda, 0x84,
+	0x10, 0x58, 0x62, 0x38, 0x56, 0x4a, 0x96, 0x6b, 0xa1, 0xb6, 0x93, 0x82, 0x65, 0xc7, 0xcb, 0xc9,
+	0xa1, 0xa1, 0xca, 0x43, 0xd8, 0x4d, 0x69, 0x57, 0xa0, 0xa9, 0x4e, 0x4b, 0xf9, 0x6b, 0x75, 0x06,
+	0xed, 0x31, 0x6e, 0xcb, 0xec, 0x5b, 0xf3, 0x5a, 0x4e, 0xe3, 0x38, 0x21, 0xc7, 0x45, 0xaa, 0x1f,
+	0xaf, 0xc6, 0xe8, 0x2e, 0x40, 0x54, 0x50, 0xc2, 0xa9, 0xa0, 0x41, 0x8e, 0x55, 0x13, 0x37, 0x2c,
+	0xad, 0x49, 0xee, 0xb5, 0x27, 0x79, 0xb8, 0x03, 0x3d, 0xd1, 0x85, 0x95, 0x99, 0xfa, 0xd6, 0x51,
+	0x81, 0x2b, 0x53, 0xf4, 0x10, 0xac, 0xac, 0x3c, 0x2d, 0xfd, 0x8e, 0x24, 0xe3, 0x4e, 0x9b, 0x0c,
+	0xc1, 0x82, 0xd6, 0x8e, 0x74, 0x43, 0x3b, 0xe0, 0x68, 0x81, 0x55, 0x42, 0x1c, 0xdc, 0x0c, 0x59,
+	0xbe, 0xc5, 0xa5, 0xef, 0xe0, 0x1d, 0xf4, 0xf4, 0x8f, 0x6c, 0x03, 0xec, 0x5d, 0xb6, 0xc8, 0x15,
+	0x77, 0x36, 0x56, 0xa0, 0xd1, 0xf2, 0xd7, 0x49, 0x1e, 0x57, 0x82, 0x69, 0x9a, 0x7e, 0xfd, 0x0b,
+	0x18, 0xc4, 0xe0, 0xe8, 0x2b, 0xff, 0xde, 0x5b, 0xda, 0xde, 0x07, 0xb7, 0xf1, 0xfb, 0x46, 0x0e,
+	0x58, 0xfb, 0x2c, 0xa7, 0xde, 0x3f, 0x62, 0x75, 0x44, 0x2f, 0xb8, 0x67, 0x20, 0x17, 0x7a, 0x07,
+	0x49, 0xc4, 0x8b, 0x05, 0xf5, 0x3a, 0xa8, 0x0f, 0xf6, 0x64, 0x11, 0x27, 0xcc, 0x33, 0xc5, 0xf2,
+	0x6d, 0x12, 0x53, 0xe6, 0x59, 0xc2, 0xf9, 0x4d, 0x92, 0xcf, 0x3c, 0xfb, 0x7d, 0x57, 0x5e, 0xfa,
+	0xe8, 0x47, 0x00, 0x00, 0x00, 0xff, 0xff, 0x7e, 0xcc, 0x3f, 0x7e, 0x98, 0x08, 0x00, 0x00,
 }

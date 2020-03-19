@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"chat/handler/middleware"
 	"chat/logic"
 	"chat/protocol"
 
@@ -10,6 +11,16 @@ import (
 type ContactHandler struct {
 	logic  *logic.ContactLogic
 	Handle HttpHandler
+}
+
+func (h *ContactHandler) HandleAll(g *gin.Engine) {
+	var group = g.Group("/contact")
+
+	group.Use(middleware.Auth)
+	group.POST("/searchUser", h.SearchUser)
+	group.POST("/addContact", h.AddContact)
+	group.POST("/deleteContact", h.DeleteContact)
+	group.POST("/updateContact", h.UpdateContact)
 }
 
 func (h *ContactHandler) SearchUser(c *gin.Context) {

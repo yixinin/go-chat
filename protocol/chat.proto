@@ -72,24 +72,42 @@ message RealTimeNotify {
     RealTimeInfo realTimeInfo = 3;
 }
 
-message MessageNotify {
-    NotiHeader  header       = 1;
-    int32       messageType  = 2;
-    MessageType textMessage  = 3;
-    repeated string memtions = 4;
-}
-
-message CacheMessage {
-    string name      = 1; //前端通过消息名解析 json
-    string body      = 2; //json
-    int64  timeStamp = 3; //时间戳 前端判断消息是否还有效
-}
-
-message PollNotifyReq {
+message PollMessageReq {
     ReqHeader header = 1;
 }
 
-message PollNotifyAck {
+message PollMessageAck {
+    AckHeader header       = 1;
+    int32     total        = 2;
+    repeated DataItem data = 3;
+    message           DataItem {
+        string   text            = 1;
+        int64    fromUid         = 2;
+        int64    toUid           = 3;
+        int64    groupId         = 4;
+        int32    messageType     = 5;
+        string   mediaUrl        = 6;
+        int64    createTime      = 7;
+        repeated string memtions = 16;
+    }
+}
+
+message PollReq {
+    ReqHeader header = 1;
+}
+
+//根据轮询结果请求相应消息数据
+message PollAck {
     AckHeader header          = 1;
-    repeated CacheMessage msg = 2;
+    repeated Message msgs     = 2;
+    RealTime         realTime = 3; //yin
+    message          Message {
+        int32  Count       = 1; //消息数量
+        int32  messageKind = 2; //消息类型 1=用户消息 2=群消息 3= 添加联系人 4=添加联系人成功
+        string groupId     = 3; //群id（如果是群消息）
+    }
+    message RealTime {
+        bool         IsConnect    = 2;
+        RealTimeInfo realTimeInfo = 3;
+    }
 }

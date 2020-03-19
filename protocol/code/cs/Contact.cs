@@ -30,26 +30,27 @@ namespace Protocol {
             "ASABKAsyEy5wcm90b2NvbC5BY2tIZWFkZXISEAoIcGFnZVNpemUYAiABKAkS",
             "LgoEZGF0YRgDIAMoCzIgLnByb3RvY29sLlNlYXJjaFVzZXJBY2suRGF0YUl0",
             "ZW0aPgoIRGF0YUl0ZW0SEAoIdXNlcm5hbWUYASABKAkSEAoIbmlja25hbWUY",
-            "AiABKAkSDgoGYXZhdGFyGAMgASgJInwKDUFkZENvbnRhY3RSZXESIwoGaGVh",
-            "ZGVyGAEgASgLMhMucHJvdG9jb2wuUmVxSGVhZGVyEhAKCHVzZXJuYW1lGAIg",
-            "ASgJEhMKC2NvbnRhY3RUeXBlGAMgASgFEhIKCnNldFJlbWFya3MYBCABKAkS",
-            "CwoDbXNnGAUgASgJIjQKDUFkZENvbnRhY3RBY2sSIwoGaGVhZGVyGAEgASgL",
-            "MhMucHJvdG9jb2wuQWNrSGVhZGVyInkKEEFkZENvbnRhY3ROb3RpZnkSIwoG",
-            "aGVhZGVyGAEgASgLMhMucHJvdG9jb2wuUmVxSGVhZGVyEhEKCWNvbnRhY3RJ",
-            "ZBgCIAEoCRIQCghuaWNrbmFtZRgDIAEoCRIOCgZhdmF0YXIYBCABKAkSCwoD",
-            "bXNnGAUgASgJIkoKEERlbGV0ZUNvbnRhY3RSZXESIwoGaGVhZGVyGAEgASgL",
-            "MhMucHJvdG9jb2wuUmVxSGVhZGVyEhEKCWNvbnRhY3RJZBgCIAEoCSI3ChBE",
-            "ZWxldGVDb250YWN0QWNrEiMKBmhlYWRlchgBIAEoCzITLnByb3RvY29sLkFj",
-            "a0hlYWRlciJeChBVcGRhdGVDb250YWN0UmVxEiMKBmhlYWRlchgBIAEoCzIT",
-            "LnByb3RvY29sLlJlcUhlYWRlchISCgpzZXRSZW1hcmtzGAIgASgJEhEKCWNv",
-            "bnRhY3RJZBgDIAEoCSI3ChBVcGRhdGVDb250YWN0QWNrEiMKBmhlYWRlchgB",
-            "IAEoCzITLnByb3RvY29sLkFja0hlYWRlcmIGcHJvdG8z"));
+            "AiABKAkSDgoGYXZhdGFyGAMgASgJIowBCg1BZGRDb250YWN0UmVxEiMKBmhl",
+            "YWRlchgBIAEoCzITLnByb3RvY29sLlJlcUhlYWRlchIQCgh1c2VybmFtZRgC",
+            "IAEoCRITCgtjb250YWN0VHlwZRgDIAEoBRISCgpzZXRSZW1hcmtzGAQgASgJ",
+            "EgsKA21zZxgFIAEoCRIOCgZhdXRoSWQYBiABKAkiNAoNQWRkQ29udGFjdEFj",
+            "axIjCgZoZWFkZXIYASABKAsyEy5wcm90b2NvbC5BY2tIZWFkZXIieQoQQWRk",
+            "Q29udGFjdE5vdGlmeRIjCgZoZWFkZXIYASABKAsyEy5wcm90b2NvbC5SZXFI",
+            "ZWFkZXISEQoJY29udGFjdElkGAIgASgJEhAKCG5pY2tuYW1lGAMgASgJEg4K",
+            "BmF2YXRhchgEIAEoCRILCgNtc2cYBSABKAkiSgoQRGVsZXRlQ29udGFjdFJl",
+            "cRIjCgZoZWFkZXIYASABKAsyEy5wcm90b2NvbC5SZXFIZWFkZXISEQoJY29u",
+            "dGFjdElkGAIgASgJIjcKEERlbGV0ZUNvbnRhY3RBY2sSIwoGaGVhZGVyGAEg",
+            "ASgLMhMucHJvdG9jb2wuQWNrSGVhZGVyIl4KEFVwZGF0ZUNvbnRhY3RSZXES",
+            "IwoGaGVhZGVyGAEgASgLMhMucHJvdG9jb2wuUmVxSGVhZGVyEhIKCnNldFJl",
+            "bWFya3MYAiABKAkSEQoJY29udGFjdElkGAMgASgJIjcKEFVwZGF0ZUNvbnRh",
+            "Y3RBY2sSIwoGaGVhZGVyGAEgASgLMhMucHJvdG9jb2wuQWNrSGVhZGVyYgZw",
+            "cm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.HeaderReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SearchUserReq), global::Protocol.SearchUserReq.Parser, new[]{ "Header", "Key" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SearchUserAck), global::Protocol.SearchUserAck.Parser, new[]{ "Header", "PageSize", "Data" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SearchUserAck.Types.DataItem), global::Protocol.SearchUserAck.Types.DataItem.Parser, new[]{ "Username", "Nickname", "Avatar" }, null, null, null, null)}),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.AddContactReq), global::Protocol.AddContactReq.Parser, new[]{ "Header", "Username", "ContactType", "SetRemarks", "Msg" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.AddContactReq), global::Protocol.AddContactReq.Parser, new[]{ "Header", "Username", "ContactType", "SetRemarks", "Msg", "AuthId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.AddContactAck), global::Protocol.AddContactAck.Parser, new[]{ "Header" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.AddContactNotify), global::Protocol.AddContactNotify.Parser, new[]{ "Header", "ContactId", "Nickname", "Avatar", "Msg" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.DeleteContactReq), global::Protocol.DeleteContactReq.Parser, new[]{ "Header", "ContactId" }, null, null, null, null),
@@ -630,6 +631,7 @@ namespace Protocol {
       contactType_ = other.contactType_;
       setRemarks_ = other.setRemarks_;
       msg_ = other.msg_;
+      authId_ = other.authId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -688,11 +690,28 @@ namespace Protocol {
     /// <summary>Field number for the "msg" field.</summary>
     public const int MsgFieldNumber = 5;
     private string msg_ = "";
+    /// <summary>
+    ///验证消息
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string Msg {
       get { return msg_; }
       set {
         msg_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "authId" field.</summary>
+    public const int AuthIdFieldNumber = 6;
+    private string authId_ = "";
+    /// <summary>
+    ///验证id
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string AuthId {
+      get { return authId_; }
+      set {
+        authId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -714,6 +733,7 @@ namespace Protocol {
       if (ContactType != other.ContactType) return false;
       if (SetRemarks != other.SetRemarks) return false;
       if (Msg != other.Msg) return false;
+      if (AuthId != other.AuthId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -725,6 +745,7 @@ namespace Protocol {
       if (ContactType != 0) hash ^= ContactType.GetHashCode();
       if (SetRemarks.Length != 0) hash ^= SetRemarks.GetHashCode();
       if (Msg.Length != 0) hash ^= Msg.GetHashCode();
+      if (AuthId.Length != 0) hash ^= AuthId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -758,6 +779,10 @@ namespace Protocol {
         output.WriteRawTag(42);
         output.WriteString(Msg);
       }
+      if (AuthId.Length != 0) {
+        output.WriteRawTag(50);
+        output.WriteString(AuthId);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -780,6 +805,9 @@ namespace Protocol {
       }
       if (Msg.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Msg);
+      }
+      if (AuthId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(AuthId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -809,6 +837,9 @@ namespace Protocol {
       }
       if (other.Msg.Length != 0) {
         Msg = other.Msg;
+      }
+      if (other.AuthId.Length != 0) {
+        AuthId = other.AuthId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -842,6 +873,10 @@ namespace Protocol {
           }
           case 42: {
             Msg = input.ReadString();
+            break;
+          }
+          case 50: {
+            AuthId = input.ReadString();
             break;
           }
         }
