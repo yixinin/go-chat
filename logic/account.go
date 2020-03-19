@@ -4,16 +4,11 @@ import (
 	"chat/cache"
 	"chat/models"
 	"chat/protocol"
-	"context"
 	"fmt"
 	"go-lib/db"
 	"go-lib/log"
 	"go-lib/utils"
 	"time"
-
-	"go.mongodb.org/mongo-driver/bson/primitive"
-	"go.mongodb.org/mongo-driver/mongo"
-	"gopkg.in/mgo.v2/bson"
 )
 
 const (
@@ -29,10 +24,8 @@ type AccountLogic struct {
 func (s *AccountLogic) SignUp(r Reqer, a Acker) (err error) {
 	req, _ := r.(*protocol.SignUpReq)
 	ack, _ := a.(*protocol.SignUpAck)
-	var ctx, cancel = context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancel()
-	var now = time.Now().Unix()
 
+	var now = time.Now().Unix()
 	if req.DeviceCode == "" {
 		req.DeviceCode = utils.UUID()
 	}
@@ -42,11 +35,15 @@ func (s *AccountLogic) SignUp(r Reqer, a Acker) (err error) {
 	var nickname = req.Username
 	if req.Username == "" {
 		regType = 2
-		nickname = fmt.Sprintf("游客(%s)", req.DeviceCode)
+		var device = req.DeviceCode
+		if len(req.DeviceCode) > 10 {
+			device = req.DeviceCode[:10]
+		}
+		nickname = fmt.Sprintf("游客(%s)", device)
 		req.Username = req.DeviceCode
 	}
 
-	ret, err := db.Mongo.Collection("user").InsertOne(ctx, &models.User{
+	uid, err := db.Mysql.InsertOne(&models.User{
 		Username:     userName,
 		PasswordHash: utils.MD5(req.Password),
 		DevideCode:   req.DeviceCode,
@@ -57,67 +54,57 @@ func (s *AccountLogic) SignUp(r Reqer, a Acker) (err error) {
 		UpdateTime:   now,
 	})
 	if err != nil {
-		if err == mongo.ErrMultipleIndexDrop {
-			if regType == 1 {
-				ack.Header.Code = 400
-				ack.Header.Msg = "repeate username"
-			} else {
-				ack.Header.Code = 400
-				ack.Header.Msg = "repeate device"
-			}
-
+		if regType == 1 {
+			ack.Header.Code = 400
+			ack.Header.Msg = "repeate username"
+		} else {
+			ack.Header.Code = 400
+			ack.Header.Msg = "repeate device"
 		}
-		return err
-	}
-	uid, ok := ret.InsertedID.(primitive.ObjectID)
-	if !ok {
-		return fmt.Errorf("signup fail, pls try later")
+		return Error(ack, err)
 	}
 
-	token, _, err1 := cache.SetToken(uid.Hex(), req.DeviceType)
+	token, _, err1 := cache.SetToken(uid, req.DeviceType)
 	if err1 != nil {
 		log.Error("set user token error:%v", err)
 	}
 	ack.Token = token
-	ack.Header.Code = 200
-	ack.Header.Msg = "success"
-	return
+
+	return Success(ack)
 }
 
 //登录
 func (s *AccountLogic) SignIn(r Reqer, a Acker) (err error) {
 	req, _ := r.(*protocol.SignInReq)
 	ack, _ := a.(*protocol.SignInAck)
-	var ctx, cancel = context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancel()
-	var user models.User
-	ex := db.Mongo.Collection("user").FindOne(ctx, bson.M{"username": req.Username}).Decode(&user)
-	if ex != nil {
-		if ex != mongo.ErrNoDocuments {
-			ack.Header.Code = 401
-			ack.Header.Msg = "username and password not match"
-			return nil
-		}
-		return ex
+
+	var user = models.User{
+		Username: req.Username,
+	}
+	ok, err := db.Mysql.Get(&user)
+	if !ok {
+
+		return Fail(ack, "username and password not match")
+	}
+	if err != nil {
+		return Error(ack, err)
 	}
 
 	if user.PasswordHash != utils.MD5(req.Password) {
-		ack.Header.Code = 401
-		ack.Header.Msg = "username and password not match"
-		return
+
+		return Fail(ack, "username and password not match")
 	}
 
-	token, oldToken, err := cache.SetToken(user.Id.Hex(), req.DeviceType)
+	token, oldToken, err := cache.SetToken(user.Id, req.DeviceType)
 	if err != nil {
-		return err
+		return Error(ack, err)
 	}
 	ack.Token = token
 	if oldToken != "" {
-		s.tryKickDevice(user.Id.Hex(), req.DeviceType, token)
+		s.tryKickDevice(user.Id, req.DeviceType, token)
 	}
-	ack.Header.Code = 200
-	ack.Header.Msg = "success"
-	return
+
+	return Success(ack)
 }
 
 func (s *AccountLogic) SignOut(r Reqer, a Acker) (err error) {
@@ -127,52 +114,42 @@ func (s *AccountLogic) SignOut(r Reqer, a Acker) (err error) {
 	deviceType, err := cache.GetDeviceToken(uid, req.Header.Token)
 	cache.DelDevice(uid, deviceType)
 	s.tryKickDevice(uid, deviceType, req.Header.Token)
-	ack.Header.Code = 200
-	ack.Header.Msg = "success"
-	return
+
+	return Success(ack)
 }
 
 func (s *AccountLogic) Delete(r Reqer, a Acker) (err error) {
 	req, _ := r.(*protocol.DeleteReq)
 	ack, _ := a.(*protocol.DeleteAck)
-	uid, err := cache.GetToken(req.Header.Token)
+
 	//标记删除
-	var ctx, cancel = context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancel()
-	var id, _ = primitive.ObjectIDFromHex(uid)
-	ret, err := db.Mongo.Collection("user").UpdateOne(ctx,
-		bson.M{"_id": id},
-		bson.M{"wait_delete": time.Now().AddDate(0, 0, 7).Unix()})
-	if err != nil {
-		return err
+	var user = &models.User{
+		Id:         req.Header.Uid,
+		DeleteTime: time.Now().AddDate(0, 0, 7).Unix(),
 	}
-	if ret.ModifiedCount <= 0 {
-		ack.Header.Code = 400
-		ack.Header.Msg = "operate fail, pls try later"
-		return
+	n, err := db.Mysql.Cols("delete_time").Update(&user)
+
+	if n != 1 {
+		return Fail(ack, "operate fail, pls try later")
 	}
-	ack.Header.Code = 200
-	ack.Header.Msg = "success"
-	return
+
+	return Success(ack)
 }
 
 func (s *AccountLogic) ChangePassword(r Reqer, a Acker) (err error) {
 	// req, _ := r.(*protocol.ChangePasswordReq)
 	ack, _ := a.(*protocol.ChangePasswordAck)
-	ack.Header.Code = 200
-	ack.Header.Msg = "success"
-	return
+	return Success(ack)
 }
 
 func (s *AccountLogic) ResetPassword(r Reqer, a Acker) (err error) {
 	// req,_ :=r.(*protocol.ResetPasswordReq)
 	ack, _ := a.(*protocol.ResetPasswordAck)
-	ack.Header.Code = 200
-	ack.Header.Msg = "success"
-	return
+	return Success(ack)
 }
 
-func (s *AccountLogic) tryKickDevice(uid string, deviceType int32, token string) {
+func (s *AccountLogic) tryKickDevice(uid int64, deviceType int32, token string) {
 	cache.DelToken(token)
 	//断开长连接 断开通话
+
 }

@@ -13,10 +13,13 @@ enum MessageType {
 }
 
 message SendMessageReq {
-    ReqHeader   header       = 1;
-    MessageType messageType  = 2;
-    string      textMessage  = 3;
-    repeated string memtions = 4;
+    ReqHeader   header        = 1;
+    MessageType messageType   = 2;
+    string      textMessage   = 3;
+    repeated string memtions  = 4;
+    string          contactId = 5; //发送给用户
+    string          username  = 6; //发送给陌生人 //通过群聊
+    string          groupId   = 7; //发送给群聊
 }
 
 message SendMessageAck {
@@ -25,7 +28,7 @@ message SendMessageAck {
 
 message RealTimeReq {
     ReqHeader header   = 1;
-    string    uid      = 2; //请求和用户通话
+    int64     uid      = 2; //请求和用户通话
     string    groupId  = 3; //请求视频会议
     string    protocol = 4; //协议
 }
@@ -49,7 +52,7 @@ message RealTimeInfo {
     string   tcpAddr             = 2; //服务器连接地址
     string   token               = 3; //本次连接token
     int32    roomId              = 4; //房间id
-    string   uid                 = 5; //来自用户
+    int64    uid                 = 5; //来自用户
     string   groupId             = 6; //来自群聊
     repeated SimpleUser users    = 7; //用户/群名称
     string              httpAddr = 8;

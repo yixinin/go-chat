@@ -2,19 +2,22 @@ package logic
 
 import (
 	"chat/cache"
+	"chat/models"
 	"chat/protocol"
 	"context"
 	"encoding/json"
+	"go-lib/db"
 	"go-lib/log"
 	"go-lib/registry"
 	"go-lib/utils"
 	"sync"
 	"time"
 
-	"google.golang.org/grpc"
+	"go.mongodb.org/mongo-driver/bson/primitive"
+	"gopkg.in/mgo.v2/bson"
 )
 
-type NotifyFunc func(uid string, msg interface{}) (bool, error)
+type NotifyFunc func(uid int64, msg interface{}) (bool, error)
 
 //发送消息/邀请等。。。
 type ChatLogic struct {
@@ -46,47 +49,54 @@ func NewChatLogic(regist registry.Registry, notifyFuncs ...NotifyFunc) *ChatLogi
 	return c
 }
 
-func (s *ChatLogic) AddNode(addr string) {
-	s.Lock()
-	defer s.Unlock()
-	var conn, err = grpc.Dial(addr, grpc.WithInsecure())
-	if err != nil {
-		return
-	}
-	if _, ok := s.roomClients[addr]; ok {
-		delete(s.roomClients, addr)
-	}
-	var client = protocol.NewRoomServiceClient(conn)
-	s.roomClients[addr] = client
-}
-func (s *ChatLogic) DelNode(addr string) {
-	s.Lock()
-	defer s.Unlock()
-	if _, ok := s.roomClients[addr]; ok {
-		delete(s.roomClients, addr)
-	}
-}
-
-func (s *ChatLogic) UpdateNode(addr string) {
-	s.Lock()
-	defer s.Unlock()
-	if _, ok := s.roomClients[addr]; ok {
-		return
-	}
-	var conn, err = grpc.Dial(addr, grpc.WithInsecure())
-	if err != nil {
-		return
-	}
-	var client = protocol.NewRoomServiceClient(conn)
-	s.roomClients[addr] = client
-}
-
 func (s *ChatLogic) SendMessage(r Reqer, a Acker) (err error) {
-	// req, _ := r.(*protocol.SendMessageReq)
+	req, _ := r.(*protocol.SendMessageReq)
 	ack, _ := a.(*protocol.SendMessageAck)
-	ack.Header.Code = 200
-	ack.Header.Msg = "success"
-	return
+
+	var uids = make([]int64, 1, 2)
+	uids[0] = req.Header.Uid
+	// var users = make(*models.User, 0, 1)
+	//查找用户/群
+	if req.ContactId != "" {
+		_id, _ := primitive.ObjectIDFromHex(req.ContactId)
+		var contact = &models.UserContact{
+			Id: _id,
+		}
+		var ctx, cancel = NewContext()
+		defer cancel()
+		err = db.Mongo.Collection(contact.TableName(req.Header.Uid)).
+			FindOne(ctx, bson.M{"_id": _id}).
+			Decode(&contact)
+		if err != nil {
+			return Error(ack, err)
+		}
+		uids = append(uids, contact.UserId)
+	}
+
+	if req.GroupId != "" {
+		_id, _ := primitive.ObjectIDFromHex(req.GroupId)
+		var userGroup = &models.UserGroup{
+			Id: _id,
+		}
+		var ctx, cancel = NewContext()
+		defer cancel()
+		err := db.Mongo.Collection(userGroup.TableName(req.Header.Uid)).FindOne(ctx, bson.M{"_id": _id}).Decode(&userGroup)
+		if err != nil {
+			return Error(ack, err)
+		}
+		//查找群成员
+		var group = &models.Group{}
+		err = db.Mongo.Collection(group.TableName()).FindOne(ctx, bson.M{"_id": _id}).Decode(&group)
+		if err != nil {
+			return Error(ack, err)
+		}
+		for _, v := range group.Members {
+			uids = append(uids, v.UserId)
+		}
+	}
+
+	s.NotifyMessage(uids, "msg", req.TextMessage)
+	return Success(ack)
 }
 
 func (s *ChatLogic) RealTime(r Reqer, a Acker) (err error) {
@@ -101,7 +111,7 @@ func (s *ChatLogic) RealTime(r Reqer, a Acker) (err error) {
 
 	var ctx, cancel = context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
-	if req.Uid != "" {
+	if req.Uid != 0 {
 		users = []*protocol.RoomUser{
 			&protocol.RoomUser{
 				Uid:   req.Header.Uid,
@@ -138,7 +148,10 @@ func (s *ChatLogic) RealTime(r Reqer, a Acker) (err error) {
 
 	//推送给其它成员
 	for _, u := range users {
-		s.NotifyMessage(u.Uid, "RealTimeNotify", &protocol.RealTimeNotify{
+		if u.Uid == req.Header.Uid {
+			continue
+		}
+		s.NotifyMessage([]int64{u.Uid}, "RealTimeNotify", &protocol.RealTimeNotify{
 			Header: &protocol.NotiHeader{},
 			RealTimeInfo: &protocol.RealTimeInfo{
 				Uid:      req.Uid,
@@ -153,9 +166,7 @@ func (s *ChatLogic) RealTime(r Reqer, a Acker) (err error) {
 		})
 	}
 
-	ack.Header.Code = 200
-	ack.Header.Msg = "success"
-	return
+	return Success(ack)
 }
 
 func (s *ChatLogic) CancelRealTime(r Reqer, a Acker) (err error) {
@@ -164,7 +175,7 @@ func (s *ChatLogic) CancelRealTime(r Reqer, a Acker) (err error) {
 	//查找当前房间
 	rid, addr, err := cache.GetUserRoomInfo(req.Header.Uid)
 	if err != nil {
-		return err
+		return Error(ack, err)
 	}
 	var ctx, cancel = context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
@@ -187,46 +198,85 @@ func (s *ChatLogic) CancelRealTime(r Reqer, a Acker) (err error) {
 		cache.DiscardRoom(rid)
 	}
 	//通知其他人
-	for _, uid := range uids {
-		s.NotifyMessage(uid, "RealTimeNotify", &protocol.RealTimeNotify{
-			Header: &protocol.NotiHeader{},
-			RealTimeInfo: &protocol.RealTimeInfo{
-				RoomId: rid,
-			},
-			IsConnect: false,
-		})
-	}
+	s.NotifyMessage(uids, "RealTimeNotify", &protocol.RealTimeNotify{
+		Header: &protocol.NotiHeader{},
+		RealTimeInfo: &protocol.RealTimeInfo{
+			RoomId: rid,
+		},
+		IsConnect: false,
+	})
 	ack.Header.Code = 200
-	return nil
+	return Success(ack)
 }
 
-func (s *ChatLogic) NotifyMessage(uid, msgName string, msg interface{}) {
+func (s *ChatLogic) NotifyMessage(uids []int64, msgName string, msg interface{}) {
 	var ok = false
-
 	var err error
+
+	var cacheMessage []byte
+
 	if s.Notify != nil {
-		ok, err = s.Notify(uid, msg)
-		if err != nil {
-			log.Errorf("notify msg error:%v", err)
+		for _, uid := range uids {
+			ok, err = s.Notify(uid, msg)
+			if err != nil {
+				log.Errorf("notify msg error:%v", err)
+			}
+			if !ok || err != nil {
+				if cacheMessage == nil {
+					if body, err := json.Marshal(msg); err != nil {
+						log.Error(err)
+					} else {
+						cacheMessage, err = json.Marshal(protocol.CacheMessage{
+							Name:      msgName,
+							Body:      string(body),
+							TimeStamp: time.Now().Unix(),
+						})
+						if err != nil {
+							log.Error(err)
+						}
+					}
+				}
+
+				if len(cacheMessage) > 10 {
+					err = cache.CacheNotifyMessage(uid, cacheMessage)
+					if err != nil {
+						log.Errorf("cache notify msg error:%v", err)
+					}
+				}
+			}
 		}
+
 	}
 
 	//没有长连接或发送失败 消息存到redis 前端轮询接收
 	if !ok || err != nil {
-		var body, err = json.Marshal(msg)
-		if err != nil {
-			return
-		}
-		var cacheMessage = protocol.CacheMessage{
-			Name:      msgName,
-			Body:      string(body),
-			TimeStamp: time.Now().Unix(),
-		}
-		err = cache.CacheNotifyMessage(uid, cacheMessage)
-		if err != nil {
-			log.Errorf("cache notify msg error:%v", err)
+		for _, uid := range uids {
+			if cacheMessage == nil {
+				if body, err := json.Marshal(msg); err != nil {
+					log.Error(err)
+				} else {
+					cacheMessage, err = json.Marshal(protocol.CacheMessage{
+						Name:      msgName,
+						Body:      string(body),
+						TimeStamp: time.Now().Unix(),
+					})
+					if err != nil {
+						log.Error(err)
+					}
+				}
+			}
+			if len(cacheMessage) > 10 {
+				err = cache.CacheNotifyMessage(uid, cacheMessage)
+				if err != nil {
+					log.Errorf("cache notify msg error:%v", err)
+				}
+			}
 		}
 	}
+}
+
+func (s *ChatLogic) CacheNotifyMessage(msg []byte, uid ...int64) {
+
 }
 
 func (s *ChatLogic) PollNotify(r Reqer, a Acker) error {
@@ -234,70 +284,9 @@ func (s *ChatLogic) PollNotify(r Reqer, a Acker) error {
 	ack, _ := a.(*protocol.PollNotifyAck)
 	msgs, err := cache.GetAllNotifyMessage(req.Header.Uid)
 	if err != nil {
-		return err
+		return Error(ack, err)
 	}
 	ack.Msg = msgs
-	ack.Header.Code = 200
-	ack.Header.Msg = "success"
-	return err
-}
 
-func (s *ChatLogic) Watch() {
-	defer func() {
-		if err := recover(); err != nil {
-			log.Errorf("watcher paniced, recover:", err)
-		}
-	}()
-
-	services, err := s.Registry.GetService("live-chat.voip")
-	if err == nil {
-		for _, srv := range services {
-			for _, node := range srv.Nodes {
-				s.AddNode(node.Address)
-				log.Infof("add node %s :%s", srv.Name, node.Address)
-			}
-		}
-	} else {
-		log.Error(err)
-	}
-
-	for {
-		select {
-		case <-s.stop:
-			return
-		default:
-			res, err := s.watcher.Next()
-			if err != nil {
-				log.Errorf("watch error:%v", err)
-				continue
-			}
-
-			var name = res.Service.Name
-
-			if name == "live-chat.voip" {
-				switch res.Action {
-				case "create":
-					for _, node := range res.Service.Nodes {
-						s.AddNode(node.Address)
-						log.Infof("new node %s :%s", name, node.Address)
-					}
-
-				case "delete":
-					for _, node := range res.Service.Nodes {
-						s.DelNode(node.Address)
-						log.Infof("del node %s :%s", name, node.Address)
-					}
-				case "update":
-					for _, node := range res.Service.Nodes {
-						s.UpdateNode(node.Address)
-						log.Infof("update node %s :%s", name, node.Address)
-					}
-				}
-			} else {
-				for _, node := range res.Service.Nodes {
-					log.Infof("%s node %s :%s", res.Action, name, node.Address)
-				}
-			}
-		}
-	}
+	return Success(ack)
 }

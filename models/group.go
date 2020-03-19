@@ -29,11 +29,15 @@ type Group struct {
 	UpdateTime int64
 }
 
+func (g *Group) TableName() string {
+	return "chat_group"
+}
+
 type GroupMember struct {
 	UserId   int64
 	Remarks  string //群昵称
 	IsAdmin  bool
-	JoinDesc string //如何加入
+	JoinDesc JoinDesc //如何加入
 	JoinTime time.Time
 }
 
@@ -41,4 +45,19 @@ type JoinDesc struct {
 	InviteUserId  string //邀请人
 	InviteUrl     string //邀请链接
 	ApproveUserId string //审核人
+}
+
+//
+type GroupAuth struct {
+	Id           primitive.ObjectID `bson:"_id"`
+	UserId       int64
+	Pass         bool
+	PassAdmin    int64 //通过人
+	InviteCode   string
+	InviteUserId int64
+	Token        string
+}
+
+func (g GroupAuth) TableName() string {
+	return "chat_group_auth"
 }

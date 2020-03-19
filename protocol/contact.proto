@@ -40,7 +40,8 @@ message AddContactNotify {
 }
 
 message DeleteContactReq {
-    string contactId = 1;
+    ReqHeader header    = 1;
+    string    contactId = 2;
 }
 
 message DeleteContactAck {
@@ -50,6 +51,7 @@ message DeleteContactAck {
 message UpdateContactReq {
     ReqHeader header     = 1;
     string    setRemarks = 2;
+    string    contactId  = 3;
 }
 message UpdateContactAck {
     AckHeader header = 1;

@@ -1,12 +1,14 @@
 package models
 
 import (
+	"fmt"
+
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
+// user_group_userId
 type UserGroup struct {
 	Id          primitive.ObjectID `bson:"_id"`
-	UserId      string
 	GroupId     string
 	Sort        int
 	IsFavorites bool
@@ -15,4 +17,8 @@ type UserGroup struct {
 
 	CreateTime int64
 	UpdateTime int64
+}
+
+func (g *UserGroup) TableName(uid int64) string {
+	return fmt.Sprintf("chat_user_group_%d", uid)
 }

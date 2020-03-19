@@ -3,23 +3,24 @@ package cache
 import (
 	"chat/protocol"
 	"encoding/json"
+	"fmt"
 	"go-lib/db"
 )
 
-func GetNotifyMsgKey(uid string) string {
-	return "list:user:msg"
+func GetNotifyMsgKey(uid int64) string {
+	return fmt.Sprintf("list:user:msg:%d", uid)
 }
 
-func CacheNotifyMessage(uid string, msg protocol.CacheMessage) error {
+func CacheNotifyMessage(uid int64, msg []byte) error {
 	var key = GetNotifyMsgKey(uid)
-	var v, err = json.Marshal(msg)
-	if err != nil {
-		return err
-	}
-	return db.Redis.RPush(key, v).Err()
+	// var v, err = json.Marshal(msg)
+	// if err != nil {
+	// 	return err
+	// }
+	return db.Redis.RPush(key, msg).Err()
 }
 
-func GetNotifyMessage(uid string) (*protocol.CacheMessage, error) {
+func GetNotifyMessage(uid int64) (*protocol.CacheMessage, error) {
 	var key = GetNotifyMsgKey(uid)
 	var buf, err = db.Redis.LPop(key).Bytes()
 	var msg *protocol.CacheMessage
@@ -27,7 +28,7 @@ func GetNotifyMessage(uid string) (*protocol.CacheMessage, error) {
 	return msg, err
 }
 
-func GetAllNotifyMessage(uid string) ([]*protocol.CacheMessage, error) {
+func GetAllNotifyMessage(uid int64) ([]*protocol.CacheMessage, error) {
 	var key = GetNotifyMsgKey(uid)
 	var msgs = make([]*protocol.CacheMessage, 0, 1)
 	var err error

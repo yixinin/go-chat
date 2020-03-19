@@ -1,6 +1,7 @@
 package cache
 
 import (
+	"fmt"
 	"go-lib/db"
 	"go-lib/utils"
 	"strconv"
@@ -11,11 +12,11 @@ func GetTokenKey(token string) string {
 	return "user:token:" + token
 }
 
-func GetUserDeviceToken(uid string) string {
-	return "user:device:" + uid
+func GetUserDeviceToken(uid int64) string {
+	return fmt.Sprintf("user:device:%d", uid)
 }
 
-func SetToken(uid string, deviceType int32) (token, oldToken string, err error) {
+func SetToken(uid int64, deviceType int32) (token, oldToken string, err error) {
 	token = utils.UUID()
 	var tokenKey = GetTokenKey(token)
 	var deviceKey = GetUserDeviceToken(uid)
@@ -34,18 +35,18 @@ func SetToken(uid string, deviceType int32) (token, oldToken string, err error) 
 	return
 }
 
-func GetToken(token string) (uid string, err error) {
+func GetToken(token string) (uid int64, err error) {
 	var tokenKey = GetTokenKey(token)
-	uid, err = db.Redis.Get(tokenKey).Result()
+	uid, err = db.Redis.Get(tokenKey).Int64()
 	if err != nil {
 		return
 	}
 
 	return
 }
-func CheckToken(token string) (uid string, err error) {
+func CheckToken(token string) (uid int64, err error) {
 	var tokenKey = GetTokenKey(token)
-	uid, err = db.Redis.Get(tokenKey).Result()
+	uid, err = db.Redis.Get(tokenKey).Int64()
 	if err != nil {
 		return
 	}
@@ -53,7 +54,7 @@ func CheckToken(token string) (uid string, err error) {
 	return
 }
 
-func GetDeviceToken(uid, token string) (deviceType int32, err error) {
+func GetDeviceToken(uid int64, token string) (deviceType int32, err error) {
 
 	var deviceKey = GetUserDeviceToken(uid)
 	var m map[string]string
@@ -70,7 +71,7 @@ func GetDeviceToken(uid, token string) (deviceType int32, err error) {
 	return
 }
 
-func DelDevice(uid string, deviceType int32) error {
+func DelDevice(uid int64, deviceType int32) error {
 	var deviceKey = GetUserDeviceToken(uid)
 	return db.Redis.HDel(deviceKey, strconv.FormatInt(int64(deviceType), 10)).Err()
 }

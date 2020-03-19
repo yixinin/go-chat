@@ -7,11 +7,16 @@ import (
 )
 
 func Auth(c *gin.Context) {
-	var _, ok = c.Get("uid")
+	var v, ok = c.Get("uid")
 	if !ok {
 		c.String(401, "access denied")
 		return
 	}
+	if uid, ok := v.(int64); !ok || uid <= 0 {
+		c.String(401, "access denied")
+		return
+	}
+	c.Next()
 }
 
 func SetUid(c *gin.Context) {
@@ -26,4 +31,5 @@ func SetUid(c *gin.Context) {
 		return
 	}
 	c.Set("uid", uid)
+	c.Next()
 }

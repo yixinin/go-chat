@@ -74,3 +74,12 @@ message UpdateUserGroupReq {
 message UpdateUserGroupAck {
     AckHeader header = 1;
 }
+
+message AuthGroupReq {
+    ReqHeader header  = 1;
+    string    groupId = 2;
+}
+
+message AuthGroupAck {
+    AckHeader header = 1;
+}

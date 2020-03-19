@@ -25,7 +25,7 @@ namespace Protocol {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CgxoZWFkZXIucHJvdG8SCHByb3RvY29sIicKCVJlcUhlYWRlchILCgN1aWQY",
-            "ASABKAkSDQoFdG9rZW4YAiABKAkiJgoJQWNrSGVhZGVyEgwKBGNvZGUYASAB",
+            "ASABKAMSDQoFdG9rZW4YAiABKAkiJgoJQWNrSGVhZGVyEgwKBGNvZGUYASAB",
             "KAUSCwoDbXNnGAIgASgJIgwKCk5vdGlIZWFkZXIiKgoNQ2FsbEFja0hlYWRl",
             "chIMCgRjb2RlGAEgASgFEgsKA21zZxgCIAEoCSJOCgdQb2xsUmVxEiMKBmhl",
             "YWRlchgBIAEoCzITLnByb3RvY29sLlJlcUhlYWRlchIQCghub3RpZnlJZBgC",
@@ -81,12 +81,12 @@ namespace Protocol {
 
     /// <summary>Field number for the "uid" field.</summary>
     public const int UidFieldNumber = 1;
-    private string uid_ = "";
+    private long uid_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Uid {
+    public long Uid {
       get { return uid_; }
       set {
-        uid_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        uid_ = value;
       }
     }
 
@@ -122,7 +122,7 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (Uid.Length != 0) hash ^= Uid.GetHashCode();
+      if (Uid != 0L) hash ^= Uid.GetHashCode();
       if (Token.Length != 0) hash ^= Token.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -137,9 +137,9 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (Uid.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(Uid);
+      if (Uid != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(Uid);
       }
       if (Token.Length != 0) {
         output.WriteRawTag(18);
@@ -153,8 +153,8 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (Uid.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Uid);
+      if (Uid != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Uid);
       }
       if (Token.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Token);
@@ -170,7 +170,7 @@ namespace Protocol {
       if (other == null) {
         return;
       }
-      if (other.Uid.Length != 0) {
+      if (other.Uid != 0L) {
         Uid = other.Uid;
       }
       if (other.Token.Length != 0) {
@@ -187,8 +187,8 @@ namespace Protocol {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 10: {
-            Uid = input.ReadString();
+          case 8: {
+            Uid = input.ReadInt64();
             break;
           }
           case 18: {

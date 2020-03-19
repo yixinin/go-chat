@@ -3,6 +3,7 @@ package cache
 import (
 	"fmt"
 	"go-lib/db"
+	"go-lib/log"
 	"strconv"
 	"strings"
 	"time"
@@ -11,11 +12,11 @@ import (
 func GetRoomKey(roomId int32) string {
 	return fmt.Sprintf("hash:room:%d", roomId)
 }
-func GetUserRoomKey(uid string) string {
-	return "kv:user:room:" + uid
+func GetUserRoomKey(uid int64) string {
+	return fmt.Sprintf("kv:user:room:%d", uid)
 }
 
-func GetUserRoomInfo(uid string) (int32, string, error) {
+func GetUserRoomInfo(uid int64) (int32, string, error) {
 	var userRoomKey = GetUserRoomKey(uid)
 	info, err := db.Redis.Get(userRoomKey).Result()
 	s := strings.Split(info, ",")
@@ -30,13 +31,22 @@ func GetUserRoomInfo(uid string) (int32, string, error) {
 	return int32(rid), string(s[1]), err
 }
 
-func GetRoomMembers(rid int32) ([]string, error) {
+func GetRoomMembers(rid int32) ([]int64, error) {
 	var roomKey = GetRoomKey(rid)
-	uids, err := db.Redis.SMembers(roomKey).Result()
+	res, err := db.Redis.SMembers(roomKey).Result()
+	var uids = make([]int64, 0, len(res))
+	for _, v := range res {
+		var uid, err = strconv.ParseInt(v, 10, 64)
+		if err != nil {
+			log.Error(err)
+			continue
+		}
+		uids = append(uids, uid)
+	}
 	return uids, err
 }
 
-func JoinRoom(uid, addr string, roomId int32) error {
+func JoinRoom(uid int64, addr string, roomId int32) error {
 	var roomKey = GetRoomKey(roomId)
 	var userRoomKey = GetUserRoomKey(uid)
 
@@ -55,7 +65,7 @@ func JoinRoom(uid, addr string, roomId int32) error {
 	return nil
 }
 
-func LeaveRoom(uid string) (int32, error) {
+func LeaveRoom(uid int64) (int32, error) {
 	var userRoomKey = GetUserRoomKey(uid)
 	roomId, err := db.Redis.Get(userRoomKey).Int()
 	if err != nil {
@@ -75,7 +85,8 @@ func DiscardRoom(roomId int32) error {
 	}
 	var keys = make([]string, len(uids))
 	keys = append(keys, roomKey)
-	for i, uid := range uids {
+	for i, v := range uids {
+		var uid, _ = strconv.ParseInt(v, 10, 64)
 		var key = GetUserRoomKey(uid)
 		keys[i] = key
 	}

@@ -4,7 +4,7 @@ package protocol;
 import "header.proto";
 
 message RoomUser {
-    string uid       = 1;
+    int64  uid       = 1;
     string token     = 2;
     bool   VideoPush = 5;
     bool   AudioPush = 6;
@@ -36,8 +36,8 @@ message JoinRoomAck {
 }
 
 message LeaveRoomReq {
-    string uid    = 1;
-    int32  roomId = 2;
+    int64 uid    = 1;
+    int32 roomId = 2;
 }
 
 //最后倒数第二个人离开房间时解散

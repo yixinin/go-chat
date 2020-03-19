@@ -23,7 +23,7 @@ func SetHeader(c *gin.Context, header *protocol.ReqHeader) bool {
 		header.Token = token
 	}
 	if uid, ok := c.Get("uid"); ok {
-		if id, ok := uid.(string); ok {
+		if id, ok := uid.(int64); ok {
 			header.Uid = id
 			return true
 		}
@@ -45,7 +45,7 @@ func HttpMessageHandler(c *gin.Context, req logic.Reqer, ack logic.Acker, handle
 	}
 	reqHeader := req.GetHeader()
 	uid, _ := c.Get("uid")
-	reqHeader.Uid, _ = uid.(string)
+	reqHeader.Uid, _ = uid.(int64)
 	reqHeader.Token, _ = c.Cookie("token")
 
 	err = handler(req, ack)

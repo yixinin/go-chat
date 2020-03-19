@@ -37,12 +37,13 @@ namespace Protocol {
             "MhMucHJvdG9jb2wuQWNrSGVhZGVyInkKEEFkZENvbnRhY3ROb3RpZnkSIwoG",
             "aGVhZGVyGAEgASgLMhMucHJvdG9jb2wuUmVxSGVhZGVyEhEKCWNvbnRhY3RJ",
             "ZBgCIAEoCRIQCghuaWNrbmFtZRgDIAEoCRIOCgZhdmF0YXIYBCABKAkSCwoD",
-            "bXNnGAUgASgJIiUKEERlbGV0ZUNvbnRhY3RSZXESEQoJY29udGFjdElkGAEg",
-            "ASgJIjcKEERlbGV0ZUNvbnRhY3RBY2sSIwoGaGVhZGVyGAEgASgLMhMucHJv",
-            "dG9jb2wuQWNrSGVhZGVyIksKEFVwZGF0ZUNvbnRhY3RSZXESIwoGaGVhZGVy",
-            "GAEgASgLMhMucHJvdG9jb2wuUmVxSGVhZGVyEhIKCnNldFJlbWFya3MYAiAB",
-            "KAkiNwoQVXBkYXRlQ29udGFjdEFjaxIjCgZoZWFkZXIYASABKAsyEy5wcm90",
-            "b2NvbC5BY2tIZWFkZXJiBnByb3RvMw=="));
+            "bXNnGAUgASgJIkoKEERlbGV0ZUNvbnRhY3RSZXESIwoGaGVhZGVyGAEgASgL",
+            "MhMucHJvdG9jb2wuUmVxSGVhZGVyEhEKCWNvbnRhY3RJZBgCIAEoCSI3ChBE",
+            "ZWxldGVDb250YWN0QWNrEiMKBmhlYWRlchgBIAEoCzITLnByb3RvY29sLkFj",
+            "a0hlYWRlciJeChBVcGRhdGVDb250YWN0UmVxEiMKBmhlYWRlchgBIAEoCzIT",
+            "LnByb3RvY29sLlJlcUhlYWRlchISCgpzZXRSZW1hcmtzGAIgASgJEhEKCWNv",
+            "bnRhY3RJZBgDIAEoCSI3ChBVcGRhdGVDb250YWN0QWNrEiMKBmhlYWRlchgB",
+            "IAEoCzITLnByb3RvY29sLkFja0hlYWRlcmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.HeaderReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -51,9 +52,9 @@ namespace Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.AddContactReq), global::Protocol.AddContactReq.Parser, new[]{ "Header", "Username", "ContactType", "SetRemarks", "Msg" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.AddContactAck), global::Protocol.AddContactAck.Parser, new[]{ "Header" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.AddContactNotify), global::Protocol.AddContactNotify.Parser, new[]{ "Header", "ContactId", "Nickname", "Avatar", "Msg" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.DeleteContactReq), global::Protocol.DeleteContactReq.Parser, new[]{ "ContactId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.DeleteContactReq), global::Protocol.DeleteContactReq.Parser, new[]{ "Header", "ContactId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.DeleteContactAck), global::Protocol.DeleteContactAck.Parser, new[]{ "Header" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.UpdateContactReq), global::Protocol.UpdateContactReq.Parser, new[]{ "Header", "SetRemarks" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.UpdateContactReq), global::Protocol.UpdateContactReq.Parser, new[]{ "Header", "SetRemarks", "ContactId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.UpdateContactAck), global::Protocol.UpdateContactAck.Parser, new[]{ "Header" }, null, null, null, null)
           }));
     }
@@ -1256,6 +1257,7 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public DeleteContactReq(DeleteContactReq other) : this() {
+      header_ = other.header_ != null ? other.header_.Clone() : null;
       contactId_ = other.contactId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -1265,8 +1267,19 @@ namespace Protocol {
       return new DeleteContactReq(this);
     }
 
+    /// <summary>Field number for the "header" field.</summary>
+    public const int HeaderFieldNumber = 1;
+    private global::Protocol.ReqHeader header_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Protocol.ReqHeader Header {
+      get { return header_; }
+      set {
+        header_ = value;
+      }
+    }
+
     /// <summary>Field number for the "contactId" field.</summary>
-    public const int ContactIdFieldNumber = 1;
+    public const int ContactIdFieldNumber = 2;
     private string contactId_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string ContactId {
@@ -1289,6 +1302,7 @@ namespace Protocol {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (!object.Equals(Header, other.Header)) return false;
       if (ContactId != other.ContactId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -1296,6 +1310,7 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
+      if (header_ != null) hash ^= Header.GetHashCode();
       if (ContactId.Length != 0) hash ^= ContactId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -1310,8 +1325,12 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (ContactId.Length != 0) {
+      if (header_ != null) {
         output.WriteRawTag(10);
+        output.WriteMessage(Header);
+      }
+      if (ContactId.Length != 0) {
+        output.WriteRawTag(18);
         output.WriteString(ContactId);
       }
       if (_unknownFields != null) {
@@ -1322,6 +1341,9 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
+      if (header_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Header);
+      }
       if (ContactId.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(ContactId);
       }
@@ -1335,6 +1357,12 @@ namespace Protocol {
     public void MergeFrom(DeleteContactReq other) {
       if (other == null) {
         return;
+      }
+      if (other.header_ != null) {
+        if (header_ == null) {
+          Header = new global::Protocol.ReqHeader();
+        }
+        Header.MergeFrom(other.Header);
       }
       if (other.ContactId.Length != 0) {
         ContactId = other.ContactId;
@@ -1351,6 +1379,13 @@ namespace Protocol {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
+            if (header_ == null) {
+              Header = new global::Protocol.ReqHeader();
+            }
+            input.ReadMessage(Header);
+            break;
+          }
+          case 18: {
             ContactId = input.ReadString();
             break;
           }
@@ -1522,6 +1557,7 @@ namespace Protocol {
     public UpdateContactReq(UpdateContactReq other) : this() {
       header_ = other.header_ != null ? other.header_.Clone() : null;
       setRemarks_ = other.setRemarks_;
+      contactId_ = other.contactId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1552,6 +1588,17 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "contactId" field.</summary>
+    public const int ContactIdFieldNumber = 3;
+    private string contactId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string ContactId {
+      get { return contactId_; }
+      set {
+        contactId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as UpdateContactReq);
@@ -1567,6 +1614,7 @@ namespace Protocol {
       }
       if (!object.Equals(Header, other.Header)) return false;
       if (SetRemarks != other.SetRemarks) return false;
+      if (ContactId != other.ContactId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1575,6 +1623,7 @@ namespace Protocol {
       int hash = 1;
       if (header_ != null) hash ^= Header.GetHashCode();
       if (SetRemarks.Length != 0) hash ^= SetRemarks.GetHashCode();
+      if (ContactId.Length != 0) hash ^= ContactId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1596,6 +1645,10 @@ namespace Protocol {
         output.WriteRawTag(18);
         output.WriteString(SetRemarks);
       }
+      if (ContactId.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(ContactId);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1609,6 +1662,9 @@ namespace Protocol {
       }
       if (SetRemarks.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(SetRemarks);
+      }
+      if (ContactId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ContactId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1630,6 +1686,9 @@ namespace Protocol {
       if (other.SetRemarks.Length != 0) {
         SetRemarks = other.SetRemarks;
       }
+      if (other.ContactId.Length != 0) {
+        ContactId = other.ContactId;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -1650,6 +1709,10 @@ namespace Protocol {
           }
           case 18: {
             SetRemarks = input.ReadString();
+            break;
+          }
+          case 26: {
+            ContactId = input.ReadString();
             break;
           }
         }
