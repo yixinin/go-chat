@@ -25,15 +25,16 @@ namespace Protocol {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CgxoZWFkZXIucHJvdG8SCHByb3RvY29sIicKCVJlcUhlYWRlchILCgN1aWQY",
-            "ASABKAMSDQoFdG9rZW4YAiABKAkiJgoJQWNrSGVhZGVyEgwKBGNvZGUYASAB",
-            "KAUSCwoDbXNnGAIgASgJIgwKCk5vdGlIZWFkZXIiKgoNQ2FsbEFja0hlYWRl",
-            "chIMCgRjb2RlGAEgASgFEgsKA21zZxgCIAEoCWIGcHJvdG8z"));
+            "ASABKAMSDQoFdG9rZW4YAiABKAkiMwoJQWNrSGVhZGVyEgwKBGNvZGUYASAB",
+            "KAUSCwoDbXNnGAIgASgJEgsKA3VpZBgDIAEoAyIbCgxOb3RpZnlIZWFkZXIS",
+            "CwoDdWlkGAEgASgDIioKDUNhbGxBY2tIZWFkZXISDAoEY29kZRgBIAEoBRIL",
+            "CgNtc2cYAiABKAliBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.ReqHeader), global::Protocol.ReqHeader.Parser, new[]{ "Uid", "Token" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.AckHeader), global::Protocol.AckHeader.Parser, new[]{ "Code", "Msg" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.NotiHeader), global::Protocol.NotiHeader.Parser, null, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.AckHeader), global::Protocol.AckHeader.Parser, new[]{ "Code", "Msg", "Uid" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.NotifyHeader), global::Protocol.NotifyHeader.Parser, new[]{ "Uid" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.CallAckHeader), global::Protocol.CallAckHeader.Parser, new[]{ "Code", "Msg" }, null, null, null, null)
           }));
     }
@@ -225,6 +226,7 @@ namespace Protocol {
     public AckHeader(AckHeader other) : this() {
       code_ = other.code_;
       msg_ = other.msg_;
+      uid_ = other.uid_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -255,6 +257,17 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "uid" field.</summary>
+    public const int UidFieldNumber = 3;
+    private long uid_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long Uid {
+      get { return uid_; }
+      set {
+        uid_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as AckHeader);
@@ -270,6 +283,7 @@ namespace Protocol {
       }
       if (Code != other.Code) return false;
       if (Msg != other.Msg) return false;
+      if (Uid != other.Uid) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -278,6 +292,7 @@ namespace Protocol {
       int hash = 1;
       if (Code != 0) hash ^= Code.GetHashCode();
       if (Msg.Length != 0) hash ^= Msg.GetHashCode();
+      if (Uid != 0L) hash ^= Uid.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -299,6 +314,10 @@ namespace Protocol {
         output.WriteRawTag(18);
         output.WriteString(Msg);
       }
+      if (Uid != 0L) {
+        output.WriteRawTag(24);
+        output.WriteInt64(Uid);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -312,6 +331,9 @@ namespace Protocol {
       }
       if (Msg.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Msg);
+      }
+      if (Uid != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Uid);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -329,6 +351,9 @@ namespace Protocol {
       }
       if (other.Msg.Length != 0) {
         Msg = other.Msg;
+      }
+      if (other.Uid != 0L) {
+        Uid = other.Uid;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -349,20 +374,21 @@ namespace Protocol {
             Msg = input.ReadString();
             break;
           }
+          case 24: {
+            Uid = input.ReadInt64();
+            break;
+          }
         }
       }
     }
 
   }
 
-  /// <summary>
-  /// int64 uid = 1;
-  /// </summary>
-  public sealed partial class NotiHeader : pb::IMessage<NotiHeader> {
-    private static readonly pb::MessageParser<NotiHeader> _parser = new pb::MessageParser<NotiHeader>(() => new NotiHeader());
+  public sealed partial class NotifyHeader : pb::IMessage<NotifyHeader> {
+    private static readonly pb::MessageParser<NotifyHeader> _parser = new pb::MessageParser<NotifyHeader>(() => new NotifyHeader());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<NotiHeader> Parser { get { return _parser; } }
+    public static pb::MessageParser<NotifyHeader> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -375,41 +401,55 @@ namespace Protocol {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public NotiHeader() {
+    public NotifyHeader() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public NotiHeader(NotiHeader other) : this() {
+    public NotifyHeader(NotifyHeader other) : this() {
+      uid_ = other.uid_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public NotiHeader Clone() {
-      return new NotiHeader(this);
+    public NotifyHeader Clone() {
+      return new NotifyHeader(this);
+    }
+
+    /// <summary>Field number for the "uid" field.</summary>
+    public const int UidFieldNumber = 1;
+    private long uid_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long Uid {
+      get { return uid_; }
+      set {
+        uid_ = value;
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as NotiHeader);
+      return Equals(other as NotifyHeader);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(NotiHeader other) {
+    public bool Equals(NotifyHeader other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (Uid != other.Uid) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
+      if (Uid != 0L) hash ^= Uid.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -423,6 +463,10 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
+      if (Uid != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(Uid);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -431,6 +475,9 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
+      if (Uid != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Uid);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -438,9 +485,12 @@ namespace Protocol {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(NotiHeader other) {
+    public void MergeFrom(NotifyHeader other) {
       if (other == null) {
         return;
+      }
+      if (other.Uid != 0L) {
+        Uid = other.Uid;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -453,6 +503,10 @@ namespace Protocol {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
+          case 8: {
+            Uid = input.ReadInt64();
+            break;
+          }
         }
       }
     }

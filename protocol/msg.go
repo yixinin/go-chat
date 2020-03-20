@@ -7,11 +7,15 @@ func init() {
 	protocol = append(protocol,
 		(*EchoReq)(nil),
 		(*EchoAck)(nil),
-		// (*LoginAck)(nil),
-		// (*LogoutReq)(nil),
-		// (*LogoutAck)(nil),
-		// (*GetGameRoomTypeListReq)(nil),
-		// (*GetGameRoomTypeListAck)(nil),
+		new(SignUpReq),
+		new(SignUpAck),
+		new(SignInReq),
+		new(SignInAck),
+		new(SendMessageReq),
+		new(SendMessageAck),
+		new(MessageNotify),
+		new(AddContactReq),
+		new(AddContactAck),
 	)
 
 	ProtocolMap["protocol"] = protocol

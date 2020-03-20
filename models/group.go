@@ -30,7 +30,7 @@ type Group struct {
 }
 
 func (g *Group) TableName() string {
-	return "chat_group"
+	return TablePrefix + "_group"
 }
 
 type GroupMember struct {
@@ -59,5 +59,5 @@ type GroupAuth struct {
 }
 
 func (g GroupAuth) TableName() string {
-	return "chat_group_auth"
+	return TablePrefix + "_group_auth"
 }

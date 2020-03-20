@@ -25,7 +25,7 @@ type Contact struct {
 }
 
 func (Contact) TableName() string {
-	return "chat_contact"
+	return TablePrefix + "_contact"
 }
 
 //集合名：user_contact_userId
@@ -42,5 +42,5 @@ type UserContact struct {
 }
 
 func (UserContact) TableName(uid int64) string {
-	return fmt.Sprintf("chat_user_contact_%d", uid)
+	return fmt.Sprintf("%s_user_contact_%d", TablePrefix, uid)
 }

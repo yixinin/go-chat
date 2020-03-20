@@ -20,5 +20,5 @@ type UserGroup struct {
 }
 
 func (g *UserGroup) TableName(uid int64) string {
-	return fmt.Sprintf("chat_user_group_%d", uid)
+	return fmt.Sprintf("%s_user_group_%d", TablePrefix, uid)
 }

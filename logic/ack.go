@@ -1,12 +1,19 @@
 package logic
 
 import (
+	"chat/protocol"
 	"context"
+	"reflect"
 	"time"
 )
 
 func Success(ack Acker) (Acker, error) {
 	var header = ack.GetHeader()
+	if header == nil {
+		header = &protocol.AckHeader{}
+		var v = reflect.Indirect(reflect.ValueOf(ack))
+		v.FieldByName("Header").Set(reflect.ValueOf(header))
+	}
 	header.Code = 200
 	header.Msg = "Success"
 	return ack, nil
@@ -14,6 +21,11 @@ func Success(ack Acker) (Acker, error) {
 
 func FailCode(ack Acker, code int32, msg string) (Acker, error) {
 	var header = ack.GetHeader()
+	if header == nil {
+		header = &protocol.AckHeader{}
+		var v = reflect.Indirect(reflect.ValueOf(ack))
+		v.FieldByName("Header").Set(reflect.ValueOf(header))
+	}
 	header.Code = code
 	header.Msg = msg
 	return ack, nil
@@ -21,16 +33,28 @@ func FailCode(ack Acker, code int32, msg string) (Acker, error) {
 
 func Fail(ack Acker, msg string) (Acker, error) {
 	var header = ack.GetHeader()
+	if header == nil {
+		header = &protocol.AckHeader{}
+		var v = reflect.Indirect(reflect.ValueOf(ack))
+		v.FieldByName("Header").Set(reflect.ValueOf(header))
+	}
 	header.Code = 400
 	header.Msg = msg
 	if msg == "" {
-		header.Msg = "Unexpected error"
+		header = &protocol.AckHeader{}
+		var v = reflect.Indirect(reflect.ValueOf(ack))
+		v.FieldByName("Header").Set(reflect.ValueOf(header))
 	}
 	return ack, nil
 }
 
 func Error(ack Acker, err error) (Acker, error) {
 	var header = ack.GetHeader()
+	if header == nil {
+		header = &protocol.AckHeader{}
+		var v = reflect.Indirect(reflect.ValueOf(ack))
+		v.FieldByName("Header").Set(reflect.ValueOf(header))
+	}
 	header.Code = 500
 	header.Msg = "Unexpected error"
 	return ack, err

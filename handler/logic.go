@@ -23,8 +23,8 @@ type Logic struct {
 }
 
 func NewLogic(srv server.Server) *Logic {
-	return &Logic{
-		hander:  EventMessageHandler,
+	var s = &Logic{
+		// hander:  EventMessageHandler,
 		account: logic.NewAccountLogic(),
 		chat:    logic.NewChatLogic(srv.Notify),
 		contact: logic.NewContactLogic(),
@@ -32,6 +32,8 @@ func NewLogic(srv server.Server) *Logic {
 		acceptFunc: srv.AcceptSess,
 		closeFunc:  srv.CloseSess,
 	}
+	s.hander = s.EventMessageHandler
+	return s
 }
 
 func (s *Logic) handleMessage(sender Sender, message interface{}) {
@@ -41,8 +43,19 @@ func (s *Logic) handleMessage(sender Sender, message interface{}) {
 	switch msg := message.(type) {
 	case *protocol.SignUpReq:
 		s.hander(sender, msg, s.account.SignUp)
+	case *protocol.SignInReq:
+		s.hander(sender, msg, s.account.SignIn)
+	case *protocol.SignOutReq:
+		s.hander(sender, msg, s.account.SignOut)
+		s.closeFunc(msg.Header.Uid)
 
+	case *protocol.SendMessageReq:
+		s.hander(sender, msg, s.chat.SendMessage)
+
+	case *protocol.AddContactReq:
+		s.hander(sender, msg, s.contact.AddContact)
 	case *cellnet.SessionClosed: // 会话连接断开
+		s.closeFunc(sender.ID())
 		fmt.Println("session closed: ", sender.ID())
 	case *protocol.EchoReq:
 		sender.Send(&protocol.EchoAck{
@@ -53,7 +66,7 @@ func (s *Logic) handleMessage(sender Sender, message interface{}) {
 			Message: msg.Message,
 		})
 	default:
-		log.Warn("no such msg", msg)
+		log.Warn("msg not handle", msg)
 	}
 
 }

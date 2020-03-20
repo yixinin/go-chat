@@ -34,6 +34,7 @@ func NewWsServer(c *Config) server.Server {
 		config: c,
 		queue:  queue,
 		peer:   peer.NewGenericPeer("gorillaws.Acceptor", "server", c.Addr, queue),
+		users:  make(map[int64]cellnet.Session, 100),
 	}
 	return s
 }
@@ -97,5 +98,13 @@ func (s *WsServer) AcceptSess(uid int64, v interface{}) {
 func (s *WsServer) CloseSess(uid int64) {
 	if _, ok := s.users[uid]; ok {
 		delete(s.users, uid)
+	} else {
+		//通过ID删除 被动断线
+		for k, v := range s.users {
+			if v.ID() == uid {
+				delete(s.users, k)
+				return
+			}
+		}
 	}
 }

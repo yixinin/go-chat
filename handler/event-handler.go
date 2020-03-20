@@ -4,6 +4,7 @@ import (
 	"chat/cache"
 	"chat/logic"
 	"chat/protocol"
+	"reflect"
 
 	"github.com/davyxu/cellnet"
 )
@@ -26,10 +27,13 @@ func (h *Event) HandleCallback(ev cellnet.Event) {
 	}
 	header := reqer.GetHeader()
 	if header == nil {
-		return
+		header = &protocol.ReqHeader{}
+		var v = reflect.Indirect(reflect.ValueOf(msg))
+		v.FieldByName("Header").Set(reflect.ValueOf(header))
+	} else {
+		h.Auth(header)
 	}
 
-	ok = h.Auth(header)
 	sess := ev.Session()
 	if msg != nil {
 		h.logic.handleMessage(sess, msg)

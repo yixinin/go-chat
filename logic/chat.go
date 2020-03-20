@@ -55,9 +55,17 @@ func (s *ChatLogic) SendMessage(r Reqer) (Acker, error) {
 	var now = time.Now().Unix()
 
 	var uids = make([]int64, 0, 1)
-	var msg interface{}
+	var msg = &protocol.MessageNotify{
+		Header: &protocol.NotifyHeader{
+			Uid: req.Header.Uid,
+		},
+		MessageType: req.MessageType,
+		TextMessage: req.TextMessage,
+		Username:    req.Username,
+	}
 	//查找用户/群
 	if req.ContactId != "" {
+		uids = append(uids, req.Header.Uid)
 		_id, _ := primitive.ObjectIDFromHex(req.ContactId)
 		var contact = &models.UserContact{
 			Id: _id,
@@ -70,6 +78,7 @@ func (s *ChatLogic) SendMessage(r Reqer) (Acker, error) {
 
 		//插入mongo
 		var userMessage = &models.UserMessage{
+			Id:          primitive.NewObjectID(),
 			Text:        req.TextMessage,
 			FromUid:     req.Header.Uid,
 			ToUid:       contact.UserId,
@@ -106,6 +115,7 @@ func (s *ChatLogic) SendMessage(r Reqer) (Acker, error) {
 		}
 		//插入消息
 		var groupMessage = &models.GroupMessage{
+			Id:          primitive.NewObjectID(),
 			GroupId:     userGroup.GroupId,
 			Text:        req.TextMessage,
 			FromUid:     req.Header.Uid,
@@ -179,7 +189,7 @@ func (s *ChatLogic) RealTime(r Reqer) (Acker, error) {
 			continue
 		}
 		s.NotifyRealTime([]int64{u.Uid}, &protocol.RealTimeNotify{
-			Header: &protocol.NotiHeader{},
+			Header: &protocol.NotifyHeader{},
 			RealTimeInfo: &protocol.RealTimeInfo{
 				Uid:      req.Uid,
 				GroupId:  req.GroupId,
@@ -227,7 +237,7 @@ func (s *ChatLogic) CancelRealTime(r Reqer) (Acker, error) {
 	}
 	//通知其他人
 	s.NotifyRealTime(uids, &protocol.RealTimeNotify{
-		Header: &protocol.NotiHeader{},
+		Header: &protocol.NotifyHeader{},
 		RealTimeInfo: &protocol.RealTimeInfo{
 			RoomId: rid,
 		},

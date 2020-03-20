@@ -66,6 +66,7 @@ func (s *ContactLogic) AddContact(r Reqer) (Acker, error) {
 		ctx, cancel = NewContext()
 		defer cancel()
 		userContact := &models.UserContact{
+			Id:         primitive.NewObjectID(),
 			UserId:     req.Header.Uid,
 			Remarks:    req.SetRemarks,
 			CreateTime: now,
@@ -75,6 +76,7 @@ func (s *ContactLogic) AddContact(r Reqer) (Acker, error) {
 		if err != nil {
 			return Error(ack, err)
 		}
+		userContact.Id = primitive.NewObjectID()
 		userContact.UserId = contact.UserAId
 		ctx, cancel = NewContext()
 		defer cancel()
@@ -97,6 +99,7 @@ func (s *ContactLogic) AddContact(r Reqer) (Acker, error) {
 
 		//添加用户认证
 		var contact = &models.Contact{
+			Id:         primitive.NewObjectID(),
 			UserAId:    req.Header.Uid,
 			UserBId:    user.Id,
 			RemarksA:   req.SetRemarks,
@@ -141,7 +144,7 @@ func (s *ContactLogic) DeleteContact(r Reqer) (Acker, error) {
 	ctx, cancel = NewContext()
 	defer cancel()
 	_, err = db.Mongo.Collection(contact.TableName()).
-		DeleteOne(ctx, bson.M{"user_id_a": req.Header.Uid, "user_id_b": uid})
+		DeleteOne(ctx, bson.M{"userida": req.Header.Uid, "useridb": uid})
 	if err != nil {
 		return Error(ack, err)
 	}

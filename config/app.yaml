@@ -28,7 +28,7 @@ mysql:
   port: 3306
   db: "live-chat"
   user: "root"
-  pwd: "123456"
+  password: "123456"
 
 redis:
   host: "127.0.0.1"

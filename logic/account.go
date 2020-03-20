@@ -16,10 +16,13 @@ const (
 )
 
 type AccountLogic struct {
+	// acceptFunc AcceptFunc
 }
 
 func NewAccountLogic() *AccountLogic {
-	return &AccountLogic{}
+	return &AccountLogic{
+		// acceptFunc: acc,
+	}
 }
 
 //账号操作等。。。
@@ -27,7 +30,9 @@ func NewAccountLogic() *AccountLogic {
 //SignUp 注册
 func (s *AccountLogic) SignUp(r Reqer) (Acker, error) {
 	req, _ := r.(*protocol.SignUpReq)
-	ack := &protocol.SignUpAck{}
+	ack := &protocol.SignUpAck{
+		Header: &protocol.AckHeader{},
+	}
 
 	var now = time.Now()
 	if req.DeviceCode == "" {
@@ -45,6 +50,9 @@ func (s *AccountLogic) SignUp(r Reqer) (Acker, error) {
 		}
 		nickname = fmt.Sprintf("游客(%s)", device)
 		req.Username = req.DeviceCode
+	}
+	if len(req.Password) < 6 {
+		return Fail(ack, "password si too simple")
 	}
 
 	uid, err := db.Mysql.InsertOne(&models.User{
@@ -73,14 +81,17 @@ func (s *AccountLogic) SignUp(r Reqer) (Acker, error) {
 		log.Error("set user token error:%v", err)
 	}
 	ack.Token = token
-
+	ack.Header.Uid = uid
+	// s.acceptFunc(uid, nil)
 	return Success(ack)
 }
 
 //登录
 func (s *AccountLogic) SignIn(r Reqer) (Acker, error) {
 	req, _ := r.(*protocol.SignInReq)
-	ack := &protocol.SignInAck{}
+	ack := &protocol.SignInAck{
+		Header: &protocol.AckHeader{},
+	}
 
 	var user = models.User{
 		Username: req.Username,
@@ -104,10 +115,10 @@ func (s *AccountLogic) SignIn(r Reqer) (Acker, error) {
 		return Error(ack, err)
 	}
 	ack.Token = token
+	ack.Header.Uid = user.Id
 	if oldToken != "" {
-		s.tryKickDevice(user.Id, req.DeviceType, token)
+		s.tryKickDevice(user.Id, req.DeviceType, oldToken)
 	}
-
 	return Success(ack)
 }
 

@@ -3,10 +3,12 @@ package handler
 import (
 	"chat/cache"
 	"chat/logic"
+	"chat/protocol"
 	"go-lib/log"
 	"go-lib/utils"
 	"io/ioutil"
 	"net/http"
+	"reflect"
 
 	"github.com/davyxu/cellnet/codec"
 )
@@ -43,34 +45,46 @@ func (h *Http) Handle(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		//读取cookie
-		h.Auth(r, msg)
+		uid, ok := h.Auth(r, msg)
 		if msg != nil {
 			log.Infof("recv http msg:%+v", msg)
 			var sender = NewHttpSender(w)
+			if ok && uid > 0 {
+				h.logic.acceptFunc(uid, nil)
+			}
 			h.logic.handleMessage(sender, msg)
 		}
 	}
 }
 
-func (h *Http) Auth(r *http.Request, msg interface{}) bool {
+func (h *Http) Auth(r *http.Request, msg interface{}) (int64, bool) {
 	c, err := r.Cookie("token")
 	if err != nil {
 		log.Error(err)
-		return false
 	}
-	var reqer, ok = msg.(logic.Reqer)
+	reqer, ok := msg.(logic.Reqer)
 	if !ok {
-		return false
+		return 0, false
 	}
 	var header = reqer.GetHeader()
-	header.Token = c.Value
-	uid, err := cache.GetToken(header.Token)
-	if err != nil {
-		log.Error(err)
-		return false
+	if header == nil {
+		header = &protocol.ReqHeader{}
+		var v = reflect.Indirect(reflect.ValueOf(msg))
+		v.FieldByName("Header").Set(reflect.ValueOf(header))
 	}
-	header.Uid = uid
-	return uid > 0
+	if c != nil && c.Value != "" && header.Token == "" {
+		header.Token = c.Value
+	}
+	if header.Token != "" {
+		uid, err := cache.GetToken(header.Token)
+		if err != nil {
+			log.Error(err)
+			return 0, false
+		}
+		header.Uid = uid
+	}
+
+	return header.Uid, header.Uid > 0
 }
 
 func (h *Http) String() string {

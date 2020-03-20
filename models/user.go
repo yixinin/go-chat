@@ -1,8 +1,14 @@
 package models
 
 import (
+	"fmt"
 	"go-lib/db"
+	"go-lib/log"
 	"time"
+)
+
+const (
+	TablePrefix = "chat"
 )
 
 type User struct {
@@ -21,6 +27,13 @@ type User struct {
 	UpdateTime time.Time `xorm:"updated"`
 }
 
+func (*User) TableName() string {
+	return fmt.Sprintf("%s_user", TablePrefix)
+}
+
 func SyncTables() {
-	db.Mysql.Sync2(new(User))
+	err := db.Mysql.Sync2(new(User))
+	if err != nil {
+		log.Errorf("sync tables error:%v", err)
+	}
 }

@@ -9,10 +9,11 @@ message ReqHeader {
 message AckHeader {
     int32  code = 1;
     string msg  = 2;
+    int64  uid  = 3;
 }
 
-message NotiHeader {
-    // int64 uid = 1;
+message NotifyHeader {
+    int64 uid = 1;
 }
 
 message CallAckHeader {

@@ -21,7 +21,7 @@ func SetToken(uid int64, deviceType int32) (token, oldToken string, err error) {
 	var tokenKey = GetTokenKey(token)
 	var deviceKey = GetUserDeviceToken(uid)
 
-	oldToken = db.Redis.HGet(deviceKey, strconv.FormatInt(int64(deviceType), 10)).String()
+	oldToken, _ = db.Redis.HGet(deviceKey, strconv.FormatInt(int64(deviceType), 10)).Result()
 
 	err = db.Redis.Set(tokenKey, uid, 30*time.Minute).Err()
 	if err != nil {

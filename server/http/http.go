@@ -37,6 +37,7 @@ func NewHttpServer(c *Config) server.Server {
 			Addr: addr,
 		},
 		config: c,
+		users:  make(map[int64]int64, 100),
 	}
 	return s
 }

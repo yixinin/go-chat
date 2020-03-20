@@ -3,6 +3,7 @@ package main
 import (
 	"chat/handler"
 	"chat/logic"
+	"chat/models"
 	"chat/protocol"
 	"chat/server"
 	"chat/server/grpc"
@@ -60,6 +61,8 @@ func (s *Service) Init() {
 	db.InitMongo(s.config.Mongo)
 	db.InitRedis(s.config.Redis)
 	db.InitMysql(s.config.Mysql)
+
+	models.SyncTables()
 
 	s.Registry.Init(
 		registry.Addrs(s.config.EtcdAddr...),

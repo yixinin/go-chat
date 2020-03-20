@@ -7,10 +7,6 @@ import (
 )
 
 const (
-	TableNamePrefix = "chat"
-)
-
-const (
 	BodyTypeText int32 = 1 + iota
 	BodyTypePicture
 	BodyTypeAudio
@@ -37,7 +33,7 @@ type LinkData struct {
 }
 
 func (m *SystemMessage) TableName(kind int32) string {
-	return fmt.Sprintf("%s_system_message:%d", TableNamePrefix, kind)
+	return fmt.Sprintf("%s_system_message:%d", TablePrefix, kind)
 }
 
 type UserMessage struct {
@@ -54,7 +50,7 @@ type UserMessage struct {
 }
 
 func (m *UserMessage) TableName(uid int64) string {
-	return fmt.Sprintf("chat_user_message_%d", uid)
+	return fmt.Sprintf("%s_user_message_%d", TablePrefix, uid)
 }
 
 type GroupMessage struct {
@@ -70,5 +66,5 @@ type GroupMessage struct {
 }
 
 func (m *GroupMessage) TableName(groupId string) string {
-	return fmt.Sprintf("chat_group_message_%s", groupId)
+	return fmt.Sprintf("%s_group_message_%s", TablePrefix, groupId)
 }

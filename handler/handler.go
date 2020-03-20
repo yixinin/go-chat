@@ -48,7 +48,7 @@ type MessageHandler func(sender Sender, req logic.Reqer, handler Handler)
 // 	c.JSON(http.StatusOK, ack)
 // }
 
-func EventMessageHandler(sender Sender, req logic.Reqer, handler Handler) {
+func (s *Logic) EventMessageHandler(sender Sender, req logic.Reqer, handler Handler) {
 	ack, err := handler(req)
 	if err != nil {
 		log.Errorf("event err:%v", err)
@@ -58,6 +58,20 @@ func EventMessageHandler(sender Sender, req logic.Reqer, handler Handler) {
 	if !FillAckHeader(ack, err) {
 		log.Error("ack is nil")
 		return
+	}
+
+	if a, ok := ack.(*protocol.SignInAck); ok {
+		if a.Header.Code == 200 && a.Token != "" { //登录成功
+			s.acceptFunc(a.Header.Uid, sender)
+			a.Header.Uid = 0
+		}
+	} else {
+		if a, ok := ack.(*protocol.SignUpAck); ok {
+			if a.Header.Code == 200 && a.Token != "" { //登录成功
+				s.acceptFunc(a.Header.Uid, sender)
+				a.Header.Uid = 0
+			}
+		}
 	}
 
 	sender.Send(ack)
