@@ -1,0 +1,14 @@
+syntax = "proto3";
+package protocol;
+
+import "header.proto";
+
+message EchoReq {
+    ReqHeader header  = 1;
+    string    message = 2;
+}
+
+message EchoAck {
+    AckHeader header  = 1;
+    string    message = 2;
+}

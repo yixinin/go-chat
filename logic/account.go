@@ -29,7 +29,7 @@ func (s *AccountLogic) SignUp(r Reqer) (Acker, error) {
 	req, _ := r.(*protocol.SignUpReq)
 	ack := &protocol.SignUpAck{}
 
-	var now = time.Now().Unix()
+	var now = time.Now()
 	if req.DeviceCode == "" {
 		req.DeviceCode = utils.UUID()
 	}

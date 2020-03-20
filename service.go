@@ -9,7 +9,6 @@ import (
 	"chat/server/http"
 	"chat/server/tcp"
 	"chat/server/ws"
-	"fmt"
 	"go-lib/db"
 	"go-lib/ip"
 	"go-lib/log"
@@ -60,6 +59,7 @@ func (s *Service) Init() {
 
 	db.InitMongo(s.config.Mongo)
 	db.InitRedis(s.config.Redis)
+	db.InitMysql(s.config.Mysql)
 
 	s.Registry.Init(
 		registry.Addrs(s.config.EtcdAddr...),
@@ -87,11 +87,17 @@ func (s *Service) Init() {
 func (s *Service) Start() error {
 
 	if s.TcpServer != nil {
-		go s.TcpServer.Start()
+		err := s.TcpServer.Start()
+		if err != nil {
+			log.Error(err)
+		}
 	}
 
 	if s.WsServer != nil {
-		go s.WsServer.Start()
+		err := s.WsServer.Start()
+		if err != nil {
+			log.Error(err)
+		}
 	}
 	if s.HttpServer != nil {
 		go s.HttpServer.Start()
@@ -101,7 +107,7 @@ func (s *Service) Start() error {
 		go s.GrpcServer.Start()
 	}
 
-	var listen, err = net.Listen("tcp", fmt.Sprintf(":%s", s.config.GrpcConfig.Port))
+	var listen, err = net.Listen("tcp", s.config.GrpcConfig.Addr)
 	if err != nil {
 		return err
 	}
@@ -117,7 +123,7 @@ func (s *Service) Start() error {
 		Name:    "live-chat.chat",
 		Version: "v1.0",
 		Nodes: []*registry.Node{
-			{Id: utils.UUID(), Address: ip.GrpcAddr(s.config.GrpcConfig.Port)},
+			{Id: utils.UUID(), Address: ip.GetAddr(s.config.GrpcConfig.Addr)},
 		},
 	}
 	s.RegistrtService = srv

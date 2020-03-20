@@ -33,7 +33,7 @@ func NewWsServer(c *Config) server.Server {
 	var s = &WsServer{
 		config: c,
 		queue:  queue,
-		peer:   peer.NewGenericPeer("tcp.Acceptor", "server", c.Addr, queue),
+		peer:   peer.NewGenericPeer("gorillaws.Acceptor", "server", c.Addr, queue),
 	}
 	return s
 }

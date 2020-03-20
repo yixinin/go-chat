@@ -1,7 +1,12 @@
 package models
 
+import (
+	"go-lib/db"
+	"time"
+)
+
 type User struct {
-	Id           int64
+	Id           int64 `xorm:"pk autoincr"`
 	Username     string
 	PasswordHash string
 	DevideCode   string
@@ -12,6 +17,10 @@ type User struct {
 
 	DeleteTime int64 //删除账户时间
 
-	CreateTime int64
-	UpdateTime int64
+	CreateTime time.Time `xorm:"created"`
+	UpdateTime time.Time `xorm:"updated"`
+}
+
+func SyncTables() {
+	db.Mysql.Sync2(new(User))
 }

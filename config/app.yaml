@@ -5,10 +5,16 @@ etcd:
   - 127.0.0.1:2579
 
 grpc:
-  port: "8181"
+  addr: "0.0.0.0:8181"
 
 http:
   addr: "0.0.0.0:8080"
+  router: "/livechat/msg"
+
+tcp:
+  addr: "0.0.0.0:8180"
+ws:
+  addr: "0.0.0.0:9180"
 
 mongo:
   host: "127.0.0.1"
@@ -16,6 +22,13 @@ mongo:
   db: "live-chat"
   user: ""
   pwd: ""
+
+mysql:
+  host: "127.0.0.1"
+  port: 3306
+  db: "live-chat"
+  user: "root"
+  pwd: "123456"
 
 redis:
   host: "127.0.0.1"

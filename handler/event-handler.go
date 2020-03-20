@@ -18,7 +18,7 @@ func NewEvent(l *Logic) *Event {
 	}
 }
 
-func (h *Event) HandleEvent(ev cellnet.Event) {
+func (h *Event) HandleCallback(ev cellnet.Event) {
 	var msg = ev.Message()
 	reqer, ok := msg.(logic.Reqer)
 	if !ok {

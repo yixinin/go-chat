@@ -1,7 +1,6 @@
 package http
 
 import (
-	"chat/handler/middleware"
 	"chat/logic"
 	"chat/server"
 	"context"
@@ -9,8 +8,6 @@ import (
 	"go-lib/log"
 	"net/http"
 	"time"
-
-	"github.com/gin-gonic/gin"
 )
 
 var (
@@ -24,10 +21,10 @@ type Config struct {
 
 type httpServer struct {
 	handler server.HttpHandler
-	engine  *gin.Engine
-	hs      *http.Server
-	config  *Config
-	users   map[int64]int64
+	// engine  *gin.Engine
+	hs     *http.Server
+	config *Config
+	users  map[int64]int64
 }
 
 func NewHttpServer(c *Config) server.Server {
@@ -46,7 +43,9 @@ func NewHttpServer(c *Config) server.Server {
 
 func (s *httpServer) Start() (err error) {
 
-	// s.hs.Handler = s.engine
+	if s.handler != nil {
+		http.HandleFunc(s.config.Router, s.handler.Handle)
+	}
 	go func() {
 		defer func() {
 			if err := recover(); err != nil {
@@ -68,10 +67,7 @@ func (s *httpServer) Init(handler server.Handler) error {
 	// 	gin.SetMode(gin.ReleaseMode)
 	// }
 
-	if s.handler != nil {
-		http.HandleFunc(s.config.Router, s.handler.Handle)
-	}
-	s.engine.Use(middleware.SetUid)
+	// s.engine.Use(middleware.SetUid)
 	if h, ok := handler.(server.HttpHandler); ok {
 		s.handler = h
 	}

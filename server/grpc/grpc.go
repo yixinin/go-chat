@@ -7,7 +7,7 @@ import (
 )
 
 type Config struct {
-	Port string
+	Addr string
 }
 
 type GrpcServer struct {

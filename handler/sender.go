@@ -1,11 +1,16 @@
 package handler
 
 import (
+	"encoding/binary"
 	"go-lib/log"
 	"go-lib/utils"
 	"net/http"
 
 	"github.com/davyxu/cellnet/codec"
+)
+
+const (
+	HeaderSize = 4
 )
 
 type Sender interface {
@@ -25,19 +30,26 @@ func NewHttpSender(w http.ResponseWriter) Sender {
 }
 
 func (s *HttpSender) Send(msg interface{}) {
-	var buf, _, err = codec.EncodeMessage(msg, nil)
-	if err != nil {
-		log.Error(err)
-		return
-	}
+	var msgData, meta, err = codec.EncodeMessage(msg, nil)
+	// var body = make([]byte, len(buf)+2)
+	pktData := make([]byte, HeaderSize+len(msgData))
+
+	// 写入消息长度做验证
+	binary.LittleEndian.PutUint16(pktData, uint16(HeaderSize+len(msgData)))
+
+	// Type
+	binary.LittleEndian.PutUint16(pktData[2:], uint16(meta.ID))
+
+	// Value
+	copy(pktData[HeaderSize:], msgData)
 	s.w.WriteHeader(http.StatusOK)
-	n, err := s.w.Write(buf)
+	n, err := s.w.Write(pktData)
 	if err != nil {
 		log.Error(err)
 		return
 	}
-	if n != len(buf) {
-		log.Warnf("http writer not sent complete, sent:%d, expect:%d", n, len(buf))
+	if n != len(pktData) {
+		log.Warnf("http writer not sent complete, sent:%d, expect:%d", n, len(pktData))
 	}
 }
 

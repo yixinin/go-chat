@@ -2,12 +2,12 @@ package logic
 
 import (
 	"chat/cache"
-	"chat/logic/pool"
 	"chat/models"
 	"chat/protocol"
 	"context"
 	"go-lib/db"
 	"go-lib/log"
+	"go-lib/pool"
 	"go-lib/utils"
 	"time"
 
@@ -54,7 +54,8 @@ func (s *ChatLogic) SendMessage(r Reqer) (Acker, error) {
 	ack := &protocol.SendMessageAck{}
 	var now = time.Now().Unix()
 
-	// var users = make(*models.User, 0, 1)
+	var uids = make([]int64, 0, 1)
+	var msg interface{}
 	//查找用户/群
 	if req.ContactId != "" {
 		_id, _ := primitive.ObjectIDFromHex(req.ContactId)
@@ -121,7 +122,7 @@ func (s *ChatLogic) SendMessage(r Reqer) (Acker, error) {
 
 	}
 
-	// s.NotifyMessage(uids, "msg", req.TextMessage)
+	s.NotifyMessage(uids, msg)
 	return Success(ack)
 }
 
@@ -243,6 +244,19 @@ func (s *ChatLogic) NotifyRealTime(uids []int64, msg *protocol.RealTimeNotify) {
 			log.Errorf("cache notify msg error:%v", err)
 		}
 	}
+}
+
+func (s *ChatLogic) NotifyMessage(uids []int64, msg interface{}) {
+	for _, uid := range uids {
+		ok, err := s.Notify(uid, msg)
+		if err != nil {
+			log.Error(err)
+		}
+		if !ok {
+			log.Warn("notify fail, uid:%d", uid)
+		}
+	}
+
 }
 
 func (s *ChatLogic) Poll(r Reqer) (Acker, error) {

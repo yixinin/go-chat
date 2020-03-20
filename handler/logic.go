@@ -44,7 +44,14 @@ func (s *Logic) handleMessage(sender Sender, message interface{}) {
 
 	case *cellnet.SessionClosed: // 会话连接断开
 		fmt.Println("session closed: ", sender.ID())
-
+	case *protocol.EchoReq:
+		sender.Send(&protocol.EchoAck{
+			Header: &protocol.AckHeader{
+				Code: 200,
+				Msg:  "Success",
+			},
+			Message: msg.Message,
+		})
 	default:
 		log.Warn("no such msg", msg)
 	}

@@ -17,7 +17,10 @@ func main() {
 	if err != nil {
 		log.Panicf("config not found, err:%v", err)
 	}
-	showIP(conf.GrpcConfig.Port)
+	showIP("grpc", conf.GrpcConfig.Addr)
+	showIP("tcp", conf.TcpConfig.Addr)
+	showIP("ws", conf.WsConfig.Addr)
+	showIP("http", conf.HttpConfig.Addr)
 	var service = NewService(conf)
 	service.Init()
 	service.Start()
@@ -39,6 +42,6 @@ func main() {
 	}
 }
 
-func showIP(port string) {
-	log.Infof("本机IP:%s", ip.GrpcAddr(port))
+func showIP(s string, port string) {
+	log.Infof("%s listen on: %s", s, ip.GetAddr(port))
 }

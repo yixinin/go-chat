@@ -34,8 +34,8 @@ func (h *Http) Handle(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if len(buf) > 0 {
-		var msgid = utils.BytesToUint16(buf[:2])
-		msg, _, err := codec.DecodeMessage(int(msgid), buf[2:])
+		var msgid = utils.GetMsgId(buf[2:4])
+		msg, _, err := codec.DecodeMessage(int(msgid), buf[4:])
 		if err != nil {
 			log.Error(err)
 			w.WriteHeader(http.StatusBadRequest)
@@ -45,6 +45,7 @@ func (h *Http) Handle(w http.ResponseWriter, r *http.Request) {
 		//读取cookie
 		h.Auth(r, msg)
 		if msg != nil {
+			log.Infof("recv http msg:%+v", msg)
 			var sender = NewHttpSender(w)
 			h.logic.handleMessage(sender, msg)
 		}
