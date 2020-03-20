@@ -1,6 +1,9 @@
 package server
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/davyxu/cellnet"
+	"github.com/gin-gonic/gin"
+)
 
 type Handler interface {
 	String() string
@@ -9,4 +12,9 @@ type Handler interface {
 type HttpHandler interface {
 	Handler
 	HandleAll(*gin.Engine) error
+}
+
+type EventHandler interface {
+	Handler
+	HandleCallback(cellnet.Event)
 }

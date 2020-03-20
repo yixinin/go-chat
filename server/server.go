@@ -6,5 +6,4 @@ type Server interface {
 	hook.ShutdownHooker
 	Init(handlers ...Handler) error
 	Start() error
-	Stop() error
 }

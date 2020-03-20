@@ -8,6 +8,7 @@ message RoomUser {
     string token     = 2;
     bool   VideoPush = 5;
     bool   AudioPush = 6;
+    string Addr      = 7;
 }
 
 message CreateRoomReq {

@@ -3,6 +3,8 @@ package config
 import (
 	"chat/server/grpc"
 	"chat/server/http"
+	"chat/server/tcp"
+	"chat/server/ws"
 	"go-lib/db"
 	"io/ioutil"
 
@@ -13,6 +15,8 @@ type Config struct {
 	EtcdAddr   []string        `yaml:"etcd"`
 	GrpcConfig *grpc.Config    `yaml:"grpc"`
 	HttpConfig *http.Config    `yaml:"http"`
+	TcpConfig  *tcp.Config     `yaml:"tcp"`
+	WsConfig   *ws.Config      `yaml:"ws"`
 	Mongo      *db.MongoConfig `yaml:"mongo"`
 	Redis      *db.RedisConfig `yaml:"redis"`
 }

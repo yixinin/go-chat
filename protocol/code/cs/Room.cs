@@ -24,36 +24,37 @@ namespace Protocol {
     static RoomReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Cgpyb29tLnByb3RvEghwcm90b2NvbBoMaGVhZGVyLnByb3RvIkwKCFJvb21V",
+            "Cgpyb29tLnByb3RvEghwcm90b2NvbBoMaGVhZGVyLnByb3RvIloKCFJvb21V",
             "c2VyEgsKA3VpZBgBIAEoAxINCgV0b2tlbhgCIAEoCRIRCglWaWRlb1B1c2gY",
-            "BSABKAgSEQoJQXVkaW9QdXNoGAYgASgIIkQKDUNyZWF0ZVJvb21SZXESIQoF",
-            "dXNlcnMYASADKAsyEi5wcm90b2NvbC5Sb29tVXNlchIQCghwcm90b2NvbBgC",
-            "IAEoCSJSCg1DcmVhdGVSb29tQWNrEg4KBnJvb21JZBgBIAEoBRIPCgd0Y3BB",
-            "ZGRyGAIgASgJEg4KBndzQWRkchgDIAEoCRIQCghodHRwQWRkchgEIAEoCSKI",
-            "AQoLSm9pblJvb21SZXESJwoGaGVhZGVyGAEgASgLMhcucHJvdG9jb2wuQ2Fs",
-            "bEFja0hlYWRlchIgCgR1c2VyGAIgASgLMhIucHJvdG9jb2wuUm9vbVVzZXIS",
-            "DgoGcm9vbUlkGAMgASgFEhAKCHByb3RvY29sGAQgASgJEgwKBGFkZHIYBSAB",
-            "KAkiRAoLSm9pblJvb21BY2sSJwoGaGVhZGVyGAEgASgLMhcucHJvdG9jb2wu",
-            "Q2FsbEFja0hlYWRlchIMCgRhZGRyGAIgASgJIisKDExlYXZlUm9vbVJlcRIL",
-            "CgN1aWQYASABKAMSDgoGcm9vbUlkGAIgASgFIjcKDExlYXZlUm9vbUFjaxIn",
-            "CgZoZWFkZXIYASABKAsyFy5wcm90b2NvbC5DYWxsQWNrSGVhZGVyIiAKDkRp",
-            "c2NhcmRSb29tUmVxEg4KBnJvb21JZBgBIAEoBSI5Cg5EaXNjYXJkUm9vbUFj",
-            "axInCgZoZWFkZXIYASABKAsyFy5wcm90b2NvbC5DYWxsQWNrSGVhZGVyMo8C",
-            "CgtSb29tU2VydmljZRJACgpDcmVhdGVSb29tEhcucHJvdG9jb2wuQ3JlYXRl",
-            "Um9vbVJlcRoXLnByb3RvY29sLkNyZWF0ZVJvb21BY2siABI6CghKb2luUm9v",
-            "bRIVLnByb3RvY29sLkpvaW5Sb29tUmVxGhUucHJvdG9jb2wuSm9pblJvb21B",
-            "Y2siABI9CglMZWF2ZVJvb20SFi5wcm90b2NvbC5MZWF2ZVJvb21SZXEaFi5w",
-            "cm90b2NvbC5MZWF2ZVJvb21BY2siABJDCgtEaXNjYXJkUm9vbRIYLnByb3Rv",
-            "Y29sLkRpc2NhcmRSb29tUmVxGhgucHJvdG9jb2wuRGlzY2FyZFJvb21BY2si",
-            "ADLNAQoLQ2hhdFNlcnZpY2USQwoLRGlzY2FyZFJvb20SGC5wcm90b2NvbC5E",
-            "aXNjYXJkUm9vbVJlcRoYLnByb3RvY29sLkRpc2NhcmRSb29tQWNrIgASOgoI",
-            "Sm9pblJvb20SFS5wcm90b2NvbC5Kb2luUm9vbVJlcRoVLnByb3RvY29sLkpv",
-            "aW5Sb29tQWNrIgASPQoJTGVhdmVSb29tEhYucHJvdG9jb2wuTGVhdmVSb29t",
-            "UmVxGhYucHJvdG9jb2wuTGVhdmVSb29tQWNrIgBiBnByb3RvMw=="));
+            "BSABKAgSEQoJQXVkaW9QdXNoGAYgASgIEgwKBEFkZHIYByABKAkiRAoNQ3Jl",
+            "YXRlUm9vbVJlcRIhCgV1c2VycxgBIAMoCzISLnByb3RvY29sLlJvb21Vc2Vy",
+            "EhAKCHByb3RvY29sGAIgASgJIlIKDUNyZWF0ZVJvb21BY2sSDgoGcm9vbUlk",
+            "GAEgASgFEg8KB3RjcEFkZHIYAiABKAkSDgoGd3NBZGRyGAMgASgJEhAKCGh0",
+            "dHBBZGRyGAQgASgJIogBCgtKb2luUm9vbVJlcRInCgZoZWFkZXIYASABKAsy",
+            "Fy5wcm90b2NvbC5DYWxsQWNrSGVhZGVyEiAKBHVzZXIYAiABKAsyEi5wcm90",
+            "b2NvbC5Sb29tVXNlchIOCgZyb29tSWQYAyABKAUSEAoIcHJvdG9jb2wYBCAB",
+            "KAkSDAoEYWRkchgFIAEoCSJECgtKb2luUm9vbUFjaxInCgZoZWFkZXIYASAB",
+            "KAsyFy5wcm90b2NvbC5DYWxsQWNrSGVhZGVyEgwKBGFkZHIYAiABKAkiKwoM",
+            "TGVhdmVSb29tUmVxEgsKA3VpZBgBIAEoAxIOCgZyb29tSWQYAiABKAUiNwoM",
+            "TGVhdmVSb29tQWNrEicKBmhlYWRlchgBIAEoCzIXLnByb3RvY29sLkNhbGxB",
+            "Y2tIZWFkZXIiIAoORGlzY2FyZFJvb21SZXESDgoGcm9vbUlkGAEgASgFIjkK",
+            "DkRpc2NhcmRSb29tQWNrEicKBmhlYWRlchgBIAEoCzIXLnByb3RvY29sLkNh",
+            "bGxBY2tIZWFkZXIyjwIKC1Jvb21TZXJ2aWNlEkAKCkNyZWF0ZVJvb20SFy5w",
+            "cm90b2NvbC5DcmVhdGVSb29tUmVxGhcucHJvdG9jb2wuQ3JlYXRlUm9vbUFj",
+            "ayIAEjoKCEpvaW5Sb29tEhUucHJvdG9jb2wuSm9pblJvb21SZXEaFS5wcm90",
+            "b2NvbC5Kb2luUm9vbUFjayIAEj0KCUxlYXZlUm9vbRIWLnByb3RvY29sLkxl",
+            "YXZlUm9vbVJlcRoWLnByb3RvY29sLkxlYXZlUm9vbUFjayIAEkMKC0Rpc2Nh",
+            "cmRSb29tEhgucHJvdG9jb2wuRGlzY2FyZFJvb21SZXEaGC5wcm90b2NvbC5E",
+            "aXNjYXJkUm9vbUFjayIAMs0BCgtDaGF0U2VydmljZRJDCgtEaXNjYXJkUm9v",
+            "bRIYLnByb3RvY29sLkRpc2NhcmRSb29tUmVxGhgucHJvdG9jb2wuRGlzY2Fy",
+            "ZFJvb21BY2siABI6CghKb2luUm9vbRIVLnByb3RvY29sLkpvaW5Sb29tUmVx",
+            "GhUucHJvdG9jb2wuSm9pblJvb21BY2siABI9CglMZWF2ZVJvb20SFi5wcm90",
+            "b2NvbC5MZWF2ZVJvb21SZXEaFi5wcm90b2NvbC5MZWF2ZVJvb21BY2siAGIG",
+            "cHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.HeaderReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.RoomUser), global::Protocol.RoomUser.Parser, new[]{ "Uid", "Token", "VideoPush", "AudioPush" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.RoomUser), global::Protocol.RoomUser.Parser, new[]{ "Uid", "Token", "VideoPush", "AudioPush", "Addr" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.CreateRoomReq), global::Protocol.CreateRoomReq.Parser, new[]{ "Users", "Protocol" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.CreateRoomAck), global::Protocol.CreateRoomAck.Parser, new[]{ "RoomId", "TcpAddr", "WsAddr", "HttpAddr" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.JoinRoomReq), global::Protocol.JoinRoomReq.Parser, new[]{ "Header", "User", "RoomId", "Protocol", "Addr" }, null, null, null, null),
@@ -97,6 +98,7 @@ namespace Protocol {
       token_ = other.token_;
       videoPush_ = other.videoPush_;
       audioPush_ = other.audioPush_;
+      addr_ = other.addr_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -149,6 +151,17 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "Addr" field.</summary>
+    public const int AddrFieldNumber = 7;
+    private string addr_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Addr {
+      get { return addr_; }
+      set {
+        addr_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as RoomUser);
@@ -166,6 +179,7 @@ namespace Protocol {
       if (Token != other.Token) return false;
       if (VideoPush != other.VideoPush) return false;
       if (AudioPush != other.AudioPush) return false;
+      if (Addr != other.Addr) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -176,6 +190,7 @@ namespace Protocol {
       if (Token.Length != 0) hash ^= Token.GetHashCode();
       if (VideoPush != false) hash ^= VideoPush.GetHashCode();
       if (AudioPush != false) hash ^= AudioPush.GetHashCode();
+      if (Addr.Length != 0) hash ^= Addr.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -205,6 +220,10 @@ namespace Protocol {
         output.WriteRawTag(48);
         output.WriteBool(AudioPush);
       }
+      if (Addr.Length != 0) {
+        output.WriteRawTag(58);
+        output.WriteString(Addr);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -224,6 +243,9 @@ namespace Protocol {
       }
       if (AudioPush != false) {
         size += 1 + 1;
+      }
+      if (Addr.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Addr);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -247,6 +269,9 @@ namespace Protocol {
       }
       if (other.AudioPush != false) {
         AudioPush = other.AudioPush;
+      }
+      if (other.Addr.Length != 0) {
+        Addr = other.Addr;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -273,6 +298,10 @@ namespace Protocol {
           }
           case 48: {
             AudioPush = input.ReadBool();
+            break;
+          }
+          case 58: {
+            Addr = input.ReadString();
             break;
           }
         }

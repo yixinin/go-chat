@@ -728,7 +728,6 @@ namespace Protocol {
     public const int GroupTokenFieldNumber = 2;
     private string groupToken_ = "";
     /// <summary>
-    ///
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string GroupToken {

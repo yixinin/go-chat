@@ -5,7 +5,10 @@ go 1.13
 replace go-lib => ../go-lib
 
 require (
-	github.com/davyxu/cellnet v4.1.0+incompatible // indirect
+	github.com/davyxu/cellnet v4.1.0+incompatible
+	github.com/davyxu/golog v0.1.0 // indirect
+	github.com/davyxu/goobjfmt v0.1.0 // indirect
+	github.com/davyxu/protoplus v0.1.0 // indirect
 	github.com/docker/go-events v0.0.0-20190806004212-e31b211e4f1c // indirect
 	github.com/emirpasic/gods v1.12.0
 	github.com/gin-gonic/gin v1.5.0

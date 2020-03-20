@@ -7,6 +7,8 @@ import (
 	"chat/server"
 	"chat/server/grpc"
 	"chat/server/http"
+	"chat/server/tcp"
+	"chat/server/ws"
 	"fmt"
 	"go-lib/db"
 	"go-lib/ip"
@@ -43,6 +45,8 @@ func NewService(c *config.Config) *Service {
 	var s = &Service{
 		HttpServer: http.NewHttpServer(c.HttpConfig),
 		GrpcServer: grpc.NewGrpcServer(c.GrpcConfig),
+		TcpServer:  tcp.NewTcpServer(c.TcpConfig),
+		WsServer:   ws.NewWsServer(c.WsConfig),
 		config:     c,
 		Registry:   etcd.NewRegistry(),
 		gs:         ggrpc.NewServer(),
@@ -67,6 +71,7 @@ func (s *Service) Init() {
 		s.HttpServer.Init(account, message)
 	}
 	if s.TcpServer != nil {
+
 		s.TcpServer.Init()
 	}
 	if s.WsServer != nil {
