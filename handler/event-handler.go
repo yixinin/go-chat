@@ -4,17 +4,23 @@ import (
 	"chat/cache"
 	"chat/logic"
 	"chat/protocol"
-	"go-lib/log"
 
 	"github.com/davyxu/cellnet"
 )
 
-type Eventhandler struct {
+type Event struct {
+	logic *Logic
 }
 
-func (h *Eventhandler) HandleEvent(ev cellnet.Event) {
-	var message = ev.Message()
-	reqer, ok := message.(logic.Reqer)
+func NewEvent(l *Logic) *Event {
+	return &Event{
+		logic: l,
+	}
+}
+
+func (h *Event) HandleEvent(ev cellnet.Event) {
+	var msg = ev.Message()
+	reqer, ok := msg.(logic.Reqer)
 	if !ok {
 		return
 	}
@@ -22,26 +28,16 @@ func (h *Eventhandler) HandleEvent(ev cellnet.Event) {
 	if header == nil {
 		return
 	}
-	var ack logic.Acker = nil
-	var err error
+
 	ok = h.Auth(header)
 	sess := ev.Session()
-	switch msg := message.(type) {
-	case *protocol.SignUpReq:
-
-	default:
-		log.Warn("no such msg", msg)
+	if msg != nil {
+		h.logic.handleMessage(sess, msg)
 	}
 
-	if err != nil {
-		log.Error(err)
-	}
-	if ack != nil {
-		sess.Send(ack)
-	}
 }
 
-func (h *Eventhandler) Auth(header *protocol.ReqHeader) bool {
+func (h *Event) Auth(header *protocol.ReqHeader) bool {
 	//通过header 获取token
 	if header.Token == "" {
 		return false
@@ -55,8 +51,15 @@ func (h *Eventhandler) Auth(header *protocol.ReqHeader) bool {
 }
 
 func AccessDeined(sess cellnet.Session, ack logic.Acker) {
+	if ack == nil {
+		return
+	}
 	header := ack.GetHeader()
 	header.Code = 401
 	header.Msg = "access deined"
 	sess.Send(ack)
+}
+
+func (h *Event) String() string {
+	return "event"
 }

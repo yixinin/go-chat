@@ -15,9 +15,13 @@ import (
 type ContactLogic struct {
 }
 
-func (s *ContactLogic) SearchUser(r Reqer, a Acker) error {
+func NewContactLogic() *ContactLogic {
+	return &ContactLogic{}
+}
+
+func (s *ContactLogic) SearchUser(r Reqer) (Acker, error) {
 	req, _ := r.(*protocol.SearchUserReq)
-	ack, _ := a.(*protocol.SearchUserAck)
+	ack := &protocol.SearchUserAck{}
 
 	var users []*models.User
 	var where = fmt.Sprintf("username like %%%s%% or nickname like %%%s%%", req.Key, req.Key)
@@ -41,9 +45,9 @@ func (s *ContactLogic) SearchUser(r Reqer, a Acker) error {
 	return Success(ack)
 }
 
-func (s *ContactLogic) AddContact(r Reqer, a Acker) error {
+func (s *ContactLogic) AddContact(r Reqer) (Acker, error) {
 	req, _ := r.(*protocol.AddContactReq)
-	ack, _ := a.(*protocol.AddContactAck)
+	ack := &protocol.AddContactAck{}
 	var now = time.Now().Unix()
 
 	if req.AuthId != "" { //通过验证
@@ -111,9 +115,9 @@ func (s *ContactLogic) AddContact(r Reqer, a Acker) error {
 	return Success(ack)
 }
 
-func (s *ContactLogic) DeleteContact(r Reqer, a Acker) error {
+func (s *ContactLogic) DeleteContact(r Reqer) (Acker, error) {
 	req, _ := r.(*protocol.DeleteContactReq)
-	ack, _ := a.(*protocol.DeleteContactAck)
+	ack := &protocol.DeleteContactAck{}
 
 	var userContact = &models.UserContact{}
 	_id, _ := primitive.ObjectIDFromHex(req.ContactId)
@@ -144,9 +148,9 @@ func (s *ContactLogic) DeleteContact(r Reqer, a Acker) error {
 	return Success(ack)
 }
 
-func (s *ContactLogic) UpdateContact(r Reqer, a Acker) error {
+func (s *ContactLogic) UpdateContact(r Reqer) (Acker, error) {
 	req, _ := r.(*protocol.UpdateContactReq)
-	ack, _ := a.(*protocol.UpdateContactAck)
+	ack := &protocol.UpdateContactAck{}
 	var userContact = &models.UserContact{}
 
 	var ctx, cancel = NewContext()

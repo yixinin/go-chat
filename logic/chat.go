@@ -2,14 +2,13 @@ package logic
 
 import (
 	"chat/cache"
+	"chat/logic/pool"
 	"chat/models"
 	"chat/protocol"
 	"context"
 	"go-lib/db"
 	"go-lib/log"
-	"go-lib/registry"
 	"go-lib/utils"
-	"sync"
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -22,37 +21,37 @@ type NotifyFunc func(uid int64, msg interface{}) (bool, error)
 
 //发送消息/邀请等。。。
 type ChatLogic struct {
-	sync.RWMutex
-	watcher     registry.Watcher
-	Registry    registry.Registry
-	roomClients map[string]protocol.RoomServiceClient
-	Notify      NotifyFunc
-	stop        chan bool
+	// sync.RWMutex
+	// watcher     registry.Watcher
+	// Registry    registry.Registry
+	// roomClients map[string]protocol.RoomServiceClient
+	Notify NotifyFunc
+	stop   chan bool
 }
 
-func NewChatLogic(regist registry.Registry, notifyFuncs ...NotifyFunc) *ChatLogic {
+func NewChatLogic(notifyFuncs ...NotifyFunc) *ChatLogic {
 	var notifyFunc NotifyFunc = nil
 	if len(notifyFuncs) > 0 {
 		notifyFunc = notifyFuncs[0]
 	}
-	var watcher, err = regist.Watch()
-	if err != nil {
-		log.Error(err)
-	}
+	// var watcher, err = regist.Watch()
+	// if err != nil {
+	// 	log.Error(err)
+	// }
 	var c = &ChatLogic{
-		roomClients: make(map[string]protocol.RoomServiceClient, 2),
-		Notify:      notifyFunc,
-		watcher:     watcher,
-		Registry:    regist,
+		// roomClients: make(map[string]protocol.RoomServiceClient, 2),
+		Notify: notifyFunc,
+		// watcher:     watcher,
+		// Registry:    regist,
 	}
 
-	go c.Watch()
+	// go c.Watch()
 	return c
 }
 
-func (s *ChatLogic) SendMessage(r Reqer, a Acker) (err error) {
+func (s *ChatLogic) SendMessage(r Reqer) (Acker, error) {
 	req, _ := r.(*protocol.SendMessageReq)
-	ack, _ := a.(*protocol.SendMessageAck)
+	ack := &protocol.SendMessageAck{}
 	var now = time.Now().Unix()
 
 	// var users = make(*models.User, 0, 1)
@@ -64,7 +63,7 @@ func (s *ChatLogic) SendMessage(r Reqer, a Acker) (err error) {
 		}
 		var ctx, cancel = NewContext()
 		defer cancel()
-		err = db.Mongo.Collection(contact.TableName(req.Header.Uid)).
+		err := db.Mongo.Collection(contact.TableName(req.Header.Uid)).
 			FindOne(ctx, bson.M{"_id": _id}).
 			Decode(&contact)
 
@@ -79,7 +78,7 @@ func (s *ChatLogic) SendMessage(r Reqer, a Acker) (err error) {
 		}
 		ctx, cancel = NewContext()
 		defer cancel()
-		_, err := db.Mongo.Collection(userMessage.TableName(contact.UserId)).InsertOne(ctx, userMessage)
+		_, err = db.Mongo.Collection(userMessage.TableName(contact.UserId)).InsertOne(ctx, userMessage)
 		if err != nil {
 			return Error(ack, err)
 		}
@@ -126,13 +125,13 @@ func (s *ChatLogic) SendMessage(r Reqer, a Acker) (err error) {
 	return Success(ack)
 }
 
-func (s *ChatLogic) RealTime(r Reqer, a Acker) (err error) {
+func (s *ChatLogic) RealTime(r Reqer) (Acker, error) {
 	// switch req.Protocol {
 	// case "tcp":
 	// case "ws":
 	// }
 	req, _ := r.(*protocol.RealTimeReq)
-	ack, _ := a.(*protocol.RealTimeAck)
+	ack := &protocol.RealTimeAck{}
 
 	var users []*protocol.RoomUser
 
@@ -155,17 +154,17 @@ func (s *ChatLogic) RealTime(r Reqer, a Acker) (err error) {
 		//仅支持10人以下的群
 	}
 
-	var client protocol.RoomServiceClient
-	s.RLock()
-	for _, v := range s.roomClients {
-		client = v
-		break
+	client, ok := s.GetRandomRoomClient()
+	if !ok {
+		return Fail(ack, "")
 	}
-	s.RUnlock()
 
 	resp, err := client.CreateRoom(ctx, &protocol.CreateRoomReq{
 		Users: users,
 	})
+	if err != nil {
+		return Error(ack, err)
+	}
 
 	ack.TcpAddr = resp.TcpAddr
 	ack.WsAddr = resp.WsAddr
@@ -196,9 +195,9 @@ func (s *ChatLogic) RealTime(r Reqer, a Acker) (err error) {
 	return Success(ack)
 }
 
-func (s *ChatLogic) CancelRealTime(r Reqer, a Acker) (err error) {
+func (s *ChatLogic) CancelRealTime(r Reqer) (Acker, error) {
 	req, _ := r.(*protocol.CancelRealTimeReq)
-	ack, _ := a.(*protocol.CancelRealTimeAck)
+	ack := &protocol.CancelRealTimeAck{}
 	//查找当前房间
 	rid, addr, err := cache.GetUserRoomInfo(req.Header.Uid)
 	if err != nil {
@@ -206,7 +205,8 @@ func (s *ChatLogic) CancelRealTime(r Reqer, a Acker) (err error) {
 	}
 	var ctx, cancel = context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
-	client, ok := s.roomClients[addr]
+	// var client =
+	client, ok := s.GetRoomClient(addr)
 	if ok {
 		client.LeaveRoom(ctx, &protocol.LeaveRoomReq{
 			Uid:    req.Header.Uid,
@@ -245,9 +245,9 @@ func (s *ChatLogic) NotifyRealTime(uids []int64, msg *protocol.RealTimeNotify) {
 	}
 }
 
-func (s *ChatLogic) Poll(r Reqer, a Acker) error {
+func (s *ChatLogic) Poll(r Reqer) (Acker, error) {
 	req, _ := r.(*protocol.PollReq)
-	ack, _ := a.(*protocol.PollAck)
+	ack := &protocol.PollAck{}
 	msgs, err := cache.GetAllNotifyMessage(req.Header.Uid)
 	if err != nil {
 		return Error(ack, err)
@@ -257,9 +257,9 @@ func (s *ChatLogic) Poll(r Reqer, a Acker) error {
 	return Success(ack)
 }
 
-func (s *ChatLogic) PollMessage(r Reqer, a Acker) error {
+func (s *ChatLogic) PollMessage(r Reqer) (Acker, error) {
 	req, _ := r.(*protocol.PollMessageReq)
-	ack, _ := a.(*protocol.PollMessageAck)
+	ack := &protocol.PollMessageAck{}
 	var userMessages = make([]models.UserMessage, 0, 10)
 	var ctx, cancel = NewContext()
 	defer cancel()
@@ -292,4 +292,20 @@ func (s *ChatLogic) PollMessage(r Reqer, a Acker) error {
 		})
 	}
 	return Success(ack)
+}
+
+func (s *ChatLogic) GetRoomClient(addr string) (protocol.RoomServiceClient, bool) {
+	var conn, ok = pool.DefaultGrpcConnPool.GetConn(addr)
+	if !ok {
+		return nil, false
+	}
+	return protocol.NewRoomServiceClient(conn), true
+}
+
+func (s *ChatLogic) GetRandomRoomClient() (protocol.RoomServiceClient, bool) {
+	var addr, conn = pool.DefaultGrpcConnPool.GetRandomConn()
+	if addr != "" {
+		return nil, false
+	}
+	return protocol.NewRoomServiceClient(conn), true
 }

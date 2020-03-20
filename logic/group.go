@@ -9,9 +9,9 @@ import (
 type GroupLogic struct {
 }
 
-func (s GroupLogic) JoinGroup(r Reqer, a Acker) error {
+func (s GroupLogic) JoinGroup(r Reqer, a Acker) (Acker, error) {
 	req, _ := r.(*protocol.JoinGroupReq)
-	ack, _ := a.(*protocol.JoinGroupAck)
+	ack := &protocol.JoinGroupAck{}
 
 	var groupAuth = &models.GroupAuth{
 		Token: req.GroupToken,
@@ -22,16 +22,16 @@ func (s GroupLogic) JoinGroup(r Reqer, a Acker) error {
 	return Success(ack)
 }
 
-func (s *GroupLogic) Auth(r Reqer, a Acker) error {
+func (s *GroupLogic) Auth(r Reqer, a Acker) (Acker, error) {
 	// req, _ := r.(*protocol.AuthGroupReq)
-	ack, _ := a.(*protocol.AuthGroupAck)
+	ack := &protocol.AuthGroupAck{}
 
 	return Success(ack)
 }
 
-func (s *GroupLogic) LeaveGroup(r Reqer, a Acker) error {
+func (s *GroupLogic) LeaveGroup(r Reqer, a Acker) (Acker, error) {
 	// req, _ := r.(*protocol.LeaveGroupReq)
-	ack, _ := a.(*protocol.LeaveGroupAck)
+	ack := &protocol.LeaveGroupAck{}
 
 	return Success(ack)
 }

@@ -7,6 +7,14 @@ import (
 type GroupHandler struct {
 }
 
+func NewGrpcHandler() *GroupHandler {
+	return &GroupHandler{}
+}
+
+func (h *GroupHandler) String() string {
+	return "grpc"
+}
+
 func (h *GroupHandler) Create(c *gin.Context) {
 
 }

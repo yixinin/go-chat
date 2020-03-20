@@ -66,19 +66,20 @@ func (s *Service) Init() {
 	)
 
 	if s.HttpServer != nil {
-		var account = handler.NewAccountHandler()
-		var message = handler.NewChatHandler(s.Registry)
-		s.HttpServer.Init(account, message)
+		var logic = handler.NewLogic(s.HttpServer)
+		s.HttpServer.Init(handler.NewHttp(logic))
 	}
 	if s.TcpServer != nil {
-
-		s.TcpServer.Init()
+		var logic = handler.NewLogic(s.TcpServer)
+		s.TcpServer.Init(handler.NewEvent(logic))
 	}
 	if s.WsServer != nil {
-		s.WsServer.Init()
+		var logic = handler.NewLogic(s.WsServer)
+		s.WsServer.Init(handler.NewEvent(logic))
 	}
 	if s.GrpcServer != nil {
-		s.GrpcServer.Init()
+		// var logic = handler.NewLogic()
+		s.GrpcServer.Init(handler.NewGrpcHandler())
 	}
 
 }

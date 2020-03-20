@@ -5,32 +5,35 @@ import (
 	"time"
 )
 
-func Success(ack Acker) error {
+func Success(ack Acker) (Acker, error) {
 	var header = ack.GetHeader()
 	header.Code = 200
 	header.Msg = "Success"
-	return nil
+	return ack, nil
 }
 
-func FailCode(ack Acker, code int32, msg string) error {
+func FailCode(ack Acker, code int32, msg string) (Acker, error) {
 	var header = ack.GetHeader()
 	header.Code = code
 	header.Msg = msg
-	return nil
+	return ack, nil
 }
 
-func Fail(ack Acker, msg string) error {
+func Fail(ack Acker, msg string) (Acker, error) {
 	var header = ack.GetHeader()
 	header.Code = 400
 	header.Msg = msg
-	return nil
+	if msg == "" {
+		header.Msg = "Unexpected error"
+	}
+	return ack, nil
 }
 
-func Error(ack Acker, err error) error {
+func Error(ack Acker, err error) (Acker, error) {
 	var header = ack.GetHeader()
 	header.Code = 500
 	header.Msg = "Unexpected error"
-	return err
+	return ack, err
 }
 
 func NewContext(ttls ...time.Duration) (context.Context, context.CancelFunc) {

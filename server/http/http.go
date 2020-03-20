@@ -2,6 +2,7 @@ package http
 
 import (
 	"chat/handler/middleware"
+	"chat/logic"
 	"chat/server"
 	"context"
 	"flag"
@@ -17,14 +18,16 @@ var (
 )
 
 type Config struct {
-	Addr string
+	Addr   string
+	Router string
 }
 
 type httpServer struct {
-	handlers []server.HttpHandler
-	engine   *gin.Engine
-	hs       *http.Server
-	config   *Config
+	handler server.HttpHandler
+	engine  *gin.Engine
+	hs      *http.Server
+	config  *Config
+	users   map[int64]int64
 }
 
 func NewHttpServer(c *Config) server.Server {
@@ -33,7 +36,6 @@ func NewHttpServer(c *Config) server.Server {
 		addr = c.Addr
 	}
 	var s = &httpServer{
-		handlers: make([]server.HttpHandler, 0, 2),
 		hs: &http.Server{
 			Addr: addr,
 		},
@@ -44,13 +46,7 @@ func NewHttpServer(c *Config) server.Server {
 
 func (s *httpServer) Start() (err error) {
 
-	for _, h := range s.handlers {
-		err := h.HandleAll(s.engine)
-		if err != nil {
-			return err
-		}
-	}
-	s.hs.Handler = s.engine
+	// s.hs.Handler = s.engine
 	go func() {
 		defer func() {
 			if err := recover(); err != nil {
@@ -64,23 +60,22 @@ func (s *httpServer) Start() (err error) {
 	return nil
 }
 
-func (s *httpServer) Init(handlers ...server.Handler) error {
-	s.engine = gin.Default()
-	if *DebugMode {
-		gin.SetMode(gin.DebugMode)
-	} else {
-		gin.SetMode(gin.ReleaseMode)
-	}
+func (s *httpServer) Init(handler server.Handler) error {
+	// s.engine = gin.Default()
+	// if *DebugMode {
+	// 	gin.SetMode(gin.DebugMode)
+	// } else {
+	// 	gin.SetMode(gin.ReleaseMode)
+	// }
 
+	if s.handler != nil {
+		http.HandleFunc(s.config.Router, s.handler.Handle)
+	}
 	s.engine.Use(middleware.SetUid)
-
-	for _, h := range handlers {
-		if handler, ok := h.(server.HttpHandler); ok {
-			s.handlers = append(s.handlers, handler)
-		} else {
-			log.Warnf("handler %s is not http handler", h.String())
-		}
+	if h, ok := handler.(server.HttpHandler); ok {
+		s.handler = h
 	}
+
 	return nil
 }
 
@@ -93,4 +88,22 @@ func (s *httpServer) Shutdown() {
 func (s *httpServer) Stop() error {
 
 	return nil
+}
+
+func (s *httpServer) GetNotifyFunc() logic.NotifyFunc {
+	return nil
+}
+
+func (s *httpServer) AcceptSess(uid int64, v interface{}) {
+	s.users[uid] = time.Now().Unix()
+}
+
+func (s *httpServer) CloseSess(uid int64) {
+	if _, ok := s.users[uid]; ok {
+		delete(s.users, uid)
+	}
+}
+
+func (s *httpServer) Notify(uid int64, msg interface{}) (ok bool, err error) {
+	return false, nil
 }

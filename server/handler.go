@@ -1,8 +1,9 @@
 package server
 
 import (
+	"net/http"
+
 	"github.com/davyxu/cellnet"
-	"github.com/gin-gonic/gin"
 )
 
 type Handler interface {
@@ -11,7 +12,7 @@ type Handler interface {
 
 type HttpHandler interface {
 	Handler
-	HandleAll(*gin.Engine) error
+	Handle(http.ResponseWriter, *http.Request)
 }
 
 type EventHandler interface {

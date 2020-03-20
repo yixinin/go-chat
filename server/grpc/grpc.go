@@ -1,6 +1,7 @@
 package grpc
 
 import (
+	"chat/logic"
 	"chat/protocol"
 	"chat/server"
 )
@@ -22,7 +23,7 @@ func NewGrpcServer(c *Config) server.Server {
 	return s
 }
 
-func (s *GrpcServer) Init(handlers ...server.Handler) error {
+func (s *GrpcServer) Init(handlers server.Handler) error {
 
 	return nil
 }
@@ -36,4 +37,20 @@ func (s *GrpcServer) Stop() error {
 
 func (s *GrpcServer) Shutdown() {
 
+}
+
+func (s *GrpcServer) GetNotifyFunc() logic.NotifyFunc {
+	return nil
+}
+
+func (s *GrpcServer) AcceptSess(uid int64, sess interface{}) {
+
+}
+
+func (s *GrpcServer) CloseSess(uid int64) {
+
+}
+
+func (s *GrpcServer) Notify(uid int64, msg interface{}) (ok bool, err error) {
+	return false, nil
 }
