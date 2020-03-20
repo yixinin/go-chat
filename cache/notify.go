@@ -56,6 +56,9 @@ func GetAllNotifyMessage(uid int64) ([]*protocol.PollAck_Message, error) {
 //好友未读
 func IncUserMessage(uid int64, count int) error {
 
+	return nil
 }
 
-func IncGroup()
+func IncGroup() {
+	return
+}
