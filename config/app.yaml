@@ -29,6 +29,7 @@ mysql:
   db: "live-chat"
   user: "root"
   password: "123456"
+  prefix: "chat_"
 
 redis:
   host: "127.0.0.1"

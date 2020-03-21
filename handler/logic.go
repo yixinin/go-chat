@@ -5,7 +5,8 @@ import (
 	"chat/protocol"
 	"chat/server"
 	"fmt"
-	"go-lib/log"
+
+	log "github.com/sirupsen/logrus"
 
 	"github.com/davyxu/cellnet"
 )

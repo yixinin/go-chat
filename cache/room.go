@@ -3,10 +3,11 @@ package cache
 import (
 	"fmt"
 	"go-lib/db"
-	"go-lib/log"
 	"strconv"
 	"strings"
 	"time"
+
+	log "github.com/sirupsen/logrus"
 )
 
 func GetRoomKey(roomId int32) string {

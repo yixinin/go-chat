@@ -10,11 +10,11 @@ type GroupLogic struct {
 }
 
 func (s GroupLogic) JoinGroup(r Reqer, a Acker) (Acker, error) {
-	req, _ := r.(*protocol.JoinGroupReq)
+	// req, _ := r.(*protocol.JoinGroupReq)
 	ack := &protocol.JoinGroupAck{}
 
-	var groupAuth = &models.GroupAuth{
-		Token: req.GroupToken,
+	var groupAuth = &models.GroupMember{
+		// Token: req.GroupToken,
 	}
 	var ctx, cancel = NewContext()
 	defer cancel()

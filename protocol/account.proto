@@ -10,11 +10,13 @@ message SignUpReq {
     string    validId    = 5;
     string    deviceCode = 6;
     int32     deviceType = 7;
+    string    nickname   = 8;
 }
 
 message SignUpAck {
-    AckHeader header = 1;
-    string    token  = 2;
+    AckHeader header     = 1;
+    string    token      = 2;
+    string    deviceCode = 3;
 }
 
 message SignInReq {

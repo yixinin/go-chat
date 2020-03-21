@@ -3,7 +3,8 @@ package handler
 import (
 	"chat/logic"
 	"chat/protocol"
-	"go-lib/log"
+
+	log "github.com/sirupsen/logrus"
 )
 
 type Handler func(req logic.Reqer) (logic.Acker, error)

@@ -9,3 +9,7 @@ type Reqer interface {
 type Acker interface {
 	GetHeader() *protocol.AckHeader
 }
+
+type Notifier interface {
+	GetHeader() *protocol.NotifyHeader
+}

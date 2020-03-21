@@ -5,9 +5,10 @@ import (
 	"chat/server"
 	"context"
 	"flag"
-	"go-lib/log"
 	"net/http"
 	"time"
+
+	log "github.com/sirupsen/logrus"
 )
 
 var (

@@ -4,7 +4,8 @@ import (
 	"chat/cache"
 	"chat/protocol"
 	"context"
-	"go-lib/log"
+
+	log "github.com/sirupsen/logrus"
 )
 
 type ChatServer struct {

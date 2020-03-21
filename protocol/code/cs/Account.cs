@@ -24,35 +24,36 @@ namespace Protocol {
     static AccountReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Cg1hY2NvdW50LnByb3RvEghwcm90b2NvbBoMaGVhZGVyLnByb3RvIqABCglT",
+            "Cg1hY2NvdW50LnByb3RvEghwcm90b2NvbBoMaGVhZGVyLnByb3RvIrIBCglT",
             "aWduVXBSZXESIwoGaGVhZGVyGAEgASgLMhMucHJvdG9jb2wuUmVxSGVhZGVy",
             "EhAKCHVzZXJuYW1lGAIgASgJEhAKCHBhc3N3b3JkGAMgASgJEhEKCXZhbGlk",
             "Q29kZRgEIAEoCRIPCgd2YWxpZElkGAUgASgJEhIKCmRldmljZUNvZGUYBiAB",
-            "KAkSEgoKZGV2aWNlVHlwZRgHIAEoBSI/CglTaWduVXBBY2sSIwoGaGVhZGVy",
-            "GAEgASgLMhMucHJvdG9jb2wuQWNrSGVhZGVyEg0KBXRva2VuGAIgASgJImgK",
-            "CVNpZ25JblJlcRIjCgZoZWFkZXIYASABKAsyEy5wcm90b2NvbC5SZXFIZWFk",
-            "ZXISEAoIdXNlcm5hbWUYAiABKAkSEAoIcGFzc3dvcmQYAyABKAkSEgoKZGV2",
-            "aWNlVHlwZRgHIAEoBSI/CglTaWduSW5BY2sSIwoGaGVhZGVyGAEgASgLMhMu",
-            "cHJvdG9jb2wuQWNrSGVhZGVyEg0KBXRva2VuGAIgASgJIjEKClNpZ25PdXRS",
-            "ZXESIwoGaGVhZGVyGAEgASgLMhMucHJvdG9jb2wuUmVxSGVhZGVyIjEKClNp",
-            "Z25PdXRBY2sSIwoGaGVhZGVyGAEgASgLMhMucHJvdG9jb2wuQWNrSGVhZGVy",
-            "IkIKCURlbGV0ZVJlcRIjCgZoZWFkZXIYASABKAsyEy5wcm90b2NvbC5SZXFI",
-            "ZWFkZXISEAoIcGFzc3dvcmQYAiABKAkiMAoJRGVsZXRlQWNrEiMKBmhlYWRl",
-            "chgBIAEoCzITLnByb3RvY29sLkFja0hlYWRlciJ8ChFDaGFuZ2VQYXNzd29y",
-            "ZFJlcRIjCgZoZWFkZXIYASABKAsyEy5wcm90b2NvbC5SZXFIZWFkZXISDgoG",
-            "b2xkUHdkGAIgASgJEg4KBm5ld1B3ZBgDIAEoCRIRCgl2YWxpZENvZGUYBCAB",
-            "KAkSDwoHdmFsaWRJZBgFIAEoCSI4ChFDaGFuZ2VQYXNzd29yZEFjaxIjCgZo",
-            "ZWFkZXIYASABKAsyEy5wcm90b2NvbC5BY2tIZWFkZXIikwEKEFJlc2V0UGFz",
-            "c3dvcmRSZXESIwoGaGVhZGVyGAEgASgLMhMucHJvdG9jb2wuUmVxSGVhZGVy",
-            "EhAKCHVzZXJuYW1lGAIgASgJEhAKCHBhc3N3b3JkGAMgASgJEhEKCXZhbGlk",
-            "Q29kZRgEIAEoCRIPCgd2YWxpZElkGAUgASgJEhIKCmRldmljZVR5cGUYByAB",
-            "KAUiNwoQUmVzZXRQYXNzd29yZEFjaxIjCgZoZWFkZXIYASABKAsyEy5wcm90",
-            "b2NvbC5BY2tIZWFkZXJiBnByb3RvMw=="));
+            "KAkSEgoKZGV2aWNlVHlwZRgHIAEoBRIQCghuaWNrbmFtZRgIIAEoCSJTCglT",
+            "aWduVXBBY2sSIwoGaGVhZGVyGAEgASgLMhMucHJvdG9jb2wuQWNrSGVhZGVy",
+            "Eg0KBXRva2VuGAIgASgJEhIKCmRldmljZUNvZGUYAyABKAkiaAoJU2lnbklu",
+            "UmVxEiMKBmhlYWRlchgBIAEoCzITLnByb3RvY29sLlJlcUhlYWRlchIQCgh1",
+            "c2VybmFtZRgCIAEoCRIQCghwYXNzd29yZBgDIAEoCRISCgpkZXZpY2VUeXBl",
+            "GAcgASgFIj8KCVNpZ25JbkFjaxIjCgZoZWFkZXIYASABKAsyEy5wcm90b2Nv",
+            "bC5BY2tIZWFkZXISDQoFdG9rZW4YAiABKAkiMQoKU2lnbk91dFJlcRIjCgZo",
+            "ZWFkZXIYASABKAsyEy5wcm90b2NvbC5SZXFIZWFkZXIiMQoKU2lnbk91dEFj",
+            "axIjCgZoZWFkZXIYASABKAsyEy5wcm90b2NvbC5BY2tIZWFkZXIiQgoJRGVs",
+            "ZXRlUmVxEiMKBmhlYWRlchgBIAEoCzITLnByb3RvY29sLlJlcUhlYWRlchIQ",
+            "CghwYXNzd29yZBgCIAEoCSIwCglEZWxldGVBY2sSIwoGaGVhZGVyGAEgASgL",
+            "MhMucHJvdG9jb2wuQWNrSGVhZGVyInwKEUNoYW5nZVBhc3N3b3JkUmVxEiMK",
+            "BmhlYWRlchgBIAEoCzITLnByb3RvY29sLlJlcUhlYWRlchIOCgZvbGRQd2QY",
+            "AiABKAkSDgoGbmV3UHdkGAMgASgJEhEKCXZhbGlkQ29kZRgEIAEoCRIPCgd2",
+            "YWxpZElkGAUgASgJIjgKEUNoYW5nZVBhc3N3b3JkQWNrEiMKBmhlYWRlchgB",
+            "IAEoCzITLnByb3RvY29sLkFja0hlYWRlciKTAQoQUmVzZXRQYXNzd29yZFJl",
+            "cRIjCgZoZWFkZXIYASABKAsyEy5wcm90b2NvbC5SZXFIZWFkZXISEAoIdXNl",
+            "cm5hbWUYAiABKAkSEAoIcGFzc3dvcmQYAyABKAkSEQoJdmFsaWRDb2RlGAQg",
+            "ASgJEg8KB3ZhbGlkSWQYBSABKAkSEgoKZGV2aWNlVHlwZRgHIAEoBSI3ChBS",
+            "ZXNldFBhc3N3b3JkQWNrEiMKBmhlYWRlchgBIAEoCzITLnByb3RvY29sLkFj",
+            "a0hlYWRlcmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.HeaderReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SignUpReq), global::Protocol.SignUpReq.Parser, new[]{ "Header", "Username", "Password", "ValidCode", "ValidId", "DeviceCode", "DeviceType" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SignUpAck), global::Protocol.SignUpAck.Parser, new[]{ "Header", "Token" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SignUpReq), global::Protocol.SignUpReq.Parser, new[]{ "Header", "Username", "Password", "ValidCode", "ValidId", "DeviceCode", "DeviceType", "Nickname" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SignUpAck), global::Protocol.SignUpAck.Parser, new[]{ "Header", "Token", "DeviceCode" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SignInReq), global::Protocol.SignInReq.Parser, new[]{ "Header", "Username", "Password", "DeviceType" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SignInAck), global::Protocol.SignInAck.Parser, new[]{ "Header", "Token" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SignOutReq), global::Protocol.SignOutReq.Parser, new[]{ "Header" }, null, null, null, null),
@@ -101,6 +102,7 @@ namespace Protocol {
       validId_ = other.validId_;
       deviceCode_ = other.deviceCode_;
       deviceType_ = other.deviceType_;
+      nickname_ = other.nickname_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -186,6 +188,17 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "nickname" field.</summary>
+    public const int NicknameFieldNumber = 8;
+    private string nickname_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Nickname {
+      get { return nickname_; }
+      set {
+        nickname_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as SignUpReq);
@@ -206,6 +219,7 @@ namespace Protocol {
       if (ValidId != other.ValidId) return false;
       if (DeviceCode != other.DeviceCode) return false;
       if (DeviceType != other.DeviceType) return false;
+      if (Nickname != other.Nickname) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -219,6 +233,7 @@ namespace Protocol {
       if (ValidId.Length != 0) hash ^= ValidId.GetHashCode();
       if (DeviceCode.Length != 0) hash ^= DeviceCode.GetHashCode();
       if (DeviceType != 0) hash ^= DeviceType.GetHashCode();
+      if (Nickname.Length != 0) hash ^= Nickname.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -260,6 +275,10 @@ namespace Protocol {
         output.WriteRawTag(56);
         output.WriteInt32(DeviceType);
       }
+      if (Nickname.Length != 0) {
+        output.WriteRawTag(66);
+        output.WriteString(Nickname);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -288,6 +307,9 @@ namespace Protocol {
       }
       if (DeviceType != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(DeviceType);
+      }
+      if (Nickname.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Nickname);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -323,6 +345,9 @@ namespace Protocol {
       }
       if (other.DeviceType != 0) {
         DeviceType = other.DeviceType;
+      }
+      if (other.Nickname.Length != 0) {
+        Nickname = other.Nickname;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -366,6 +391,10 @@ namespace Protocol {
             DeviceType = input.ReadInt32();
             break;
           }
+          case 66: {
+            Nickname = input.ReadString();
+            break;
+          }
         }
       }
     }
@@ -399,6 +428,7 @@ namespace Protocol {
     public SignUpAck(SignUpAck other) : this() {
       header_ = other.header_ != null ? other.header_.Clone() : null;
       token_ = other.token_;
+      deviceCode_ = other.deviceCode_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -429,6 +459,17 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "deviceCode" field.</summary>
+    public const int DeviceCodeFieldNumber = 3;
+    private string deviceCode_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string DeviceCode {
+      get { return deviceCode_; }
+      set {
+        deviceCode_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as SignUpAck);
@@ -444,6 +485,7 @@ namespace Protocol {
       }
       if (!object.Equals(Header, other.Header)) return false;
       if (Token != other.Token) return false;
+      if (DeviceCode != other.DeviceCode) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -452,6 +494,7 @@ namespace Protocol {
       int hash = 1;
       if (header_ != null) hash ^= Header.GetHashCode();
       if (Token.Length != 0) hash ^= Token.GetHashCode();
+      if (DeviceCode.Length != 0) hash ^= DeviceCode.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -473,6 +516,10 @@ namespace Protocol {
         output.WriteRawTag(18);
         output.WriteString(Token);
       }
+      if (DeviceCode.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(DeviceCode);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -486,6 +533,9 @@ namespace Protocol {
       }
       if (Token.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Token);
+      }
+      if (DeviceCode.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(DeviceCode);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -507,6 +557,9 @@ namespace Protocol {
       if (other.Token.Length != 0) {
         Token = other.Token;
       }
+      if (other.DeviceCode.Length != 0) {
+        DeviceCode = other.DeviceCode;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -527,6 +580,10 @@ namespace Protocol {
           }
           case 18: {
             Token = input.ReadString();
+            break;
+          }
+          case 26: {
+            DeviceCode = input.ReadString();
             break;
           }
         }

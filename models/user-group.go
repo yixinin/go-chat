@@ -2,23 +2,25 @@ package models
 
 import (
 	"fmt"
-
-	"go.mongodb.org/mongo-driver/bson/primitive"
+	"time"
 )
 
 // user_group_userId
 type UserGroup struct {
-	Id          primitive.ObjectID `bson:"_id"`
-	GroupId     string
+	Uid         int64 `xorm:"-"`
+	Id          int64 `xorm:"pk autoincr"`
+	GroupId     int64 `xorm:"unique"`
 	Sort        int
 	IsFavorites bool
-	Remarks     string //备注
 	NotifyLevel int8
 
-	CreateTime int64
-	UpdateTime int64
+	CreateTime time.Time `xorm:"created"`
+	UpdateTime time.Time `xorm:"updated"`
 }
 
-func (g *UserGroup) TableName(uid int64) string {
-	return fmt.Sprintf("%s_user_group_%d", TablePrefix, uid)
+func (g *UserGroup) TableName() string {
+	if g.Uid == 0 {
+		return ""
+	}
+	return fmt.Sprintf("user_group_%d", g.Uid)
 }

@@ -12,8 +12,7 @@ message RoomUser {
 }
 
 message CreateRoomReq {
-    repeated RoomUser users    = 1; //要加入房间的用户
-    string            protocol = 2; // 协议
+    repeated RoomUser users = 1; //要加入房间的用户
 }
 
 message CreateRoomAck {
@@ -25,11 +24,10 @@ message CreateRoomAck {
 }
 
 message JoinRoomReq {
-    CallAckHeader header   = 1;
-    RoomUser      user     = 2;
-    int32         roomId   = 3;
-    string        protocol = 4; // 协议
-    string        addr     = 5; //grpc地址
+    CallAckHeader header = 1;
+    RoomUser      user   = 2;
+    int32         roomId = 3;
+    string        addr   = 5; //grpc地址
 }
 
 message JoinRoomAck {

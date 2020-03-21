@@ -6,10 +6,11 @@ import (
 	"chat/protocol"
 	"context"
 	"go-lib/db"
-	"go-lib/log"
 	"go-lib/pool"
 	"go-lib/utils"
 	"time"
+
+	log "github.com/sirupsen/logrus"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -34,59 +35,54 @@ func NewChatLogic(notifyFuncs ...NotifyFunc) *ChatLogic {
 	if len(notifyFuncs) > 0 {
 		notifyFunc = notifyFuncs[0]
 	}
-	// var watcher, err = regist.Watch()
-	// if err != nil {
-	// 	log.Error(err)
-	// }
 	var c = &ChatLogic{
-		// roomClients: make(map[string]protocol.RoomServiceClient, 2),
 		Notify: notifyFunc,
-		// watcher:     watcher,
-		// Registry:    regist,
 	}
 
-	// go c.Watch()
 	return c
 }
 
 func (s *ChatLogic) SendMessage(r Reqer) (Acker, error) {
+	defer func() {
+		if err := recover(); err != nil {
+			log.Error("SendMessage recovered", err)
+		}
+	}()
 	req, _ := r.(*protocol.SendMessageReq)
 	ack := &protocol.SendMessageAck{}
 	var now = time.Now().Unix()
 
 	var uids = make([]int64, 0, 1)
 	var msg = &protocol.MessageNotify{
-		Header: &protocol.NotifyHeader{
-			Uid: req.Header.Uid,
-		},
-		MessageType: req.MessageType,
-		TextMessage: req.TextMessage,
-		Username:    req.Username,
+		Header: &protocol.NotifyHeader{},
+		Body:   req.Body,
 	}
-	//查找用户/群
-	if req.ContactId != "" {
+	//查找用户
+	if req.Body.ContactId != 0 {
 		uids = append(uids, req.Header.Uid)
-		_id, _ := primitive.ObjectIDFromHex(req.ContactId)
-		var contact = &models.UserContact{
-			Id: _id,
+		var contact = models.UserContact{
+			Id:  req.Body.ContactId,
+			Uid: req.Header.Uid,
 		}
-		var ctx, cancel = NewContext()
-		defer cancel()
-		err := db.Mongo.Collection(contact.TableName(req.Header.Uid)).
-			FindOne(ctx, bson.M{"_id": _id}).
-			Decode(&contact)
-
+		ok, err := db.Mysql.Get(&contact)
+		if !ok {
+			return Fail(ack, "no such contact")
+		}
+		if err != nil {
+			return Error(ack, err)
+		}
+		uids = append(uids, contact.UserId)
 		//插入mongo
 		var userMessage = &models.UserMessage{
 			Id:          primitive.NewObjectID(),
-			Text:        req.TextMessage,
+			Text:        req.Body.Text,
 			FromUid:     req.Header.Uid,
 			ToUid:       contact.UserId,
 			Read:        false,
-			MessageType: int32(req.MessageType),
+			MessageType: int32(req.Body.MessageType),
 			CreateTime:  now,
 		}
-		ctx, cancel = NewContext()
+		ctx, cancel := NewContext()
 		defer cancel()
 		_, err = db.Mongo.Collection(userMessage.TableName(contact.UserId)).InsertOne(ctx, userMessage)
 		if err != nil {
@@ -94,6 +90,7 @@ func (s *ChatLogic) SendMessage(r Reqer) (Acker, error) {
 		}
 		ctx, cancel = NewContext()
 		defer cancel()
+		userMessage.Read = true
 		_, err = db.Mongo.Collection(userMessage.TableName(req.Header.Uid)).InsertOne(ctx, userMessage)
 		if err != nil {
 			return Error(ack, err)
@@ -101,29 +98,32 @@ func (s *ChatLogic) SendMessage(r Reqer) (Acker, error) {
 
 	}
 
-	if req.GroupId != "" {
-		_id, _ := primitive.ObjectIDFromHex(req.GroupId)
-		var userGroup = &models.UserGroup{}
-		var ctx, cancel = NewContext()
-		defer cancel()
-		err := db.Mongo.Collection(userGroup.TableName(req.Header.Uid)).FindOne(ctx, bson.M{"_id": _id}).Decode(&userGroup)
+	if req.Body.GroupId != 0 {
+
+		var userGroup = models.UserGroup{
+			Uid:     req.Header.Uid,
+			GroupId: req.Body.GroupId,
+		}
+
+		ok, err := db.Mysql.Get(&userGroup)
+		if !ok || userGroup.GroupId != req.Body.GroupId {
+			return Fail(ack, "you are not in this group, cannot send msg")
+		}
 		if err != nil {
 			return Error(ack, err)
 		}
-		if userGroup.GroupId == "" {
-			return Fail(ack, "no such group")
-		}
+
 		//插入消息
 		var groupMessage = &models.GroupMessage{
 			Id:          primitive.NewObjectID(),
 			GroupId:     userGroup.GroupId,
-			Text:        req.TextMessage,
+			Text:        req.Body.Text,
 			FromUid:     req.Header.Uid,
-			MessageType: int32(req.MessageType),
-			Memtions:    req.Memtions,
+			MessageType: int32(req.Body.MessageType),
+			Memtions:    req.Body.Memtions,
 			CreateTime:  now,
 		}
-		ctx, cancel = NewContext()
+		var ctx, cancel = NewContext()
 		defer cancel()
 		_, err = db.Mongo.Collection(groupMessage.TableName(userGroup.GroupId)).InsertOne(ctx, groupMessage)
 		if err != nil {
@@ -137,29 +137,25 @@ func (s *ChatLogic) SendMessage(r Reqer) (Acker, error) {
 }
 
 func (s *ChatLogic) RealTime(r Reqer) (Acker, error) {
-	// switch req.Protocol {
-	// case "tcp":
-	// case "ws":
-	// }
+	defer func() {
+		if err := recover(); err != nil {
+			log.Error("RealTime recovered", err)
+		}
+	}()
 	req, _ := r.(*protocol.RealTimeReq)
 	ack := &protocol.RealTimeAck{}
 
 	var users []*protocol.RoomUser
 
-	var ctx, cancel = context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancel()
-	if req.ContactId != "" {
+	if req.ContactId != 0 {
 
 		//查找联系人
-		var userContact = new(models.UserContact)
-		var ctx, cancel = NewContext()
-		defer cancel()
-		_id, _ := primitive.ObjectIDFromHex(req.ContactId)
-		err := db.Mongo.Collection(userContact.TableName(req.Header.Uid)).
-			FindOne(ctx, bson.M{"_id": _id}).
-			Decode(userContact)
+		userContact, ok, err := models.GetContactById(req.Header.Uid, req.ContactId)
 		if err != nil {
 			return Error(ack, err)
+		}
+		if !ok {
+			return Fail(ack, "pls add the user as your contact")
 		}
 		users = []*protocol.RoomUser{
 			&protocol.RoomUser{
@@ -171,21 +167,23 @@ func (s *ChatLogic) RealTime(r Reqer) (Acker, error) {
 				Token: utils.UUID(),
 			},
 		}
-	} else if req.GroupId != "" {
+	} else if req.GroupId != 0 {
 		//TODO ...
 		//查找所有成员加入到房间
 		//仅支持10人以下的群
+	} else {
+		return Fail(ack, "cannot chat with nobody")
 	}
 
 	client, ok := s.GetRandomRoomClient()
 	if !ok {
-		return Fail(ack, "")
+		return Fail(ack, "live server not avliable")
 	}
 
-	ctx, cancel = NewContext()
+	ctx, cancel := NewContext()
+	defer cancel()
 	resp, err := client.CreateRoom(ctx, &protocol.CreateRoomReq{
-		Users:    users,
-		Protocol: req.Protocol,
+		Users: users,
 	})
 	if err != nil {
 		return Error(ack, err)
@@ -221,6 +219,11 @@ func (s *ChatLogic) RealTime(r Reqer) (Acker, error) {
 }
 
 func (s *ChatLogic) CancelRealTime(r Reqer) (Acker, error) {
+	defer func() {
+		if err := recover(); err != nil {
+			log.Error("CancelRealTime recovered", err)
+		}
+	}()
 	req, _ := r.(*protocol.CancelRealTimeReq)
 	ack := &protocol.CancelRealTimeAck{}
 	//查找当前房间
@@ -263,6 +266,7 @@ func (s *ChatLogic) CancelRealTime(r Reqer) (Acker, error) {
 
 func (s *ChatLogic) NotifyRealTime(uids []int64, msg *protocol.RealTimeNotify) {
 	for _, uid := range uids {
+		msg.Header.Uid = 0
 		if ok, err := s.Notify(uid, msg); err == nil && ok {
 			if err != nil {
 				log.Error(err)
@@ -276,8 +280,13 @@ func (s *ChatLogic) NotifyRealTime(uids []int64, msg *protocol.RealTimeNotify) {
 	}
 }
 
-func (s *ChatLogic) NotifyMessage(uids []int64, msg interface{}) {
+func (s *ChatLogic) NotifyMessage(uids []int64, msg Notifier) {
 	for _, uid := range uids {
+		header := msg.GetHeader()
+		if header != nil {
+			header.Uid = 0
+		}
+
 		ok, err := s.Notify(uid, msg)
 		if err != nil {
 			log.Error(err)
@@ -290,6 +299,11 @@ func (s *ChatLogic) NotifyMessage(uids []int64, msg interface{}) {
 }
 
 func (s *ChatLogic) Poll(r Reqer) (Acker, error) {
+	defer func() {
+		if err := recover(); err != nil {
+			log.Error("Poll recovered", err)
+		}
+	}()
 	req, _ := r.(*protocol.PollReq)
 	ack := &protocol.PollAck{}
 	msgs, err := cache.GetAllNotifyMessage(req.Header.Uid)
@@ -302,6 +316,11 @@ func (s *ChatLogic) Poll(r Reqer) (Acker, error) {
 }
 
 func (s *ChatLogic) PollMessage(r Reqer) (Acker, error) {
+	defer func() {
+		if err := recover(); err != nil {
+			log.Error("PollMessage recovered", err)
+		}
+	}()
 	req, _ := r.(*protocol.PollMessageReq)
 	ack := &protocol.PollMessageAck{}
 	var userMessages = make([]models.UserMessage, 0, 10)

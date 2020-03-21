@@ -4,11 +4,12 @@ import (
 	"chat/cache"
 	"chat/logic"
 	"chat/protocol"
-	"go-lib/log"
 	"go-lib/utils"
 	"io/ioutil"
 	"net/http"
 	"reflect"
+
+	log "github.com/sirupsen/logrus"
 
 	"github.com/davyxu/cellnet/codec"
 )

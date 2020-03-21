@@ -3,9 +3,10 @@ package main
 import (
 	"flag"
 	"go-lib/ip"
-	"go-lib/log"
 	"os"
 	"os/signal"
+
+	log "github.com/sirupsen/logrus"
 
 	"chat/config"
 )
@@ -35,7 +36,7 @@ func main() {
 		case sig := <-c:
 			switch sig {
 			case os.Interrupt:
-				service.stop <- true
+				close(service.stop)
 				return
 			}
 		}

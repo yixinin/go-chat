@@ -2,9 +2,10 @@ package handler
 
 import (
 	"encoding/binary"
-	"go-lib/log"
 	"go-lib/utils"
 	"net/http"
+
+	log "github.com/sirupsen/logrus"
 
 	"github.com/davyxu/cellnet/codec"
 )

@@ -12,14 +12,23 @@ enum MessageType {
     Link    = 5;
 }
 
+message Memtion {
+    int64  userId = 1; // uid
+    string text   = 2; //@xxx
+}
+message MessageBody {
+    MessageType messageType      = 2;
+    string      text             = 3;
+    repeated Memtion memtions    = 4;
+    int64            contactId   = 5; //发送给用户
+    string           username    = 6; //发送给陌生人 //通过群聊
+    int64            fromGroupId = 7; //通过群
+    int64            groupId     = 8; //发送给群聊
+}
+
 message SendMessageReq {
-    ReqHeader   header        = 1;
-    MessageType messageType   = 2;
-    string      textMessage   = 3;
-    repeated string memtions  = 4;
-    string          contactId = 5; //发送给用户
-    string          username  = 6; //发送给陌生人 //通过群聊
-    string          groupId   = 7; //发送给群聊
+    ReqHeader   header = 1;
+    MessageBody body   = 2;
 }
 
 message SendMessageAck {
@@ -27,20 +36,14 @@ message SendMessageAck {
 }
 
 message MessageNotify {
-    NotifyHeader header       = 1;
-    MessageType  messageType  = 2;
-    string       textMessage  = 3;
-    repeated string memtions  = 4;
-    string          contactId = 5; //发送给用户
-    string          username  = 6; //发送给陌生人 //通过群聊
-    string          groupId   = 7; //发送给群聊
+    NotifyHeader header = 1;
+    MessageBody  body   = 2;
 }
 
 message RealTimeReq {
     ReqHeader header    = 1;
-    string    contactId = 2; //请求和用户通话
-    string    groupId   = 3; //请求视频会议
-    string    protocol  = 4; //协议
+    int64     contactId = 2; //请求和用户通话
+    int64     groupId   = 3; //请求视频会议
 }
 
 message RealTimeAck {
@@ -55,14 +58,14 @@ message RealTimeAck {
 message SimpleUser {
     string nickname = 1;
     string avatart  = 2;
+    int64  userId   = 3;
 }
 
 message RealTimeInfo {
-
     string   token               = 3; //本次连接token
     int32    roomId              = 4; //房间id
     int64    uid                 = 5; //来自用户
-    string   groupId             = 6; //来自群聊
+    int64    groupId             = 6; //来自群聊
     repeated SimpleUser users    = 7; //用户/群名称
     string              httpAddr = 8;
     string              wsAddr   = 1;
@@ -79,8 +82,10 @@ message CancelRealTimeAck {
 
 message RealTimeNotify {
     NotifyHeader header       = 1;
-    bool         IsConnect    = 2;
-    RealTimeInfo realTimeInfo = 3;
+    int64        fromGroupId  = 2; //群语音
+    int64        fromUserId   = 3; //私人语音
+    bool         IsConnect    = 4; //false时断开连接
+    RealTimeInfo realTimeInfo = 5;
 }
 
 message PollMessageReq {
@@ -92,14 +97,14 @@ message PollMessageAck {
     int32     total        = 2;
     repeated DataItem data = 3;
     message           DataItem {
-        string   text            = 1;
-        int64    fromUid         = 2;
-        int64    toUid           = 3;
-        int64    groupId         = 4;
-        int32    messageType     = 5;
-        string   mediaUrl        = 6;
-        int64    createTime      = 7;
-        repeated string memtions = 16;
+        string   text             = 1;
+        int64    fromUid          = 2;
+        int64    toUid            = 3;
+        int64    groupId          = 4;
+        int32    messageType      = 5;
+        string   mediaUrl         = 6;
+        int64    createTime       = 7;
+        repeated Memtion memtions = 16;
     }
 }
 

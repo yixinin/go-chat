@@ -6,13 +6,10 @@ import (
 	"chat/protocol"
 	"fmt"
 	"go-lib/db"
-	"go-lib/log"
 	"go-lib/utils"
 	"time"
-)
 
-const (
-	DefaultAvatar = "livechat/avatar/default.png"
+	log "github.com/sirupsen/logrus"
 )
 
 type AccountLogic struct {
@@ -29,65 +26,49 @@ func NewAccountLogic() *AccountLogic {
 
 //SignUp 注册
 func (s *AccountLogic) SignUp(r Reqer) (Acker, error) {
+	defer func() {
+		if err := recover(); err != nil {
+			log.Error("sign up recovered", err)
+		}
+	}()
 	req, _ := r.(*protocol.SignUpReq)
 	ack := &protocol.SignUpAck{
 		Header: &protocol.AckHeader{},
 	}
-
-	var now = time.Now()
-	if req.DeviceCode == "" {
-		req.DeviceCode = utils.UUID()
+	if len(req.Password) < 6 {
+		return Fail(ack, "password si too simple")
 	}
-
-	var regType = 1
-	var userName = req.Username
-	var nickname = req.Username
 	if req.Username == "" {
-		regType = 2
 		var device = req.DeviceCode
 		if len(req.DeviceCode) > 10 {
 			device = req.DeviceCode[:10]
 		}
-		nickname = fmt.Sprintf("游客(%s)", device)
+		if req.Nickname == "" {
+			req.Nickname = fmt.Sprintf("游客(%s)", device)
+		}
 		req.Username = req.DeviceCode
 	}
-	if len(req.Password) < 6 {
-		return Fail(ack, "password si too simple")
+	if req.Nickname == "" {
+		req.Nickname = req.Username
 	}
 
-	uid, err := db.Mysql.InsertOne(&models.User{
-		Username:     userName,
-		PasswordHash: utils.MD5(req.Password),
-		DevideCode:   req.DeviceCode,
-		Nickname:     nickname,
-		Avatart:      DefaultAvatar,
-		InviteCode:   utils.UUID(),
-		CreateTime:   now,
-		UpdateTime:   now,
-	})
+	msg, err := models.CreateUser(req, ack)
 	if err != nil {
-		if regType == 1 {
-			ack.Header.Code = 400
-			ack.Header.Msg = "repeate username"
-		} else {
-			ack.Header.Code = 400
-			ack.Header.Msg = "repeate device"
-		}
-		return Error(ack, err)
+		Error(ack, err)
 	}
-
-	token, _, err1 := cache.SetToken(uid, req.DeviceType)
-	if err1 != nil {
-		log.Error("set user token error:%v", err)
+	if msg != "" {
+		return Fail(ack, msg)
 	}
-	ack.Token = token
-	ack.Header.Uid = uid
-	// s.acceptFunc(uid, nil)
 	return Success(ack)
 }
 
 //登录
 func (s *AccountLogic) SignIn(r Reqer) (Acker, error) {
+	defer func() {
+		if err := recover(); err != nil {
+			log.Error("sign in recovered", err)
+		}
+	}()
 	req, _ := r.(*protocol.SignInReq)
 	ack := &protocol.SignInAck{
 		Header: &protocol.AckHeader{},
@@ -99,7 +80,7 @@ func (s *AccountLogic) SignIn(r Reqer) (Acker, error) {
 	ok, err := db.Mysql.Get(&user)
 	if !ok {
 
-		return Fail(ack, "username and password not match")
+		return Fail(ack, "no such user, pls check your username")
 	}
 	if err != nil {
 		return Error(ack, err)
@@ -123,6 +104,11 @@ func (s *AccountLogic) SignIn(r Reqer) (Acker, error) {
 }
 
 func (s *AccountLogic) SignOut(r Reqer) (Acker, error) {
+	defer func() {
+		if err := recover(); err != nil {
+			log.Error("sign out recovered", err)
+		}
+	}()
 	req, _ := r.(*protocol.SignOutReq)
 	ack := &protocol.SignOutAck{}
 	var uid = req.Header.Uid
@@ -137,6 +123,11 @@ func (s *AccountLogic) SignOut(r Reqer) (Acker, error) {
 }
 
 func (s *AccountLogic) Delete(r Reqer) (Acker, error) {
+	defer func() {
+		if err := recover(); err != nil {
+			log.Error("account delete recovered", err)
+		}
+	}()
 	req, _ := r.(*protocol.DeleteReq)
 	ack := &protocol.DeleteAck{}
 
@@ -157,12 +148,22 @@ func (s *AccountLogic) Delete(r Reqer) (Acker, error) {
 }
 
 func (s *AccountLogic) ChangePassword(r Reqer) (ack Acker, err error) {
+	defer func() {
+		if err := recover(); err != nil {
+			log.Error("ChangePassword recovered", err)
+		}
+	}()
 	// req, _ := r.(*protocol.ChangePasswordReq)
 	ack = &protocol.ChangePasswordAck{}
 	return Success(ack)
 }
 
 func (s *AccountLogic) ResetPassword(r Reqer) (ack Acker, err error) {
+	defer func() {
+		if err := recover(); err != nil {
+			log.Error("ResetPassword recovered", err)
+		}
+	}()
 	// req,_ :=r.(*protocol.ResetPasswordReq)
 	ack = &protocol.ResetPasswordAck{}
 	return Success(ack)

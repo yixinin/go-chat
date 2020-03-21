@@ -7,6 +7,9 @@ import (
 	"chat/server/ws"
 	"go-lib/db"
 	"io/ioutil"
+	"os"
+
+	log "github.com/sirupsen/logrus"
 
 	"gopkg.in/yaml.v2"
 )
@@ -30,4 +33,12 @@ func GetConfig(p string) (*Config, error) {
 	}
 	yaml.Unmarshal(yamlFile, &c)
 	return &c, nil
+}
+func init() {
+	log.SetOutput(os.Stdout)
+	log.SetFormatter(&log.TextFormatter{
+		DisableColors: false,
+		FullTimestamp: true,
+	})
+	// log.SetReportCaller(true)
 }

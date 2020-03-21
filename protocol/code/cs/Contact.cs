@@ -26,33 +26,34 @@ namespace Protocol {
           string.Concat(
             "Cg1jb250YWN0LnByb3RvEghwcm90b2NvbBoMaGVhZGVyLnByb3RvIkEKDVNl",
             "YXJjaFVzZXJSZXESIwoGaGVhZGVyGAEgASgLMhMucHJvdG9jb2wuUmVxSGVh",
-            "ZGVyEgsKA2tleRgCIAEoCSK2AQoNU2VhcmNoVXNlckFjaxIjCgZoZWFkZXIY",
+            "ZGVyEgsKA2tleRgCIAEoCSK0AQoNU2VhcmNoVXNlckFjaxIjCgZoZWFkZXIY",
             "ASABKAsyEy5wcm90b2NvbC5BY2tIZWFkZXISEAoIcGFnZVNpemUYAiABKAkS",
             "LgoEZGF0YRgDIAMoCzIgLnByb3RvY29sLlNlYXJjaFVzZXJBY2suRGF0YUl0",
-            "ZW0aPgoIRGF0YUl0ZW0SEAoIdXNlcm5hbWUYASABKAkSEAoIbmlja25hbWUY",
-            "AiABKAkSDgoGYXZhdGFyGAMgASgJIowBCg1BZGRDb250YWN0UmVxEiMKBmhl",
-            "YWRlchgBIAEoCzITLnByb3RvY29sLlJlcUhlYWRlchIQCgh1c2VybmFtZRgC",
-            "IAEoCRITCgtjb250YWN0VHlwZRgDIAEoBRISCgpzZXRSZW1hcmtzGAQgASgJ",
-            "EgsKA21zZxgFIAEoCRIOCgZhdXRoSWQYBiABKAkiNAoNQWRkQ29udGFjdEFj",
-            "axIjCgZoZWFkZXIYASABKAsyEy5wcm90b2NvbC5BY2tIZWFkZXIieQoQQWRk",
-            "Q29udGFjdE5vdGlmeRIjCgZoZWFkZXIYASABKAsyEy5wcm90b2NvbC5SZXFI",
-            "ZWFkZXISEQoJY29udGFjdElkGAIgASgJEhAKCG5pY2tuYW1lGAMgASgJEg4K",
-            "BmF2YXRhchgEIAEoCRILCgNtc2cYBSABKAkiSgoQRGVsZXRlQ29udGFjdFJl",
-            "cRIjCgZoZWFkZXIYASABKAsyEy5wcm90b2NvbC5SZXFIZWFkZXISEQoJY29u",
-            "dGFjdElkGAIgASgJIjcKEERlbGV0ZUNvbnRhY3RBY2sSIwoGaGVhZGVyGAEg",
-            "ASgLMhMucHJvdG9jb2wuQWNrSGVhZGVyIl4KEFVwZGF0ZUNvbnRhY3RSZXES",
-            "IwoGaGVhZGVyGAEgASgLMhMucHJvdG9jb2wuUmVxSGVhZGVyEhIKCnNldFJl",
-            "bWFya3MYAiABKAkSEQoJY29udGFjdElkGAMgASgJIjcKEFVwZGF0ZUNvbnRh",
-            "Y3RBY2sSIwoGaGVhZGVyGAEgASgLMhMucHJvdG9jb2wuQWNrSGVhZGVyYgZw",
-            "cm90bzM="));
+            "ZW0aPAoIRGF0YUl0ZW0SDgoGdXNlcklkGAEgASgDEhAKCG5pY2tuYW1lGAIg",
+            "ASgJEg4KBmF2YXRhchgDIAEoCSKsAQoNQWRkQ29udGFjdFJlcRIjCgZoZWFk",
+            "ZXIYASABKAsyEy5wcm90b2NvbC5SZXFIZWFkZXISDgoGYXV0aElkGAYgASgD",
+            "EgsKA2FkZBgIIAEoCBIOCgZ1c2VySWQYAiABKAMSEwoLY29udGFjdFR5cGUY",
+            "AyABKAUSEgoKc2V0UmVtYXJrcxgEIAEoCRILCgNtc2cYBSABKAkSEwoLZnJv",
+            "bUdyb3VwSWQYByABKAMiNAoNQWRkQ29udGFjdEFjaxIjCgZoZWFkZXIYASAB",
+            "KAsyEy5wcm90b2NvbC5BY2tIZWFkZXIioAEKEEFkZENvbnRhY3ROb3RpZnkS",
+            "IwoGaGVhZGVyGAEgASgLMhMucHJvdG9jb2wuUmVxSGVhZGVyEg4KBmF1dGhJ",
+            "ZBgCIAEoAxIQCghuaWNrbmFtZRgDIAEoCRIOCgZhdmF0YXIYBCABKAkSCwoD",
+            "bXNnGAUgASgJEhMKC2Zyb21Hcm91cElkGAcgASgDEhMKC2NvbnRhY3RUeXBl",
+            "GAggASgFIkoKEERlbGV0ZUNvbnRhY3RSZXESIwoGaGVhZGVyGAEgASgLMhMu",
+            "cHJvdG9jb2wuUmVxSGVhZGVyEhEKCWNvbnRhY3RJZBgCIAEoAyI3ChBEZWxl",
+            "dGVDb250YWN0QWNrEiMKBmhlYWRlchgBIAEoCzITLnByb3RvY29sLkFja0hl",
+            "YWRlciJeChBVcGRhdGVDb250YWN0UmVxEiMKBmhlYWRlchgBIAEoCzITLnBy",
+            "b3RvY29sLlJlcUhlYWRlchISCgpzZXRSZW1hcmtzGAIgASgJEhEKCWNvbnRh",
+            "Y3RJZBgDIAEoAyI3ChBVcGRhdGVDb250YWN0QWNrEiMKBmhlYWRlchgBIAEo",
+            "CzITLnByb3RvY29sLkFja0hlYWRlcmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.HeaderReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SearchUserReq), global::Protocol.SearchUserReq.Parser, new[]{ "Header", "Key" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SearchUserAck), global::Protocol.SearchUserAck.Parser, new[]{ "Header", "PageSize", "Data" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SearchUserAck.Types.DataItem), global::Protocol.SearchUserAck.Types.DataItem.Parser, new[]{ "Username", "Nickname", "Avatar" }, null, null, null, null)}),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.AddContactReq), global::Protocol.AddContactReq.Parser, new[]{ "Header", "Username", "ContactType", "SetRemarks", "Msg", "AuthId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SearchUserAck), global::Protocol.SearchUserAck.Parser, new[]{ "Header", "PageSize", "Data" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SearchUserAck.Types.DataItem), global::Protocol.SearchUserAck.Types.DataItem.Parser, new[]{ "UserId", "Nickname", "Avatar" }, null, null, null, null)}),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.AddContactReq), global::Protocol.AddContactReq.Parser, new[]{ "Header", "AuthId", "Add", "UserId", "ContactType", "SetRemarks", "Msg", "FromGroupId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.AddContactAck), global::Protocol.AddContactAck.Parser, new[]{ "Header" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.AddContactNotify), global::Protocol.AddContactNotify.Parser, new[]{ "Header", "ContactId", "Nickname", "Avatar", "Msg" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.AddContactNotify), global::Protocol.AddContactNotify.Parser, new[]{ "Header", "AuthId", "Nickname", "Avatar", "Msg", "FromGroupId", "ContactType" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.DeleteContactReq), global::Protocol.DeleteContactReq.Parser, new[]{ "Header", "ContactId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.DeleteContactAck), global::Protocol.DeleteContactAck.Parser, new[]{ "Header" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.UpdateContactReq), global::Protocol.UpdateContactReq.Parser, new[]{ "Header", "SetRemarks", "ContactId" }, null, null, null, null),
@@ -436,7 +437,7 @@ namespace Protocol {
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public DataItem(DataItem other) : this() {
-          username_ = other.username_;
+          userId_ = other.userId_;
           nickname_ = other.nickname_;
           avatar_ = other.avatar_;
           _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -447,14 +448,14 @@ namespace Protocol {
           return new DataItem(this);
         }
 
-        /// <summary>Field number for the "username" field.</summary>
-        public const int UsernameFieldNumber = 1;
-        private string username_ = "";
+        /// <summary>Field number for the "userId" field.</summary>
+        public const int UserIdFieldNumber = 1;
+        private long userId_;
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public string Username {
-          get { return username_; }
+        public long UserId {
+          get { return userId_; }
           set {
-            username_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+            userId_ = value;
           }
         }
 
@@ -493,7 +494,7 @@ namespace Protocol {
           if (ReferenceEquals(other, this)) {
             return true;
           }
-          if (Username != other.Username) return false;
+          if (UserId != other.UserId) return false;
           if (Nickname != other.Nickname) return false;
           if (Avatar != other.Avatar) return false;
           return Equals(_unknownFields, other._unknownFields);
@@ -502,7 +503,7 @@ namespace Protocol {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override int GetHashCode() {
           int hash = 1;
-          if (Username.Length != 0) hash ^= Username.GetHashCode();
+          if (UserId != 0L) hash ^= UserId.GetHashCode();
           if (Nickname.Length != 0) hash ^= Nickname.GetHashCode();
           if (Avatar.Length != 0) hash ^= Avatar.GetHashCode();
           if (_unknownFields != null) {
@@ -518,9 +519,9 @@ namespace Protocol {
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void WriteTo(pb::CodedOutputStream output) {
-          if (Username.Length != 0) {
-            output.WriteRawTag(10);
-            output.WriteString(Username);
+          if (UserId != 0L) {
+            output.WriteRawTag(8);
+            output.WriteInt64(UserId);
           }
           if (Nickname.Length != 0) {
             output.WriteRawTag(18);
@@ -538,8 +539,8 @@ namespace Protocol {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int CalculateSize() {
           int size = 0;
-          if (Username.Length != 0) {
-            size += 1 + pb::CodedOutputStream.ComputeStringSize(Username);
+          if (UserId != 0L) {
+            size += 1 + pb::CodedOutputStream.ComputeInt64Size(UserId);
           }
           if (Nickname.Length != 0) {
             size += 1 + pb::CodedOutputStream.ComputeStringSize(Nickname);
@@ -558,8 +559,8 @@ namespace Protocol {
           if (other == null) {
             return;
           }
-          if (other.Username.Length != 0) {
-            Username = other.Username;
+          if (other.UserId != 0L) {
+            UserId = other.UserId;
           }
           if (other.Nickname.Length != 0) {
             Nickname = other.Nickname;
@@ -578,8 +579,8 @@ namespace Protocol {
               default:
                 _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
                 break;
-              case 10: {
-                Username = input.ReadString();
+              case 8: {
+                UserId = input.ReadInt64();
                 break;
               }
               case 18: {
@@ -627,11 +628,13 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public AddContactReq(AddContactReq other) : this() {
       header_ = other.header_ != null ? other.header_.Clone() : null;
-      username_ = other.username_;
+      authId_ = other.authId_;
+      add_ = other.add_;
+      userId_ = other.userId_;
       contactType_ = other.contactType_;
       setRemarks_ = other.setRemarks_;
       msg_ = other.msg_;
-      authId_ = other.authId_;
+      fromGroupId_ = other.fromGroupId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -651,14 +654,42 @@ namespace Protocol {
       }
     }
 
-    /// <summary>Field number for the "username" field.</summary>
-    public const int UsernameFieldNumber = 2;
-    private string username_ = "";
+    /// <summary>Field number for the "authId" field.</summary>
+    public const int AuthIdFieldNumber = 6;
+    private long authId_;
+    /// <summary>
+    ///验证id 不为空时通过添加请求
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Username {
-      get { return username_; }
+    public long AuthId {
+      get { return authId_; }
       set {
-        username_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        authId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "add" field.</summary>
+    public const int AddFieldNumber = 8;
+    private bool add_;
+    /// <summary>
+    ///是否通过
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Add {
+      get { return add_; }
+      set {
+        add_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "userId" field.</summary>
+    public const int UserIdFieldNumber = 2;
+    private long userId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long UserId {
+      get { return userId_; }
+      set {
+        userId_ = value;
       }
     }
 
@@ -666,7 +697,7 @@ namespace Protocol {
     public const int ContactTypeFieldNumber = 3;
     private int contactType_;
     /// <summary>
-    ///添加类型 1=搜索 2=通讯录 3=推荐
+    ///添加类型 1=搜索 2=通讯录 3=推荐 4 群
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int ContactType {
@@ -701,17 +732,17 @@ namespace Protocol {
       }
     }
 
-    /// <summary>Field number for the "authId" field.</summary>
-    public const int AuthIdFieldNumber = 6;
-    private string authId_ = "";
+    /// <summary>Field number for the "fromGroupId" field.</summary>
+    public const int FromGroupIdFieldNumber = 7;
+    private long fromGroupId_;
     /// <summary>
-    ///验证id
+    ///通过群聊
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string AuthId {
-      get { return authId_; }
+    public long FromGroupId {
+      get { return fromGroupId_; }
       set {
-        authId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        fromGroupId_ = value;
       }
     }
 
@@ -729,11 +760,13 @@ namespace Protocol {
         return true;
       }
       if (!object.Equals(Header, other.Header)) return false;
-      if (Username != other.Username) return false;
+      if (AuthId != other.AuthId) return false;
+      if (Add != other.Add) return false;
+      if (UserId != other.UserId) return false;
       if (ContactType != other.ContactType) return false;
       if (SetRemarks != other.SetRemarks) return false;
       if (Msg != other.Msg) return false;
-      if (AuthId != other.AuthId) return false;
+      if (FromGroupId != other.FromGroupId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -741,11 +774,13 @@ namespace Protocol {
     public override int GetHashCode() {
       int hash = 1;
       if (header_ != null) hash ^= Header.GetHashCode();
-      if (Username.Length != 0) hash ^= Username.GetHashCode();
+      if (AuthId != 0L) hash ^= AuthId.GetHashCode();
+      if (Add != false) hash ^= Add.GetHashCode();
+      if (UserId != 0L) hash ^= UserId.GetHashCode();
       if (ContactType != 0) hash ^= ContactType.GetHashCode();
       if (SetRemarks.Length != 0) hash ^= SetRemarks.GetHashCode();
       if (Msg.Length != 0) hash ^= Msg.GetHashCode();
-      if (AuthId.Length != 0) hash ^= AuthId.GetHashCode();
+      if (FromGroupId != 0L) hash ^= FromGroupId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -763,9 +798,9 @@ namespace Protocol {
         output.WriteRawTag(10);
         output.WriteMessage(Header);
       }
-      if (Username.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(Username);
+      if (UserId != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(UserId);
       }
       if (ContactType != 0) {
         output.WriteRawTag(24);
@@ -779,9 +814,17 @@ namespace Protocol {
         output.WriteRawTag(42);
         output.WriteString(Msg);
       }
-      if (AuthId.Length != 0) {
-        output.WriteRawTag(50);
-        output.WriteString(AuthId);
+      if (AuthId != 0L) {
+        output.WriteRawTag(48);
+        output.WriteInt64(AuthId);
+      }
+      if (FromGroupId != 0L) {
+        output.WriteRawTag(56);
+        output.WriteInt64(FromGroupId);
+      }
+      if (Add != false) {
+        output.WriteRawTag(64);
+        output.WriteBool(Add);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -794,8 +837,14 @@ namespace Protocol {
       if (header_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Header);
       }
-      if (Username.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Username);
+      if (AuthId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(AuthId);
+      }
+      if (Add != false) {
+        size += 1 + 1;
+      }
+      if (UserId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(UserId);
       }
       if (ContactType != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(ContactType);
@@ -806,8 +855,8 @@ namespace Protocol {
       if (Msg.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Msg);
       }
-      if (AuthId.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(AuthId);
+      if (FromGroupId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(FromGroupId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -826,8 +875,14 @@ namespace Protocol {
         }
         Header.MergeFrom(other.Header);
       }
-      if (other.Username.Length != 0) {
-        Username = other.Username;
+      if (other.AuthId != 0L) {
+        AuthId = other.AuthId;
+      }
+      if (other.Add != false) {
+        Add = other.Add;
+      }
+      if (other.UserId != 0L) {
+        UserId = other.UserId;
       }
       if (other.ContactType != 0) {
         ContactType = other.ContactType;
@@ -838,8 +893,8 @@ namespace Protocol {
       if (other.Msg.Length != 0) {
         Msg = other.Msg;
       }
-      if (other.AuthId.Length != 0) {
-        AuthId = other.AuthId;
+      if (other.FromGroupId != 0L) {
+        FromGroupId = other.FromGroupId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -859,8 +914,8 @@ namespace Protocol {
             input.ReadMessage(Header);
             break;
           }
-          case 18: {
-            Username = input.ReadString();
+          case 16: {
+            UserId = input.ReadInt64();
             break;
           }
           case 24: {
@@ -875,8 +930,16 @@ namespace Protocol {
             Msg = input.ReadString();
             break;
           }
-          case 50: {
-            AuthId = input.ReadString();
+          case 48: {
+            AuthId = input.ReadInt64();
+            break;
+          }
+          case 56: {
+            FromGroupId = input.ReadInt64();
+            break;
+          }
+          case 64: {
+            Add = input.ReadBool();
             break;
           }
         }
@@ -1046,10 +1109,12 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public AddContactNotify(AddContactNotify other) : this() {
       header_ = other.header_ != null ? other.header_.Clone() : null;
-      contactId_ = other.contactId_;
+      authId_ = other.authId_;
       nickname_ = other.nickname_;
       avatar_ = other.avatar_;
       msg_ = other.msg_;
+      fromGroupId_ = other.fromGroupId_;
+      contactType_ = other.contactType_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1069,14 +1134,14 @@ namespace Protocol {
       }
     }
 
-    /// <summary>Field number for the "contactId" field.</summary>
-    public const int ContactIdFieldNumber = 2;
-    private string contactId_ = "";
+    /// <summary>Field number for the "authId" field.</summary>
+    public const int AuthIdFieldNumber = 2;
+    private long authId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string ContactId {
-      get { return contactId_; }
+    public long AuthId {
+      get { return authId_; }
       set {
-        contactId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        authId_ = value;
       }
     }
 
@@ -1113,6 +1178,34 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "fromGroupId" field.</summary>
+    public const int FromGroupIdFieldNumber = 7;
+    private long fromGroupId_;
+    /// <summary>
+    ///通过群聊
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long FromGroupId {
+      get { return fromGroupId_; }
+      set {
+        fromGroupId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "contactType" field.</summary>
+    public const int ContactTypeFieldNumber = 8;
+    private int contactType_;
+    /// <summary>
+    ///添加类型 1=搜索 2=通讯录 3=推荐 4 群
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int ContactType {
+      get { return contactType_; }
+      set {
+        contactType_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as AddContactNotify);
@@ -1127,10 +1220,12 @@ namespace Protocol {
         return true;
       }
       if (!object.Equals(Header, other.Header)) return false;
-      if (ContactId != other.ContactId) return false;
+      if (AuthId != other.AuthId) return false;
       if (Nickname != other.Nickname) return false;
       if (Avatar != other.Avatar) return false;
       if (Msg != other.Msg) return false;
+      if (FromGroupId != other.FromGroupId) return false;
+      if (ContactType != other.ContactType) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1138,10 +1233,12 @@ namespace Protocol {
     public override int GetHashCode() {
       int hash = 1;
       if (header_ != null) hash ^= Header.GetHashCode();
-      if (ContactId.Length != 0) hash ^= ContactId.GetHashCode();
+      if (AuthId != 0L) hash ^= AuthId.GetHashCode();
       if (Nickname.Length != 0) hash ^= Nickname.GetHashCode();
       if (Avatar.Length != 0) hash ^= Avatar.GetHashCode();
       if (Msg.Length != 0) hash ^= Msg.GetHashCode();
+      if (FromGroupId != 0L) hash ^= FromGroupId.GetHashCode();
+      if (ContactType != 0) hash ^= ContactType.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1159,9 +1256,9 @@ namespace Protocol {
         output.WriteRawTag(10);
         output.WriteMessage(Header);
       }
-      if (ContactId.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(ContactId);
+      if (AuthId != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(AuthId);
       }
       if (Nickname.Length != 0) {
         output.WriteRawTag(26);
@@ -1175,6 +1272,14 @@ namespace Protocol {
         output.WriteRawTag(42);
         output.WriteString(Msg);
       }
+      if (FromGroupId != 0L) {
+        output.WriteRawTag(56);
+        output.WriteInt64(FromGroupId);
+      }
+      if (ContactType != 0) {
+        output.WriteRawTag(64);
+        output.WriteInt32(ContactType);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1186,8 +1291,8 @@ namespace Protocol {
       if (header_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Header);
       }
-      if (ContactId.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(ContactId);
+      if (AuthId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(AuthId);
       }
       if (Nickname.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Nickname);
@@ -1197,6 +1302,12 @@ namespace Protocol {
       }
       if (Msg.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Msg);
+      }
+      if (FromGroupId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(FromGroupId);
+      }
+      if (ContactType != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ContactType);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1215,8 +1326,8 @@ namespace Protocol {
         }
         Header.MergeFrom(other.Header);
       }
-      if (other.ContactId.Length != 0) {
-        ContactId = other.ContactId;
+      if (other.AuthId != 0L) {
+        AuthId = other.AuthId;
       }
       if (other.Nickname.Length != 0) {
         Nickname = other.Nickname;
@@ -1226,6 +1337,12 @@ namespace Protocol {
       }
       if (other.Msg.Length != 0) {
         Msg = other.Msg;
+      }
+      if (other.FromGroupId != 0L) {
+        FromGroupId = other.FromGroupId;
+      }
+      if (other.ContactType != 0) {
+        ContactType = other.ContactType;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1245,8 +1362,8 @@ namespace Protocol {
             input.ReadMessage(Header);
             break;
           }
-          case 18: {
-            ContactId = input.ReadString();
+          case 16: {
+            AuthId = input.ReadInt64();
             break;
           }
           case 26: {
@@ -1259,6 +1376,14 @@ namespace Protocol {
           }
           case 42: {
             Msg = input.ReadString();
+            break;
+          }
+          case 56: {
+            FromGroupId = input.ReadInt64();
+            break;
+          }
+          case 64: {
+            ContactType = input.ReadInt32();
             break;
           }
         }
@@ -1315,12 +1440,12 @@ namespace Protocol {
 
     /// <summary>Field number for the "contactId" field.</summary>
     public const int ContactIdFieldNumber = 2;
-    private string contactId_ = "";
+    private long contactId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string ContactId {
+    public long ContactId {
       get { return contactId_; }
       set {
-        contactId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        contactId_ = value;
       }
     }
 
@@ -1346,7 +1471,7 @@ namespace Protocol {
     public override int GetHashCode() {
       int hash = 1;
       if (header_ != null) hash ^= Header.GetHashCode();
-      if (ContactId.Length != 0) hash ^= ContactId.GetHashCode();
+      if (ContactId != 0L) hash ^= ContactId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1364,9 +1489,9 @@ namespace Protocol {
         output.WriteRawTag(10);
         output.WriteMessage(Header);
       }
-      if (ContactId.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(ContactId);
+      if (ContactId != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(ContactId);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -1379,8 +1504,8 @@ namespace Protocol {
       if (header_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Header);
       }
-      if (ContactId.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(ContactId);
+      if (ContactId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(ContactId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1399,7 +1524,7 @@ namespace Protocol {
         }
         Header.MergeFrom(other.Header);
       }
-      if (other.ContactId.Length != 0) {
+      if (other.ContactId != 0L) {
         ContactId = other.ContactId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -1420,8 +1545,8 @@ namespace Protocol {
             input.ReadMessage(Header);
             break;
           }
-          case 18: {
-            ContactId = input.ReadString();
+          case 16: {
+            ContactId = input.ReadInt64();
             break;
           }
         }
@@ -1625,12 +1750,12 @@ namespace Protocol {
 
     /// <summary>Field number for the "contactId" field.</summary>
     public const int ContactIdFieldNumber = 3;
-    private string contactId_ = "";
+    private long contactId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string ContactId {
+    public long ContactId {
       get { return contactId_; }
       set {
-        contactId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        contactId_ = value;
       }
     }
 
@@ -1658,7 +1783,7 @@ namespace Protocol {
       int hash = 1;
       if (header_ != null) hash ^= Header.GetHashCode();
       if (SetRemarks.Length != 0) hash ^= SetRemarks.GetHashCode();
-      if (ContactId.Length != 0) hash ^= ContactId.GetHashCode();
+      if (ContactId != 0L) hash ^= ContactId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1680,9 +1805,9 @@ namespace Protocol {
         output.WriteRawTag(18);
         output.WriteString(SetRemarks);
       }
-      if (ContactId.Length != 0) {
-        output.WriteRawTag(26);
-        output.WriteString(ContactId);
+      if (ContactId != 0L) {
+        output.WriteRawTag(24);
+        output.WriteInt64(ContactId);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -1698,8 +1823,8 @@ namespace Protocol {
       if (SetRemarks.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(SetRemarks);
       }
-      if (ContactId.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(ContactId);
+      if (ContactId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(ContactId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1721,7 +1846,7 @@ namespace Protocol {
       if (other.SetRemarks.Length != 0) {
         SetRemarks = other.SetRemarks;
       }
-      if (other.ContactId.Length != 0) {
+      if (other.ContactId != 0L) {
         ContactId = other.ContactId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -1746,8 +1871,8 @@ namespace Protocol {
             SetRemarks = input.ReadString();
             break;
           }
-          case 26: {
-            ContactId = input.ReadString();
+          case 24: {
+            ContactId = input.ReadInt64();
             break;
           }
         }

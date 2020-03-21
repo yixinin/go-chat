@@ -1,63 +1,50 @@
 package models
 
 import (
+	"fmt"
 	"time"
-
-	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 const (
-	GroupTypeTemp   uint8 = 1 //限时
-	GroupTypeNormal uint8 = 2 //永久
+	GroupTypeNormal uint8 = 1 //永久
 )
 
 type Group struct {
-	Id     primitive.ObjectID `bson:"_id"`
-	Name   string
+	Id     int64  `xorm:"pk autoincr"`
+	Name   string `xorm:"unique"`
 	Avatar string
 
-	GroupType uint8 //群类型
-
-	Members []*GroupMember
+	GroupType uint8 `xorm:"default(1)"` //群类型
 
 	CreateBy int64 //创建人
 
-	Log        string //群公告
-	ExpireTime int64
+	Log  string //群公告
+	Logs string //历史公告
 
-	CreateTime int64
-	UpdateTime int64
+	CreateTime time.Time `xorm:"created"`
+	UpdateTime time.Time `xorm:"updated"`
 }
 
 func (g *Group) TableName() string {
-	return TablePrefix + "_group"
-}
-
-type GroupMember struct {
-	UserId   int64
-	Remarks  string //群昵称
-	IsAdmin  bool
-	JoinDesc JoinDesc //如何加入
-	JoinTime time.Time
-}
-
-type JoinDesc struct {
-	InviteUserId  string //邀请人
-	InviteUrl     string //邀请链接
-	ApproveUserId string //审核人
+	return "group"
 }
 
 //
-type GroupAuth struct {
-	Id           primitive.ObjectID `bson:"_id"`
-	UserId       int64
-	Pass         bool
-	PassAdmin    int64 //通过人
+type GroupMember struct {
+	GroupId       int64  `xorm:"-"`
+	Id            int64  `xorm:"pk autoincr"`
+	UserId        int64  `xorm:"unique"`
+	GroupNickname string //群昵称
+
+	Approved      bool
+	ApproveUserId string //审核人
+
 	InviteCode   string
-	InviteUserId int64
-	Token        string
+	InviteUserId string //邀请人
+	InviteUrl    string //邀请链接
+
 }
 
-func (g GroupAuth) TableName() string {
-	return TablePrefix + "_group_auth"
+func (m *GroupMember) TableName() string {
+	return fmt.Sprintf("group_auth_%d", m.GroupId)
 }

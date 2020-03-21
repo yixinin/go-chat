@@ -1,6 +1,7 @@
 package models
 
 import (
+	"chat/protocol"
 	"fmt"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -33,7 +34,7 @@ type LinkData struct {
 }
 
 func (m *SystemMessage) TableName(kind int32) string {
-	return fmt.Sprintf("%s_system_message:%d", TablePrefix, kind)
+	return fmt.Sprintf("system_message:%d", kind)
 }
 
 type UserMessage struct {
@@ -46,11 +47,14 @@ type UserMessage struct {
 	ToUid       int64
 	GroupId     string
 	Read        bool
-	CreateTime  int64
+	Deleted     bool
+
+	CreateTime int64
+	UpdateTime int64
 }
 
 func (m *UserMessage) TableName(uid int64) string {
-	return fmt.Sprintf("%s_user_message_%d", TablePrefix, uid)
+	return fmt.Sprintf("user_message_%d", uid)
 }
 
 type GroupMessage struct {
@@ -60,11 +64,14 @@ type GroupMessage struct {
 	MessageType int32
 	Link        LinkData
 	FromUid     int64
-	GroupId     string
-	Memtions    []string
-	CreateTime  int64
+	GroupId     int64
+	Memtions    []*protocol.Memtion
+	Deleted     bool
+
+	CreateTime int64
+	UpdateTime int64
 }
 
-func (m *GroupMessage) TableName(groupId string) string {
-	return fmt.Sprintf("%s_group_message_%s", TablePrefix, groupId)
+func (m *GroupMessage) TableName(groupId int64) string {
+	return fmt.Sprintf("group_message_%s", groupId)
 }
