@@ -148,14 +148,26 @@ func (s *ChatLogic) RealTime(r Reqer) (Acker, error) {
 
 	var ctx, cancel = context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
-	if req.Uid != 0 {
+	if req.ContactId != "" {
+
+		//查找联系人
+		var userContact = new(models.UserContact)
+		var ctx, cancel = NewContext()
+		defer cancel()
+		_id, _ := primitive.ObjectIDFromHex(req.ContactId)
+		err := db.Mongo.Collection(userContact.TableName(req.Header.Uid)).
+			FindOne(ctx, bson.M{"_id": _id}).
+			Decode(userContact)
+		if err != nil {
+			return Error(ack, err)
+		}
 		users = []*protocol.RoomUser{
 			&protocol.RoomUser{
 				Uid:   req.Header.Uid,
-				Token: req.Header.Token,
+				Token: utils.UUID(),
 			},
 			&protocol.RoomUser{
-				Uid:   req.Uid,
+				Uid:   userContact.UserId,
 				Token: utils.UUID(),
 			},
 		}
@@ -170,8 +182,10 @@ func (s *ChatLogic) RealTime(r Reqer) (Acker, error) {
 		return Fail(ack, "")
 	}
 
+	ctx, cancel = NewContext()
 	resp, err := client.CreateRoom(ctx, &protocol.CreateRoomReq{
-		Users: users,
+		Users:    users,
+		Protocol: req.Protocol,
 	})
 	if err != nil {
 		return Error(ack, err)
@@ -191,7 +205,7 @@ func (s *ChatLogic) RealTime(r Reqer) (Acker, error) {
 		s.NotifyRealTime([]int64{u.Uid}, &protocol.RealTimeNotify{
 			Header: &protocol.NotifyHeader{},
 			RealTimeInfo: &protocol.RealTimeInfo{
-				Uid:      req.Uid,
+				Uid:      req.Header.Uid,
 				GroupId:  req.GroupId,
 				Token:    u.Token,
 				RoomId:   resp.RoomId,
@@ -249,6 +263,12 @@ func (s *ChatLogic) CancelRealTime(r Reqer) (Acker, error) {
 
 func (s *ChatLogic) NotifyRealTime(uids []int64, msg *protocol.RealTimeNotify) {
 	for _, uid := range uids {
+		if ok, err := s.Notify(uid, msg); err == nil && ok {
+			if err != nil {
+				log.Error(err)
+			}
+			continue
+		}
 		err := cache.CacheRealTimeNotify(uid, msg)
 		if err != nil {
 			log.Errorf("cache notify msg error:%v", err)
@@ -328,7 +348,7 @@ func (s *ChatLogic) GetRoomClient(addr string) (protocol.RoomServiceClient, bool
 
 func (s *ChatLogic) GetRandomRoomClient() (protocol.RoomServiceClient, bool) {
 	var addr, conn = pool.DefaultGrpcConnPool.GetRandomConn()
-	if addr != "" {
+	if addr == "" {
 		return nil, false
 	}
 	return protocol.NewRoomServiceClient(conn), true

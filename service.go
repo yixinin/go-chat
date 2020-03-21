@@ -13,6 +13,7 @@ import (
 	"go-lib/db"
 	"go-lib/ip"
 	"go-lib/log"
+	"go-lib/pool"
 	"go-lib/registry"
 	"go-lib/registry/etcd"
 	"go-lib/utils"
@@ -135,11 +136,36 @@ func (s *Service) Start() error {
 		log.Error(err)
 	}
 
-	go s.KeepAlive()
+	watcher, err := s.Registry.Watch()
+	if err != nil {
+		log.Error(err)
+		return err
+	}
+
+	go s.KeepAlive(watcher)
 	return nil
 }
 
-func (s *Service) KeepAlive() {
+func (s *Service) KeepAlive(watcher registry.Watcher) {
+	defer func() {
+		if err := recover(); err != nil {
+			log.Error(err)
+		}
+	}()
+
+	//添加初始node
+	services, err := s.Registry.GetService("live-chat.voip")
+	if err != nil {
+		log.Error(err)
+	} else {
+		for _, srv := range services {
+			for _, node := range srv.Nodes {
+				pool.DefaultGrpcConnPool.AddNode(node.Address)
+				log.Infof("add node %s :%s", srv.Name, node.Address)
+			}
+		}
+	}
+FOR:
 	for {
 		select {
 		case <-s.stop:
@@ -149,6 +175,29 @@ func (s *Service) KeepAlive() {
 			}
 			return
 		default:
+			res, err := watcher.Next()
+			if err != nil || res == nil {
+				log.Error(err)
+				continue FOR
+			}
+			if res.Service.Name == s.RegistrtService.Name {
+				continue
+			}
+			switch res.Action {
+			case registry.Create.String():
+				for _, node := range res.Service.Nodes {
+					pool.DefaultGrpcConnPool.AddNode(node.Address)
+				}
+			case registry.Delete.String():
+				for _, node := range res.Service.Nodes {
+					pool.DefaultGrpcConnPool.DelNode(node.Address)
+				}
+			case registry.Update.String():
+				for _, node := range res.Service.Nodes {
+					pool.DefaultGrpcConnPool.AddNode(node.Address)
+				}
+			}
+
 		}
 	}
 

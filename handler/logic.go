@@ -52,6 +52,9 @@ func (s *Logic) handleMessage(sender Sender, message interface{}) {
 	case *protocol.SendMessageReq:
 		s.hander(sender, msg, s.chat.SendMessage)
 
+	case *protocol.RealTimeReq:
+		s.hander(sender, msg, s.chat.RealTime)
+
 	case *protocol.AddContactReq:
 		s.hander(sender, msg, s.contact.AddContact)
 	case *cellnet.SessionClosed: // 会话连接断开

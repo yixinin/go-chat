@@ -17,10 +17,11 @@ message CreateRoomReq {
 }
 
 message CreateRoomAck {
-    int32  roomId   = 1;
-    string tcpAddr  = 2;
-    string wsAddr   = 3;
-    string httpAddr = 4;
+    CallAckHeader header   = 1;
+    int32         roomId   = 2;
+    string        tcpAddr  = 3;
+    string        wsAddr   = 4;
+    string        httpAddr = 5;
 }
 
 message JoinRoomReq {

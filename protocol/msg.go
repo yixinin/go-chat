@@ -7,13 +7,22 @@ func init() {
 	protocol = append(protocol,
 		(*EchoReq)(nil),
 		(*EchoAck)(nil),
+
+		//账户
 		new(SignUpReq),
 		new(SignUpAck),
 		new(SignInReq),
 		new(SignInAck),
+
+		//消息
 		new(SendMessageReq),
 		new(SendMessageAck),
 		new(MessageNotify),
+		new(RealTimeAck),
+		new(RealTimeReq),
+		new(RealTimeNotify),
+
+		//联系人
 		new(AddContactReq),
 		new(AddContactAck),
 	)
