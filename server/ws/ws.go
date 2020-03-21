@@ -1,7 +1,9 @@
 package ws
 
 import (
+	"chat/handler/iface"
 	"chat/logic"
+	"chat/protocol"
 	"chat/server"
 	"errors"
 
@@ -25,7 +27,9 @@ type WsServer struct {
 	peer  cellnet.GenericPeer
 	queue cellnet.EventQueue
 
-	users map[int64]cellnet.Session
+	users  map[int64]*iface.Session
+	tokens map[string]int64
+	sess   map[int64]int64
 }
 
 func NewWsServer(c *Config) server.Server {
@@ -34,7 +38,7 @@ func NewWsServer(c *Config) server.Server {
 		config: c,
 		queue:  queue,
 		peer:   peer.NewGenericPeer("gorillaws.Acceptor", "server", c.Addr, queue),
-		users:  make(map[int64]cellnet.Session, 100),
+		users:  make(map[int64]*iface.Session, 100),
 	}
 	return s
 }
@@ -85,26 +89,42 @@ func (s *WsServer) Notify(uid int64, msg interface{}) (ok bool, err error) {
 	return false, nil
 }
 
-func (s *WsServer) AcceptSess(uid int64, v interface{}) {
-	if old, ok := s.users[uid]; ok {
+func (s *WsServer) AcceptSess(sess *iface.Session) {
+	if old, ok := s.users[sess.Uid]; ok {
 		old.Close()
-		delete(s.users, uid)
+		delete(s.users, sess.Uid)
+		delete(s.tokens, old.Token)
+		delete(s.sess, old.ID())
 	}
-	if sess, ok := v.(cellnet.Session); ok {
-		s.users[uid] = sess
+	s.users[sess.Uid] = sess
+	s.tokens[sess.Token] = sess.Uid
+	s.sess[sess.ID()] = sess.Uid
+}
+
+func (s *WsServer) CloseSess(v int64) {
+	if u, ok := s.users[v]; ok {
+		u.Close()
+		delete(s.users, v)
+		delete(s.sess, u.ID())
+		delete(s.tokens, u.Token)
+	} else {
+		//通过ID删除 被动断线
+		if uid, ok := s.sess[v]; ok {
+			if u, ok := s.users[uid]; ok {
+				u.Close()
+				delete(s.users, uid)
+				delete(s.sess, u.ID())
+				delete(s.tokens, u.Token)
+			}
+		}
+
 	}
 }
 
-func (s *WsServer) CloseSess(uid int64) {
-	if _, ok := s.users[uid]; ok {
-		delete(s.users, uid)
-	} else {
-		//通过ID删除 被动断线
-		for k, v := range s.users {
-			if v.ID() == uid {
-				delete(s.users, k)
-				return
-			}
-		}
+func (s *WsServer) Auth(header *protocol.ReqHeader) bool {
+	if header == nil {
+		return false
 	}
+	_, ok := s.tokens[header.Token]
+	return ok
 }

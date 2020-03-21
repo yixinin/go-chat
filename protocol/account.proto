@@ -39,12 +39,12 @@ message SignOutAck {
     AckHeader header = 1;
 }
 
-message DeleteReq {
+message SignOffReq {
     ReqHeader header   = 1;
     string    password = 2;
 }
 
-message DeleteAck {
+message SignOffAck {
     AckHeader header = 1;
 }
 

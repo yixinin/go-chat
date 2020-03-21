@@ -1,4 +1,4 @@
-package handler
+package iface
 
 import (
 	"encoding/binary"
@@ -60,4 +60,10 @@ func (s *HttpSender) Close() {
 
 func (s *HttpSender) ID() int64 {
 	return utils.RandInt64(1024)
+}
+
+type User struct {
+	Sess  Sender
+	Uid   int64
+	Token string
 }

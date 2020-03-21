@@ -2,6 +2,7 @@ package handler
 
 import (
 	"chat/cache"
+	"chat/handler/iface"
 	"chat/logic"
 	"chat/protocol"
 	"go-lib/utils"
@@ -46,26 +47,26 @@ func (h *Http) Handle(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		//读取cookie
-		uid, ok := h.Auth(r, msg)
+		uid, token, ok := h.Auth(r, msg)
 		if msg != nil {
 			log.Infof("recv http msg:%+v", msg)
-			var sender = NewHttpSender(w)
+			var sender = iface.NewHttpSender(w)
 			if ok && uid > 0 {
-				h.logic.acceptFunc(uid, nil)
+				h.logic.acceptFunc(iface.NewSessoin(sender, uid, token))
 			}
 			h.logic.handleMessage(sender, msg)
 		}
 	}
 }
 
-func (h *Http) Auth(r *http.Request, msg interface{}) (int64, bool) {
+func (h *Http) Auth(r *http.Request, msg interface{}) (int64, string, bool) {
 	c, err := r.Cookie("token")
 	if err != nil {
 		log.Error(err)
 	}
 	reqer, ok := msg.(logic.Reqer)
 	if !ok {
-		return 0, false
+		return 0, "", false
 	}
 	var header = reqer.GetHeader()
 	if header == nil {
@@ -80,12 +81,12 @@ func (h *Http) Auth(r *http.Request, msg interface{}) (int64, bool) {
 		uid, err := cache.GetToken(header.Token)
 		if err != nil {
 			log.Error(err)
-			return 0, false
+			return 0, header.Token, false
 		}
 		header.Uid = uid
 	}
 
-	return header.Uid, header.Uid > 0
+	return header.Uid, header.Token, header.Uid > 0
 }
 
 func (h *Http) String() string {

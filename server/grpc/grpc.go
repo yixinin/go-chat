@@ -1,6 +1,7 @@
 package grpc
 
 import (
+	"chat/handler/iface"
 	"chat/logic"
 	"chat/protocol"
 	"chat/server"
@@ -43,7 +44,7 @@ func (s *GrpcServer) GetNotifyFunc() logic.NotifyFunc {
 	return nil
 }
 
-func (s *GrpcServer) AcceptSess(uid int64, sess interface{}) {
+func (s *GrpcServer) AcceptSess(sess *iface.Session) {
 
 }
 
@@ -53,4 +54,8 @@ func (s *GrpcServer) CloseSess(uid int64) {
 
 func (s *GrpcServer) Notify(uid int64, msg interface{}) (ok bool, err error) {
 	return false, nil
+}
+
+func (s *GrpcServer) Auth(header *protocol.ReqHeader) bool {
+	return false
 }

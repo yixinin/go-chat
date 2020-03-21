@@ -1,7 +1,9 @@
 package http
 
 import (
+	"chat/handler/iface"
 	"chat/logic"
+	"chat/protocol"
 	"chat/server"
 	"context"
 	"flag"
@@ -92,8 +94,8 @@ func (s *httpServer) GetNotifyFunc() logic.NotifyFunc {
 	return nil
 }
 
-func (s *httpServer) AcceptSess(uid int64, v interface{}) {
-	s.users[uid] = time.Now().Unix()
+func (s *httpServer) AcceptSess(sess *iface.Session) {
+	s.users[sess.Uid] = time.Now().Unix()
 }
 
 func (s *httpServer) CloseSess(uid int64) {
@@ -104,4 +106,8 @@ func (s *httpServer) CloseSess(uid int64) {
 
 func (s *httpServer) Notify(uid int64, msg interface{}) (ok bool, err error) {
 	return false, nil
+}
+
+func (s *httpServer) Auth(header *protocol.ReqHeader) bool {
+	return false
 }

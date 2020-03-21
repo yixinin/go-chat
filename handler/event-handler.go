@@ -31,7 +31,9 @@ func (h *Event) HandleCallback(ev cellnet.Event) {
 		var v = reflect.Indirect(reflect.ValueOf(msg))
 		v.FieldByName("Header").Set(reflect.ValueOf(header))
 	} else {
-		h.Auth(header)
+		if ok := h.logic.authFunc(header); !ok {
+			h.Auth(header)
+		}
 	}
 
 	sess := ev.Session()

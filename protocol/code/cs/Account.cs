@@ -36,19 +36,19 @@ namespace Protocol {
             "GAcgASgFIj8KCVNpZ25JbkFjaxIjCgZoZWFkZXIYASABKAsyEy5wcm90b2Nv",
             "bC5BY2tIZWFkZXISDQoFdG9rZW4YAiABKAkiMQoKU2lnbk91dFJlcRIjCgZo",
             "ZWFkZXIYASABKAsyEy5wcm90b2NvbC5SZXFIZWFkZXIiMQoKU2lnbk91dEFj",
-            "axIjCgZoZWFkZXIYASABKAsyEy5wcm90b2NvbC5BY2tIZWFkZXIiQgoJRGVs",
-            "ZXRlUmVxEiMKBmhlYWRlchgBIAEoCzITLnByb3RvY29sLlJlcUhlYWRlchIQ",
-            "CghwYXNzd29yZBgCIAEoCSIwCglEZWxldGVBY2sSIwoGaGVhZGVyGAEgASgL",
-            "MhMucHJvdG9jb2wuQWNrSGVhZGVyInwKEUNoYW5nZVBhc3N3b3JkUmVxEiMK",
-            "BmhlYWRlchgBIAEoCzITLnByb3RvY29sLlJlcUhlYWRlchIOCgZvbGRQd2QY",
-            "AiABKAkSDgoGbmV3UHdkGAMgASgJEhEKCXZhbGlkQ29kZRgEIAEoCRIPCgd2",
-            "YWxpZElkGAUgASgJIjgKEUNoYW5nZVBhc3N3b3JkQWNrEiMKBmhlYWRlchgB",
-            "IAEoCzITLnByb3RvY29sLkFja0hlYWRlciKTAQoQUmVzZXRQYXNzd29yZFJl",
-            "cRIjCgZoZWFkZXIYASABKAsyEy5wcm90b2NvbC5SZXFIZWFkZXISEAoIdXNl",
-            "cm5hbWUYAiABKAkSEAoIcGFzc3dvcmQYAyABKAkSEQoJdmFsaWRDb2RlGAQg",
-            "ASgJEg8KB3ZhbGlkSWQYBSABKAkSEgoKZGV2aWNlVHlwZRgHIAEoBSI3ChBS",
-            "ZXNldFBhc3N3b3JkQWNrEiMKBmhlYWRlchgBIAEoCzITLnByb3RvY29sLkFj",
-            "a0hlYWRlcmIGcHJvdG8z"));
+            "axIjCgZoZWFkZXIYASABKAsyEy5wcm90b2NvbC5BY2tIZWFkZXIiQwoKU2ln",
+            "bk9mZlJlcRIjCgZoZWFkZXIYASABKAsyEy5wcm90b2NvbC5SZXFIZWFkZXIS",
+            "EAoIcGFzc3dvcmQYAiABKAkiMQoKU2lnbk9mZkFjaxIjCgZoZWFkZXIYASAB",
+            "KAsyEy5wcm90b2NvbC5BY2tIZWFkZXIifAoRQ2hhbmdlUGFzc3dvcmRSZXES",
+            "IwoGaGVhZGVyGAEgASgLMhMucHJvdG9jb2wuUmVxSGVhZGVyEg4KBm9sZFB3",
+            "ZBgCIAEoCRIOCgZuZXdQd2QYAyABKAkSEQoJdmFsaWRDb2RlGAQgASgJEg8K",
+            "B3ZhbGlkSWQYBSABKAkiOAoRQ2hhbmdlUGFzc3dvcmRBY2sSIwoGaGVhZGVy",
+            "GAEgASgLMhMucHJvdG9jb2wuQWNrSGVhZGVyIpMBChBSZXNldFBhc3N3b3Jk",
+            "UmVxEiMKBmhlYWRlchgBIAEoCzITLnByb3RvY29sLlJlcUhlYWRlchIQCgh1",
+            "c2VybmFtZRgCIAEoCRIQCghwYXNzd29yZBgDIAEoCRIRCgl2YWxpZENvZGUY",
+            "BCABKAkSDwoHdmFsaWRJZBgFIAEoCRISCgpkZXZpY2VUeXBlGAcgASgFIjcK",
+            "EFJlc2V0UGFzc3dvcmRBY2sSIwoGaGVhZGVyGAEgASgLMhMucHJvdG9jb2wu",
+            "QWNrSGVhZGVyYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.HeaderReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -58,8 +58,8 @@ namespace Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SignInAck), global::Protocol.SignInAck.Parser, new[]{ "Header", "Token" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SignOutReq), global::Protocol.SignOutReq.Parser, new[]{ "Header" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SignOutAck), global::Protocol.SignOutAck.Parser, new[]{ "Header" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.DeleteReq), global::Protocol.DeleteReq.Parser, new[]{ "Header", "Password" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.DeleteAck), global::Protocol.DeleteAck.Parser, new[]{ "Header" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SignOffReq), global::Protocol.SignOffReq.Parser, new[]{ "Header", "Password" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SignOffAck), global::Protocol.SignOffAck.Parser, new[]{ "Header" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.ChangePasswordReq), global::Protocol.ChangePasswordReq.Parser, new[]{ "Header", "OldPwd", "NewPwd", "ValidCode", "ValidId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.ChangePasswordAck), global::Protocol.ChangePasswordAck.Parser, new[]{ "Header" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.ResetPasswordReq), global::Protocol.ResetPasswordReq.Parser, new[]{ "Header", "Username", "Password", "ValidCode", "ValidId", "DeviceType" }, null, null, null, null),
@@ -1244,11 +1244,11 @@ namespace Protocol {
 
   }
 
-  public sealed partial class DeleteReq : pb::IMessage<DeleteReq> {
-    private static readonly pb::MessageParser<DeleteReq> _parser = new pb::MessageParser<DeleteReq>(() => new DeleteReq());
+  public sealed partial class SignOffReq : pb::IMessage<SignOffReq> {
+    private static readonly pb::MessageParser<SignOffReq> _parser = new pb::MessageParser<SignOffReq>(() => new SignOffReq());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<DeleteReq> Parser { get { return _parser; } }
+    public static pb::MessageParser<SignOffReq> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -1261,22 +1261,22 @@ namespace Protocol {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public DeleteReq() {
+    public SignOffReq() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public DeleteReq(DeleteReq other) : this() {
+    public SignOffReq(SignOffReq other) : this() {
       header_ = other.header_ != null ? other.header_.Clone() : null;
       password_ = other.password_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public DeleteReq Clone() {
-      return new DeleteReq(this);
+    public SignOffReq Clone() {
+      return new SignOffReq(this);
     }
 
     /// <summary>Field number for the "header" field.</summary>
@@ -1303,11 +1303,11 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as DeleteReq);
+      return Equals(other as SignOffReq);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(DeleteReq other) {
+    public bool Equals(SignOffReq other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -1366,7 +1366,7 @@ namespace Protocol {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(DeleteReq other) {
+    public void MergeFrom(SignOffReq other) {
       if (other == null) {
         return;
       }
@@ -1407,11 +1407,11 @@ namespace Protocol {
 
   }
 
-  public sealed partial class DeleteAck : pb::IMessage<DeleteAck> {
-    private static readonly pb::MessageParser<DeleteAck> _parser = new pb::MessageParser<DeleteAck>(() => new DeleteAck());
+  public sealed partial class SignOffAck : pb::IMessage<SignOffAck> {
+    private static readonly pb::MessageParser<SignOffAck> _parser = new pb::MessageParser<SignOffAck>(() => new SignOffAck());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<DeleteAck> Parser { get { return _parser; } }
+    public static pb::MessageParser<SignOffAck> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -1424,21 +1424,21 @@ namespace Protocol {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public DeleteAck() {
+    public SignOffAck() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public DeleteAck(DeleteAck other) : this() {
+    public SignOffAck(SignOffAck other) : this() {
       header_ = other.header_ != null ? other.header_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public DeleteAck Clone() {
-      return new DeleteAck(this);
+    public SignOffAck Clone() {
+      return new SignOffAck(this);
     }
 
     /// <summary>Field number for the "header" field.</summary>
@@ -1454,11 +1454,11 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as DeleteAck);
+      return Equals(other as SignOffAck);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(DeleteAck other) {
+    public bool Equals(SignOffAck other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -1508,7 +1508,7 @@ namespace Protocol {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(DeleteAck other) {
+    public void MergeFrom(SignOffAck other) {
       if (other == null) {
         return;
       }

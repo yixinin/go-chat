@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"chat/handler/iface"
 	"chat/logic"
 	"chat/protocol"
 
@@ -13,43 +14,9 @@ type Handler func(req logic.Reqer) (logic.Acker, error)
 
 // type HttpHandler func(c *gin.Context, req logic.Reqer, handler Handler)
 
-type MessageHandler func(sender Sender, req logic.Reqer, handler Handler)
+type MessageHandler func(sender iface.Sender, req logic.Reqer, handler Handler)
 
-// type HttpWHandler func(w http.ResponseWriter, req logic.Reqer, handler Handler)
-
-// func HttpMessageHandler(c *gin.Context, req logic.Reqer, handler Handler) {
-// 	if req == nil || handler == nil {
-// 		return
-// 	}
-
-// 	reqHeader := req.GetHeader()
-// 	if c != nil {
-// 		err := c.ShouldBind(req)
-// 		if err != nil {
-// 			c.Status(http.StatusBadRequest)
-// 			return
-// 		}
-
-// 		uid, _ := c.Get("uid")
-// 		reqHeader.Uid, _ = uid.(int64)
-// 		reqHeader.Token, _ = c.Cookie("token")
-// 	}
-
-// 	ack, err := handler(req)
-// 	if err != nil {
-// 		log.Errorf("http err:%v", err)
-// 		log.Errorf("http req: %+v", req)
-// 		log.Errorf("http ack: %+v", ack)
-
-// 	}
-// 	if !FillAckHeader(ack, err) {
-// 		log.Error("ack is nil")
-// 		return
-// 	}
-// 	c.JSON(http.StatusOK, ack)
-// }
-
-func (s *Logic) EventMessageHandler(sender Sender, req logic.Reqer, handler Handler) {
+func (s *Logic) EventMessageHandler(sender iface.Sender, req logic.Reqer, handler Handler) {
 	ack, err := handler(req)
 	if err != nil {
 		log.Errorf("event err:%v", err)
@@ -63,13 +30,13 @@ func (s *Logic) EventMessageHandler(sender Sender, req logic.Reqer, handler Hand
 
 	if a, ok := ack.(*protocol.SignInAck); ok {
 		if a.Header.Code == 200 && a.Token != "" { //登录成功
-			s.acceptFunc(a.Header.Uid, sender)
+			s.acceptFunc(iface.NewSessoin(sender, a.Header.Uid, a.Token))
 			a.Header.Uid = 0
 		}
 	} else {
 		if a, ok := ack.(*protocol.SignUpAck); ok {
 			if a.Header.Code == 200 && a.Token != "" { //登录成功
-				s.acceptFunc(a.Header.Uid, sender)
+				s.acceptFunc(iface.NewSessoin(sender, a.Header.Uid, a.Token))
 				a.Header.Uid = 0
 			}
 		}

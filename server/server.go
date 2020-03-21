@@ -1,6 +1,8 @@
 package server
 
 import (
+	"chat/handler/iface"
+	"chat/protocol"
 	"go-lib/hook"
 )
 
@@ -9,6 +11,7 @@ type Server interface {
 	Init(handlers Handler) error
 	Start() error
 	Notify(uid int64, msg interface{}) (ok bool, err error)
-	AcceptSess(uid int64, v interface{})
+	AcceptSess(v *iface.Session)
 	CloseSess(uid int64)
+	Auth(*protocol.ReqHeader) (ok bool)
 }

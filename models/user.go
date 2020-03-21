@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	DefaultAvatar = "livechat/avatar/default.png"
+	DefaultAvatar = "http://localhost:8080/static/avatar/default.jpg"
 )
 
 type User struct {

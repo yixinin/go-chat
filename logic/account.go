@@ -128,8 +128,8 @@ func (s *AccountLogic) Delete(r Reqer) (Acker, error) {
 			log.Error("account delete recovered", err)
 		}
 	}()
-	req, _ := r.(*protocol.DeleteReq)
-	ack := &protocol.DeleteAck{}
+	req, _ := r.(*protocol.SignOffReq)
+	ack := &protocol.SignOffAck{}
 
 	//标记删除
 	var user = &models.User{

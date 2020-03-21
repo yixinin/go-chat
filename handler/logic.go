@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"chat/handler/iface"
 	"chat/logic"
 	"chat/protocol"
 	"chat/server"
@@ -11,8 +12,9 @@ import (
 	"github.com/davyxu/cellnet"
 )
 
-type AcceptFunc func(uid int64, v interface{})
+type AcceptFunc func(v *iface.Session)
 type CloseFunc func(uid int64)
+type AuthFunc func(*protocol.ReqHeader) bool
 
 type Logic struct {
 	account    *logic.AccountLogic
@@ -21,6 +23,7 @@ type Logic struct {
 	hander     MessageHandler
 	acceptFunc AcceptFunc
 	closeFunc  CloseFunc
+	authFunc   AuthFunc
 }
 
 func NewLogic(srv server.Server) *Logic {
@@ -32,12 +35,13 @@ func NewLogic(srv server.Server) *Logic {
 
 		acceptFunc: srv.AcceptSess,
 		closeFunc:  srv.CloseSess,
+		authFunc:   srv.Auth,
 	}
 	s.hander = s.EventMessageHandler
 	return s
 }
 
-func (s *Logic) handleMessage(sender Sender, message interface{}) {
+func (s *Logic) handleMessage(sender iface.Sender, message interface{}) {
 	if sender == nil {
 		return
 	}
