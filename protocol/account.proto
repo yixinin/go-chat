@@ -9,7 +9,7 @@ message SignUpReq {
     string    validCode  = 4;
     string    validId    = 5;
     string    deviceCode = 6;
-    int32     deviceType = 7;
+    int32     deviceType = 7; // 1=mobile 2=PC 3=tablet 4=iot
     string    nickname   = 8;
 }
 
@@ -71,4 +71,14 @@ message ResetPasswordReq {
 
 message ResetPasswordAck {
     AckHeader header = 1;
+}
+
+message GetUserInfoReq {
+    ReqHeader header = 1;
+}
+
+message GetUserInfoAck {
+    AckHeader header   = 1;
+    string    nickname = 2;
+    string    avatar   = 3;
 }

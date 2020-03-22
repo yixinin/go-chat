@@ -90,3 +90,16 @@ func createUserTables(sess *xorm.Session, uid int64) error {
 	}
 	return sess.CreateTable(&UserGroup{Uid: uid})
 }
+
+func FindUsersByUids(uids []int64) (map[int64]*User, error) {
+	var users = make([]*User, 0, len(uids))
+	err := db.Mysql.In("id", uids).Find(&users)
+	if err != nil {
+		return nil, err
+	}
+	var m = make(map[int64]*User, len(uids))
+	for _, v := range users {
+		m[v.Id] = v
+	}
+	return m, nil
+}

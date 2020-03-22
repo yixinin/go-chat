@@ -23,7 +23,7 @@ func RegisterProtobuf(pkgName string, args ...interface{}) {
 		var t = reflect.TypeOf(v).Elem()
 		var fullName = strings.ToLower(fmt.Sprintf("%s.%s", pkgName, t.Name()))
 		var id = int(util.StringHash(fullName))
-		// fmt.Printf("name:%s,hashid:%d\n", fullName, id)
+		fmt.Printf("name:%s,hashid:%d\n", fullName, id)
 		cellnet.RegisterMessageMeta(&cellnet.MessageMeta{
 			Codec: codec.MustGetCodec("gogopb"),
 			Type:  t,

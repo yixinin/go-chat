@@ -37,6 +37,8 @@ func NewTcpServer(c *Config) server.Server {
 		queue:  queue,
 		peer:   peer.NewGenericPeer("tcp.Acceptor", "server", c.Addr, queue),
 		users:  make(map[int64]*iface.Session, 100),
+		tokens: make(map[string]int64, 100),
+		sess:   make(map[int64]int64, 100),
 	}
 	return s
 }

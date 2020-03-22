@@ -43,6 +43,7 @@ func NewLogic(srv server.Server) *Logic {
 
 func (s *Logic) handleMessage(sender iface.Sender, message interface{}) {
 	if sender == nil {
+		log.Error("sender is nil")
 		return
 	}
 	switch msg := message.(type) {
@@ -59,9 +60,16 @@ func (s *Logic) handleMessage(sender iface.Sender, message interface{}) {
 
 	case *protocol.RealTimeReq:
 		s.hander(sender, msg, s.chat.RealTime)
+	case *protocol.GetMessageUserReq:
+		s.hander(sender, msg, s.chat.GetMessageUser)
+	case *protocol.GetMessageReq:
+		s.hander(sender, msg, s.chat.GetUserMessage)
 
 	case *protocol.AddContactReq:
 		s.hander(sender, msg, s.contact.AddContact)
+
+	case *cellnet.SessionAccepted:
+		log.Debugln("server accepted")
 	case *cellnet.SessionClosed: // 会话连接断开
 		s.closeFunc(sender.ID())
 		fmt.Println("session closed: ", sender.ID())

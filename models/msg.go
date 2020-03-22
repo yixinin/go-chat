@@ -2,9 +2,14 @@ package models
 
 import (
 	"chat/protocol"
+	"context"
 	"fmt"
+	"go-lib/db"
+	"time"
 
+	log "github.com/sirupsen/logrus"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"gopkg.in/mgo.v2/bson"
 )
 
 const (
@@ -74,4 +79,124 @@ type GroupMessage struct {
 
 func (m *GroupMessage) TableName(groupId int64) string {
 	return fmt.Sprintf("group_message_%s", groupId)
+}
+
+func NewContext(ttls ...time.Duration) (context.Context, context.CancelFunc) {
+	var ttl = 5 * time.Second
+	if len(ttls) > 0 {
+		ttl = ttls[0]
+	}
+	return context.WithTimeout(context.Background(), ttl)
+}
+
+func GetMessageUser(uid int64, ack *protocol.GetMessageUserAck) error {
+	if ack.Users == nil {
+		ack.Users = make([]*protocol.GetMessageUserAck_MessageUser, 1)
+	}
+	//查找未读消息
+	var userMessage = &UserMessage{}
+
+	var ctx, cancel = NewContext()
+	defer cancel()
+	rows, err := db.Mongo.Collection(userMessage.TableName(uid)).Find(ctx, bson.M{"read": false})
+	if err != nil {
+		return err
+	}
+	var m = make(map[int64][]UserMessage)
+	for rows.Next(context.TODO()) {
+		var msg UserMessage
+		err := rows.Decode(&msg)
+		if err != nil {
+			continue
+		}
+
+		if msg.FromUid == uid { //发出去的消息
+			if _, ok := m[msg.ToUid]; ok {
+				m[msg.ToUid] = append(m[msg.ToUid], msg)
+			} else {
+				m[msg.ToUid] = []UserMessage{msg}
+			}
+		} else {
+			if _, ok := m[msg.FromUid]; ok {
+				m[msg.FromUid] = append(m[msg.FromUid], msg)
+			} else {
+				m[msg.FromUid] = []UserMessage{msg}
+			}
+		}
+	}
+	//分组
+	var uids = make([]int64, 0, len(m))
+	for k, v := range m {
+		uids = append(uids, uid)
+		var msgs = make([]*protocol.MessageAckBody, 0, len(v))
+		for _, msg := range v {
+			msgs = append(msgs, &protocol.MessageAckBody{
+				Text:       msg.Text,
+				FromUid:    msg.FromUid,
+				ToUid:      msg.ToUid,
+				CreateTime: msg.CreateTime,
+				UpdateTime: msg.UpdateTime,
+			})
+		}
+		ack.Users = append(ack.Users, &protocol.GetMessageUserAck_MessageUser{
+			UserId:   k,
+			Count:    int32(len(v)),
+			Messages: msgs,
+		})
+	}
+	//查找用户信息
+	users, err := FindUsersByUids(uids)
+	if err != nil {
+		log.Error(err)
+		return nil
+	}
+	for _, v := range ack.Users {
+		var user = users[v.UserId]
+		v.Nickname = user.Nickname
+		v.Avatar = user.Avatart
+	}
+	return nil
+}
+
+func GetUserMessage(uid, toUid int64, ack *protocol.GetMessageAck) error {
+	if ack.Messages == nil {
+		ack.Messages = make([]*protocol.MessageAckBody, 10)
+	}
+	//查找未读消息
+	var userMessage = &UserMessage{}
+
+	var ctx, cancel = NewContext()
+	defer cancel()
+	rows, err := db.Mongo.Collection(userMessage.TableName(uid)).Find(ctx, bson.M{"$or": bson.D{
+		// bson.M{"fromuid": toUid},
+		// bson.M{"touid": toUid},
+		bson.DocElem{
+			Name:  "fromuid",
+			Value: toUid,
+		},
+		bson.DocElem{
+			Name:  "touid",
+			Value: toUid,
+		},
+	}})
+	if err != nil {
+		return err
+	}
+
+	for rows.Next(context.TODO()) {
+		var msg = new(UserMessage)
+		err := rows.Decode(msg)
+		if err != nil {
+			log.Error(err)
+			continue
+		}
+		ack.Messages = append(ack.Messages, &protocol.MessageAckBody{
+			Text:       msg.Text,
+			FromUid:    msg.FromUid,
+			ToUid:      msg.ToUid,
+			CreateTime: msg.CreateTime,
+			UpdateTime: msg.UpdateTime,
+		})
+	}
+	return nil
 }

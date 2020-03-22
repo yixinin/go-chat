@@ -343,15 +343,16 @@ func (s *ChatLogic) PollMessage(r Reqer) (Acker, error) {
 		userMessages = append(userMessages, msg)
 	}
 
-	ack.Data = make([]*protocol.PollMessageAck_DataItem, 0, len(userMessages))
+	ack.Data = make([]*protocol.MessageAckBody, 0, len(userMessages))
 	for _, v := range userMessages {
-		ack.Data = append(ack.Data, &protocol.PollMessageAck_DataItem{
+		ack.Data = append(ack.Data, &protocol.MessageAckBody{
 			Text:        v.Text,
 			FromUid:     v.FromUid,
 			ToUid:       v.ToUid,
 			MediaUrl:    v.MediaUrl,
 			MessageType: v.MessageType,
 			CreateTime:  v.CreateTime,
+			UpdateTime:  v.UpdateTime,
 		})
 	}
 	return Success(ack)
@@ -371,4 +372,28 @@ func (s *ChatLogic) GetRandomRoomClient() (protocol.RoomServiceClient, bool) {
 		return nil, false
 	}
 	return protocol.NewRoomServiceClient(conn), true
+}
+
+func (s *ChatLogic) GetMessageUser(r Reqer) (Acker, error) {
+	req, _ := r.(*protocol.GetMessageUserReq)
+	ack := &protocol.GetMessageUserAck{
+		Header: &protocol.AckHeader{},
+	}
+	err := models.GetMessageUser(req.Header.Uid, ack)
+	if err != nil {
+		return Error(ack, err)
+	}
+	return Success(ack)
+}
+
+func (s *ChatLogic) GetUserMessage(r Reqer) (Acker, error) {
+	req, _ := r.(*protocol.GetMessageReq)
+	ack := &protocol.GetMessageAck{
+		Header: &protocol.AckHeader{},
+	}
+	err := models.GetUserMessage(req.Header.Uid, req.UserId, ack)
+	if err != nil {
+		return Error(ack, err)
+	}
+	return Success(ack)
 }

@@ -3,22 +3,22 @@ package protocol;
 
 import "header.proto";
 
-enum MessageType {
-    None    = 0;
-    Text    = 1;
-    Pictrue = 2;
-    Audio   = 3;
-    Video   = 4;
-    Link    = 5;
-}
+// enum MessageType {
+//     None    = 0;
+//     Text    = 1;
+//     Pictrue = 2;
+//     Audio   = 3;
+//     Video   = 4;
+//     Link    = 5;
+// }
 
 message Memtion {
     int64  userId = 1; // uid
     string text   = 2; //@xxx
 }
 message MessageBody {
-    MessageType messageType      = 2;
-    string      text             = 3;
+    int32    messageType         = 2;
+    string   text                = 3;
     repeated Memtion memtions    = 4;
     int64            contactId   = 5; //发送给用户
     string           username    = 6; //发送给陌生人 //通过群聊
@@ -93,19 +93,9 @@ message PollMessageReq {
 }
 
 message PollMessageAck {
-    AckHeader header       = 1;
-    int32     total        = 2;
-    repeated DataItem data = 3;
-    message           DataItem {
-        string   text             = 1;
-        int64    fromUid          = 2;
-        int64    toUid            = 3;
-        int64    groupId          = 4;
-        int32    messageType      = 5;
-        string   mediaUrl         = 6;
-        int64    createTime       = 7;
-        repeated Memtion memtions = 16;
-    }
+    AckHeader header             = 1;
+    int32     total              = 2;
+    repeated MessageAckBody data = 3;
 }
 
 message PollReq {
@@ -126,4 +116,54 @@ message PollAck {
         bool         IsConnect    = 2;
         RealTimeInfo realTimeInfo = 3;
     }
+}
+
+//获取消息列表
+message GetMessageUserReq {
+    ReqHeader header = 1;
+}
+
+message GetMessageUserAck {
+    AckHeader header           = 1;
+    repeated MessageUser users = 2;
+    message              MessageUser {
+        int64    userId                  = 1;  //用户消息
+        int64    groupId                 = 2;  //群消息
+        string   nickname                = 3;  //昵称
+        string   avatar                  = 4;  //头像
+        int32    count                   = 6;  //消息条数
+        repeated MessageAckBody messages = 10; //消息列表
+    }
+}
+
+message GetMessageReq {
+    ReqHeader header  = 1;
+    int64     userId  = 2; //获取用户消息记录
+    int64     groupId = 3; //获取群消息记录
+}
+
+message MessageAckBody {
+    string   text             = 1;
+    int64    fromUid          = 2;
+    int64    toUid            = 3;
+    int64    groupId          = 4;
+    int32    messageType      = 5;
+    string   mediaUrl         = 6;
+    int64    createTime       = 7;
+    int64    updateTime       = 8;
+    repeated Memtion memtions = 16;
+}
+
+message GetMessageAck {
+    AckHeader header                 = 1;
+    repeated MessageAckBody messages = 2;
+}
+
+message SetReadReq {
+    ReqHeader header = 1;
+    int64     userId = 2; //用户已读
+}
+
+message SetReadAck {
+    AckHeader header = 1;
 }
