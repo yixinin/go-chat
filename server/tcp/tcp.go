@@ -123,6 +123,7 @@ func (s *TcpServer) Auth(header *protocol.ReqHeader) bool {
 	if header == nil {
 		return false
 	}
-	_, ok := s.tokens[header.Token]
+	uid, ok := s.tokens[header.Token]
+	header.Uid = uid
 	return ok
 }

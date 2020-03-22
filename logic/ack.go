@@ -48,6 +48,10 @@ func Fail(ack Acker, msg string) (Acker, error) {
 	return ack, nil
 }
 
+func AccessDeined(ack Acker) (Acker, error) {
+	return Fail(ack, "access deined")
+}
+
 func Error(ack Acker, err error) (Acker, error) {
 	var header = ack.GetHeader()
 	if header == nil {

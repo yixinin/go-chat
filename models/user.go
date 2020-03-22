@@ -50,7 +50,7 @@ func CreateUser(req *protocol.SignUpReq, ack *protocol.SignUpAck) (msg string, e
 	}
 	defer sess.Rollback()
 
-	uid, err := sess.InsertOne(&User{
+	var user = &User{
 		Username:     req.Username,
 		PasswordHash: utils.MD5(req.Password),
 		DevideCode:   req.DeviceCode,
@@ -59,11 +59,13 @@ func CreateUser(req *protocol.SignUpReq, ack *protocol.SignUpAck) (msg string, e
 		InviteCode:   utils.UUID(),
 		CreateTime:   now,
 		UpdateTime:   now,
-	})
+	}
+	_, err = sess.InsertOne(user)
 	if err != nil {
 		log.Error(err)
 		return "username is already taken", nil
 	}
+	var uid = user.Id
 	if uid == 0 {
 		return "siginup failed, pls try later", nil
 	}
@@ -84,11 +86,22 @@ func CreateUser(req *protocol.SignUpReq, ack *protocol.SignUpAck) (msg string, e
 }
 
 func createUserTables(sess *xorm.Session, uid int64) error {
-	err := sess.CreateTable(&UserContact{Uid: uid})
+	var uc = &UserContact{Uid: uid}
+	err := sess.CreateTable(uc)
 	if err != nil {
 		return err
 	}
-	return sess.CreateTable(&UserGroup{Uid: uid})
+	err = sess.CreateUniques(uc)
+	if err != nil {
+		return err
+	}
+	var ug = &UserGroup{Uid: uid}
+	err = sess.CreateTable(ug)
+	if err != nil {
+		return err
+	}
+	err = sess.CreateUniques(ug)
+	return err
 }
 
 func FindUsersByUids(uids []int64) (map[int64]*User, error) {

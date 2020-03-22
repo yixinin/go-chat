@@ -395,5 +395,7 @@ func (s *ChatLogic) GetUserMessage(r Reqer) (Acker, error) {
 	if err != nil {
 		return Error(ack, err)
 	}
+	ack.UserId = req.UserId
+	ack.GroupId = req.GroupId
 	return Success(ack)
 }

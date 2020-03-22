@@ -157,6 +157,8 @@ message MessageAckBody {
 message GetMessageAck {
     AckHeader header                 = 1;
     repeated MessageAckBody messages = 2;
+    int64                   userId   = 3; //获取用户消息记录
+    int64                   groupId  = 4; //获取群消息记录
 }
 
 message SetReadReq {

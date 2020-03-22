@@ -30,7 +30,7 @@ func (h *Event) HandleCallback(ev cellnet.Event) {
 		header = &protocol.ReqHeader{}
 		var v = reflect.Indirect(reflect.ValueOf(msg))
 		v.FieldByName("Header").Set(reflect.ValueOf(header))
-	} else {
+	} else if header.Token != "" {
 		if ok := h.logic.authFunc(header); !ok {
 			h.Auth(header)
 		}

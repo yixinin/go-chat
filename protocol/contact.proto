@@ -61,3 +61,18 @@ message UpdateContactReq {
 message UpdateContactAck {
     AckHeader header = 1;
 }
+
+message GetContactListReq {
+    ReqHeader header = 1;
+}
+
+message GetContactListAck {
+    AckHeader header          = 1;
+    repeated Contact contacts = 2;
+    message          Contact {
+        string nickname  = 1;
+        string avatar    = 2;
+        int64  contactId = 3;
+        string remarks   = 4;
+    }
+}

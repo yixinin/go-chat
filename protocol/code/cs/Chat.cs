@@ -75,12 +75,12 @@ namespace Protocol {
             "CgV0b1VpZBgDIAEoAxIPCgdncm91cElkGAQgASgDEhMKC21lc3NhZ2VUeXBl",
             "GAUgASgFEhAKCG1lZGlhVXJsGAYgASgJEhIKCmNyZWF0ZVRpbWUYByABKAMS",
             "EgoKdXBkYXRlVGltZRgIIAEoAxIjCghtZW10aW9ucxgQIAMoCzIRLnByb3Rv",
-            "Y29sLk1lbXRpb24iYAoNR2V0TWVzc2FnZUFjaxIjCgZoZWFkZXIYASABKAsy",
-            "Ey5wcm90b2NvbC5BY2tIZWFkZXISKgoIbWVzc2FnZXMYAiADKAsyGC5wcm90",
-            "b2NvbC5NZXNzYWdlQWNrQm9keSJBCgpTZXRSZWFkUmVxEiMKBmhlYWRlchgB",
-            "IAEoCzITLnByb3RvY29sLlJlcUhlYWRlchIOCgZ1c2VySWQYAiABKAMiMQoK",
-            "U2V0UmVhZEFjaxIjCgZoZWFkZXIYASABKAsyEy5wcm90b2NvbC5BY2tIZWFk",
-            "ZXJiBnByb3RvMw=="));
+            "Y29sLk1lbXRpb24igQEKDUdldE1lc3NhZ2VBY2sSIwoGaGVhZGVyGAEgASgL",
+            "MhMucHJvdG9jb2wuQWNrSGVhZGVyEioKCG1lc3NhZ2VzGAIgAygLMhgucHJv",
+            "dG9jb2wuTWVzc2FnZUFja0JvZHkSDgoGdXNlcklkGAMgASgDEg8KB2dyb3Vw",
+            "SWQYBCABKAMiQQoKU2V0UmVhZFJlcRIjCgZoZWFkZXIYASABKAsyEy5wcm90",
+            "b2NvbC5SZXFIZWFkZXISDgoGdXNlcklkGAIgASgDIjEKClNldFJlYWRBY2sS",
+            "IwoGaGVhZGVyGAEgASgLMhMucHJvdG9jb2wuQWNrSGVhZGVyYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.HeaderReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -105,7 +105,7 @@ namespace Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.GetMessageUserAck), global::Protocol.GetMessageUserAck.Parser, new[]{ "Header", "Users" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.GetMessageUserAck.Types.MessageUser), global::Protocol.GetMessageUserAck.Types.MessageUser.Parser, new[]{ "UserId", "GroupId", "Nickname", "Avatar", "Count", "Messages" }, null, null, null, null)}),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.GetMessageReq), global::Protocol.GetMessageReq.Parser, new[]{ "Header", "UserId", "GroupId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.MessageAckBody), global::Protocol.MessageAckBody.Parser, new[]{ "Text", "FromUid", "ToUid", "GroupId", "MessageType", "MediaUrl", "CreateTime", "UpdateTime", "Memtions" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.GetMessageAck), global::Protocol.GetMessageAck.Parser, new[]{ "Header", "Messages" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.GetMessageAck), global::Protocol.GetMessageAck.Parser, new[]{ "Header", "Messages", "UserId", "GroupId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SetReadReq), global::Protocol.SetReadReq.Parser, new[]{ "Header", "UserId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SetReadAck), global::Protocol.SetReadAck.Parser, new[]{ "Header" }, null, null, null, null)
           }));
@@ -4744,6 +4744,8 @@ namespace Protocol {
     public GetMessageAck(GetMessageAck other) : this() {
       header_ = other.header_ != null ? other.header_.Clone() : null;
       messages_ = other.messages_.Clone();
+      userId_ = other.userId_;
+      groupId_ = other.groupId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -4773,6 +4775,34 @@ namespace Protocol {
       get { return messages_; }
     }
 
+    /// <summary>Field number for the "userId" field.</summary>
+    public const int UserIdFieldNumber = 3;
+    private long userId_;
+    /// <summary>
+    ///获取用户消息记录
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long UserId {
+      get { return userId_; }
+      set {
+        userId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "groupId" field.</summary>
+    public const int GroupIdFieldNumber = 4;
+    private long groupId_;
+    /// <summary>
+    ///获取群消息记录
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long GroupId {
+      get { return groupId_; }
+      set {
+        groupId_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as GetMessageAck);
@@ -4788,6 +4818,8 @@ namespace Protocol {
       }
       if (!object.Equals(Header, other.Header)) return false;
       if(!messages_.Equals(other.messages_)) return false;
+      if (UserId != other.UserId) return false;
+      if (GroupId != other.GroupId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -4796,6 +4828,8 @@ namespace Protocol {
       int hash = 1;
       if (header_ != null) hash ^= Header.GetHashCode();
       hash ^= messages_.GetHashCode();
+      if (UserId != 0L) hash ^= UserId.GetHashCode();
+      if (GroupId != 0L) hash ^= GroupId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -4814,6 +4848,14 @@ namespace Protocol {
         output.WriteMessage(Header);
       }
       messages_.WriteTo(output, _repeated_messages_codec);
+      if (UserId != 0L) {
+        output.WriteRawTag(24);
+        output.WriteInt64(UserId);
+      }
+      if (GroupId != 0L) {
+        output.WriteRawTag(32);
+        output.WriteInt64(GroupId);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -4826,6 +4868,12 @@ namespace Protocol {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Header);
       }
       size += messages_.CalculateSize(_repeated_messages_codec);
+      if (UserId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(UserId);
+      }
+      if (GroupId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(GroupId);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -4844,6 +4892,12 @@ namespace Protocol {
         Header.MergeFrom(other.Header);
       }
       messages_.Add(other.messages_);
+      if (other.UserId != 0L) {
+        UserId = other.UserId;
+      }
+      if (other.GroupId != 0L) {
+        GroupId = other.GroupId;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -4864,6 +4918,14 @@ namespace Protocol {
           }
           case 18: {
             messages_.AddEntriesFrom(input, _repeated_messages_codec);
+            break;
+          }
+          case 24: {
+            UserId = input.ReadInt64();
+            break;
+          }
+          case 32: {
+            GroupId = input.ReadInt64();
             break;
           }
         }

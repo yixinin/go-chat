@@ -45,7 +45,13 @@ namespace Protocol {
             "YWRlciJeChBVcGRhdGVDb250YWN0UmVxEiMKBmhlYWRlchgBIAEoCzITLnBy",
             "b3RvY29sLlJlcUhlYWRlchISCgpzZXRSZW1hcmtzGAIgASgJEhEKCWNvbnRh",
             "Y3RJZBgDIAEoAyI3ChBVcGRhdGVDb250YWN0QWNrEiMKBmhlYWRlchgBIAEo",
-            "CzITLnByb3RvY29sLkFja0hlYWRlcmIGcHJvdG8z"));
+            "CzITLnByb3RvY29sLkFja0hlYWRlciI4ChFHZXRDb250YWN0TGlzdFJlcRIj",
+            "CgZoZWFkZXIYASABKAsyEy5wcm90b2NvbC5SZXFIZWFkZXIiwAEKEUdldENv",
+            "bnRhY3RMaXN0QWNrEiMKBmhlYWRlchgBIAEoCzITLnByb3RvY29sLkFja0hl",
+            "YWRlchI1Cghjb250YWN0cxgCIAMoCzIjLnByb3RvY29sLkdldENvbnRhY3RM",
+            "aXN0QWNrLkNvbnRhY3QaTwoHQ29udGFjdBIQCghuaWNrbmFtZRgBIAEoCRIO",
+            "CgZhdmF0YXIYAiABKAkSEQoJY29udGFjdElkGAMgASgDEg8KB3JlbWFya3MY",
+            "BCABKAliBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.HeaderReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -57,7 +63,9 @@ namespace Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.DeleteContactReq), global::Protocol.DeleteContactReq.Parser, new[]{ "Header", "ContactId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.DeleteContactAck), global::Protocol.DeleteContactAck.Parser, new[]{ "Header" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.UpdateContactReq), global::Protocol.UpdateContactReq.Parser, new[]{ "Header", "SetRemarks", "ContactId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.UpdateContactAck), global::Protocol.UpdateContactAck.Parser, new[]{ "Header" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.UpdateContactAck), global::Protocol.UpdateContactAck.Parser, new[]{ "Header" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.GetContactListReq), global::Protocol.GetContactListReq.Parser, new[]{ "Header" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.GetContactListAck), global::Protocol.GetContactListAck.Parser, new[]{ "Header", "Contacts" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.GetContactListAck.Types.Contact), global::Protocol.GetContactListAck.Types.Contact.Parser, new[]{ "Nickname", "Avatar", "ContactId", "Remarks" }, null, null, null, null)})
           }));
     }
     #endregion
@@ -2013,6 +2021,516 @@ namespace Protocol {
         }
       }
     }
+
+  }
+
+  public sealed partial class GetContactListReq : pb::IMessage<GetContactListReq> {
+    private static readonly pb::MessageParser<GetContactListReq> _parser = new pb::MessageParser<GetContactListReq>(() => new GetContactListReq());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GetContactListReq> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Protocol.ContactReflection.Descriptor.MessageTypes[9]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetContactListReq() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetContactListReq(GetContactListReq other) : this() {
+      header_ = other.header_ != null ? other.header_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetContactListReq Clone() {
+      return new GetContactListReq(this);
+    }
+
+    /// <summary>Field number for the "header" field.</summary>
+    public const int HeaderFieldNumber = 1;
+    private global::Protocol.ReqHeader header_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Protocol.ReqHeader Header {
+      get { return header_; }
+      set {
+        header_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GetContactListReq);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GetContactListReq other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(Header, other.Header)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (header_ != null) hash ^= Header.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (header_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Header);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (header_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Header);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GetContactListReq other) {
+      if (other == null) {
+        return;
+      }
+      if (other.header_ != null) {
+        if (header_ == null) {
+          Header = new global::Protocol.ReqHeader();
+        }
+        Header.MergeFrom(other.Header);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            if (header_ == null) {
+              Header = new global::Protocol.ReqHeader();
+            }
+            input.ReadMessage(Header);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class GetContactListAck : pb::IMessage<GetContactListAck> {
+    private static readonly pb::MessageParser<GetContactListAck> _parser = new pb::MessageParser<GetContactListAck>(() => new GetContactListAck());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GetContactListAck> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Protocol.ContactReflection.Descriptor.MessageTypes[10]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetContactListAck() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetContactListAck(GetContactListAck other) : this() {
+      header_ = other.header_ != null ? other.header_.Clone() : null;
+      contacts_ = other.contacts_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetContactListAck Clone() {
+      return new GetContactListAck(this);
+    }
+
+    /// <summary>Field number for the "header" field.</summary>
+    public const int HeaderFieldNumber = 1;
+    private global::Protocol.AckHeader header_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Protocol.AckHeader Header {
+      get { return header_; }
+      set {
+        header_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "contacts" field.</summary>
+    public const int ContactsFieldNumber = 2;
+    private static readonly pb::FieldCodec<global::Protocol.GetContactListAck.Types.Contact> _repeated_contacts_codec
+        = pb::FieldCodec.ForMessage(18, global::Protocol.GetContactListAck.Types.Contact.Parser);
+    private readonly pbc::RepeatedField<global::Protocol.GetContactListAck.Types.Contact> contacts_ = new pbc::RepeatedField<global::Protocol.GetContactListAck.Types.Contact>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::Protocol.GetContactListAck.Types.Contact> Contacts {
+      get { return contacts_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GetContactListAck);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GetContactListAck other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(Header, other.Header)) return false;
+      if(!contacts_.Equals(other.contacts_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (header_ != null) hash ^= Header.GetHashCode();
+      hash ^= contacts_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (header_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Header);
+      }
+      contacts_.WriteTo(output, _repeated_contacts_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (header_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Header);
+      }
+      size += contacts_.CalculateSize(_repeated_contacts_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GetContactListAck other) {
+      if (other == null) {
+        return;
+      }
+      if (other.header_ != null) {
+        if (header_ == null) {
+          Header = new global::Protocol.AckHeader();
+        }
+        Header.MergeFrom(other.Header);
+      }
+      contacts_.Add(other.contacts_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            if (header_ == null) {
+              Header = new global::Protocol.AckHeader();
+            }
+            input.ReadMessage(Header);
+            break;
+          }
+          case 18: {
+            contacts_.AddEntriesFrom(input, _repeated_contacts_codec);
+            break;
+          }
+        }
+      }
+    }
+
+    #region Nested types
+    /// <summary>Container for nested types declared in the GetContactListAck message type.</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static partial class Types {
+      public sealed partial class Contact : pb::IMessage<Contact> {
+        private static readonly pb::MessageParser<Contact> _parser = new pb::MessageParser<Contact>(() => new Contact());
+        private pb::UnknownFieldSet _unknownFields;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::MessageParser<Contact> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::Protocol.GetContactListAck.Descriptor.NestedTypes[0]; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Contact() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Contact(Contact other) : this() {
+          nickname_ = other.nickname_;
+          avatar_ = other.avatar_;
+          contactId_ = other.contactId_;
+          remarks_ = other.remarks_;
+          _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Contact Clone() {
+          return new Contact(this);
+        }
+
+        /// <summary>Field number for the "nickname" field.</summary>
+        public const int NicknameFieldNumber = 1;
+        private string nickname_ = "";
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public string Nickname {
+          get { return nickname_; }
+          set {
+            nickname_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        /// <summary>Field number for the "avatar" field.</summary>
+        public const int AvatarFieldNumber = 2;
+        private string avatar_ = "";
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public string Avatar {
+          get { return avatar_; }
+          set {
+            avatar_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        /// <summary>Field number for the "contactId" field.</summary>
+        public const int ContactIdFieldNumber = 3;
+        private long contactId_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public long ContactId {
+          get { return contactId_; }
+          set {
+            contactId_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "remarks" field.</summary>
+        public const int RemarksFieldNumber = 4;
+        private string remarks_ = "";
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public string Remarks {
+          get { return remarks_; }
+          set {
+            remarks_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override bool Equals(object other) {
+          return Equals(other as Contact);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool Equals(Contact other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if (Nickname != other.Nickname) return false;
+          if (Avatar != other.Avatar) return false;
+          if (ContactId != other.ContactId) return false;
+          if (Remarks != other.Remarks) return false;
+          return Equals(_unknownFields, other._unknownFields);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override int GetHashCode() {
+          int hash = 1;
+          if (Nickname.Length != 0) hash ^= Nickname.GetHashCode();
+          if (Avatar.Length != 0) hash ^= Avatar.GetHashCode();
+          if (ContactId != 0L) hash ^= ContactId.GetHashCode();
+          if (Remarks.Length != 0) hash ^= Remarks.GetHashCode();
+          if (_unknownFields != null) {
+            hash ^= _unknownFields.GetHashCode();
+          }
+          return hash;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void WriteTo(pb::CodedOutputStream output) {
+          if (Nickname.Length != 0) {
+            output.WriteRawTag(10);
+            output.WriteString(Nickname);
+          }
+          if (Avatar.Length != 0) {
+            output.WriteRawTag(18);
+            output.WriteString(Avatar);
+          }
+          if (ContactId != 0L) {
+            output.WriteRawTag(24);
+            output.WriteInt64(ContactId);
+          }
+          if (Remarks.Length != 0) {
+            output.WriteRawTag(34);
+            output.WriteString(Remarks);
+          }
+          if (_unknownFields != null) {
+            _unknownFields.WriteTo(output);
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int CalculateSize() {
+          int size = 0;
+          if (Nickname.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeStringSize(Nickname);
+          }
+          if (Avatar.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeStringSize(Avatar);
+          }
+          if (ContactId != 0L) {
+            size += 1 + pb::CodedOutputStream.ComputeInt64Size(ContactId);
+          }
+          if (Remarks.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeStringSize(Remarks);
+          }
+          if (_unknownFields != null) {
+            size += _unknownFields.CalculateSize();
+          }
+          return size;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(Contact other) {
+          if (other == null) {
+            return;
+          }
+          if (other.Nickname.Length != 0) {
+            Nickname = other.Nickname;
+          }
+          if (other.Avatar.Length != 0) {
+            Avatar = other.Avatar;
+          }
+          if (other.ContactId != 0L) {
+            ContactId = other.ContactId;
+          }
+          if (other.Remarks.Length != 0) {
+            Remarks = other.Remarks;
+          }
+          _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+                break;
+              case 10: {
+                Nickname = input.ReadString();
+                break;
+              }
+              case 18: {
+                Avatar = input.ReadString();
+                break;
+              }
+              case 24: {
+                ContactId = input.ReadInt64();
+                break;
+              }
+              case 34: {
+                Remarks = input.ReadString();
+                break;
+              }
+            }
+          }
+        }
+
+      }
+
+    }
+    #endregion
 
   }
 

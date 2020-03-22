@@ -21,6 +21,10 @@ func init() {
 		new(RealTimeAck),
 		new(RealTimeReq),
 		new(RealTimeNotify),
+		new(GetMessageUserReq),
+		new(GetMessageUserAck),
+		new(GetMessageReq),
+		new(GetMessageAck),
 
 		//联系人
 		new(AddContactReq),

@@ -57,7 +57,9 @@ func (s *ContactLogic) AddContact(r Reqer) (Acker, error) {
 	}()
 	req, _ := r.(*protocol.AddContactReq)
 	ack := &protocol.AddContactAck{}
-
+	if req.Header.Uid <= 0 {
+		return AccessDeined(ack)
+	}
 	if req.AuthId != 0 { //通过验证
 		ok, err := models.ApproveContact(req.AuthId, req.Add, req.SetRemarks)
 		if err != nil {

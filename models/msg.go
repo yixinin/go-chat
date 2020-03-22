@@ -91,14 +91,15 @@ func NewContext(ttls ...time.Duration) (context.Context, context.CancelFunc) {
 
 func GetMessageUser(uid int64, ack *protocol.GetMessageUserAck) error {
 	if ack.Users == nil {
-		ack.Users = make([]*protocol.GetMessageUserAck_MessageUser, 1)
+		ack.Users = make([]*protocol.GetMessageUserAck_MessageUser, 0, 1)
 	}
 	//查找未读消息
 	var userMessage = &UserMessage{}
 
 	var ctx, cancel = NewContext()
 	defer cancel()
-	rows, err := db.Mongo.Collection(userMessage.TableName(uid)).Find(ctx, bson.M{"read": false})
+	var tbName = userMessage.TableName(uid)
+	rows, err := db.Mongo.Collection(tbName).Find(ctx, bson.M{"read": false})
 	if err != nil {
 		return err
 	}
@@ -127,7 +128,7 @@ func GetMessageUser(uid int64, ack *protocol.GetMessageUserAck) error {
 	//分组
 	var uids = make([]int64, 0, len(m))
 	for k, v := range m {
-		uids = append(uids, uid)
+		uids = append(uids, k)
 		var msgs = make([]*protocol.MessageAckBody, 0, len(v))
 		for _, msg := range v {
 			msgs = append(msgs, &protocol.MessageAckBody{
@@ -160,24 +161,17 @@ func GetMessageUser(uid int64, ack *protocol.GetMessageUserAck) error {
 
 func GetUserMessage(uid, toUid int64, ack *protocol.GetMessageAck) error {
 	if ack.Messages == nil {
-		ack.Messages = make([]*protocol.MessageAckBody, 10)
+		ack.Messages = make([]*protocol.MessageAckBody, 0, 10)
 	}
 	//查找未读消息
 	var userMessage = &UserMessage{}
 
 	var ctx, cancel = NewContext()
 	defer cancel()
-	rows, err := db.Mongo.Collection(userMessage.TableName(uid)).Find(ctx, bson.M{"$or": bson.D{
-		// bson.M{"fromuid": toUid},
-		// bson.M{"touid": toUid},
-		bson.DocElem{
-			Name:  "fromuid",
-			Value: toUid,
-		},
-		bson.DocElem{
-			Name:  "touid",
-			Value: toUid,
-		},
+	var tbName = userMessage.TableName(uid)
+	rows, err := db.Mongo.Collection(tbName).Find(ctx, bson.M{"$or": []bson.M{
+		bson.M{"fromuid": toUid},
+		bson.M{"touid": toUid},
 	}})
 	if err != nil {
 		return err

@@ -80,6 +80,9 @@ func ApproveContact(id int64, add bool, remarks string) (bool, error) {
 		sess.Rollback()
 		return false, err
 	}
+	if contact.Status != ContactStatusWaiting {
+		return false, nil
+	}
 
 	// 通过
 	// 添加A的联系人B
