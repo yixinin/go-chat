@@ -23,17 +23,24 @@ type ChatLogic struct {
 	// watcher     registry.Watcher
 	// Registry    registry.Registry
 	// roomClients map[string]protocol.RoomServiceClient
-	Notify NotifyFunc
-	stop   chan bool
+	Notifys []NotifyFunc
+	stop    chan bool
 }
 
 func NewChatLogic(notifyFuncs ...NotifyFunc) *ChatLogic {
-	var notifyFunc NotifyFunc = nil
-	if len(notifyFuncs) > 0 {
-		notifyFunc = notifyFuncs[0]
-	}
+	// var notifyFunc NotifyFunc = nil
+	// if len(notifyFuncs) > 0 {
+	// 	notifyFunc = notifyFuncs
+	// }
 	var c = &ChatLogic{
-		Notify: notifyFunc,
+		Notifys: make([]NotifyFunc, 0, 2),
+	}
+	if notifyFuncs != nil {
+		for _, v := range notifyFuncs {
+			if v != nil {
+				c.Notifys = append(c.Notifys, v)
+			}
+		}
 	}
 
 	return c
@@ -195,11 +202,11 @@ func (s *ChatLogic) RealTime(r Reqer) (Acker, error) {
 	ack.WsAddr = resp.WsAddr
 	ack.HttpAddr = resp.HttpAddr
 	ack.RoomId = resp.RoomId
-	ack.Token = req.Header.Token
 
 	//推送给其它成员
 	for _, u := range users {
 		if u.Uid == req.Header.Uid {
+			ack.Token = u.Token
 			continue
 		}
 		s.NotifyRealTime([]int64{u.Uid}, &protocol.RealTimeNotify{
@@ -267,18 +274,26 @@ func (s *ChatLogic) CancelRealTime(r Reqer) (Acker, error) {
 }
 
 func (s *ChatLogic) NotifyRealTime(uids []int64, msg *protocol.RealTimeNotify) {
+
 	for _, uid := range uids {
 		msg.Header.Uid = 0
-		if ok, err := s.Notify(uid, msg); err == nil && ok {
+		var notified bool
+		for _, notify := range s.Notifys {
+			ok, err := notify(uid, msg)
 			if err != nil {
 				log.Error(err)
 			}
-			continue
+			if ok {
+				notified = true
+			}
 		}
-		err := cache.CacheRealTimeNotify(uid, msg)
-		if err != nil {
-			log.Errorf("cache notify msg error:%v", err)
+		if !notified {
+			err := cache.CacheRealTimeNotify(uid, msg)
+			if err != nil {
+				log.Errorf("cache notify msg error:%v", err)
+			}
 		}
+
 	}
 }
 
@@ -289,12 +304,11 @@ func (s *ChatLogic) NotifyMessage(uids []int64, msg Notifier) {
 			header.Uid = 0
 		}
 
-		ok, err := s.Notify(uid, msg)
-		if err != nil {
-			log.Error(err)
-		}
-		if !ok {
-			log.Warn("notify fail, uid:%d", uid)
+		for _, notify := range s.Notifys {
+			_, err := notify(uid, msg)
+			if err != nil {
+				log.Error(err)
+			}
 		}
 	}
 
@@ -314,49 +328,6 @@ func (s *ChatLogic) Poll(r Reqer) (Acker, error) {
 	}
 	ack.Msgs = msgs
 
-	return Success(ack)
-}
-
-func (s *ChatLogic) PollMessage(r Reqer) (Acker, error) {
-	defer func() {
-		if err := recover(); err != nil {
-			log.Error("PollMessage recovered", err)
-		}
-	}()
-	// req, _ := r.(*protocol.PollReq)
-	ack := &protocol.PollAck{}
-	// var userMessages = make([]models.UserMessage, 0, 10)
-	// var ctx, cancel = NewContext()
-	// defer cancel()
-	// c, err := db.Mongo.Collection((&models.UserMessage{}).TableName(req.Header.Uid)).Find(ctx, bson.M{"read": false}, options.Find().SetSort(bson.M{"_id": -1}))
-	// if err != nil {
-	// 	if err != mongo.ErrNoDocuments {
-	// 		return Error(ack, err)
-	// 	}
-	// }
-	// defer c.Close(context.TODO())
-	// for c.TryNext(context.TODO()) {
-	// 	var msg models.UserMessage
-	// 	err := c.Decode(&msg)
-	// 	if err != nil {
-	// 		log.Error(err)
-	// 		continue
-	// 	}
-	// 	userMessages = append(userMessages, msg)
-	// }
-
-	// ack.Data = make([]*protocol.MessageAckBody, 0, len(userMessages))
-	// for _, v := range userMessages {
-	// 	ack.Data = append(ack.Data, &protocol.MessageAckBody{
-	// 		Text:        v.Text,
-	// 		FromUid:     v.FromUid,
-	// 		ToUid:       v.ToUid,
-	// 		MediaUrl:    v.MediaUrl,
-	// 		MessageType: v.MessageType,
-	// 		CreateTime:  v.CreateTime,
-	// 		UpdateTime:  v.UpdateTime,
-	// 	})
-	// }
 	return Success(ack)
 }
 

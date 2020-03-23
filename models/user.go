@@ -14,16 +14,16 @@ import (
 )
 
 var avatars = []string{
-	"http://localhost:8080/static/avatar/default0.jpg",
-	"http://localhost:8080/static/avatar/default1.jpg",
-	"http://localhost:8080/static/avatar/default2.jpg",
-	"http://localhost:8080/static/avatar/default3.jpg",
-	"http://localhost:8080/static/avatar/default4.jpg",
-	"http://localhost:8080/static/avatar/default5.jpg",
-	"http://localhost:8080/static/avatar/default6.jpg",
-	"http://localhost:8080/static/avatar/default7.jpg",
-	"http://localhost:8080/static/avatar/default8.jpg",
-	"http://localhost:8080/static/avatar/default9.jpg",
+	"/static/avatar/default0.jpg",
+	"/static/avatar/default1.jpg",
+	"/static/avatar/default2.jpg",
+	"/static/avatar/default3.jpg",
+	"/static/avatar/default4.jpg",
+	"/static/avatar/default5.jpg",
+	"/static/avatar/default6.jpg",
+	"/static/avatar/default7.jpg",
+	"/static/avatar/default8.jpg",
+	"/static/avatar/default9.jpg",
 }
 
 func init() {

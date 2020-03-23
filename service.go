@@ -74,16 +74,24 @@ func (s *Service) Init() {
 		registry.Addrs(s.config.EtcdAddr...),
 	)
 
+	var notifys = make([]logic.NotifyFunc, 0, 2)
+	if s.TcpServer != nil {
+		notifys = append(notifys, s.TcpServer.Notify)
+	}
+	if s.WsServer != nil {
+		notifys = append(notifys, s.WsServer.Notify)
+	}
+
 	if s.HttpServer != nil {
-		var logic = handler.NewLogic(s.HttpServer)
+		var logic = handler.NewLogic(s.HttpServer, notifys...)
 		s.HttpServer.Init(handler.NewHttp(logic))
 	}
 	if s.TcpServer != nil {
-		var logic = handler.NewLogic(s.TcpServer)
+		var logic = handler.NewLogic(s.TcpServer, notifys...)
 		s.TcpServer.Init(handler.NewEvent(logic))
 	}
 	if s.WsServer != nil {
-		var logic = handler.NewLogic(s.WsServer)
+		var logic = handler.NewLogic(s.WsServer, notifys...)
 		s.WsServer.Init(handler.NewEvent(logic))
 	}
 	if s.GrpcServer != nil {

@@ -26,11 +26,11 @@ type Logic struct {
 	authFunc   AuthFunc
 }
 
-func NewLogic(srv server.Server) *Logic {
+func NewLogic(srv server.Server, notifys ...logic.NotifyFunc) *Logic {
 	var s = &Logic{
 		// hander:  EventMessageHandler,
 		account: logic.NewAccountLogic(),
-		chat:    logic.NewChatLogic(srv.Notify),
+		chat:    logic.NewChatLogic(notifys...),
 		contact: logic.NewContactLogic(),
 
 		acceptFunc: srv.AcceptSess,
