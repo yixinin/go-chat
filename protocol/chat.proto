@@ -17,13 +17,13 @@ message Memtion {
     string text   = 2; //@xxx
 }
 message MessageBody {
-    int32    messageType         = 2;
-    string   text                = 3;
-    repeated Memtion memtions    = 4;
-    int64            toUserId    = 5; //发送给用户
-    string           fromUserId  = 6; //发送者
-    int64            fromGroupId = 7; //通过群
-    int64            toGroupId   = 8; //发送给群聊
+    int32    messageType      = 2;
+    string   text             = 3;
+    repeated Memtion memtions = 4;
+    int64            toUserId = 5; //发送给用户
+    // int64            fromUserId  = 6; //发送者
+    int64 fromGroupId = 7; //通过群
+    int64 toGroupId   = 8; //发送给群聊
 }
 
 message SendMessageReq {
@@ -36,8 +36,11 @@ message SendMessageAck {
 }
 
 message MessageNotify {
-    NotifyHeader header = 1;
-    MessageBody  body   = 2;
+    NotifyHeader header     = 1;
+    MessageBody  body       = 2;
+    int64        fromUserId = 3;
+    string       avatar     = 4;
+    string       nickname   = 5;
 }
 
 message RealTimeReq {

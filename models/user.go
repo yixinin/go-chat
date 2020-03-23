@@ -135,3 +135,10 @@ func FindUsersByUids(uids []int64) (map[int64]*User, error) {
 	}
 	return m, nil
 }
+
+func FindOneUserByUid(uid int64) (*User, error) {
+	var user = new(User)
+	user.Id = uid
+	_, err := db.Mysql.Get(user)
+	return user, err
+}

@@ -74,5 +74,6 @@ message GetContactListAck {
         string avatar    = 2;
         int64  contactId = 3;
         string remarks   = 4;
+        int64  userId    = 5;
     }
 }

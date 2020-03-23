@@ -22,7 +22,7 @@ const (
 
 type Contact struct {
 	Id       int64 `xorm:"pk autoincr"`
-	UserId   int64 //x用户的联系人列表
+	UserId   int64 `xorm:"unique(to_user_id)"` //x用户的联系人列表
 	ToUserId int64
 	Remarks  string //预设备注备注
 	Status   int32  `xorm:"default(1)"` //状态 1=待通过 2=已拒绝 3=已通过 4=已过期
@@ -36,15 +36,26 @@ func (Contact) TableName() string {
 	return "contact"
 }
 
-func AddContact(uid, toUid int64, msg, remarks string) (int64, error) {
-	var contact = &Contact{
+func AddContact(uid, toUid int64, msg, remarks string) (bool, error) {
+	var contact = new(Contact)
+	ok, err := db.Mysql.Where("(user_id = ? and to_user_id = ?) or (user_id = ? and to_user_id =?)", uid, toUid, toUid, uid).Get(contact)
+	if ok { //已存在记录
+		if contact.ToUserId == toUid { //重复添加 更新状态
+			contact.Status = ContactStatusWaiting
+			_, err := db.Mysql.Cols("status").Update(contact)
+			return err == nil, err
+		}
+		//互相添加 通过
+		return ApproveContact(contact.Id, true, remarks)
+	}
+	contact = &Contact{
 		UserId:   uid,
 		ToUserId: toUid,
 		Remarks:  remarks,
 		Message:  msg,
 	}
 	n, err := db.Mysql.Insert(contact)
-	return n, err
+	return n > 0, err
 }
 
 func ApproveContact(id int64, add bool, remarks string) (bool, error) {
@@ -54,6 +65,7 @@ func ApproveContact(id int64, add bool, remarks string) (bool, error) {
 	if err != nil {
 		return false, err
 	}
+
 	//通过验证
 	var contact = new(Contact)
 	contact.Status = ContactStatusApproved
@@ -79,9 +91,6 @@ func ApproveContact(id int64, add bool, remarks string) (bool, error) {
 	if !ok {
 		sess.Rollback()
 		return false, err
-	}
-	if contact.Status != ContactStatusWaiting {
-		return false, nil
 	}
 
 	// 通过
@@ -227,7 +236,7 @@ func GetContactByUserId(uid, toUid int64) (*UserContact, bool, error) {
 		Uid:    uid,
 		UserId: toUid,
 	}
-	ok, err := db.Mysql.Get(m)
+	ok, err := db.Mysql.Table(m.TableName()).Get(m)
 	if !ok {
 		return m, ok, err
 	}
@@ -235,6 +244,15 @@ func GetContactByUserId(uid, toUid int64) (*UserContact, bool, error) {
 		return m, ok, err
 	}
 	return m, ok, err
+}
+
+func GetUserContacts(uid int64) ([]*UserContact, error) {
+	var contact = &UserContact{
+		Uid: uid,
+	}
+	var contacts = make([]*UserContact, 0, 10)
+	err := db.Mysql.Table(contact.TableName()).Cols("user_id", "id", "remarks").Find(&contacts)
+	return contacts, err
 }
 
 func UpdateContact(uid, id int64, remarks string) (bool, error) {

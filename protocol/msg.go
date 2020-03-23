@@ -29,6 +29,8 @@ func init() {
 		//联系人
 		new(AddContactReq),
 		new(AddContactAck),
+		new(GetContactListReq),
+		new(GetContactListAck),
 	)
 
 	ProtocolMap["protocol"] = protocol

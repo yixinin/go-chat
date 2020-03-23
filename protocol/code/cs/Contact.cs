@@ -46,12 +46,12 @@ namespace Protocol {
             "b3RvY29sLlJlcUhlYWRlchISCgpzZXRSZW1hcmtzGAIgASgJEhEKCWNvbnRh",
             "Y3RJZBgDIAEoAyI3ChBVcGRhdGVDb250YWN0QWNrEiMKBmhlYWRlchgBIAEo",
             "CzITLnByb3RvY29sLkFja0hlYWRlciI4ChFHZXRDb250YWN0TGlzdFJlcRIj",
-            "CgZoZWFkZXIYASABKAsyEy5wcm90b2NvbC5SZXFIZWFkZXIiwAEKEUdldENv",
+            "CgZoZWFkZXIYASABKAsyEy5wcm90b2NvbC5SZXFIZWFkZXIi0AEKEUdldENv",
             "bnRhY3RMaXN0QWNrEiMKBmhlYWRlchgBIAEoCzITLnByb3RvY29sLkFja0hl",
             "YWRlchI1Cghjb250YWN0cxgCIAMoCzIjLnByb3RvY29sLkdldENvbnRhY3RM",
-            "aXN0QWNrLkNvbnRhY3QaTwoHQ29udGFjdBIQCghuaWNrbmFtZRgBIAEoCRIO",
+            "aXN0QWNrLkNvbnRhY3QaXwoHQ29udGFjdBIQCghuaWNrbmFtZRgBIAEoCRIO",
             "CgZhdmF0YXIYAiABKAkSEQoJY29udGFjdElkGAMgASgDEg8KB3JlbWFya3MY",
-            "BCABKAliBnByb3RvMw=="));
+            "BCABKAkSDgoGdXNlcklkGAUgASgDYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.HeaderReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -65,7 +65,7 @@ namespace Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.UpdateContactReq), global::Protocol.UpdateContactReq.Parser, new[]{ "Header", "SetRemarks", "ContactId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.UpdateContactAck), global::Protocol.UpdateContactAck.Parser, new[]{ "Header" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.GetContactListReq), global::Protocol.GetContactListReq.Parser, new[]{ "Header" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.GetContactListAck), global::Protocol.GetContactListAck.Parser, new[]{ "Header", "Contacts" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.GetContactListAck.Types.Contact), global::Protocol.GetContactListAck.Types.Contact.Parser, new[]{ "Nickname", "Avatar", "ContactId", "Remarks" }, null, null, null, null)})
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.GetContactListAck), global::Protocol.GetContactListAck.Parser, new[]{ "Header", "Contacts" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.GetContactListAck.Types.Contact), global::Protocol.GetContactListAck.Types.Contact.Parser, new[]{ "Nickname", "Avatar", "ContactId", "Remarks", "UserId" }, null, null, null, null)})
           }));
     }
     #endregion
@@ -2345,6 +2345,7 @@ namespace Protocol {
           avatar_ = other.avatar_;
           contactId_ = other.contactId_;
           remarks_ = other.remarks_;
+          userId_ = other.userId_;
           _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
         }
 
@@ -2397,6 +2398,17 @@ namespace Protocol {
           }
         }
 
+        /// <summary>Field number for the "userId" field.</summary>
+        public const int UserIdFieldNumber = 5;
+        private long userId_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public long UserId {
+          get { return userId_; }
+          set {
+            userId_ = value;
+          }
+        }
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override bool Equals(object other) {
           return Equals(other as Contact);
@@ -2414,6 +2426,7 @@ namespace Protocol {
           if (Avatar != other.Avatar) return false;
           if (ContactId != other.ContactId) return false;
           if (Remarks != other.Remarks) return false;
+          if (UserId != other.UserId) return false;
           return Equals(_unknownFields, other._unknownFields);
         }
 
@@ -2424,6 +2437,7 @@ namespace Protocol {
           if (Avatar.Length != 0) hash ^= Avatar.GetHashCode();
           if (ContactId != 0L) hash ^= ContactId.GetHashCode();
           if (Remarks.Length != 0) hash ^= Remarks.GetHashCode();
+          if (UserId != 0L) hash ^= UserId.GetHashCode();
           if (_unknownFields != null) {
             hash ^= _unknownFields.GetHashCode();
           }
@@ -2453,6 +2467,10 @@ namespace Protocol {
             output.WriteRawTag(34);
             output.WriteString(Remarks);
           }
+          if (UserId != 0L) {
+            output.WriteRawTag(40);
+            output.WriteInt64(UserId);
+          }
           if (_unknownFields != null) {
             _unknownFields.WriteTo(output);
           }
@@ -2472,6 +2490,9 @@ namespace Protocol {
           }
           if (Remarks.Length != 0) {
             size += 1 + pb::CodedOutputStream.ComputeStringSize(Remarks);
+          }
+          if (UserId != 0L) {
+            size += 1 + pb::CodedOutputStream.ComputeInt64Size(UserId);
           }
           if (_unknownFields != null) {
             size += _unknownFields.CalculateSize();
@@ -2495,6 +2516,9 @@ namespace Protocol {
           }
           if (other.Remarks.Length != 0) {
             Remarks = other.Remarks;
+          }
+          if (other.UserId != 0L) {
+            UserId = other.UserId;
           }
           _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
         }
@@ -2521,6 +2545,10 @@ namespace Protocol {
               }
               case 34: {
                 Remarks = input.ReadString();
+                break;
+              }
+              case 40: {
+                UserId = input.ReadInt64();
                 break;
               }
             }

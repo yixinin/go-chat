@@ -67,6 +67,8 @@ func (s *Logic) handleMessage(sender iface.Sender, message interface{}) {
 
 	case *protocol.AddContactReq:
 		s.hander(sender, msg, s.contact.AddContact)
+	case *protocol.GetContactListReq:
+		s.hander(sender, msg, s.contact.GetContacts)
 
 	case *cellnet.SessionAccepted:
 		log.Debugln("server accepted")

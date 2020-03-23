@@ -73,9 +73,12 @@ func (s *ContactLogic) AddContact(r Reqer) (Acker, error) {
 			return Fail(ack, "add contact failed")
 		}
 	} else { //添加验证
-		_, err := models.AddContact(req.Header.Uid, req.UserId, req.Msg, req.SetRemarks)
+		ok, err := models.AddContact(req.Header.Uid, req.UserId, req.Msg, req.SetRemarks)
 		if err != nil {
 			return Error(ack, err)
+		}
+		if !ok {
+			return Fail(ack, "add contact fail, pls try later")
 		}
 	}
 
@@ -115,6 +118,38 @@ func (s *ContactLogic) UpdateContact(r Reqer) (Acker, error) {
 	}
 	if !ok {
 		return Fail(ack, "no such contact")
+	}
+	return Success(ack)
+}
+
+func (s ContactLogic) GetContacts(r Reqer) (Acker, error) {
+	req, _ := r.(*protocol.GetContactListReq)
+	ack := &protocol.GetContactListAck{
+		Contacts: make([]*protocol.GetContactListAck_Contact, 0, 10),
+	}
+	var contacts, err = models.GetUserContacts(req.Header.Uid)
+	if err != nil {
+		return Error(ack, err)
+	}
+	var uids = make([]int64, 0, len(contacts))
+	for _, v := range contacts {
+		uids = append(uids, v.UserId)
+		ack.Contacts = append(ack.Contacts, &protocol.GetContactListAck_Contact{
+			Nickname:  "",
+			ContactId: v.Id,
+			UserId:    v.UserId,
+			Remarks:   v.Remarks,
+			Avatar:    "",
+		})
+	}
+	users, err := models.FindUsersByUids(uids)
+	if err != nil {
+		return Error(ack, err)
+	}
+	for i := range ack.Contacts {
+		var u = users[ack.Contacts[i].UserId]
+		ack.Contacts[i].Nickname = u.Nickname
+		ack.Contacts[i].Avatar = u.Avatart
 	}
 	return Success(ack)
 }

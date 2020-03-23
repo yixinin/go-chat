@@ -54,6 +54,7 @@ func (s *ChatLogic) SendMessage(r Reqer) (Acker, error) {
 		Header: &protocol.NotifyHeader{},
 		Body:   req.Body,
 	}
+	msg.FromUserId = req.Header.Uid
 	//查找用户
 	if req.Body.ToUserId != 0 {
 		uids = append(uids, req.Header.Uid)
@@ -129,6 +130,10 @@ func (s *ChatLogic) SendMessage(r Reqer) (Acker, error) {
 
 	}
 
+	//查找发送者信息
+	user, _ := models.FindOneUserByUid(req.Header.Uid)
+	msg.Nickname = user.Nickname
+	msg.Avatar = user.Avatart
 	s.NotifyMessage(uids, msg)
 	return Success(ack)
 }
