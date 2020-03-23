@@ -1,8 +1,8 @@
 etcd:
-  - 127.0.0.1:2279
-  - 127.0.0.1:2379
-  - 127.0.0.1:2479
-  - 127.0.0.1:2579
+  - etcd:2279
+  - etcd:2379
+  - etcd:2479
+  - etcd:2579
 
 grpc:
   addr: "0.0.0.0:8181"
@@ -17,14 +17,14 @@ ws:
   addr: "0.0.0.0:9180"
 
 mongo:
-  host: "127.0.0.1"
+  host: "mongo"
   port: 27017
   db: "live-chat"
   user: ""
   pwd: ""
 
 mysql:
-  host: "127.0.0.1"
+  host: "mysql"
   port: 3306
   db: "live-chat"
   user: "root"
@@ -32,6 +32,7 @@ mysql:
   prefix: "chat_"
 
 redis:
-  host: "127.0.0.1"
+  host: "redis"
   port: 6379
+
 host: 10.0.0.218

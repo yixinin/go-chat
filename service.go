@@ -180,8 +180,12 @@ func (s *Service) Watch(watcher registry.Watcher) {
 					if node == nil {
 						continue
 					}
-					pool.DefaultGrpcConnPool.AddNode(node.Address)
-					log.Infof("add node %s :%s", srv.Name, node.Address)
+					var addr = node.Address
+					if addr[0] == ':' {
+						addr = "voip" + addr
+					}
+					pool.DefaultGrpcConnPool.AddNode(addr)
+					log.Infof("add node %s :%s", srv.Name, addr)
 				}
 			}
 		}
@@ -215,24 +219,36 @@ FOR:
 					if node == nil {
 						continue FOR
 					}
-					pool.DefaultGrpcConnPool.AddNode(node.Address)
-					log.Infof("----new node %s :%s", name, node.Address)
+					var addr = node.Address
+					if addr[0] == ':' {
+						addr = "voip" + addr
+					}
+					pool.DefaultGrpcConnPool.AddNode(addr)
+					log.Infof("----new node %s :%s", name, addr)
 				}
 			case registry.Update.String():
 				for _, node := range res.Service.Nodes {
 					if node == nil {
 						continue FOR
 					}
-					pool.DefaultGrpcConnPool.AddNode(node.Address)
-					log.Infof("----update node %s :%s", name, node.Address)
+					var addr = node.Address
+					if addr[0] == ':' {
+						addr = "voip" + addr
+					}
+					pool.DefaultGrpcConnPool.AddNode(addr)
+					log.Infof("----update node %s :%s", name, addr)
 				}
 			case registry.Delete.String():
 				for _, node := range res.Service.Nodes {
 					if node == nil {
 						continue FOR
 					}
-					pool.DefaultGrpcConnPool.AddNode(node.Address)
-					log.Infof("----del node %s :%s", name, node.Address)
+					var addr = node.Address
+					if addr[0] == ':' {
+						addr = "voip" + addr
+					}
+					pool.DefaultGrpcConnPool.AddNode(addr)
+					log.Infof("----del node %s :%s", name, addr)
 				}
 			default:
 				for _, node := range res.Service.Nodes {
