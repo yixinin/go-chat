@@ -28,37 +28,41 @@ namespace Protocol {
             "aWduVXBSZXESIwoGaGVhZGVyGAEgASgLMhMucHJvdG9jb2wuUmVxSGVhZGVy",
             "EhAKCHVzZXJuYW1lGAIgASgJEhAKCHBhc3N3b3JkGAMgASgJEhEKCXZhbGlk",
             "Q29kZRgEIAEoCRIPCgd2YWxpZElkGAUgASgJEhIKCmRldmljZUNvZGUYBiAB",
-            "KAkSEgoKZGV2aWNlVHlwZRgHIAEoBRIQCghuaWNrbmFtZRgIIAEoCSJTCglT",
-            "aWduVXBBY2sSIwoGaGVhZGVyGAEgASgLMhMucHJvdG9jb2wuQWNrSGVhZGVy",
-            "Eg0KBXRva2VuGAIgASgJEhIKCmRldmljZUNvZGUYAyABKAkiaAoJU2lnbklu",
-            "UmVxEiMKBmhlYWRlchgBIAEoCzITLnByb3RvY29sLlJlcUhlYWRlchIQCgh1",
-            "c2VybmFtZRgCIAEoCRIQCghwYXNzd29yZBgDIAEoCRISCgpkZXZpY2VUeXBl",
-            "GAcgASgFIj8KCVNpZ25JbkFjaxIjCgZoZWFkZXIYASABKAsyEy5wcm90b2Nv",
-            "bC5BY2tIZWFkZXISDQoFdG9rZW4YAiABKAkiMQoKU2lnbk91dFJlcRIjCgZo",
-            "ZWFkZXIYASABKAsyEy5wcm90b2NvbC5SZXFIZWFkZXIiMQoKU2lnbk91dEFj",
-            "axIjCgZoZWFkZXIYASABKAsyEy5wcm90b2NvbC5BY2tIZWFkZXIiQwoKU2ln",
-            "bk9mZlJlcRIjCgZoZWFkZXIYASABKAsyEy5wcm90b2NvbC5SZXFIZWFkZXIS",
-            "EAoIcGFzc3dvcmQYAiABKAkiMQoKU2lnbk9mZkFjaxIjCgZoZWFkZXIYASAB",
-            "KAsyEy5wcm90b2NvbC5BY2tIZWFkZXIifAoRQ2hhbmdlUGFzc3dvcmRSZXES",
-            "IwoGaGVhZGVyGAEgASgLMhMucHJvdG9jb2wuUmVxSGVhZGVyEg4KBm9sZFB3",
-            "ZBgCIAEoCRIOCgZuZXdQd2QYAyABKAkSEQoJdmFsaWRDb2RlGAQgASgJEg8K",
-            "B3ZhbGlkSWQYBSABKAkiOAoRQ2hhbmdlUGFzc3dvcmRBY2sSIwoGaGVhZGVy",
-            "GAEgASgLMhMucHJvdG9jb2wuQWNrSGVhZGVyIpMBChBSZXNldFBhc3N3b3Jk",
-            "UmVxEiMKBmhlYWRlchgBIAEoCzITLnByb3RvY29sLlJlcUhlYWRlchIQCgh1",
-            "c2VybmFtZRgCIAEoCRIQCghwYXNzd29yZBgDIAEoCRIRCgl2YWxpZENvZGUY",
-            "BCABKAkSDwoHdmFsaWRJZBgFIAEoCRISCgpkZXZpY2VUeXBlGAcgASgFIjcK",
-            "EFJlc2V0UGFzc3dvcmRBY2sSIwoGaGVhZGVyGAEgASgLMhMucHJvdG9jb2wu",
-            "QWNrSGVhZGVyIjUKDkdldFVzZXJJbmZvUmVxEiMKBmhlYWRlchgBIAEoCzIT",
-            "LnByb3RvY29sLlJlcUhlYWRlciJXCg5HZXRVc2VySW5mb0FjaxIjCgZoZWFk",
-            "ZXIYASABKAsyEy5wcm90b2NvbC5BY2tIZWFkZXISEAoIbmlja25hbWUYAiAB",
-            "KAkSDgoGYXZhdGFyGAMgASgJYgZwcm90bzM="));
+            "KAkSEgoKZGV2aWNlVHlwZRgHIAEoBRIQCghuaWNrbmFtZRgIIAEoCSI9CgxT",
+            "aWduVXNlckluZm8SEAoIbmlja25hbWUYASABKAkSCwoDdWlkGAIgASgDEg4K",
+            "BmF2YXRhchgDIAEoCSJ9CglTaWduVXBBY2sSIwoGaGVhZGVyGAEgASgLMhMu",
+            "cHJvdG9jb2wuQWNrSGVhZGVyEg0KBXRva2VuGAIgASgJEhIKCmRldmljZUNv",
+            "ZGUYAyABKAkSKAoIdXNlckluZm8YCCABKAsyFi5wcm90b2NvbC5TaWduVXNl",
+            "ckluZm8iaAoJU2lnbkluUmVxEiMKBmhlYWRlchgBIAEoCzITLnByb3RvY29s",
+            "LlJlcUhlYWRlchIQCgh1c2VybmFtZRgCIAEoCRIQCghwYXNzd29yZBgDIAEo",
+            "CRISCgpkZXZpY2VUeXBlGAcgASgFImkKCVNpZ25JbkFjaxIjCgZoZWFkZXIY",
+            "ASABKAsyEy5wcm90b2NvbC5BY2tIZWFkZXISDQoFdG9rZW4YAiABKAkSKAoI",
+            "dXNlckluZm8YCCABKAsyFi5wcm90b2NvbC5TaWduVXNlckluZm8iMQoKU2ln",
+            "bk91dFJlcRIjCgZoZWFkZXIYASABKAsyEy5wcm90b2NvbC5SZXFIZWFkZXIi",
+            "MQoKU2lnbk91dEFjaxIjCgZoZWFkZXIYASABKAsyEy5wcm90b2NvbC5BY2tI",
+            "ZWFkZXIiQwoKU2lnbk9mZlJlcRIjCgZoZWFkZXIYASABKAsyEy5wcm90b2Nv",
+            "bC5SZXFIZWFkZXISEAoIcGFzc3dvcmQYAiABKAkiMQoKU2lnbk9mZkFjaxIj",
+            "CgZoZWFkZXIYASABKAsyEy5wcm90b2NvbC5BY2tIZWFkZXIifAoRQ2hhbmdl",
+            "UGFzc3dvcmRSZXESIwoGaGVhZGVyGAEgASgLMhMucHJvdG9jb2wuUmVxSGVh",
+            "ZGVyEg4KBm9sZFB3ZBgCIAEoCRIOCgZuZXdQd2QYAyABKAkSEQoJdmFsaWRD",
+            "b2RlGAQgASgJEg8KB3ZhbGlkSWQYBSABKAkiOAoRQ2hhbmdlUGFzc3dvcmRB",
+            "Y2sSIwoGaGVhZGVyGAEgASgLMhMucHJvdG9jb2wuQWNrSGVhZGVyIpMBChBS",
+            "ZXNldFBhc3N3b3JkUmVxEiMKBmhlYWRlchgBIAEoCzITLnByb3RvY29sLlJl",
+            "cUhlYWRlchIQCgh1c2VybmFtZRgCIAEoCRIQCghwYXNzd29yZBgDIAEoCRIR",
+            "Cgl2YWxpZENvZGUYBCABKAkSDwoHdmFsaWRJZBgFIAEoCRISCgpkZXZpY2VU",
+            "eXBlGAcgASgFIjcKEFJlc2V0UGFzc3dvcmRBY2sSIwoGaGVhZGVyGAEgASgL",
+            "MhMucHJvdG9jb2wuQWNrSGVhZGVyIjUKDkdldFVzZXJJbmZvUmVxEiMKBmhl",
+            "YWRlchgBIAEoCzITLnByb3RvY29sLlJlcUhlYWRlciJXCg5HZXRVc2VySW5m",
+            "b0FjaxIjCgZoZWFkZXIYASABKAsyEy5wcm90b2NvbC5BY2tIZWFkZXISEAoI",
+            "bmlja25hbWUYAiABKAkSDgoGYXZhdGFyGAMgASgJYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.HeaderReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SignUpReq), global::Protocol.SignUpReq.Parser, new[]{ "Header", "Username", "Password", "ValidCode", "ValidId", "DeviceCode", "DeviceType", "Nickname" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SignUpAck), global::Protocol.SignUpAck.Parser, new[]{ "Header", "Token", "DeviceCode" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SignUserInfo), global::Protocol.SignUserInfo.Parser, new[]{ "Nickname", "Uid", "Avatar" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SignUpAck), global::Protocol.SignUpAck.Parser, new[]{ "Header", "Token", "DeviceCode", "UserInfo" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SignInReq), global::Protocol.SignInReq.Parser, new[]{ "Header", "Username", "Password", "DeviceType" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SignInAck), global::Protocol.SignInAck.Parser, new[]{ "Header", "Token" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SignInAck), global::Protocol.SignInAck.Parser, new[]{ "Header", "Token", "UserInfo" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SignOutReq), global::Protocol.SignOutReq.Parser, new[]{ "Header" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SignOutAck), global::Protocol.SignOutAck.Parser, new[]{ "Header" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SignOffReq), global::Protocol.SignOffReq.Parser, new[]{ "Header", "Password" }, null, null, null, null),
@@ -409,6 +413,191 @@ namespace Protocol {
 
   }
 
+  public sealed partial class SignUserInfo : pb::IMessage<SignUserInfo> {
+    private static readonly pb::MessageParser<SignUserInfo> _parser = new pb::MessageParser<SignUserInfo>(() => new SignUserInfo());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<SignUserInfo> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Protocol.AccountReflection.Descriptor.MessageTypes[1]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SignUserInfo() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SignUserInfo(SignUserInfo other) : this() {
+      nickname_ = other.nickname_;
+      uid_ = other.uid_;
+      avatar_ = other.avatar_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SignUserInfo Clone() {
+      return new SignUserInfo(this);
+    }
+
+    /// <summary>Field number for the "nickname" field.</summary>
+    public const int NicknameFieldNumber = 1;
+    private string nickname_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Nickname {
+      get { return nickname_; }
+      set {
+        nickname_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "uid" field.</summary>
+    public const int UidFieldNumber = 2;
+    private long uid_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long Uid {
+      get { return uid_; }
+      set {
+        uid_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "avatar" field.</summary>
+    public const int AvatarFieldNumber = 3;
+    private string avatar_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Avatar {
+      get { return avatar_; }
+      set {
+        avatar_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as SignUserInfo);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(SignUserInfo other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Nickname != other.Nickname) return false;
+      if (Uid != other.Uid) return false;
+      if (Avatar != other.Avatar) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Nickname.Length != 0) hash ^= Nickname.GetHashCode();
+      if (Uid != 0L) hash ^= Uid.GetHashCode();
+      if (Avatar.Length != 0) hash ^= Avatar.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Nickname.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Nickname);
+      }
+      if (Uid != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(Uid);
+      }
+      if (Avatar.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Avatar);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Nickname.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Nickname);
+      }
+      if (Uid != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Uid);
+      }
+      if (Avatar.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Avatar);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(SignUserInfo other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Nickname.Length != 0) {
+        Nickname = other.Nickname;
+      }
+      if (other.Uid != 0L) {
+        Uid = other.Uid;
+      }
+      if (other.Avatar.Length != 0) {
+        Avatar = other.Avatar;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Nickname = input.ReadString();
+            break;
+          }
+          case 16: {
+            Uid = input.ReadInt64();
+            break;
+          }
+          case 26: {
+            Avatar = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   public sealed partial class SignUpAck : pb::IMessage<SignUpAck> {
     private static readonly pb::MessageParser<SignUpAck> _parser = new pb::MessageParser<SignUpAck>(() => new SignUpAck());
     private pb::UnknownFieldSet _unknownFields;
@@ -417,7 +606,7 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.AccountReflection.Descriptor.MessageTypes[1]; }
+      get { return global::Protocol.AccountReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -437,6 +626,7 @@ namespace Protocol {
       header_ = other.header_ != null ? other.header_.Clone() : null;
       token_ = other.token_;
       deviceCode_ = other.deviceCode_;
+      userInfo_ = other.userInfo_ != null ? other.userInfo_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -478,6 +668,17 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "userInfo" field.</summary>
+    public const int UserInfoFieldNumber = 8;
+    private global::Protocol.SignUserInfo userInfo_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Protocol.SignUserInfo UserInfo {
+      get { return userInfo_; }
+      set {
+        userInfo_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as SignUpAck);
@@ -494,6 +695,7 @@ namespace Protocol {
       if (!object.Equals(Header, other.Header)) return false;
       if (Token != other.Token) return false;
       if (DeviceCode != other.DeviceCode) return false;
+      if (!object.Equals(UserInfo, other.UserInfo)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -503,6 +705,7 @@ namespace Protocol {
       if (header_ != null) hash ^= Header.GetHashCode();
       if (Token.Length != 0) hash ^= Token.GetHashCode();
       if (DeviceCode.Length != 0) hash ^= DeviceCode.GetHashCode();
+      if (userInfo_ != null) hash ^= UserInfo.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -528,6 +731,10 @@ namespace Protocol {
         output.WriteRawTag(26);
         output.WriteString(DeviceCode);
       }
+      if (userInfo_ != null) {
+        output.WriteRawTag(66);
+        output.WriteMessage(UserInfo);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -544,6 +751,9 @@ namespace Protocol {
       }
       if (DeviceCode.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(DeviceCode);
+      }
+      if (userInfo_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(UserInfo);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -567,6 +777,12 @@ namespace Protocol {
       }
       if (other.DeviceCode.Length != 0) {
         DeviceCode = other.DeviceCode;
+      }
+      if (other.userInfo_ != null) {
+        if (userInfo_ == null) {
+          UserInfo = new global::Protocol.SignUserInfo();
+        }
+        UserInfo.MergeFrom(other.UserInfo);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -594,6 +810,13 @@ namespace Protocol {
             DeviceCode = input.ReadString();
             break;
           }
+          case 66: {
+            if (userInfo_ == null) {
+              UserInfo = new global::Protocol.SignUserInfo();
+            }
+            input.ReadMessage(UserInfo);
+            break;
+          }
         }
       }
     }
@@ -608,7 +831,7 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.AccountReflection.Descriptor.MessageTypes[2]; }
+      get { return global::Protocol.AccountReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -827,7 +1050,7 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.AccountReflection.Descriptor.MessageTypes[3]; }
+      get { return global::Protocol.AccountReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -846,6 +1069,7 @@ namespace Protocol {
     public SignInAck(SignInAck other) : this() {
       header_ = other.header_ != null ? other.header_.Clone() : null;
       token_ = other.token_;
+      userInfo_ = other.userInfo_ != null ? other.userInfo_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -876,6 +1100,17 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "userInfo" field.</summary>
+    public const int UserInfoFieldNumber = 8;
+    private global::Protocol.SignUserInfo userInfo_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Protocol.SignUserInfo UserInfo {
+      get { return userInfo_; }
+      set {
+        userInfo_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as SignInAck);
@@ -891,6 +1126,7 @@ namespace Protocol {
       }
       if (!object.Equals(Header, other.Header)) return false;
       if (Token != other.Token) return false;
+      if (!object.Equals(UserInfo, other.UserInfo)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -899,6 +1135,7 @@ namespace Protocol {
       int hash = 1;
       if (header_ != null) hash ^= Header.GetHashCode();
       if (Token.Length != 0) hash ^= Token.GetHashCode();
+      if (userInfo_ != null) hash ^= UserInfo.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -920,6 +1157,10 @@ namespace Protocol {
         output.WriteRawTag(18);
         output.WriteString(Token);
       }
+      if (userInfo_ != null) {
+        output.WriteRawTag(66);
+        output.WriteMessage(UserInfo);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -933,6 +1174,9 @@ namespace Protocol {
       }
       if (Token.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Token);
+      }
+      if (userInfo_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(UserInfo);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -953,6 +1197,12 @@ namespace Protocol {
       }
       if (other.Token.Length != 0) {
         Token = other.Token;
+      }
+      if (other.userInfo_ != null) {
+        if (userInfo_ == null) {
+          UserInfo = new global::Protocol.SignUserInfo();
+        }
+        UserInfo.MergeFrom(other.UserInfo);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -976,6 +1226,13 @@ namespace Protocol {
             Token = input.ReadString();
             break;
           }
+          case 66: {
+            if (userInfo_ == null) {
+              UserInfo = new global::Protocol.SignUserInfo();
+            }
+            input.ReadMessage(UserInfo);
+            break;
+          }
         }
       }
     }
@@ -990,7 +1247,7 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.AccountReflection.Descriptor.MessageTypes[4]; }
+      get { return global::Protocol.AccountReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1125,7 +1382,7 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.AccountReflection.Descriptor.MessageTypes[5]; }
+      get { return global::Protocol.AccountReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1260,7 +1517,7 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.AccountReflection.Descriptor.MessageTypes[6]; }
+      get { return global::Protocol.AccountReflection.Descriptor.MessageTypes[7]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1423,7 +1680,7 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.AccountReflection.Descriptor.MessageTypes[7]; }
+      get { return global::Protocol.AccountReflection.Descriptor.MessageTypes[8]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1558,7 +1815,7 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.AccountReflection.Descriptor.MessageTypes[8]; }
+      get { return global::Protocol.AccountReflection.Descriptor.MessageTypes[9]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1805,7 +2062,7 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.AccountReflection.Descriptor.MessageTypes[9]; }
+      get { return global::Protocol.AccountReflection.Descriptor.MessageTypes[10]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1940,7 +2197,7 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.AccountReflection.Descriptor.MessageTypes[10]; }
+      get { return global::Protocol.AccountReflection.Descriptor.MessageTypes[11]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2215,7 +2472,7 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.AccountReflection.Descriptor.MessageTypes[11]; }
+      get { return global::Protocol.AccountReflection.Descriptor.MessageTypes[12]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2350,7 +2607,7 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.AccountReflection.Descriptor.MessageTypes[12]; }
+      get { return global::Protocol.AccountReflection.Descriptor.MessageTypes[13]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2485,7 +2742,7 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.AccountReflection.Descriptor.MessageTypes[13]; }
+      get { return global::Protocol.AccountReflection.Descriptor.MessageTypes[14]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

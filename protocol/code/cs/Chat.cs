@@ -25,87 +25,81 @@ namespace Protocol {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CgpjaGF0LnByb3RvEghwcm90b2NvbBoMaGVhZGVyLnByb3RvIicKB01lbXRp",
-            "b24SDgoGdXNlcklkGAEgASgDEgwKBHRleHQYAiABKAkioAEKC01lc3NhZ2VC",
+            "b24SDgoGdXNlcklkGAEgASgDEgwKBHRleHQYAiABKAkiowEKC01lc3NhZ2VC",
             "b2R5EhMKC21lc3NhZ2VUeXBlGAIgASgFEgwKBHRleHQYAyABKAkSIwoIbWVt",
-            "dGlvbnMYBCADKAsyES5wcm90b2NvbC5NZW10aW9uEhEKCWNvbnRhY3RJZBgF",
-            "IAEoAxIQCgh1c2VybmFtZRgGIAEoCRITCgtmcm9tR3JvdXBJZBgHIAEoAxIP",
-            "Cgdncm91cElkGAggASgDIloKDlNlbmRNZXNzYWdlUmVxEiMKBmhlYWRlchgB",
-            "IAEoCzITLnByb3RvY29sLlJlcUhlYWRlchIjCgRib2R5GAIgASgLMhUucHJv",
-            "dG9jb2wuTWVzc2FnZUJvZHkiNQoOU2VuZE1lc3NhZ2VBY2sSIwoGaGVhZGVy",
-            "GAEgASgLMhMucHJvdG9jb2wuQWNrSGVhZGVyIlwKDU1lc3NhZ2VOb3RpZnkS",
-            "JgoGaGVhZGVyGAEgASgLMhYucHJvdG9jb2wuTm90aWZ5SGVhZGVyEiMKBGJv",
-            "ZHkYAiABKAsyFS5wcm90b2NvbC5NZXNzYWdlQm9keSJWCgtSZWFsVGltZVJl",
-            "cRIjCgZoZWFkZXIYASABKAsyEy5wcm90b2NvbC5SZXFIZWFkZXISEQoJY29u",
-            "dGFjdElkGAIgASgDEg8KB2dyb3VwSWQYAyABKAMihAEKC1JlYWxUaW1lQWNr",
+            "dGlvbnMYBCADKAsyES5wcm90b2NvbC5NZW10aW9uEhAKCHRvVXNlcklkGAUg",
+            "ASgDEhIKCmZyb21Vc2VySWQYBiABKAkSEwoLZnJvbUdyb3VwSWQYByABKAMS",
+            "EQoJdG9Hcm91cElkGAggASgDIloKDlNlbmRNZXNzYWdlUmVxEiMKBmhlYWRl",
+            "chgBIAEoCzITLnByb3RvY29sLlJlcUhlYWRlchIjCgRib2R5GAIgASgLMhUu",
+            "cHJvdG9jb2wuTWVzc2FnZUJvZHkiNQoOU2VuZE1lc3NhZ2VBY2sSIwoGaGVh",
+            "ZGVyGAEgASgLMhMucHJvdG9jb2wuQWNrSGVhZGVyIlwKDU1lc3NhZ2VOb3Rp",
+            "ZnkSJgoGaGVhZGVyGAEgASgLMhYucHJvdG9jb2wuTm90aWZ5SGVhZGVyEiMK",
+            "BGJvZHkYAiABKAsyFS5wcm90b2NvbC5NZXNzYWdlQm9keSJTCgtSZWFsVGlt",
+            "ZVJlcRIjCgZoZWFkZXIYASABKAsyEy5wcm90b2NvbC5SZXFIZWFkZXISDgoG",
+            "dXNlcklkGAIgASgDEg8KB2dyb3VwSWQYAyABKAMihAEKC1JlYWxUaW1lQWNr",
             "EiMKBmhlYWRlchgBIAEoCzITLnByb3RvY29sLkFja0hlYWRlchIPCgd0Y3BB",
             "ZGRyGAIgASgJEg0KBXRva2VuGAMgASgJEg4KBnJvb21JZBgEIAEoBRIOCgZ3",
             "c0FkZHIYBSABKAkSEAoIaHR0cEFkZHIYBiABKAkiPwoKU2ltcGxlVXNlchIQ",
             "CghuaWNrbmFtZRgBIAEoCRIPCgdhdmF0YXJ0GAIgASgJEg4KBnVzZXJJZBgD",
-            "IAEoAyKjAQoMUmVhbFRpbWVJbmZvEg0KBXRva2VuGAMgASgJEg4KBnJvb21J",
-            "ZBgEIAEoBRILCgN1aWQYBSABKAMSDwoHZ3JvdXBJZBgGIAEoAxIjCgV1c2Vy",
-            "cxgHIAMoCzIULnByb3RvY29sLlNpbXBsZVVzZXISEAoIaHR0cEFkZHIYCCAB",
-            "KAkSDgoGd3NBZGRyGAEgASgJEg8KB3RjcEFkZHIYAiABKAkiOAoRQ2FuY2Vs",
-            "UmVhbFRpbWVSZXESIwoGaGVhZGVyGAEgASgLMhMucHJvdG9jb2wuUmVxSGVh",
-            "ZGVyIjgKEUNhbmNlbFJlYWxUaW1lQWNrEiMKBmhlYWRlchgBIAEoCzITLnBy",
-            "b3RvY29sLkFja0hlYWRlciKiAQoOUmVhbFRpbWVOb3RpZnkSJgoGaGVhZGVy",
-            "GAEgASgLMhYucHJvdG9jb2wuTm90aWZ5SGVhZGVyEhMKC2Zyb21Hcm91cElk",
-            "GAIgASgDEhIKCmZyb21Vc2VySWQYAyABKAMSEQoJSXNDb25uZWN0GAQgASgI",
-            "EiwKDHJlYWxUaW1lSW5mbxgFIAEoCzIWLnByb3RvY29sLlJlYWxUaW1lSW5m",
-            "byI1Cg5Qb2xsTWVzc2FnZVJlcRIjCgZoZWFkZXIYASABKAsyEy5wcm90b2Nv",
-            "bC5SZXFIZWFkZXIibAoOUG9sbE1lc3NhZ2VBY2sSIwoGaGVhZGVyGAEgASgL",
-            "MhMucHJvdG9jb2wuQWNrSGVhZGVyEg0KBXRvdGFsGAIgASgFEiYKBGRhdGEY",
-            "AyADKAsyGC5wcm90b2NvbC5NZXNzYWdlQWNrQm9keSIuCgdQb2xsUmVxEiMK",
-            "BmhlYWRlchgBIAEoCzITLnByb3RvY29sLlJlcUhlYWRlciKSAgoHUG9sbEFj",
-            "axIjCgZoZWFkZXIYASABKAsyEy5wcm90b2NvbC5BY2tIZWFkZXISJwoEbXNn",
-            "cxgCIAMoCzIZLnByb3RvY29sLlBvbGxBY2suTWVzc2FnZRIsCghyZWFsVGlt",
-            "ZRgDIAEoCzIaLnByb3RvY29sLlBvbGxBY2suUmVhbFRpbWUaPgoHTWVzc2Fn",
-            "ZRINCgVDb3VudBgBIAEoBRITCgttZXNzYWdlS2luZBgCIAEoBRIPCgdncm91",
-            "cElkGAMgASgJGksKCFJlYWxUaW1lEhEKCUlzQ29ubmVjdBgCIAEoCBIsCgxy",
-            "ZWFsVGltZUluZm8YAyABKAsyFi5wcm90b2NvbC5SZWFsVGltZUluZm8iOAoR",
-            "R2V0TWVzc2FnZVVzZXJSZXESIwoGaGVhZGVyGAEgASgLMhMucHJvdG9jb2wu",
-            "UmVxSGVhZGVyIv4BChFHZXRNZXNzYWdlVXNlckFjaxIjCgZoZWFkZXIYASAB",
-            "KAsyEy5wcm90b2NvbC5BY2tIZWFkZXISNgoFdXNlcnMYAiADKAsyJy5wcm90",
-            "b2NvbC5HZXRNZXNzYWdlVXNlckFjay5NZXNzYWdlVXNlchqLAQoLTWVzc2Fn",
-            "ZVVzZXISDgoGdXNlcklkGAEgASgDEg8KB2dyb3VwSWQYAiABKAMSEAoIbmlj",
-            "a25hbWUYAyABKAkSDgoGYXZhdGFyGAQgASgJEg0KBWNvdW50GAYgASgFEioK",
-            "CG1lc3NhZ2VzGAogAygLMhgucHJvdG9jb2wuTWVzc2FnZUFja0JvZHkiVQoN",
-            "R2V0TWVzc2FnZVJlcRIjCgZoZWFkZXIYASABKAsyEy5wcm90b2NvbC5SZXFI",
-            "ZWFkZXISDgoGdXNlcklkGAIgASgDEg8KB2dyb3VwSWQYAyABKAMiwwEKDk1l",
-            "c3NhZ2VBY2tCb2R5EgwKBHRleHQYASABKAkSDwoHZnJvbVVpZBgCIAEoAxIN",
-            "CgV0b1VpZBgDIAEoAxIPCgdncm91cElkGAQgASgDEhMKC21lc3NhZ2VUeXBl",
-            "GAUgASgFEhAKCG1lZGlhVXJsGAYgASgJEhIKCmNyZWF0ZVRpbWUYByABKAMS",
-            "EgoKdXBkYXRlVGltZRgIIAEoAxIjCghtZW10aW9ucxgQIAMoCzIRLnByb3Rv",
-            "Y29sLk1lbXRpb24igQEKDUdldE1lc3NhZ2VBY2sSIwoGaGVhZGVyGAEgASgL",
-            "MhMucHJvdG9jb2wuQWNrSGVhZGVyEioKCG1lc3NhZ2VzGAIgAygLMhgucHJv",
-            "dG9jb2wuTWVzc2FnZUFja0JvZHkSDgoGdXNlcklkGAMgASgDEg8KB2dyb3Vw",
-            "SWQYBCABKAMiQQoKU2V0UmVhZFJlcRIjCgZoZWFkZXIYASABKAsyEy5wcm90",
-            "b2NvbC5SZXFIZWFkZXISDgoGdXNlcklkGAIgASgDIjEKClNldFJlYWRBY2sS",
-            "IwoGaGVhZGVyGAEgASgLMhMucHJvdG9jb2wuQWNrSGVhZGVyYgZwcm90bzM="));
+            "IAEoAyKmAQoMUmVhbFRpbWVJbmZvEg0KBXRva2VuGAMgASgJEg4KBnJvb21J",
+            "ZBgEIAEoBRIOCgZ1c2VySWQYBSABKAMSDwoHZ3JvdXBJZBgGIAEoAxIjCgV1",
+            "c2VycxgHIAMoCzIULnByb3RvY29sLlNpbXBsZVVzZXISEAoIaHR0cEFkZHIY",
+            "CCABKAkSDgoGd3NBZGRyGAEgASgJEg8KB3RjcEFkZHIYAiABKAkiOAoRQ2Fu",
+            "Y2VsUmVhbFRpbWVSZXESIwoGaGVhZGVyGAEgASgLMhMucHJvdG9jb2wuUmVx",
+            "SGVhZGVyIjgKEUNhbmNlbFJlYWxUaW1lQWNrEiMKBmhlYWRlchgBIAEoCzIT",
+            "LnByb3RvY29sLkFja0hlYWRlciJ5Cg5SZWFsVGltZU5vdGlmeRImCgZoZWFk",
+            "ZXIYASABKAsyFi5wcm90b2NvbC5Ob3RpZnlIZWFkZXISEQoJSXNDb25uZWN0",
+            "GAQgASgIEiwKDHJlYWxUaW1lSW5mbxgFIAEoCzIWLnByb3RvY29sLlJlYWxU",
+            "aW1lSW5mbyIuCgdQb2xsUmVxEiMKBmhlYWRlchgBIAEoCzITLnByb3RvY29s",
+            "LlJlcUhlYWRlciKSAgoHUG9sbEFjaxIjCgZoZWFkZXIYASABKAsyEy5wcm90",
+            "b2NvbC5BY2tIZWFkZXISJwoEbXNncxgCIAMoCzIZLnByb3RvY29sLlBvbGxB",
+            "Y2suTWVzc2FnZRIsCghyZWFsVGltZRgDIAEoCzIaLnByb3RvY29sLlBvbGxB",
+            "Y2suUmVhbFRpbWUaPgoHTWVzc2FnZRINCgVDb3VudBgBIAEoBRITCgttZXNz",
+            "YWdlS2luZBgCIAEoBRIPCgdncm91cElkGAMgASgJGksKCFJlYWxUaW1lEhEK",
+            "CUlzQ29ubmVjdBgCIAEoCBIsCgxyZWFsVGltZUluZm8YAyABKAsyFi5wcm90",
+            "b2NvbC5SZWFsVGltZUluZm8iOAoRR2V0TWVzc2FnZVVzZXJSZXESIwoGaGVh",
+            "ZGVyGAEgASgLMhMucHJvdG9jb2wuUmVxSGVhZGVyIpMCChFHZXRNZXNzYWdl",
+            "VXNlckFjaxIjCgZoZWFkZXIYASABKAsyEy5wcm90b2NvbC5BY2tIZWFkZXIS",
+            "NgoFdXNlcnMYAiADKAsyJy5wcm90b2NvbC5HZXRNZXNzYWdlVXNlckFjay5N",
+            "ZXNzYWdlVXNlchqgAQoLTWVzc2FnZVVzZXISDgoGdXNlcklkGAEgASgDEg8K",
+            "B2dyb3VwSWQYAiABKAMSEAoIbmlja25hbWUYAyABKAkSDgoGYXZhdGFyGAQg",
+            "ASgJEg0KBWNvdW50GAYgASgFEhMKC2Zyb21Hcm91cElkGAcgASgDEioKCG1l",
+            "c3NhZ2VzGAogAygLMhgucHJvdG9jb2wuTWVzc2FnZUFja0JvZHkiVQoNR2V0",
+            "TWVzc2FnZVJlcRIjCgZoZWFkZXIYASABKAsyEy5wcm90b2NvbC5SZXFIZWFk",
+            "ZXISDgoGdXNlcklkGAIgASgDEg8KB2dyb3VwSWQYAyABKAMiwwEKDk1lc3Nh",
+            "Z2VBY2tCb2R5EgwKBHRleHQYASABKAkSDwoHZnJvbVVpZBgCIAEoAxINCgV0",
+            "b1VpZBgDIAEoAxIPCgdncm91cElkGAQgASgDEhMKC21lc3NhZ2VUeXBlGAUg",
+            "ASgFEhAKCG1lZGlhVXJsGAYgASgJEhIKCmNyZWF0ZVRpbWUYByABKAMSEgoK",
+            "dXBkYXRlVGltZRgIIAEoAxIjCghtZW10aW9ucxgQIAMoCzIRLnByb3RvY29s",
+            "Lk1lbXRpb24iYAoNR2V0TWVzc2FnZUFjaxIjCgZoZWFkZXIYASABKAsyEy5w",
+            "cm90b2NvbC5BY2tIZWFkZXISKgoIbWVzc2FnZXMYAiADKAsyGC5wcm90b2Nv",
+            "bC5NZXNzYWdlQWNrQm9keSJBCgpTZXRSZWFkUmVxEiMKBmhlYWRlchgBIAEo",
+            "CzITLnByb3RvY29sLlJlcUhlYWRlchIOCgZ1c2VySWQYAiABKAMiMQoKU2V0",
+            "UmVhZEFjaxIjCgZoZWFkZXIYASABKAsyEy5wcm90b2NvbC5BY2tIZWFkZXJi",
+            "BnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.HeaderReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.Memtion), global::Protocol.Memtion.Parser, new[]{ "UserId", "Text" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.MessageBody), global::Protocol.MessageBody.Parser, new[]{ "MessageType", "Text", "Memtions", "ContactId", "Username", "FromGroupId", "GroupId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.MessageBody), global::Protocol.MessageBody.Parser, new[]{ "MessageType", "Text", "Memtions", "ToUserId", "FromUserId", "FromGroupId", "ToGroupId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SendMessageReq), global::Protocol.SendMessageReq.Parser, new[]{ "Header", "Body" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SendMessageAck), global::Protocol.SendMessageAck.Parser, new[]{ "Header" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.MessageNotify), global::Protocol.MessageNotify.Parser, new[]{ "Header", "Body" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.RealTimeReq), global::Protocol.RealTimeReq.Parser, new[]{ "Header", "ContactId", "GroupId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.RealTimeReq), global::Protocol.RealTimeReq.Parser, new[]{ "Header", "UserId", "GroupId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.RealTimeAck), global::Protocol.RealTimeAck.Parser, new[]{ "Header", "TcpAddr", "Token", "RoomId", "WsAddr", "HttpAddr" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SimpleUser), global::Protocol.SimpleUser.Parser, new[]{ "Nickname", "Avatart", "UserId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.RealTimeInfo), global::Protocol.RealTimeInfo.Parser, new[]{ "Token", "RoomId", "Uid", "GroupId", "Users", "HttpAddr", "WsAddr", "TcpAddr" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.RealTimeInfo), global::Protocol.RealTimeInfo.Parser, new[]{ "Token", "RoomId", "UserId", "GroupId", "Users", "HttpAddr", "WsAddr", "TcpAddr" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.CancelRealTimeReq), global::Protocol.CancelRealTimeReq.Parser, new[]{ "Header" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.CancelRealTimeAck), global::Protocol.CancelRealTimeAck.Parser, new[]{ "Header" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.RealTimeNotify), global::Protocol.RealTimeNotify.Parser, new[]{ "Header", "FromGroupId", "FromUserId", "IsConnect", "RealTimeInfo" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.PollMessageReq), global::Protocol.PollMessageReq.Parser, new[]{ "Header" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.PollMessageAck), global::Protocol.PollMessageAck.Parser, new[]{ "Header", "Total", "Data" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.RealTimeNotify), global::Protocol.RealTimeNotify.Parser, new[]{ "Header", "IsConnect", "RealTimeInfo" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.PollReq), global::Protocol.PollReq.Parser, new[]{ "Header" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.PollAck), global::Protocol.PollAck.Parser, new[]{ "Header", "Msgs", "RealTime" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.PollAck.Types.Message), global::Protocol.PollAck.Types.Message.Parser, new[]{ "Count", "MessageKind", "GroupId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.PollAck.Types.RealTime), global::Protocol.PollAck.Types.RealTime.Parser, new[]{ "IsConnect", "RealTimeInfo" }, null, null, null, null)}),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.GetMessageUserReq), global::Protocol.GetMessageUserReq.Parser, new[]{ "Header" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.GetMessageUserAck), global::Protocol.GetMessageUserAck.Parser, new[]{ "Header", "Users" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.GetMessageUserAck.Types.MessageUser), global::Protocol.GetMessageUserAck.Types.MessageUser.Parser, new[]{ "UserId", "GroupId", "Nickname", "Avatar", "Count", "Messages" }, null, null, null, null)}),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.GetMessageUserAck), global::Protocol.GetMessageUserAck.Parser, new[]{ "Header", "Users" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.GetMessageUserAck.Types.MessageUser), global::Protocol.GetMessageUserAck.Types.MessageUser.Parser, new[]{ "UserId", "GroupId", "Nickname", "Avatar", "Count", "FromGroupId", "Messages" }, null, null, null, null)}),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.GetMessageReq), global::Protocol.GetMessageReq.Parser, new[]{ "Header", "UserId", "GroupId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.MessageAckBody), global::Protocol.MessageAckBody.Parser, new[]{ "Text", "FromUid", "ToUid", "GroupId", "MessageType", "MediaUrl", "CreateTime", "UpdateTime", "Memtions" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.GetMessageAck), global::Protocol.GetMessageAck.Parser, new[]{ "Header", "Messages", "UserId", "GroupId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.GetMessageAck), global::Protocol.GetMessageAck.Parser, new[]{ "Header", "Messages" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SetReadReq), global::Protocol.SetReadReq.Parser, new[]{ "Header", "UserId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SetReadAck), global::Protocol.SetReadAck.Parser, new[]{ "Header" }, null, null, null, null)
           }));
@@ -305,10 +299,10 @@ namespace Protocol {
       messageType_ = other.messageType_;
       text_ = other.text_;
       memtions_ = other.memtions_.Clone();
-      contactId_ = other.contactId_;
-      username_ = other.username_;
+      toUserId_ = other.toUserId_;
+      fromUserId_ = other.fromUserId_;
       fromGroupId_ = other.fromGroupId_;
-      groupId_ = other.groupId_;
+      toGroupId_ = other.toGroupId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -349,31 +343,31 @@ namespace Protocol {
       get { return memtions_; }
     }
 
-    /// <summary>Field number for the "contactId" field.</summary>
-    public const int ContactIdFieldNumber = 5;
-    private long contactId_;
+    /// <summary>Field number for the "toUserId" field.</summary>
+    public const int ToUserIdFieldNumber = 5;
+    private long toUserId_;
     /// <summary>
     ///发送给用户
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long ContactId {
-      get { return contactId_; }
+    public long ToUserId {
+      get { return toUserId_; }
       set {
-        contactId_ = value;
+        toUserId_ = value;
       }
     }
 
-    /// <summary>Field number for the "username" field.</summary>
-    public const int UsernameFieldNumber = 6;
-    private string username_ = "";
+    /// <summary>Field number for the "fromUserId" field.</summary>
+    public const int FromUserIdFieldNumber = 6;
+    private string fromUserId_ = "";
     /// <summary>
-    ///发送给陌生人 //通过群聊
+    ///发送者
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Username {
-      get { return username_; }
+    public string FromUserId {
+      get { return fromUserId_; }
       set {
-        username_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        fromUserId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -391,17 +385,17 @@ namespace Protocol {
       }
     }
 
-    /// <summary>Field number for the "groupId" field.</summary>
-    public const int GroupIdFieldNumber = 8;
-    private long groupId_;
+    /// <summary>Field number for the "toGroupId" field.</summary>
+    public const int ToGroupIdFieldNumber = 8;
+    private long toGroupId_;
     /// <summary>
     ///发送给群聊
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long GroupId {
-      get { return groupId_; }
+    public long ToGroupId {
+      get { return toGroupId_; }
       set {
-        groupId_ = value;
+        toGroupId_ = value;
       }
     }
 
@@ -421,10 +415,10 @@ namespace Protocol {
       if (MessageType != other.MessageType) return false;
       if (Text != other.Text) return false;
       if(!memtions_.Equals(other.memtions_)) return false;
-      if (ContactId != other.ContactId) return false;
-      if (Username != other.Username) return false;
+      if (ToUserId != other.ToUserId) return false;
+      if (FromUserId != other.FromUserId) return false;
       if (FromGroupId != other.FromGroupId) return false;
-      if (GroupId != other.GroupId) return false;
+      if (ToGroupId != other.ToGroupId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -434,10 +428,10 @@ namespace Protocol {
       if (MessageType != 0) hash ^= MessageType.GetHashCode();
       if (Text.Length != 0) hash ^= Text.GetHashCode();
       hash ^= memtions_.GetHashCode();
-      if (ContactId != 0L) hash ^= ContactId.GetHashCode();
-      if (Username.Length != 0) hash ^= Username.GetHashCode();
+      if (ToUserId != 0L) hash ^= ToUserId.GetHashCode();
+      if (FromUserId.Length != 0) hash ^= FromUserId.GetHashCode();
       if (FromGroupId != 0L) hash ^= FromGroupId.GetHashCode();
-      if (GroupId != 0L) hash ^= GroupId.GetHashCode();
+      if (ToGroupId != 0L) hash ^= ToGroupId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -460,21 +454,21 @@ namespace Protocol {
         output.WriteString(Text);
       }
       memtions_.WriteTo(output, _repeated_memtions_codec);
-      if (ContactId != 0L) {
+      if (ToUserId != 0L) {
         output.WriteRawTag(40);
-        output.WriteInt64(ContactId);
+        output.WriteInt64(ToUserId);
       }
-      if (Username.Length != 0) {
+      if (FromUserId.Length != 0) {
         output.WriteRawTag(50);
-        output.WriteString(Username);
+        output.WriteString(FromUserId);
       }
       if (FromGroupId != 0L) {
         output.WriteRawTag(56);
         output.WriteInt64(FromGroupId);
       }
-      if (GroupId != 0L) {
+      if (ToGroupId != 0L) {
         output.WriteRawTag(64);
-        output.WriteInt64(GroupId);
+        output.WriteInt64(ToGroupId);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -491,17 +485,17 @@ namespace Protocol {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Text);
       }
       size += memtions_.CalculateSize(_repeated_memtions_codec);
-      if (ContactId != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(ContactId);
+      if (ToUserId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(ToUserId);
       }
-      if (Username.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Username);
+      if (FromUserId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(FromUserId);
       }
       if (FromGroupId != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(FromGroupId);
       }
-      if (GroupId != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(GroupId);
+      if (ToGroupId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(ToGroupId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -521,17 +515,17 @@ namespace Protocol {
         Text = other.Text;
       }
       memtions_.Add(other.memtions_);
-      if (other.ContactId != 0L) {
-        ContactId = other.ContactId;
+      if (other.ToUserId != 0L) {
+        ToUserId = other.ToUserId;
       }
-      if (other.Username.Length != 0) {
-        Username = other.Username;
+      if (other.FromUserId.Length != 0) {
+        FromUserId = other.FromUserId;
       }
       if (other.FromGroupId != 0L) {
         FromGroupId = other.FromGroupId;
       }
-      if (other.GroupId != 0L) {
-        GroupId = other.GroupId;
+      if (other.ToGroupId != 0L) {
+        ToGroupId = other.ToGroupId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -557,11 +551,11 @@ namespace Protocol {
             break;
           }
           case 40: {
-            ContactId = input.ReadInt64();
+            ToUserId = input.ReadInt64();
             break;
           }
           case 50: {
-            Username = input.ReadString();
+            FromUserId = input.ReadString();
             break;
           }
           case 56: {
@@ -569,7 +563,7 @@ namespace Protocol {
             break;
           }
           case 64: {
-            GroupId = input.ReadInt64();
+            ToGroupId = input.ReadInt64();
             break;
           }
         }
@@ -1077,7 +1071,7 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public RealTimeReq(RealTimeReq other) : this() {
       header_ = other.header_ != null ? other.header_.Clone() : null;
-      contactId_ = other.contactId_;
+      userId_ = other.userId_;
       groupId_ = other.groupId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -1098,17 +1092,17 @@ namespace Protocol {
       }
     }
 
-    /// <summary>Field number for the "contactId" field.</summary>
-    public const int ContactIdFieldNumber = 2;
-    private long contactId_;
+    /// <summary>Field number for the "userId" field.</summary>
+    public const int UserIdFieldNumber = 2;
+    private long userId_;
     /// <summary>
     ///请求和用户通话
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long ContactId {
-      get { return contactId_; }
+    public long UserId {
+      get { return userId_; }
       set {
-        contactId_ = value;
+        userId_ = value;
       }
     }
 
@@ -1140,7 +1134,7 @@ namespace Protocol {
         return true;
       }
       if (!object.Equals(Header, other.Header)) return false;
-      if (ContactId != other.ContactId) return false;
+      if (UserId != other.UserId) return false;
       if (GroupId != other.GroupId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -1149,7 +1143,7 @@ namespace Protocol {
     public override int GetHashCode() {
       int hash = 1;
       if (header_ != null) hash ^= Header.GetHashCode();
-      if (ContactId != 0L) hash ^= ContactId.GetHashCode();
+      if (UserId != 0L) hash ^= UserId.GetHashCode();
       if (GroupId != 0L) hash ^= GroupId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -1168,9 +1162,9 @@ namespace Protocol {
         output.WriteRawTag(10);
         output.WriteMessage(Header);
       }
-      if (ContactId != 0L) {
+      if (UserId != 0L) {
         output.WriteRawTag(16);
-        output.WriteInt64(ContactId);
+        output.WriteInt64(UserId);
       }
       if (GroupId != 0L) {
         output.WriteRawTag(24);
@@ -1187,8 +1181,8 @@ namespace Protocol {
       if (header_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Header);
       }
-      if (ContactId != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(ContactId);
+      if (UserId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(UserId);
       }
       if (GroupId != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(GroupId);
@@ -1210,8 +1204,8 @@ namespace Protocol {
         }
         Header.MergeFrom(other.Header);
       }
-      if (other.ContactId != 0L) {
-        ContactId = other.ContactId;
+      if (other.UserId != 0L) {
+        UserId = other.UserId;
       }
       if (other.GroupId != 0L) {
         GroupId = other.GroupId;
@@ -1235,7 +1229,7 @@ namespace Protocol {
             break;
           }
           case 16: {
-            ContactId = input.ReadInt64();
+            UserId = input.ReadInt64();
             break;
           }
           case 24: {
@@ -1744,7 +1738,7 @@ namespace Protocol {
     public RealTimeInfo(RealTimeInfo other) : this() {
       token_ = other.token_;
       roomId_ = other.roomId_;
-      uid_ = other.uid_;
+      userId_ = other.userId_;
       groupId_ = other.groupId_;
       users_ = other.users_.Clone();
       httpAddr_ = other.httpAddr_;
@@ -1786,17 +1780,17 @@ namespace Protocol {
       }
     }
 
-    /// <summary>Field number for the "uid" field.</summary>
-    public const int UidFieldNumber = 5;
-    private long uid_;
+    /// <summary>Field number for the "userId" field.</summary>
+    public const int UserIdFieldNumber = 5;
+    private long userId_;
     /// <summary>
     ///来自用户
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long Uid {
-      get { return uid_; }
+    public long UserId {
+      get { return userId_; }
       set {
-        uid_ = value;
+        userId_ = value;
       }
     }
 
@@ -1878,7 +1872,7 @@ namespace Protocol {
       }
       if (Token != other.Token) return false;
       if (RoomId != other.RoomId) return false;
-      if (Uid != other.Uid) return false;
+      if (UserId != other.UserId) return false;
       if (GroupId != other.GroupId) return false;
       if(!users_.Equals(other.users_)) return false;
       if (HttpAddr != other.HttpAddr) return false;
@@ -1892,7 +1886,7 @@ namespace Protocol {
       int hash = 1;
       if (Token.Length != 0) hash ^= Token.GetHashCode();
       if (RoomId != 0) hash ^= RoomId.GetHashCode();
-      if (Uid != 0L) hash ^= Uid.GetHashCode();
+      if (UserId != 0L) hash ^= UserId.GetHashCode();
       if (GroupId != 0L) hash ^= GroupId.GetHashCode();
       hash ^= users_.GetHashCode();
       if (HttpAddr.Length != 0) hash ^= HttpAddr.GetHashCode();
@@ -1927,9 +1921,9 @@ namespace Protocol {
         output.WriteRawTag(32);
         output.WriteInt32(RoomId);
       }
-      if (Uid != 0L) {
+      if (UserId != 0L) {
         output.WriteRawTag(40);
-        output.WriteInt64(Uid);
+        output.WriteInt64(UserId);
       }
       if (GroupId != 0L) {
         output.WriteRawTag(48);
@@ -1954,8 +1948,8 @@ namespace Protocol {
       if (RoomId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(RoomId);
       }
-      if (Uid != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Uid);
+      if (UserId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(UserId);
       }
       if (GroupId != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(GroupId);
@@ -1987,8 +1981,8 @@ namespace Protocol {
       if (other.RoomId != 0) {
         RoomId = other.RoomId;
       }
-      if (other.Uid != 0L) {
-        Uid = other.Uid;
+      if (other.UserId != 0L) {
+        UserId = other.UserId;
       }
       if (other.GroupId != 0L) {
         GroupId = other.GroupId;
@@ -2031,7 +2025,7 @@ namespace Protocol {
             break;
           }
           case 40: {
-            Uid = input.ReadInt64();
+            UserId = input.ReadInt64();
             break;
           }
           case 48: {
@@ -2348,8 +2342,6 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public RealTimeNotify(RealTimeNotify other) : this() {
       header_ = other.header_ != null ? other.header_.Clone() : null;
-      fromGroupId_ = other.fromGroupId_;
-      fromUserId_ = other.fromUserId_;
       isConnect_ = other.isConnect_;
       realTimeInfo_ = other.realTimeInfo_ != null ? other.realTimeInfo_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -2368,34 +2360,6 @@ namespace Protocol {
       get { return header_; }
       set {
         header_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "fromGroupId" field.</summary>
-    public const int FromGroupIdFieldNumber = 2;
-    private long fromGroupId_;
-    /// <summary>
-    ///群语音
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long FromGroupId {
-      get { return fromGroupId_; }
-      set {
-        fromGroupId_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "fromUserId" field.</summary>
-    public const int FromUserIdFieldNumber = 3;
-    private long fromUserId_;
-    /// <summary>
-    ///私人语音
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long FromUserId {
-      get { return fromUserId_; }
-      set {
-        fromUserId_ = value;
       }
     }
 
@@ -2438,8 +2402,6 @@ namespace Protocol {
         return true;
       }
       if (!object.Equals(Header, other.Header)) return false;
-      if (FromGroupId != other.FromGroupId) return false;
-      if (FromUserId != other.FromUserId) return false;
       if (IsConnect != other.IsConnect) return false;
       if (!object.Equals(RealTimeInfo, other.RealTimeInfo)) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -2449,8 +2411,6 @@ namespace Protocol {
     public override int GetHashCode() {
       int hash = 1;
       if (header_ != null) hash ^= Header.GetHashCode();
-      if (FromGroupId != 0L) hash ^= FromGroupId.GetHashCode();
-      if (FromUserId != 0L) hash ^= FromUserId.GetHashCode();
       if (IsConnect != false) hash ^= IsConnect.GetHashCode();
       if (realTimeInfo_ != null) hash ^= RealTimeInfo.GetHashCode();
       if (_unknownFields != null) {
@@ -2470,14 +2430,6 @@ namespace Protocol {
         output.WriteRawTag(10);
         output.WriteMessage(Header);
       }
-      if (FromGroupId != 0L) {
-        output.WriteRawTag(16);
-        output.WriteInt64(FromGroupId);
-      }
-      if (FromUserId != 0L) {
-        output.WriteRawTag(24);
-        output.WriteInt64(FromUserId);
-      }
       if (IsConnect != false) {
         output.WriteRawTag(32);
         output.WriteBool(IsConnect);
@@ -2496,12 +2448,6 @@ namespace Protocol {
       int size = 0;
       if (header_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Header);
-      }
-      if (FromGroupId != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(FromGroupId);
-      }
-      if (FromUserId != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(FromUserId);
       }
       if (IsConnect != false) {
         size += 1 + 1;
@@ -2525,12 +2471,6 @@ namespace Protocol {
           Header = new global::Protocol.NotifyHeader();
         }
         Header.MergeFrom(other.Header);
-      }
-      if (other.FromGroupId != 0L) {
-        FromGroupId = other.FromGroupId;
-      }
-      if (other.FromUserId != 0L) {
-        FromUserId = other.FromUserId;
       }
       if (other.IsConnect != false) {
         IsConnect = other.IsConnect;
@@ -2559,14 +2499,6 @@ namespace Protocol {
             input.ReadMessage(Header);
             break;
           }
-          case 16: {
-            FromGroupId = input.ReadInt64();
-            break;
-          }
-          case 24: {
-            FromUserId = input.ReadInt64();
-            break;
-          }
           case 32: {
             IsConnect = input.ReadBool();
             break;
@@ -2584,324 +2516,6 @@ namespace Protocol {
 
   }
 
-  public sealed partial class PollMessageReq : pb::IMessage<PollMessageReq> {
-    private static readonly pb::MessageParser<PollMessageReq> _parser = new pb::MessageParser<PollMessageReq>(() => new PollMessageReq());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<PollMessageReq> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.ChatReflection.Descriptor.MessageTypes[12]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public PollMessageReq() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public PollMessageReq(PollMessageReq other) : this() {
-      header_ = other.header_ != null ? other.header_.Clone() : null;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public PollMessageReq Clone() {
-      return new PollMessageReq(this);
-    }
-
-    /// <summary>Field number for the "header" field.</summary>
-    public const int HeaderFieldNumber = 1;
-    private global::Protocol.ReqHeader header_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Protocol.ReqHeader Header {
-      get { return header_; }
-      set {
-        header_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as PollMessageReq);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(PollMessageReq other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (!object.Equals(Header, other.Header)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (header_ != null) hash ^= Header.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (header_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(Header);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (header_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Header);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(PollMessageReq other) {
-      if (other == null) {
-        return;
-      }
-      if (other.header_ != null) {
-        if (header_ == null) {
-          Header = new global::Protocol.ReqHeader();
-        }
-        Header.MergeFrom(other.Header);
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            if (header_ == null) {
-              Header = new global::Protocol.ReqHeader();
-            }
-            input.ReadMessage(Header);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class PollMessageAck : pb::IMessage<PollMessageAck> {
-    private static readonly pb::MessageParser<PollMessageAck> _parser = new pb::MessageParser<PollMessageAck>(() => new PollMessageAck());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<PollMessageAck> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.ChatReflection.Descriptor.MessageTypes[13]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public PollMessageAck() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public PollMessageAck(PollMessageAck other) : this() {
-      header_ = other.header_ != null ? other.header_.Clone() : null;
-      total_ = other.total_;
-      data_ = other.data_.Clone();
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public PollMessageAck Clone() {
-      return new PollMessageAck(this);
-    }
-
-    /// <summary>Field number for the "header" field.</summary>
-    public const int HeaderFieldNumber = 1;
-    private global::Protocol.AckHeader header_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Protocol.AckHeader Header {
-      get { return header_; }
-      set {
-        header_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "total" field.</summary>
-    public const int TotalFieldNumber = 2;
-    private int total_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int Total {
-      get { return total_; }
-      set {
-        total_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "data" field.</summary>
-    public const int DataFieldNumber = 3;
-    private static readonly pb::FieldCodec<global::Protocol.MessageAckBody> _repeated_data_codec
-        = pb::FieldCodec.ForMessage(26, global::Protocol.MessageAckBody.Parser);
-    private readonly pbc::RepeatedField<global::Protocol.MessageAckBody> data_ = new pbc::RepeatedField<global::Protocol.MessageAckBody>();
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::Protocol.MessageAckBody> Data {
-      get { return data_; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as PollMessageAck);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(PollMessageAck other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (!object.Equals(Header, other.Header)) return false;
-      if (Total != other.Total) return false;
-      if(!data_.Equals(other.data_)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (header_ != null) hash ^= Header.GetHashCode();
-      if (Total != 0) hash ^= Total.GetHashCode();
-      hash ^= data_.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (header_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(Header);
-      }
-      if (Total != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(Total);
-      }
-      data_.WriteTo(output, _repeated_data_codec);
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (header_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Header);
-      }
-      if (Total != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Total);
-      }
-      size += data_.CalculateSize(_repeated_data_codec);
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(PollMessageAck other) {
-      if (other == null) {
-        return;
-      }
-      if (other.header_ != null) {
-        if (header_ == null) {
-          Header = new global::Protocol.AckHeader();
-        }
-        Header.MergeFrom(other.Header);
-      }
-      if (other.Total != 0) {
-        Total = other.Total;
-      }
-      data_.Add(other.data_);
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            if (header_ == null) {
-              Header = new global::Protocol.AckHeader();
-            }
-            input.ReadMessage(Header);
-            break;
-          }
-          case 16: {
-            Total = input.ReadInt32();
-            break;
-          }
-          case 26: {
-            data_.AddEntriesFrom(input, _repeated_data_codec);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
   public sealed partial class PollReq : pb::IMessage<PollReq> {
     private static readonly pb::MessageParser<PollReq> _parser = new pb::MessageParser<PollReq>(() => new PollReq());
     private pb::UnknownFieldSet _unknownFields;
@@ -2910,7 +2524,7 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.ChatReflection.Descriptor.MessageTypes[14]; }
+      get { return global::Protocol.ChatReflection.Descriptor.MessageTypes[12]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3048,7 +2662,7 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.ChatReflection.Descriptor.MessageTypes[15]; }
+      get { return global::Protocol.ChatReflection.Descriptor.MessageTypes[13]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3607,7 +3221,7 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.ChatReflection.Descriptor.MessageTypes[16]; }
+      get { return global::Protocol.ChatReflection.Descriptor.MessageTypes[14]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3742,7 +3356,7 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.ChatReflection.Descriptor.MessageTypes[17]; }
+      get { return global::Protocol.ChatReflection.Descriptor.MessageTypes[15]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3921,6 +3535,7 @@ namespace Protocol {
           nickname_ = other.nickname_;
           avatar_ = other.avatar_;
           count_ = other.count_;
+          fromGroupId_ = other.fromGroupId_;
           messages_ = other.messages_.Clone();
           _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
         }
@@ -4000,6 +3615,20 @@ namespace Protocol {
           }
         }
 
+        /// <summary>Field number for the "fromGroupId" field.</summary>
+        public const int FromGroupIdFieldNumber = 7;
+        private long fromGroupId_;
+        /// <summary>
+        ///通过群聊发的消息
+        /// </summary>
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public long FromGroupId {
+          get { return fromGroupId_; }
+          set {
+            fromGroupId_ = value;
+          }
+        }
+
         /// <summary>Field number for the "messages" field.</summary>
         public const int MessagesFieldNumber = 10;
         private static readonly pb::FieldCodec<global::Protocol.MessageAckBody> _repeated_messages_codec
@@ -4031,6 +3660,7 @@ namespace Protocol {
           if (Nickname != other.Nickname) return false;
           if (Avatar != other.Avatar) return false;
           if (Count != other.Count) return false;
+          if (FromGroupId != other.FromGroupId) return false;
           if(!messages_.Equals(other.messages_)) return false;
           return Equals(_unknownFields, other._unknownFields);
         }
@@ -4043,6 +3673,7 @@ namespace Protocol {
           if (Nickname.Length != 0) hash ^= Nickname.GetHashCode();
           if (Avatar.Length != 0) hash ^= Avatar.GetHashCode();
           if (Count != 0) hash ^= Count.GetHashCode();
+          if (FromGroupId != 0L) hash ^= FromGroupId.GetHashCode();
           hash ^= messages_.GetHashCode();
           if (_unknownFields != null) {
             hash ^= _unknownFields.GetHashCode();
@@ -4077,6 +3708,10 @@ namespace Protocol {
             output.WriteRawTag(48);
             output.WriteInt32(Count);
           }
+          if (FromGroupId != 0L) {
+            output.WriteRawTag(56);
+            output.WriteInt64(FromGroupId);
+          }
           messages_.WriteTo(output, _repeated_messages_codec);
           if (_unknownFields != null) {
             _unknownFields.WriteTo(output);
@@ -4100,6 +3735,9 @@ namespace Protocol {
           }
           if (Count != 0) {
             size += 1 + pb::CodedOutputStream.ComputeInt32Size(Count);
+          }
+          if (FromGroupId != 0L) {
+            size += 1 + pb::CodedOutputStream.ComputeInt64Size(FromGroupId);
           }
           size += messages_.CalculateSize(_repeated_messages_codec);
           if (_unknownFields != null) {
@@ -4127,6 +3765,9 @@ namespace Protocol {
           }
           if (other.Count != 0) {
             Count = other.Count;
+          }
+          if (other.FromGroupId != 0L) {
+            FromGroupId = other.FromGroupId;
           }
           messages_.Add(other.messages_);
           _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -4160,6 +3801,10 @@ namespace Protocol {
                 Count = input.ReadInt32();
                 break;
               }
+              case 56: {
+                FromGroupId = input.ReadInt64();
+                break;
+              }
               case 82: {
                 messages_.AddEntriesFrom(input, _repeated_messages_codec);
                 break;
@@ -4183,7 +3828,7 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.ChatReflection.Descriptor.MessageTypes[18]; }
+      get { return global::Protocol.ChatReflection.Descriptor.MessageTypes[16]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4380,7 +4025,7 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.ChatReflection.Descriptor.MessageTypes[19]; }
+      get { return global::Protocol.ChatReflection.Descriptor.MessageTypes[17]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4725,7 +4370,7 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.ChatReflection.Descriptor.MessageTypes[20]; }
+      get { return global::Protocol.ChatReflection.Descriptor.MessageTypes[18]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4744,8 +4389,6 @@ namespace Protocol {
     public GetMessageAck(GetMessageAck other) : this() {
       header_ = other.header_ != null ? other.header_.Clone() : null;
       messages_ = other.messages_.Clone();
-      userId_ = other.userId_;
-      groupId_ = other.groupId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -4770,37 +4413,13 @@ namespace Protocol {
     private static readonly pb::FieldCodec<global::Protocol.MessageAckBody> _repeated_messages_codec
         = pb::FieldCodec.ForMessage(18, global::Protocol.MessageAckBody.Parser);
     private readonly pbc::RepeatedField<global::Protocol.MessageAckBody> messages_ = new pbc::RepeatedField<global::Protocol.MessageAckBody>();
+    /// <summary>
+    /// int64                   userId   = 3; //获取用户消息记录
+    /// int64                   groupId  = 4; //获取群消息记录
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Protocol.MessageAckBody> Messages {
       get { return messages_; }
-    }
-
-    /// <summary>Field number for the "userId" field.</summary>
-    public const int UserIdFieldNumber = 3;
-    private long userId_;
-    /// <summary>
-    ///获取用户消息记录
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long UserId {
-      get { return userId_; }
-      set {
-        userId_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "groupId" field.</summary>
-    public const int GroupIdFieldNumber = 4;
-    private long groupId_;
-    /// <summary>
-    ///获取群消息记录
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long GroupId {
-      get { return groupId_; }
-      set {
-        groupId_ = value;
-      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4818,8 +4437,6 @@ namespace Protocol {
       }
       if (!object.Equals(Header, other.Header)) return false;
       if(!messages_.Equals(other.messages_)) return false;
-      if (UserId != other.UserId) return false;
-      if (GroupId != other.GroupId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -4828,8 +4445,6 @@ namespace Protocol {
       int hash = 1;
       if (header_ != null) hash ^= Header.GetHashCode();
       hash ^= messages_.GetHashCode();
-      if (UserId != 0L) hash ^= UserId.GetHashCode();
-      if (GroupId != 0L) hash ^= GroupId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -4848,14 +4463,6 @@ namespace Protocol {
         output.WriteMessage(Header);
       }
       messages_.WriteTo(output, _repeated_messages_codec);
-      if (UserId != 0L) {
-        output.WriteRawTag(24);
-        output.WriteInt64(UserId);
-      }
-      if (GroupId != 0L) {
-        output.WriteRawTag(32);
-        output.WriteInt64(GroupId);
-      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -4868,12 +4475,6 @@ namespace Protocol {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Header);
       }
       size += messages_.CalculateSize(_repeated_messages_codec);
-      if (UserId != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(UserId);
-      }
-      if (GroupId != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(GroupId);
-      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -4892,12 +4493,6 @@ namespace Protocol {
         Header.MergeFrom(other.Header);
       }
       messages_.Add(other.messages_);
-      if (other.UserId != 0L) {
-        UserId = other.UserId;
-      }
-      if (other.GroupId != 0L) {
-        GroupId = other.GroupId;
-      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -4920,14 +4515,6 @@ namespace Protocol {
             messages_.AddEntriesFrom(input, _repeated_messages_codec);
             break;
           }
-          case 24: {
-            UserId = input.ReadInt64();
-            break;
-          }
-          case 32: {
-            GroupId = input.ReadInt64();
-            break;
-          }
         }
       }
     }
@@ -4942,7 +4529,7 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.ChatReflection.Descriptor.MessageTypes[21]; }
+      get { return global::Protocol.ChatReflection.Descriptor.MessageTypes[19]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5108,7 +4695,7 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.ChatReflection.Descriptor.MessageTypes[22]; }
+      get { return global::Protocol.ChatReflection.Descriptor.MessageTypes[20]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

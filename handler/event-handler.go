@@ -2,6 +2,7 @@ package handler
 
 import (
 	"chat/cache"
+	"chat/handler/iface"
 	"chat/logic"
 	"chat/protocol"
 	"reflect"
@@ -32,7 +33,10 @@ func (h *Event) HandleCallback(ev cellnet.Event) {
 		v.FieldByName("Header").Set(reflect.ValueOf(header))
 	} else if header.Token != "" {
 		if ok := h.logic.authFunc(header); !ok {
-			h.Auth(header)
+			if ok = h.Auth(header); ok {
+				h.logic.acceptFunc(iface.NewSessoin(ev.Session(), header.Uid, header.Token))
+			}
+
 		}
 	}
 

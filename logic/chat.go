@@ -13,9 +13,6 @@ import (
 	log "github.com/sirupsen/logrus"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
-	"gopkg.in/mgo.v2/bson"
 )
 
 type NotifyFunc func(uid int64, msg interface{}) (bool, error)
@@ -58,11 +55,11 @@ func (s *ChatLogic) SendMessage(r Reqer) (Acker, error) {
 		Body:   req.Body,
 	}
 	//查找用户
-	if req.Body.ContactId != 0 {
+	if req.Body.ToUserId != 0 {
 		uids = append(uids, req.Header.Uid)
 		var contact = models.UserContact{
-			Id:  req.Body.ContactId,
-			Uid: req.Header.Uid,
+			UserId: req.Body.ToUserId,
+			Uid:    req.Header.Uid,
 		}
 		ok, err := db.Mysql.Get(&contact)
 		if !ok {
@@ -98,15 +95,15 @@ func (s *ChatLogic) SendMessage(r Reqer) (Acker, error) {
 
 	}
 
-	if req.Body.GroupId != 0 {
+	if req.Body.ToGroupId != 0 {
 
 		var userGroup = models.UserGroup{
 			Uid:     req.Header.Uid,
-			GroupId: req.Body.GroupId,
+			GroupId: req.Body.ToGroupId,
 		}
 
 		ok, err := db.Mysql.Get(&userGroup)
-		if !ok || userGroup.GroupId != req.Body.GroupId {
+		if !ok || userGroup.GroupId != req.Body.ToGroupId {
 			return Fail(ack, "you are not in this group, cannot send msg")
 		}
 		if err != nil {
@@ -147,10 +144,10 @@ func (s *ChatLogic) RealTime(r Reqer) (Acker, error) {
 
 	var users []*protocol.RoomUser
 
-	if req.ContactId != 0 {
+	if req.UserId != 0 {
 
 		//查找联系人
-		userContact, ok, err := models.GetContactById(req.Header.Uid, req.ContactId)
+		userContact, ok, err := models.GetContactByUserId(req.Header.Uid, req.UserId)
 		if err != nil {
 			return Error(ack, err)
 		}
@@ -203,7 +200,7 @@ func (s *ChatLogic) RealTime(r Reqer) (Acker, error) {
 		s.NotifyRealTime([]int64{u.Uid}, &protocol.RealTimeNotify{
 			Header: &protocol.NotifyHeader{},
 			RealTimeInfo: &protocol.RealTimeInfo{
-				Uid:      req.Header.Uid,
+				UserId:   req.Header.Uid,
 				GroupId:  req.GroupId,
 				Token:    u.Token,
 				RoomId:   resp.RoomId,
@@ -321,40 +318,40 @@ func (s *ChatLogic) PollMessage(r Reqer) (Acker, error) {
 			log.Error("PollMessage recovered", err)
 		}
 	}()
-	req, _ := r.(*protocol.PollMessageReq)
-	ack := &protocol.PollMessageAck{}
-	var userMessages = make([]models.UserMessage, 0, 10)
-	var ctx, cancel = NewContext()
-	defer cancel()
-	c, err := db.Mongo.Collection((&models.UserMessage{}).TableName(req.Header.Uid)).Find(ctx, bson.M{"read": false}, options.Find().SetSort(bson.M{"_id": -1}))
-	if err != nil {
-		if err != mongo.ErrNoDocuments {
-			return Error(ack, err)
-		}
-	}
-	defer c.Close(context.TODO())
-	for c.TryNext(context.TODO()) {
-		var msg models.UserMessage
-		err := c.Decode(&msg)
-		if err != nil {
-			log.Error(err)
-			continue
-		}
-		userMessages = append(userMessages, msg)
-	}
+	// req, _ := r.(*protocol.PollReq)
+	ack := &protocol.PollAck{}
+	// var userMessages = make([]models.UserMessage, 0, 10)
+	// var ctx, cancel = NewContext()
+	// defer cancel()
+	// c, err := db.Mongo.Collection((&models.UserMessage{}).TableName(req.Header.Uid)).Find(ctx, bson.M{"read": false}, options.Find().SetSort(bson.M{"_id": -1}))
+	// if err != nil {
+	// 	if err != mongo.ErrNoDocuments {
+	// 		return Error(ack, err)
+	// 	}
+	// }
+	// defer c.Close(context.TODO())
+	// for c.TryNext(context.TODO()) {
+	// 	var msg models.UserMessage
+	// 	err := c.Decode(&msg)
+	// 	if err != nil {
+	// 		log.Error(err)
+	// 		continue
+	// 	}
+	// 	userMessages = append(userMessages, msg)
+	// }
 
-	ack.Data = make([]*protocol.MessageAckBody, 0, len(userMessages))
-	for _, v := range userMessages {
-		ack.Data = append(ack.Data, &protocol.MessageAckBody{
-			Text:        v.Text,
-			FromUid:     v.FromUid,
-			ToUid:       v.ToUid,
-			MediaUrl:    v.MediaUrl,
-			MessageType: v.MessageType,
-			CreateTime:  v.CreateTime,
-			UpdateTime:  v.UpdateTime,
-		})
-	}
+	// ack.Data = make([]*protocol.MessageAckBody, 0, len(userMessages))
+	// for _, v := range userMessages {
+	// 	ack.Data = append(ack.Data, &protocol.MessageAckBody{
+	// 		Text:        v.Text,
+	// 		FromUid:     v.FromUid,
+	// 		ToUid:       v.ToUid,
+	// 		MediaUrl:    v.MediaUrl,
+	// 		MessageType: v.MessageType,
+	// 		CreateTime:  v.CreateTime,
+	// 		UpdateTime:  v.UpdateTime,
+	// 	})
+	// }
 	return Success(ack)
 }
 
@@ -395,7 +392,5 @@ func (s *ChatLogic) GetUserMessage(r Reqer) (Acker, error) {
 	if err != nil {
 		return Error(ack, err)
 	}
-	ack.UserId = req.UserId
-	ack.GroupId = req.GroupId
 	return Success(ack)
 }

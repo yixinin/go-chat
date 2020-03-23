@@ -5,6 +5,7 @@ import (
 	"chat/protocol"
 	"go-lib/db"
 	"go-lib/utils"
+	"math/rand"
 	"time"
 
 	log "github.com/sirupsen/logrus"
@@ -12,9 +13,22 @@ import (
 	"github.com/go-xorm/xorm"
 )
 
-const (
-	DefaultAvatar = "http://localhost:8080/static/avatar/default.jpg"
-)
+var avatars = []string{
+	"http://localhost:8080/static/avatar/default0.jpg",
+	"http://localhost:8080/static/avatar/default1.jpg",
+	"http://localhost:8080/static/avatar/default2.jpg",
+	"http://localhost:8080/static/avatar/default3.jpg",
+	"http://localhost:8080/static/avatar/default4.jpg",
+	"http://localhost:8080/static/avatar/default5.jpg",
+	"http://localhost:8080/static/avatar/default6.jpg",
+	"http://localhost:8080/static/avatar/default7.jpg",
+	"http://localhost:8080/static/avatar/default8.jpg",
+	"http://localhost:8080/static/avatar/default9.jpg",
+}
+
+func init() {
+	rand.Seed(time.Now().Unix())
+}
 
 type User struct {
 	Id           int64  `xorm:"pk autoincr"`
@@ -55,7 +69,7 @@ func CreateUser(req *protocol.SignUpReq, ack *protocol.SignUpAck) (msg string, e
 		PasswordHash: utils.MD5(req.Password),
 		DevideCode:   req.DeviceCode,
 		Nickname:     req.Nickname,
-		Avatart:      DefaultAvatar,
+		Avatart:      avatars[rand.Intn(10)],
 		InviteCode:   utils.UUID(),
 		CreateTime:   now,
 		UpdateTime:   now,
@@ -82,6 +96,11 @@ func CreateUser(req *protocol.SignUpReq, ack *protocol.SignUpAck) (msg string, e
 	}
 	ack.Token = token
 	ack.Header.Uid = uid
+	ack.UserInfo = &protocol.SignUserInfo{
+		Avatar:   user.Avatart,
+		Uid:      uid,
+		Nickname: user.Nickname,
+	}
 	return "", nil
 }
 

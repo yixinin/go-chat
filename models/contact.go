@@ -222,11 +222,12 @@ func (m UserContact) TableName() string {
 	return fmt.Sprintf("user_contact_%d", m.Uid)
 }
 
-func GetContactById(uid, id int64) (*UserContact, bool, error) {
+func GetContactByUserId(uid, toUid int64) (*UserContact, bool, error) {
 	var m = &UserContact{
-		Uid: uid,
+		Uid:    uid,
+		UserId: toUid,
 	}
-	ok, err := db.Mysql.ID(id).Get(m)
+	ok, err := db.Mysql.Get(m)
 	if !ok {
 		return m, ok, err
 	}

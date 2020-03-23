@@ -13,10 +13,17 @@ message SignUpReq {
     string    nickname   = 8;
 }
 
+message SignUserInfo {
+    string nickname = 1;
+    int64  uid      = 2;
+    string avatar   = 3;
+}
+
 message SignUpAck {
-    AckHeader header     = 1;
-    string    token      = 2;
-    string    deviceCode = 3;
+    AckHeader    header     = 1;
+    string       token      = 2;
+    string       deviceCode = 3;
+    SignUserInfo userInfo   = 8;
 }
 
 message SignInReq {
@@ -27,8 +34,9 @@ message SignInReq {
 }
 
 message SignInAck {
-    AckHeader header = 1;
-    string    token  = 2;
+    AckHeader    header   = 1;
+    string       token    = 2;
+    SignUserInfo userInfo = 8;
 }
 
 message SignOutReq {

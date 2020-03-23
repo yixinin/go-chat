@@ -100,6 +100,11 @@ func (s *AccountLogic) SignIn(r Reqer) (Acker, error) {
 	if oldToken != "" {
 		s.tryKickDevice(user.Id, req.DeviceType, oldToken)
 	}
+	ack.UserInfo = &protocol.SignUserInfo{
+		Avatar:   user.Avatart,
+		Uid:      user.Id,
+		Nickname: user.Nickname,
+	}
 	return Success(ack)
 }
 

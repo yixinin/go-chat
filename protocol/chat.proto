@@ -20,10 +20,10 @@ message MessageBody {
     int32    messageType         = 2;
     string   text                = 3;
     repeated Memtion memtions    = 4;
-    int64            contactId   = 5; //发送给用户
-    string           username    = 6; //发送给陌生人 //通过群聊
+    int64            toUserId    = 5; //发送给用户
+    string           fromUserId  = 6; //发送者
     int64            fromGroupId = 7; //通过群
-    int64            groupId     = 8; //发送给群聊
+    int64            toGroupId   = 8; //发送给群聊
 }
 
 message SendMessageReq {
@@ -41,9 +41,9 @@ message MessageNotify {
 }
 
 message RealTimeReq {
-    ReqHeader header    = 1;
-    int64     contactId = 2; //请求和用户通话
-    int64     groupId   = 3; //请求视频会议
+    ReqHeader header  = 1;
+    int64     userId  = 2; //请求和用户通话
+    int64     groupId = 3; //请求视频会议
 }
 
 message RealTimeAck {
@@ -64,7 +64,7 @@ message SimpleUser {
 message RealTimeInfo {
     string   token               = 3; //本次连接token
     int32    roomId              = 4; //房间id
-    int64    uid                 = 5; //来自用户
+    int64    userId              = 5; //来自用户
     int64    groupId             = 6; //来自群聊
     repeated SimpleUser users    = 7; //用户/群名称
     string              httpAddr = 8;
@@ -82,21 +82,19 @@ message CancelRealTimeAck {
 
 message RealTimeNotify {
     NotifyHeader header       = 1;
-    int64        fromGroupId  = 2; //群语音
-    int64        fromUserId   = 3; //私人语音
     bool         IsConnect    = 4; //false时断开连接
     RealTimeInfo realTimeInfo = 5;
 }
 
-message PollMessageReq {
-    ReqHeader header = 1;
-}
+// message PollMessageReq {
+//     ReqHeader header = 1;
+// }
 
-message PollMessageAck {
-    AckHeader header             = 1;
-    int32     total              = 2;
-    repeated MessageAckBody data = 3;
-}
+// message PollMessageAck {
+//     AckHeader header             = 1;
+//     int32     total              = 2;
+//     repeated MessageAckBody data = 3;
+// }
 
 message PollReq {
     ReqHeader header = 1;
@@ -132,6 +130,7 @@ message GetMessageUserAck {
         string   nickname                = 3;  //昵称
         string   avatar                  = 4;  //头像
         int32    count                   = 6;  //消息条数
+        int64    fromGroupId             = 7;  //通过群聊发的消息
         repeated MessageAckBody messages = 10; //消息列表
     }
 }
@@ -157,8 +156,8 @@ message MessageAckBody {
 message GetMessageAck {
     AckHeader header                 = 1;
     repeated MessageAckBody messages = 2;
-    int64                   userId   = 3; //获取用户消息记录
-    int64                   groupId  = 4; //获取群消息记录
+    // int64                   userId   = 3; //获取用户消息记录
+    // int64                   groupId  = 4; //获取群消息记录
 }
 
 message SetReadReq {
