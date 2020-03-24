@@ -11,7 +11,6 @@ import (
 	"chat/server/tcp"
 	"chat/server/ws"
 	"go-lib/db"
-	"go-lib/ip"
 	"go-lib/pool"
 	"go-lib/registry"
 	"go-lib/registry/etcd"
@@ -140,7 +139,7 @@ func (s *Service) Start() error {
 		Name:    "live-chat.chat",
 		Version: "v1.0",
 		Nodes: []*registry.Node{
-			{Id: utils.UUID(), Address: ip.GetAddr(s.config.GrpcConfig.Addr)},
+			{Id: utils.UUID(), Address: s.config.GrpcConfig.Addr},
 		},
 	}
 	s.RegistrtService = srv
