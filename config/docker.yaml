@@ -5,7 +5,8 @@ etcd:
   - etcd:2579
 
 grpc:
-  addr: "0.0.0.0:8181"
+  addr: ":8181"
+  host: chat
 
 http:
   addr: "0.0.0.0:8080"
