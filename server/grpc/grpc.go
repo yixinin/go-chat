@@ -9,6 +9,7 @@ import (
 
 type Config struct {
 	Addr string
+	Host string
 }
 
 type GrpcServer struct {

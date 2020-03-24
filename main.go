@@ -18,7 +18,7 @@ func main() {
 	if err != nil {
 		log.Panicf("config not found, err:%v", err)
 	}
-	showIP("grpc", conf.GrpcConfig.Addr)
+	showIP("grpc", conf.GrpcConfig.Host+conf.GrpcConfig.Addr)
 	showIP("tcp", conf.TcpConfig.Addr)
 	showIP("ws", conf.WsConfig.Addr)
 	showIP("http", conf.HttpConfig.Addr)

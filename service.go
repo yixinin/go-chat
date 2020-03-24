@@ -139,7 +139,7 @@ func (s *Service) Start() error {
 		Name:    "live-chat.chat",
 		Version: "v1.0",
 		Nodes: []*registry.Node{
-			{Id: utils.UUID(), Address: s.config.GrpcConfig.Addr},
+			{Id: utils.UUID(), Address: s.config.GrpcConfig.Host + s.config.GrpcConfig.Addr},
 		},
 	}
 	s.RegistrtService = srv
