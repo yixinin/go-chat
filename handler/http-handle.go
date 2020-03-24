@@ -30,6 +30,11 @@ func (h *Http) Name() string {
 }
 
 func (h *Http) Handle(w http.ResponseWriter, r *http.Request) {
+	defer func() {
+		if err := recover(); err != nil {
+			log.Errorf("http handler recovered, err:%v", err)
+		}
+	}()
 	var buf, err = ioutil.ReadAll(r.Body)
 	if err != nil {
 		log.Error(err)

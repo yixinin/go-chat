@@ -8,6 +8,7 @@ import (
 	"reflect"
 
 	"github.com/davyxu/cellnet"
+	"github.com/micro/go-micro/debug/log"
 )
 
 type Event struct {
@@ -21,6 +22,11 @@ func NewEvent(l *Logic) *Event {
 }
 
 func (h *Event) HandleCallback(ev cellnet.Event) {
+	defer func() {
+		if err := recover(); err != nil {
+			log.Errorf("event handler recovered, err:%v", err)
+		}
+	}()
 	var msg = ev.Message()
 	reqer, ok := msg.(logic.Reqer)
 	if !ok {
