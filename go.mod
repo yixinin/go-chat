@@ -14,6 +14,7 @@ require (
 	github.com/go-xorm/xorm v0.7.9
 	github.com/godoctor/godoctor v0.0.0-20181123222458-69df17f3a6f6 // indirect
 	github.com/golang/protobuf v1.3.2
+	github.com/micro/go-micro v1.18.0
 	github.com/sirupsen/logrus v1.4.2
 	github.com/willf/bitset v1.1.10 // indirect
 	go-lib v0.0.0-00010101000000-000000000000

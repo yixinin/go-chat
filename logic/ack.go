@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-func Success(ack Acker) (Acker, error) {
+func Success(ack protocol.Acker) (protocol.Acker, error) {
 	var header = ack.GetHeader()
 	if header == nil {
 		header = &protocol.AckHeader{}
@@ -19,7 +19,7 @@ func Success(ack Acker) (Acker, error) {
 	return ack, nil
 }
 
-func FailCode(ack Acker, code int32, msg string) (Acker, error) {
+func FailCode(ack protocol.Acker, code int32, msg string) (protocol.Acker, error) {
 	var header = ack.GetHeader()
 	if header == nil {
 		header = &protocol.AckHeader{}
@@ -31,7 +31,7 @@ func FailCode(ack Acker, code int32, msg string) (Acker, error) {
 	return ack, nil
 }
 
-func Fail(ack Acker, msg string) (Acker, error) {
+func Fail(ack protocol.Acker, msg string) (protocol.Acker, error) {
 	var header = ack.GetHeader()
 	if header == nil {
 		header = &protocol.AckHeader{}
@@ -48,11 +48,11 @@ func Fail(ack Acker, msg string) (Acker, error) {
 	return ack, nil
 }
 
-func AccessDeined(ack Acker) (Acker, error) {
+func AccessDeined(ack protocol.Acker) (protocol.Acker, error) {
 	return Fail(ack, "access deined")
 }
 
-func Error(ack Acker, err error) (Acker, error) {
+func Error(ack protocol.Acker, err error) (protocol.Acker, error) {
 	var header = ack.GetHeader()
 	if header == nil {
 		header = &protocol.AckHeader{}

@@ -18,7 +18,7 @@ func NewContactLogic() *ContactLogic {
 	return &ContactLogic{}
 }
 
-func (s *ContactLogic) SearchUser(r Reqer) (Acker, error) {
+func (s *ContactLogic) SearchUser(r protocol.Reqer) (protocol.Acker, error) {
 	defer func() {
 		if err := recover(); err != nil {
 			log.Error("SearchUser recovered", err)
@@ -49,7 +49,7 @@ func (s *ContactLogic) SearchUser(r Reqer) (Acker, error) {
 	return Success(ack)
 }
 
-func (s *ContactLogic) AddContact(r Reqer) (Acker, error) {
+func (s *ContactLogic) AddContact(r protocol.Reqer) (protocol.Acker, error) {
 	defer func() {
 		if err := recover(); err != nil {
 			log.Error("AddContact recovered", err)
@@ -85,7 +85,7 @@ func (s *ContactLogic) AddContact(r Reqer) (Acker, error) {
 	return Success(ack)
 }
 
-func (s *ContactLogic) DeleteContact(r Reqer) (Acker, error) {
+func (s *ContactLogic) DeleteContact(r protocol.Reqer) (protocol.Acker, error) {
 	defer func() {
 		if err := recover(); err != nil {
 			log.Error("DeleteContact recovered", err)
@@ -104,7 +104,7 @@ func (s *ContactLogic) DeleteContact(r Reqer) (Acker, error) {
 	return Success(ack)
 }
 
-func (s *ContactLogic) UpdateContact(r Reqer) (Acker, error) {
+func (s *ContactLogic) UpdateContact(r protocol.Reqer) (protocol.Acker, error) {
 	defer func() {
 		if err := recover(); err != nil {
 			log.Error("UpdateContact recovered", err)
@@ -122,7 +122,7 @@ func (s *ContactLogic) UpdateContact(r Reqer) (Acker, error) {
 	return Success(ack)
 }
 
-func (s ContactLogic) GetContacts(r Reqer) (Acker, error) {
+func (s ContactLogic) GetContacts(r protocol.Reqer) (protocol.Acker, error) {
 	req, _ := r.(*protocol.GetContactListReq)
 	ack := &protocol.GetContactListAck{
 		Contacts: make([]*protocol.GetContactListAck_Contact, 0, 10),

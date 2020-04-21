@@ -9,7 +9,7 @@ import (
 type GroupLogic struct {
 }
 
-func (s GroupLogic) JoinGroup(r Reqer, a Acker) (Acker, error) {
+func (s GroupLogic) JoinGroup(r protocol.Reqer, a protocol.Acker) (protocol.Acker, error) {
 	// req, _ := r.(*protocol.JoinGroupReq)
 	ack := &protocol.JoinGroupAck{}
 
@@ -22,14 +22,14 @@ func (s GroupLogic) JoinGroup(r Reqer, a Acker) (Acker, error) {
 	return Success(ack)
 }
 
-func (s *GroupLogic) Auth(r Reqer, a Acker) (Acker, error) {
+func (s *GroupLogic) Auth(r protocol.Reqer, a protocol.Acker) (protocol.Acker, error) {
 	// req, _ := r.(*protocol.AuthGroupReq)
 	ack := &protocol.AuthGroupAck{}
 
 	return Success(ack)
 }
 
-func (s *GroupLogic) LeaveGroup(r Reqer, a Acker) (Acker, error) {
+func (s *GroupLogic) LeaveGroup(r protocol.Reqer, a protocol.Acker) (protocol.Acker, error) {
 	// req, _ := r.(*protocol.LeaveGroupReq)
 	ack := &protocol.LeaveGroupAck{}
 

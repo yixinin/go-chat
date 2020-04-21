@@ -25,7 +25,7 @@ func NewAccountLogic() *AccountLogic {
 //账号操作等。。。
 
 //SignUp 注册
-func (s *AccountLogic) SignUp(r Reqer) (Acker, error) {
+func (s *AccountLogic) SignUp(r protocol.Reqer) (protocol.Acker, error) {
 	defer func() {
 		if err := recover(); err != nil {
 			log.Error("sign up recovered", err)
@@ -63,7 +63,7 @@ func (s *AccountLogic) SignUp(r Reqer) (Acker, error) {
 }
 
 //登录
-func (s *AccountLogic) SignIn(r Reqer) (Acker, error) {
+func (s *AccountLogic) SignIn(r protocol.Reqer) (protocol.Acker, error) {
 	defer func() {
 		if err := recover(); err != nil {
 			log.Error("sign in recovered", err)
@@ -108,7 +108,7 @@ func (s *AccountLogic) SignIn(r Reqer) (Acker, error) {
 	return Success(ack)
 }
 
-func (s *AccountLogic) SignOut(r Reqer) (Acker, error) {
+func (s *AccountLogic) SignOut(r protocol.Reqer) (protocol.Acker, error) {
 	defer func() {
 		if err := recover(); err != nil {
 			log.Error("sign out recovered", err)
@@ -127,7 +127,7 @@ func (s *AccountLogic) SignOut(r Reqer) (Acker, error) {
 	return Success(ack)
 }
 
-func (s *AccountLogic) Delete(r Reqer) (Acker, error) {
+func (s *AccountLogic) Delete(r protocol.Reqer) (protocol.Acker, error) {
 	defer func() {
 		if err := recover(); err != nil {
 			log.Error("account delete recovered", err)
@@ -152,7 +152,7 @@ func (s *AccountLogic) Delete(r Reqer) (Acker, error) {
 	return Success(ack)
 }
 
-func (s *AccountLogic) ChangePassword(r Reqer) (ack Acker, err error) {
+func (s *AccountLogic) ChangePassword(r protocol.Reqer) (ack protocol.Acker, err error) {
 	defer func() {
 		if err := recover(); err != nil {
 			log.Error("ChangePassword recovered", err)
@@ -163,7 +163,7 @@ func (s *AccountLogic) ChangePassword(r Reqer) (ack Acker, err error) {
 	return Success(ack)
 }
 
-func (s *AccountLogic) ResetPassword(r Reqer) (ack Acker, err error) {
+func (s *AccountLogic) ResetPassword(r protocol.Reqer) (ack protocol.Acker, err error) {
 	defer func() {
 		if err := recover(); err != nil {
 			log.Error("ResetPassword recovered", err)

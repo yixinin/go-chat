@@ -2,21 +2,20 @@ package handler
 
 import (
 	"chat/handler/iface"
-	"chat/logic"
 	"chat/protocol"
 
 	log "github.com/sirupsen/logrus"
 )
 
-type Handler func(req logic.Reqer) (logic.Acker, error)
+type Handler func(req protocol.Reqer) (protocol.Acker, error)
 
-// type MessageHandler func(req logic.Reqer, ack logic.Acker) error
+// type MessageHandler func(req protocol.Reqer, ack Acker) error
 
-// type HttpHandler func(c *gin.Context, req logic.Reqer, handler Handler)
+// type HttpHandler func(c *gin.Context, req protocol.Reqer, handler Handler)
 
-type MessageHandler func(sender iface.Sender, req logic.Reqer, handler Handler)
+type MessageHandler func(sender iface.Sender, req protocol.Reqer, handler Handler)
 
-func (s *Logic) EventMessageHandler(sender iface.Sender, req logic.Reqer, handler Handler) {
+func (s *Logic) EventMessageHandler(sender iface.Sender, req protocol.Reqer, handler Handler) {
 	ack, err := handler(req)
 	if err != nil {
 		log.Errorf("event err:%v", err)
@@ -45,7 +44,7 @@ func (s *Logic) EventMessageHandler(sender iface.Sender, req logic.Reqer, handle
 	sender.Send(ack)
 }
 
-// func HttpWMessageHandler(w http.ResponseWriter, req logic.Reqer, handler Handler) {
+// func HttpWMessageHandler(w http.ResponseWriter, req protocol.Reqer, handler Handler) {
 // 	ack, err := handler(req)
 // 	if err != nil {
 // 		log.Errorf("event err:%v", err)
@@ -66,7 +65,7 @@ func (s *Logic) EventMessageHandler(sender iface.Sender, req logic.Reqer, handle
 // 	}
 // }
 
-func FillAckHeader(ack logic.Acker, err error) bool {
+func FillAckHeader(ack protocol.Acker, err error) bool {
 
 	if ack == nil {
 		return false

@@ -3,7 +3,6 @@ package handler
 import (
 	"chat/cache"
 	"chat/handler/iface"
-	"chat/logic"
 	"chat/protocol"
 	"go-lib/utils"
 	"io/ioutil"
@@ -34,6 +33,8 @@ func (h *Http) Handle(w http.ResponseWriter, r *http.Request) {
 		if err := recover(); err != nil {
 			log.Errorf("http handler recovered, err:%v", err)
 		}
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte("Unexpect error"))
 	}()
 	var buf, err = ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -69,7 +70,7 @@ func (h *Http) Auth(r *http.Request, msg interface{}) (int64, string, bool) {
 	if err != nil {
 		log.Error(err)
 	}
-	reqer, ok := msg.(logic.Reqer)
+	reqer, ok := msg.(protocol.Reqer)
 	if !ok {
 		return 0, "", false
 	}

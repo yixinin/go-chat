@@ -3,7 +3,6 @@ package handler
 import (
 	"chat/cache"
 	"chat/handler/iface"
-	"chat/logic"
 	"chat/protocol"
 	"reflect"
 
@@ -26,9 +25,11 @@ func (h *Event) HandleCallback(ev cellnet.Event) {
 		if err := recover(); err != nil {
 			log.Errorf("event handler recovered, err:%v", err)
 		}
+		// TODO 回复消息
+		ev.Session().Send([]byte{})
 	}()
 	var msg = ev.Message()
-	reqer, ok := msg.(logic.Reqer)
+	reqer, ok := msg.(protocol.Reqer)
 	if !ok {
 		return
 	}
@@ -66,7 +67,7 @@ func (h *Event) Auth(header *protocol.ReqHeader) bool {
 	return uid > 0
 }
 
-func AccessDeined(sess cellnet.Session, ack logic.Acker) {
+func AccessDeined(sess cellnet.Session, ack protocol.Acker) {
 	if ack == nil {
 		return
 	}

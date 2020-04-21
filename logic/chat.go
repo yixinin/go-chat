@@ -46,7 +46,7 @@ func NewChatLogic(notifyFuncs ...NotifyFunc) *ChatLogic {
 	return c
 }
 
-func (s *ChatLogic) SendMessage(r Reqer) (Acker, error) {
+func (s *ChatLogic) SendMessage(r protocol.Reqer) (protocol.Acker, error) {
 	defer func() {
 		if err := recover(); err != nil {
 			log.Error("SendMessage recovered", err)
@@ -145,7 +145,7 @@ func (s *ChatLogic) SendMessage(r Reqer) (Acker, error) {
 	return Success(ack)
 }
 
-func (s *ChatLogic) RealTime(r Reqer) (Acker, error) {
+func (s *ChatLogic) RealTime(r protocol.Reqer) (protocol.Acker, error) {
 	defer func() {
 		if err := recover(); err != nil {
 			log.Error("RealTime recovered", err)
@@ -227,7 +227,7 @@ func (s *ChatLogic) RealTime(r Reqer) (Acker, error) {
 	return Success(ack)
 }
 
-func (s *ChatLogic) CancelRealTime(r Reqer) (Acker, error) {
+func (s *ChatLogic) CancelRealTime(r protocol.Reqer) (protocol.Acker, error) {
 	defer func() {
 		if err := recover(); err != nil {
 			log.Error("CancelRealTime recovered", err)
@@ -297,7 +297,7 @@ func (s *ChatLogic) NotifyRealTime(uids []int64, msg *protocol.RealTimeNotify) {
 	}
 }
 
-func (s *ChatLogic) NotifyMessage(uids []int64, msg Notifier) {
+func (s *ChatLogic) NotifyMessage(uids []int64, msg protocol.Notifier) {
 	for _, uid := range uids {
 		header := msg.GetHeader()
 		if header != nil {
@@ -314,7 +314,7 @@ func (s *ChatLogic) NotifyMessage(uids []int64, msg Notifier) {
 
 }
 
-func (s *ChatLogic) Poll(r Reqer) (Acker, error) {
+func (s *ChatLogic) Poll(r protocol.Reqer) (protocol.Acker, error) {
 	defer func() {
 		if err := recover(); err != nil {
 			log.Error("Poll recovered", err)
@@ -347,7 +347,7 @@ func (s *ChatLogic) GetRandomRoomClient() (protocol.RoomServiceClient, bool) {
 	return protocol.NewRoomServiceClient(conn), true
 }
 
-func (s *ChatLogic) GetMessageUser(r Reqer) (Acker, error) {
+func (s *ChatLogic) GetMessageUser(r protocol.Reqer) (protocol.Acker, error) {
 	req, _ := r.(*protocol.GetMessageUserReq)
 	ack := &protocol.GetMessageUserAck{
 		Header: &protocol.AckHeader{},
@@ -359,7 +359,7 @@ func (s *ChatLogic) GetMessageUser(r Reqer) (Acker, error) {
 	return Success(ack)
 }
 
-func (s *ChatLogic) GetUserMessage(r Reqer) (Acker, error) {
+func (s *ChatLogic) GetUserMessage(r protocol.Reqer) (protocol.Acker, error) {
 	req, _ := r.(*protocol.GetMessageReq)
 	ack := &protocol.GetMessageAck{
 		Header: &protocol.AckHeader{},
